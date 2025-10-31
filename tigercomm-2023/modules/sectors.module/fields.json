@@ -1,0 +1,23 @@
+[
+  {
+    "id": "sector",
+    "type": "choice",
+    "display": "Select",
+    "choices": [
+      ["Manufacturing", "Manufacturing"],
+      ["Developer", "Developer"],
+      ["Professional Services", "Professional Services"],
+      ["SASS", "SASS"],
+      ["Solar", "Solar"],
+      ["Wind", "Wind"],
+      ["Storage", "Storage"],
+      ["Public Affairs", "Public Affairs"],
+      ["NGO", "NGO"]
+    ],
+    "label": "Choice",
+    "name": "sector",
+    "multiple": true,
+    "default": [],
+    "placeholder": "Choose options"
+  }
+]

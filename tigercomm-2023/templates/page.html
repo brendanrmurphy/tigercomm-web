@@ -1,0 +1,85 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Page
+  screenshotPath: ../images/template-previews/blog-post.png
+-->
+{% module "hero" path="/tigercomm-2023/modules/hero" %}
+{% module "cta" path="/tigercomm-2023/modules/cta" %}
+
+{% set template_css = "../../css/templates/page.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+  <div class="body-container body-container--blog-post">
+    {% if content.widgets.hero.body.title %}
+      {% set hero_title = content.widgets.hero.body.title %}
+    {% else %}
+      {% set hero_title = content.title %}
+    {% endif %}
+    {% if content.widgets.hero.body.sub_title %}
+      {% set hero_sub_title = content.widgets.hero.body.sub_title %}
+    {% endif %}
+    {% if content.widgets.hero.body.hero_label %}
+      {% set hero_label = content.widgets.hero.body.hero_label %}
+    {% endif %}
+    {% if content.widgets.hero.body.content %}
+      {% set hero_content = content.widgets.hero.body.content %}
+    {% endif %}
+    {% set hero_content_wrapper_class = "hero--sm" %}
+    {% include "../sections/hero.html" %}
+    <div class="content-wrapper">
+      <div class="cta__border ">
+        <span data-aos="fade-down-right" data-aos-delay="150"></span>
+        <span data-aos="fade-down-right" data-aos-delay="250"></span>
+        <span data-aos="fade-down-right" data-aos-delay="350"></span>
+      </div>
+    </div>
+    <div class="blog-post page-content content-wrapper content-wrapper--vertical-spacing">
+      <div class="row-fluid">
+        <div class="blog-post__body">
+          <div class="span12">
+            {% dnd_area "dnd_area"
+              label="Main section",
+              class="body-container body-container--about"
+            %}
+
+            {# Two column image left #}
+
+            {% dnd_section
+              vertical_alignment="TOP"
+            %}
+              {% dnd_module
+                path="@hubspot/rich_text",
+                html="Page Content Here"
+                offset=2,
+                width=10
+              %}
+              {% end_dnd_module %}
+            {% end_dnd_section %}
+          {% end_dnd_area %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if content.widgets.cta.body.enabled == true %}
+      {% set cta_enabled = true %}
+    {% else %}
+      {% set cta_enabled = false %}
+    {% endif %}
+    {% if content.widgets.cta.body.title %}
+      {% set cta_title = content.widgets.cta.body.title %}
+    {% endif %}
+    {% if content.widgets.cta.body.description %}
+      {% set cta_description = content.widgets.cta.body.description %}
+    {% endif %}
+    {% if content.widgets.cta.body.button_label %}
+      {% set cta_button_label = content.widgets.cta.body.button_label %}
+    {% endif %}
+    {% if content.widgets.cta.body.contact_type %}
+      {% set cta_contact_type = content.widgets.cta.body.contact_type %}
+    {% endif %}
+    {% set cta_bg_dark = true %}
+    {% include "../sections/cta.html" %}
+  </div>
+{% endblock body %}

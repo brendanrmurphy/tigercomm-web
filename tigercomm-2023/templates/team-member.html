@@ -1,0 +1,94 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Team Member
+  screenshotPath: ../images/template-previews/about.png
+-->
+{% set template_css = "../../css/templates/team-member.css" %}
+{% extends "./layouts/base.html" %}
+
+{% module "team_member_settings" path="/tigercomm-2023/modules/team-member" %}
+
+{% block body %}
+  {% if request.path == '/about/staff/mike-casey' %}
+  {% include "../sections/team/mike-casey.html" %}
+  {% elif request.path == '/about/staff/melissa-meehan-baldwin' %}
+  {% include "../sections/team/melissa-meehan-baldwin.html" %}
+  {% elif request.path == '/about/staff/bridgette-borst-ombres' %}
+  {% include "../sections/team/bridgette-borst-ombres.html" %}
+  {% elif request.path == '/about/staff/jamie-meckley' %}
+  {% include "../sections/team/jamie-meckley.html" %}
+  {% elif request.path == '/about/staff/phoebe-lease' %}
+  {% include "../sections/team/phoebe-lease.html" %}
+  {% elif request.path == '/about/staff/nathaniel-schub' %}
+  {% include "../sections/team/nathaniel-schub.html" %}
+  {% elif request.path == '/about/staff/ayelet-hines' %}
+  {% include "../sections/team/ayelet-hines.html" %}
+  {% elif request.path == '/about/staff/ivy-aning' %}
+  {% include "../sections/team/ivy-aning.html" %}
+  {% elif request.path == '/about/staff/alex-petersen' %}
+    {% include "../sections/team/alex-petersen.html" %}
+  {% elif request.path == '/about/staff/clare-quirin' %}
+    {% include "../sections/team/clare-quirin.html" %}
+  {% endif %}
+
+  {% if content.team_member_settings.body.job_title %}
+    {% set title = content.team_member_settings.body.job_title %}
+  {% endif %}
+  {% if content.team_member_settings.body.linked_in_url %}
+    {% set linked_in_url = content.team_member_settings.body.linked_in_url %}
+  {% endif %}
+
+  {% set hero_title = name %}
+  {% set hero_sub_title = title %}
+  {% set hero_label = '<a href="/team">Team</a>' %}
+  {% set hero_content_wrapper_class = "hero--sm" %}
+  {% include "../sections/hero.html" %}
+    <div class="content-wrapper">
+    <div class="cta__border">
+        <span data-aos="fade-down-right" data-aos-delay="150"></span>
+        <span data-aos="fade-down-right" data-aos-delay="250"></span>
+        <span data-aos="fade-down-right" data-aos-delay="350"></span>
+      </div>
+    </div>
+    <div class="team-member__content content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="img-col span4">
+        <div class="img-wrapper">
+            <div class="featured-image">
+              <img class="team-member__img" src="{{ get_asset_url('../images/team/'  + img_url )}}" alt="{{ name }}"/>
+            </div>
+          {% if linked_in_url != "" %}
+          <a class="linkedin__icon" href="{{ linked_in_url }}"><img src="{{ get_asset_url('../images/linkedin.svg') }}" alt="linkedin" /></a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="span8">
+        {{ bio }}
+      {% dnd_area "dnd_area"
+        label="Main section",
+        class=""
+      %}
+
+      {# Two column image left #}
+
+      {% dnd_section
+        vertical_alignment="TOP"
+      %}
+        {% dnd_module
+          path="@hubspot/rich_text",
+          html=""
+          offset=0,
+          width=12
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+
+
+
+
+      </div>
+    </div>
+    </div>
+{% endblock body %}

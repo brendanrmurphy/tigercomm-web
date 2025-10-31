@@ -1,0 +1,106 @@
+<aside class="blog-aside span4">
+  <a href="{{ group.absolute_url }}"><img class="logo" src="{{ get_asset_url ("../images/scaling-clean-logo.png") }}" alt="Scaling Clean the Podcast" /></a>
+  {% if content.post_body %}
+    <div class="block block-guest">
+      <div class="block__label">Guest</div>
+      {% if content.widgets.podcast_settings.body.guest_name %}
+      <h3>{{ content.widgets.podcast_settings.body.guest_name }}</h3>
+      {% endif %} 
+     {% if
+      content.post_list_summary_featured_image %}
+      <img
+        class="host-img"
+        src="{{ content.post_list_summary_featured_image }}"
+      />
+      {% endif %}
+    </div>
+  {% else %}
+    <div class="block block-hosted-by">
+      <h3 class="block__title">Hosted by Melissa Baldwin</h3>
+      <img class="host-img img--round" src="{{ get_asset_url ("../images/team/melissa.jpg")
+      }}" />
+      <p>
+        Melissa Baldwin is the senior vice president of Tigercomm, a clean-economy
+        marketing communications firm. She brings over 20 years of experience
+        working with clients in manufacturing, renewable energy development, and
+        environmental services.
+      </p>
+      <p>
+        To schedule a guest, contact Clare Quirin at
+        <a href="mailto:clare@tigercomm.us">clare@tigercomm.us</a>
+      </p>
+    </div>
+  {% endif %} 
+  <div class="block block-listen">
+    <h3>Listen and Subscribe</h3>
+      <ul class="platforms list--plain">
+        <li>
+          <a
+            href="https://podcasts.apple.com/us/podcast/scaling-clean/id1611807534"
+            class="social-links__icon social-links__icon--icon"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://www.tigercomm.us/hubfs/1024px-Apple_Music_logo.svg.png"
+              alt="1024px-Apple_Music_logo.svg"
+            />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://open.spotify.com/show/5YC4Q7AvD5pBAczxxN2Gov?si=b4f66f9aa9114f76"
+            class="social-links__icon social-links__icon--icon"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://www.tigercomm.us/hubfs/Spotify%20logo.png"
+              alt="Spotify logo"
+            />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://music.amazon.com/podcasts/262d19cd-f7ef-4b33-99a0-ac12f23414c6/scaling-clean"
+            class="social-links__icon social-links__icon--icon"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://www.tigercomm.us/hubfs/amazon%20music.png"
+              alt="amazon music"
+            />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.iheart.com/podcast/269-scaling-clean-93459605/"
+            class="social-links__icon social-links__icon--icon"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://www.tigercomm.us/hubfs/i.%20heart%20radio.jpg"
+              alt="i. heart radio"
+            />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://radiopublic.com/scaling-clean-WdmDML"
+            class="social-links__icon social-links__icon--icon"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://www.tigercomm.us/hubfs/radiopublic-wordmark-red@3x.png"
+              alt="radiopublic-wordmark-red@3x"
+              style="height: 25px"
+            />
+          </a>
+        </li>
+        <li></li>
+      </ul>
+  </div>
+</aside>

@@ -1,0 +1,39 @@
+<aside class="blog-aside span4">
+    {# {% module_block module "module_166559448561661" wrapping_html='', per_widget_wrapper_html='', overrideable=True, widget_name='Table of Contents', module_id=87905505652, path='/Table of Contents', label='table_of_contents' %}
+    {% end_module_block %} #}
+
+    {% widget_block rich_text "about_this_blog" %}
+    {% widget_attribute "html" %}
+    <div class="block">
+    <p>Curated insights, leadership lessons, and real-world experiences from clean economy Experts — powered by the team at <a href="http://www.tigercomm.us" rel="noopener">Tigercomm</a>.&nbsp;</p>
+    </div>
+    {% end_widget_attribute %}
+    {% end_widget_block %}
+
+    {% widget_block rich_text "module_1645549227782145" %}
+    {% widget_attribute "html" %}
+    <div class="block">
+      <h3>Cleantech Glossary</h3>
+      <p>Review frequently used industry <a href="https://www.tigercomm.us/cleantech-glossary-terms-and-definitions" rel="noopener">cleantech terms and definitions</a>.</p>
+    </div>
+    {% end_widget_attribute %}
+    {% end_widget_block %}
+
+    {% blog_subscribe "module_1512603810033295" overrideable=False, per_widget_wrapper_html='', response_message='Thanks for Subscribing!', select_blog=5299072768, title='Subscribe to Email Updates', wrapping_html='', label='Blog Email Subscription' %}
+    
+    {% if show_topics %}
+    {% module "post_filter" path="@hubspot/post_filter" expand_link_text='see all', filter_type='topic', list_title='Posts by Topic', max_links=5, order_by='post_count', overrideable=False, select_blog=5299072768, label='Post Filter' %}
+    {% endif %}
+
+    {% if show_recent %}
+    {% module "post_listing" path="@hubspot/post_listing" list_title='Recent', listing_type='recent', max_links=5, overrideable=False, root=False, row=False, select_blog=5299072768, wrapping_html='', label='Recent (.module-wrapper)' %}
+    {% endif %}
+
+    {% if show_authors %}
+    {% module "post_filter" path="@hubspot/post_filter" expand_link_text='see all', filter_type='author', list_title='Posts by Author', max_links=5, order_by='name', overrideable=False, per_widget_wrapper_html='', select_blog=5299072768, wrapping_html='', label='Post Filter' %}
+    {% endif %}
+
+    {% if show_archives %}
+    {% module "post_filter" path="@hubspot/post_filter" expand_link_text='see all', filter_type='month', list_title='Archive', max_links=5, order_by='post_count', overrideable=False, root=False, row=False, select_blog=5299072768, wrapping_html='', label='Blog Archive' %}
+    {% endif %}
+  </aside>

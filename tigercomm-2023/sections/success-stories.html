@@ -1,0 +1,23 @@
+<div id="success-stories" class="success-stories row-fluid-wrapper">
+  <div class="content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="span6 split-content__img-col">
+        <div class="module" data-aos="fade-right" data-aos-delay="1000">
+            <h4 class="label">Success Story | {{ success_story_label}}</h4>
+            <h2><a href="{{ success_story_url }}">{{ success_story_title }}</a></h2>
+            <a href="{{ success_story_url }}" class="desktop-none">
+              <img src="{{ get_asset_url('../images/success-stories/' + success_story_img)}}" />
+            </a>
+            <p>{{ success_story_content }}</p>
+            <a href="{{ success_story_url }}" class="anchor">Read the full story <img src="{{ get_asset_url("../images/blue-arrow.svg") }}" /></a>
+        </div>
+        </div><!--end row-->
+        <div class="span6 content-col desktop-only" data-aos="fade" data-aos-delay="1000">
+            <a href="{{ success_story_url }}">
+              <img src="{{ get_asset_url('../images/success-stories/' + success_story_img)}}" />
+            </a>
+        </div><!--end widget-span -->
+      </div>
+      <!-- <a class="anchor" href="/success-stories/tag/{{ tag }}">View all {{ category }} Success Stories</a> -->
+  </div>
+</div>

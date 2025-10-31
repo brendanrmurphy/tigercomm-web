@@ -1,0 +1,32 @@
+.hero .content-wrapper--vertical-spacing {
+    padding-bottom: 2rem;
+}
+
+.card--cleantech-basics .card__img {
+    background: #fff;
+}
+
+.card--cleantech-basics .card__img img {
+    max-width: 80%;
+}
+
+.card--scaling-clean .card__img {
+    background: #000;
+}
+
+
+.card {
+    width: 31%;
+}
+
+@media (max-width: 979px) {
+    .card {
+        width: 48%;
+    }
+}
+
+@media (max-width: 767px) {
+    .card {
+        width: 100%;
+    }
+}

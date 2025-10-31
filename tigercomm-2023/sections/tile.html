@@ -1,0 +1,25 @@
+<div class="row-fluid-wrapper">
+    <div class="row-fluid">
+      <div class="span12 split-content__img-col">
+        <div class="module" data-aos="fade-right" data-aos-delay="1000">
+            {% if img_url %}<a href="{{ img_url }}">{% endif %}
+            <figure>
+            <div class="split-content__img-wrapper">
+              <img
+                class="split-content__img img--{{ theme }}"
+                src="{{ get_asset_url(split_content_img) }}"
+                alt="{{ img_alt }}"
+              />
+            </div>
+            {% if img_caption %}
+            <figcaption class="img-caption img-caption--{{ theme }}">
+              {{ img_caption }}
+            </figcaption>
+            {% endif %}
+            </figure>
+            {% if img_url %}</a>{% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</div>

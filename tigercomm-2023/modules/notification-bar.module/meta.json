@@ -1,0 +1,6 @@
+{
+  "label": "Notification Bar",
+  "host_template_types": ["PAGE"],
+  "global": true,
+  "is_available_for_new_content": true
+}

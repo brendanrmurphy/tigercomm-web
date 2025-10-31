@@ -1,0 +1,38 @@
+[
+  {
+    "id": "title",
+    "type": "text",
+    "display": "Title",
+    "label": "Title",
+    "name": "title",
+    "default": "",
+    "placeholder": "Enter a title"
+  },
+  {
+    "id": "sub_title",
+    "type": "text",
+    "display": "Subtitle",
+    "label": "Subtitle",
+    "name": "sub_title",
+    "default": "",
+    "placeholder": "Enter a subtitle"
+  },
+  {
+    "id": "label",
+    "type": "text",
+    "display": "Label",
+    "label": "Label",
+    "name": "hero_label",
+    "default": "",
+    "placeholder": "Enter a label"
+  },
+  {
+    "id": "content",
+    "type": "richtext",
+    "display": "Content",
+    "label": "Content",
+    "name": "content",
+    "default": "",
+    "placeholder": "Enter content"
+  }
+]

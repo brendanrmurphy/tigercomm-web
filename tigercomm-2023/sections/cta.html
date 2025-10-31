@@ -1,0 +1,41 @@
+{% set default_title = "Interested in Learning More?" %}
+{% set default_description = "<p>Whatever the engagement, we design our work to meet goals, overcome barriers and produce results.</p>" %}
+{% set default_button_label = "Get in Touch" %}
+{% set is_enabled = true %}
+{% if cta_enabled == false %}
+  {% set is_enabled = false %}
+{% endif %}
+{% if !cta_title %}
+  {% set cta_title = default_title %}
+{% endif %}
+{% if !cta_description %}
+{% set cta_description = default_description %}
+{% endif %}
+{% if !cta_button_label %}
+{% set cta_button_label = default_button_label %}
+{% endif %}
+{% if cta_contact_type %}
+{% set cta_contact_type = "?help_me_=" + cta_contact_type %}
+{% endif %}
+{% if cta_bg_dark == true %}
+  {% set cta_bg_class = 'row--alt' %}
+{% endif %}
+{% if is_enabled %}
+<div class="cta row-fluid-wrapper {{ cta_bg_class }}">
+  <div class="content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="cta__content">
+        <div class="cta__desc">
+          <h2 class="cta__title" data-aos="fade">{{ cta_title }}</h2>
+          {{ cta_description }}
+        </div>
+        <a href="/contact{{ cta_contact_type }}" class="button button--lg">{{ cta_button_label }}</a>
+      </div>
+      <div class="cta__border">
+        <span data-aos="fade-down-right" data-aos-delay="150"></span>
+        <span data-aos="fade-down-right" data-aos-delay="250"></span>
+        <span data-aos="fade-down-right" data-aos-delay="350"></span>
+      </div>
+  </div>
+</div>
+{% endif %}

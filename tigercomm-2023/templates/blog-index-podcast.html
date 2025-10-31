@@ -1,0 +1,117 @@
+<!--
+  templateType: blog_listing
+  isAvailableForNewContent: true
+  label: Podcast - blog listing
+  screenshotPath: ../images/template-previews/blog-index.png
+-->
+{% set template_css = "../../css/templates/blog.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+<style>
+.player .hs-embed-wrapper {
+margin: 0;
+max-width: 100%;
+}
+</style>
+<div class="body-container body-container--blog-index">
+{% set hero_label = "" %}
+{% set show_archives = false %}
+{% set show_topics = true %}
+{% set show_recent = false %}
+{% set show_authors = false %}
+{% if blog.id == 192539234147 %}
+  {% set hero_title = "This Week in Cleantech" %}
+{% else %}
+  {% if !tag %}
+  {% set hero_title = "Scaling Clean Podcast" %}
+  {% set hero_sub_title = "The podcast for cleantech CEOs, investors, and the people who advise them." %}
+  {% else %}
+  {% set hero_title = tag.name %}
+  {% endif %}
+{% endif %}
+{% include "../sections/hero.html" %}
+<div class="content-wrapper">
+  <div class="cta__border">
+    <span data-aos="fade-down-right" data-aos-delay="150"></span>
+    <span data-aos="fade-down-right" data-aos-delay="250"></span>
+    <span data-aos="fade-down-right" data-aos-delay="350"></span>
+  </div>
+</div>
+<div class="blog-post blog-listing content-wrapper content-wrapper--vertical-spacing" data-blog-id="{{ blog.id }}">
+  <div class="row-fluid">
+    <div class="span8 main-content">
+    <div class="blog-intro">
+    {% if blog.id == 192539234147 %}
+    {% else %}
+      <p>This show is a cross between NPR's <a href="https://www.npr.org/series/490248027/how-i-built-this" target="_blank">"How I Built This"</a> and The New York Times' <a href="https://www.nytimes.com/column/corner-office" target="_blank">"Corner Office"</a> series. We glean and curate usable tips from experienced cleantech leaders in a compact, rich 30 minutes.</p>
+      <p><strong>Covering:</strong> Founder's journey, leadership lessons learned, change management, hiring & firing, advice for the next generation, and recruitment & retention.</p>
+    {% endif %}
+    </div>
+    <div class="blog-items">
+    {% for content in contents %}
+        <div class="blog-item">
+          <div class="blog-item__header">
+            {#{% if content.widgets.podcast_settings.body.episode_number %}
+            {% set episode_number = "Episode " ~ content.widgets.podcast_settings.body.episode_number ~ ":" %}
+            <div class="blog-item__label">{{ episode_number }}</div>
+            {% endif %}#}
+            <h2 class="blog-item__title"><a href="{{content.absolute_url}}">{{ content.name }}</a></h2>
+          </div>
+          <div class="row-fluid blog-item__content">
+            {% if content.post_list_summary_featured_image %}
+              <div class="blog-item__image span4">
+                  <a href="{{content.absolute_url}}">
+                    <img src="{{ content.post_list_summary_featured_image }}" alt="{{ content.name }}">
+                  </a>
+              </div>
+            {% endif %}  
+            <div class="blog-item__excerpt span8">
+            <p class="blog-item__author"><span class="blog-item__published">{{ content.publish_date|format_datetime("MMMM d, yyyy") }}</span></p>
+            {% if content.topic_list %}
+              <div class="blog-item__topics">
+                  <span>Topics:</span>
+                  {% for topic in content.topic_list %}
+                  <a href="{{ group.absolute_url }}/tag/{{ topic.slug }}">{{ topic.name }}</a>{% if not loop.last %}<span class="sep"></span>{% endif %}
+                  {% endfor %}
+              </div>
+            {% endif %}
+            {% if content.widgets.podcast_settings.body.embed_code %}
+              <div class="player">
+                {{ content.widgets.podcast_settings.body.embed_code }}
+              </div>
+            {% endif %}
+              {{ content.post_list_content | truncatehtml(160, '...', false) }}
+              {% if content_group.show_summary_in_listing %}
+                <a class="button button--xs" href="{{ content.absolute_url }}">Continue Reading</a>
+              {% endif %}
+              {% blog_social_sharing "blog_social_sharing" overrideable=False, label='Blog Social Sharing' %}
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+      {% dnd_area "dnd_area"
+        label="Main section",
+        class=""
+      %}
+      {# Blog listings and pagination #}
+      {% dnd_section
+        vertical_alignment="TOP"
+      %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="@hubspot/pagination" %}
+            {% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+    </div>
+    {% if blog.id == 192539234147 %}
+    {% else %}
+    {% include "../sections/podcast-sidebar.html" %}
+    {% endif %}
+  </div>
+</div>
+{% endblock body %}

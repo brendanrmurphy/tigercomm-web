@@ -1,0 +1,28 @@
+.page-content h3, h4 {
+    margin-bottom: 1.6rem;
+}
+
+.page-content ol,
+.page-content ul {
+  margin-left: 2rem;
+  margin-bottom: 3.2rem;
+}
+
+.page-content ol:last-child,
+.page-content ul:last-child {
+    margin-bottom: 0;
+}
+
+.page-content p:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.page-content .testimonial__quote {
+    font-size: 2.2rem;
+}
+.page-content .testimonial__author {
+    font-size: 2.0rem;
+}
+.page-content .testimonial__author-title {
+    font-size: 1.6rem;
+}

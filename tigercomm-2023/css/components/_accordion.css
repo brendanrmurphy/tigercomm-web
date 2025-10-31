@@ -1,0 +1,37 @@
+.hs-accordion__item button {
+  line-height: 1.2;
+  color: #2b2b35 !important;
+}
+
+.hs-accordion__item[aria-expanded=true] button {
+  border-bottom-color: #2b2b35 !important;
+}
+.hs-accordion__item-icon {
+  border-color: {{ theme.global_colors.quaternary.color }} !important;
+}
+.hs-accordion__item .hs-accordion__item-icon:before, .hs-accordion__item .hs-accordion__item-icon:after {
+  background-color: {{ theme.global_colors.quaternary.color }} !important;
+}
+
+.hs-accordion__item[aria-expanded=true] .hs-accordion__item-icon:before,
+.hs-accordion__item[aria-expanded=true] .hs-accordion__item-icon:after {
+  background-color: #fff !important;
+}
+
+.hs-accordion__item button:hover {
+  color: {{ theme.global_colors.quaternary.color }} !important;
+}
+
+.hs-accordion__item button:hover .hs-accordion__item-icon:before, .hs-accordion__item button:hover .hs-accordion__item-icon:after {
+  color: {{ theme.global_colors.quaternary.color }} !important;
+}
+
+.hs-accordion__item[aria-expanded=true] .hs-accordion__item-icon {
+  border-color: {{ theme.global_colors.quaternary.color }} !important;
+  background-color: {{ theme.global_colors.quaternary.color }} !important;
+}
+
+.hs-accordion__item-content,
+.hs-accordion__item-content p {
+  font-size: 1.6rem;
+}

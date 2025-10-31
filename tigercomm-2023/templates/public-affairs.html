@@ -1,0 +1,60 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Public Affairs
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% set template_css = "../../css/templates/service.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+
+<div class="container-fluid body-container">
+  {% set hero_label = "Public Affairs" %}
+  {% set hero_title = "Secure fair treatment from policymakers" %}
+  {% set hero_content = "<p data-aos='fade' data-aos-delay='750'>Clean economy companies are typically building new sectors within industries dominated by mature incumbents unwilling to relinquish market share. Instead, they weaponize lobbying and political influence to block the growth of clean economy challengers.</p>" %}
+  {% set large_text = "Our industry-leading approach has helped dozens of clean economy companies use marcom to support better B2B sales – especially when lead times are long and price tags are high." %}
+  {% set split_content_text = "<p>Tigercomm team members have decades of communications and clean economy public affairs experience defeating anti-clean energy interests in politics and government. We’ve helped client companies open or protect access to markets, disrupted underhanded tactics used by powerful incumbents, and secured fair and stable policies at the state and federal level.</p><ul><li><a class='anchor anchor--alt' href='#success-stories'>Success Story</a></li><li><a class='anchor anchor--alt' href='#sample-clients'>Sample Clients</a></li><li><a class='anchor anchor--alt' href='#testimonials'>Testimonial</a></li></ul>" %}
+  {% set split_content_img = "../images/services/secure-tile.jpg" %}
+  {% set img_alt = "" %}
+  {% set img_caption = "" %}
+  {% set theme = "quaternary" %}
+  {% set info_graphic_title = "PROCESS / Public Affairs" %}
+  {% set info_graphic_img = "../images/services/secure-diagram.jpg" %}
+  {% set cta_contact_type = "secure" %}
+
+  {% set clients_title = "Sample Clients" %}
+  {% set client_logo_one = "../images/client-logos/real-logo.png" %}
+  {% set client_logo_one_alt = "Real" %}
+  {% set client_logo_two = "../images/client-logos/renew-logo.png" %}
+  {% set client_logo_two_alt = "Renew Financial" %}
+  {% set client_logo_three = "../images/client-logos/special-initiative-logo.svg" %}
+  {% set client_logo_three_alt = "Special Initiative on Offshore Wind" %}
+  {% set client_logo_four = "../images/client-logos/renewable-america-logo.png" %}
+  {% set client_logo_four_alt = "A Renewable America" %}
+
+  {% set testimonial_label = "Testimonial" %}
+  {% set testimonial_author = "Colin Bishopp" %}
+  {% set testimonial_author_title = "Vice President, Communications and Government Relations, Renew Financial" %}
+  {% set testimonial = "When incumbent sectors mounted aggressive efforts to shut down entire markets for us, Tigercomm designed and executed the strategy that kept them open. They are clean economy’s chess masters." %}
+
+  {% set success_story_title = "An Entire State Market Saved for Clean Energy" %}
+  {% set success_story_label = "Retail Energy Advancement League" %}
+  {% set success_story_content = "As the Massachusetts legislature prepared to expand state commitments to climate progress, it also considered banning retail sales of 100% clean energy – effectively pushing Bay Staters back into the arms of incumbent, monopoly utilities. Several retailers formed the Retail Energy Advancement League (REAL), but were hampered by differences on messaging and how much risk to take. The ban was backed by the popular, then-Attorney General Maura Healey (who led the race for governor by 44 points). A combined tens of millions in sales was at severe risk for nearly a dozen retailers." %}
+  {% set success_story_url = "/success-stories/real" %}
+  {% set success_story_img = "real.jpg" %}
+
+  {% include "../sections/hero.html" %}
+  {% include "../sections/split-content.html" %}
+  {# {% include "../sections/large-text.html" %} #}
+  {% include "../sections/info-graphic.html" %}
+  {% set category = "Public Affairs" %}
+  {% set tag = 'public-affairs' %}
+  {% include "../sections/success-stories.html" %}
+  {% include "../sections/clients.html" %}
+  {% include "../sections/testimonials.html" %}
+  {% include "../sections/cta.html" %}
+</div>
+{# All templates are recommended to have an h1 present for both accessibility and SEO best practice. This should be at the top of the template before any other textual content. The h1 element below is within a dnd area to allow content editors the ability to adjust the content and alignment of the text. #}
+
+{% endblock body %}

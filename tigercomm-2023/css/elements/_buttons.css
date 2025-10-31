@@ -1,0 +1,72 @@
+button,
+.button,
+.hs-button {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.15s linear;
+  white-space: normal;
+}
+
+button:disabled,
+.button:disabled,
+.hs-button:disabled {
+  background-color: #d0d0d0;
+  border-color: #d0d0d0;
+  color: #e6e6e6;
+}
+
+/* No button */
+
+.no-button,
+.no-button:hover,
+.no-button:focus,
+.no-button:active {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: initial;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  margin-bottom: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  transition: none;
+}
+
+.button.button--xs {
+  font-size: 1.4rem;
+}
+
+.button.button--sm {
+  font-size: 1.8rem;
+}
+
+.button.button--lg {
+  font-size: 3.2rem;
+}
+
+@media (max-width: 979px) {
+  button,
+  .button,
+  .hs-button.hs-button,
+  .hs-blog-post-listing__post-button.hs-blog-post-listing__post-button,
+  a.button.button {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 767px) {
+  button,
+  .button,
+  .hs-button.hs-button,
+  .hs-blog-post-listing__post-button.hs-blog-post-listing__post-button,
+  a.button.button {
+    font-size: 1.8rem;
+  }
+}

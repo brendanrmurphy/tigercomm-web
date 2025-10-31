@@ -1,0 +1,62 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Thought Leadership
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% set template_css = "../../css/templates/service.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+
+<div class="container-fluid body-container body-container--home">
+    {% set hero_label = "Thought Leadership" %}
+    {% set hero_title = "Narrating companies and executives to markets and investors" %}
+    {% set hero_content = "<p data-aos='fade' data-aos-delay='750'>There are several points in a company’s growth when it’s crucial to narrate a company and its leadership team, not just its products. Whether you’re securing early-stage funding, building valuation for potential acquirers, or preparing for an IPO … we can help with clean economy thought leadership.</p>" %}
+    {% set large_text = "Our industry-leading approach has helped dozens of clean economy companies use marcom to support better B2B sales – especially when lead times are long and price tags are high." %}
+    {% set split_content_text = "<p>We’ve spent more than a decade helping company leaders do just that in ways that are memorable, compelling and on-brand. From helping clients land TED talks to crushing conference keynote speeches, from laying the predicates for new products to narrating acquisitions by public companies, we’re on the leading edge of clean energy thought leadership practices that get results.</p>
+    </p><ul><li><a class='anchor anchor--alt' href='#success-stories'>Success Story</a></li><li><a class='anchor anchor--alt' href='#sample-clients'>Sample Clients</a></li><li><a class='anchor anchor--alt' href='#testimonials'>Testimonial</a></li></ul>" %}
+    {% set split_content_img = "../images/services/narrate-tile.jpg" %}
+    {% set img_alt = "" %}
+    {% set img_caption = "During our service to the world’s leading solar tracker maker, fast-growing Nextracker and CEO Dan Shugar have become one of the most influential companies in cleantech." %}
+    {% set theme = "quinary" %}
+    {% set info_graphic_title = "PROCESS / Thought Leadership" %}
+    {% set info_graphic_img = "../images/services/narrate-diagram.jpg" %}
+    {% set cta_contact_type = "narrate" %}
+  
+    {% set clients_title = "Sample Clients" %}
+    {% set client_logo_one = "../images/client-logos/nextracker-logo.svg" %}
+    {% set client_logo_one_alt = "Nextracker" %}
+    {% set client_logo_two = "../images/client-logos/plus-power-logo.svg" %}
+    {% set client_logo_two_alt = "Plus Power" %}
+    {% set client_logo_three = "../images/client-logos/pv-case-logo.svg" %}
+    {% set client_logo_three_alt = "PVcase" %}
+    {% set client_logo_four = "../images/client-logos/vestas-logo.svg" %}
+    {% set client_logo_four_alt = "Vestas" %}
+
+    {% set testimonial_author = "Daniel Shugar" %}
+    {% set testimonial_author_title = "CEO and Founder, Nextracker" %}
+    {% set testimonial = "Tigercomm worked with our in-house team to position Nextracker as not just a leading solar OEM, but one of the leading companies across renewable energy. It has made a real difference in how investors see the company." %}
+
+    {% set testimonial_label = "Testimonial" %}
+    {% set success_story_title = "Laying the communications foundation for a successful IPO" %}
+    {% set success_story_label = "Nextracker" %}
+    {% set success_story_content = "As for most global companies, the pandemic disrupted supply chains for Nextracker, the world’s leading maker of solar trackers and software. CEO Dan Shugar saw early that the cost of sluggish supply chains outweighed savings from manufacturing in China. He leaned into the challenge, aggressively reshoring manufacturing to the U.S. before the Inflation Reduction Act incentivized others. The company was leading the way, but few outside it knew that – an unfilled opportunity as the company prepared to go public in February 2023." %}
+    {% set success_story_url = "/success-stories/nextracker" %}
+    {% set success_story_img = "nextracker.jpg" %}
+      
+  
+    {% include "../sections/hero.html" %}
+    {% include "../sections/split-content.html" %}
+    {# {% include "../sections/large-text.html" %} #}
+    {% include "../sections/info-graphic.html" %}
+    {% set category = "Thought Leadership" %}
+    {% set tag = 'thought-leadership' %}
+    {% include "../sections/success-stories.html" %}
+    {% include "../sections/clients.html" %}
+    {% include "../sections/testimonials.html" %}
+    {% include "../sections/cta.html" %}
+</div>
+{# All templates are recommended to have an h1 present for both accessibility and SEO best practice. This should be at the top of the template before any other textual content. The h1 element below is within a dnd area to allow content editors the ability to adjust the content and alignment of the text. #}
+
+{% endblock body %}

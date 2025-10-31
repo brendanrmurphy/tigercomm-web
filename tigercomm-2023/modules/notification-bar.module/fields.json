@@ -1,0 +1,36 @@
+[
+  {
+    "name": "alert_message",
+    "label": "Alert Message",
+    "type": "richtext",
+    "default": "<p>This is an alert message</p>"
+  },
+  {
+    "name": "background_color",
+    "label": "Background Color",
+    "type": "color",
+    "default": {
+      "color": "#2b2b35",
+      "opacity": 100
+    }
+  },
+  {
+    "name": "text_color",
+    "label": "Text Color",
+    "type": "color",
+    "default": {
+      "color": "#ffffff",
+      "opacity": 100
+    }
+  },
+  {
+    "name": "start_date",
+    "label": "Start Date/Time",
+    "type": "datetime"
+  },
+  {
+    "name": "end_date",
+    "label": "End Date/Time",
+    "type": "datetime"
+  }
+]

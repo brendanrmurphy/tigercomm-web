@@ -1,0 +1,68 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Marketing Communications
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% set template_css = "../../css/templates/service.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+
+<div class="container-fluid body-container body-container--home">
+  {% set hero_label = "Marketing Communications" %}
+  {% set hero_title = "Turbocharge your sales through better marketing" %}
+  {% set hero_content = "<p data-aos='fade' data-aos-delay='750'>Many clean economy companies offer B2B industrial goods and services to a limited pool of customers who don’t buy with a mouse click. However, too many still use the legacy marketing approach of expecting sales teams to provide early-stage customer education. Marketing research shows B2B customers start their “buyer’s journey” through online searches and content, before they engage sales team members.</p>" %}
+  {% set large_text = "Our industry-leading approach has helped dozens of clean economy companies use marcom to support better B2B sales – especially when lead times are long and price tags are high." %}
+  {% set split_content_text = "<p>Tigercomm literally wrote <a href='https://www.tigercomm.us/insights/no-time-for-legacy-the-new-digital-playbook-for-cleantech-marketers'>the book</a> on how B2B clean economy companies can boost their commercial traction with updated marketing communications (“marcom”) that works with – not against – the new normal in buyers’ information consumption habits.</p>
+  <p>Our industry-leading approach has helped dozens of clean economy companies use marcom to support better B2B sales – especially when lead times are long and price tags are high.</p>
+  <p>We encourage you to download and skim our book, <a href='https://www.tigercomm.us/insights/no-time-for-legacy-the-new-digital-playbook-for-cleantech-marketers'>“No Time For Legacy”</a> (a 12-min. read) and let us know if you want to be the next cleantech company to turbocharge its commercial traction through better marcom.</p>
+  </p><ul><li><a class='anchor anchor--alt' href='#success-stories'>Success Story</a></li><li><a class='anchor anchor--alt' href='#sample-clients'>Sample Clients</a></li><li><a class='anchor anchor--alt' href='#testimonials'>Testimonials</a></li></ul>" %}
+  {% set split_content_img = "../images/services/turbo-tile.jpg" %}
+  {% set img_alt = "" %}
+  {% set img_caption = "B2B customers start their purchase decision through online search and content. We helped SaaS player Transect work with that reality to exceed commercial goals for a major trade show." %}
+  {% set theme = "primary" %}
+  {% set info_graphic_title = "PROCESS / Marketing Communications" %}
+  {% set info_graphic_img = "../images/diagram.jpg" %}
+  {% set cta_contact_type = "turbocharge" %}
+
+  {% set clients_title = "Sample of Marcom Clients" %}
+  {% set client_logo_one = "../images/client-logos/rondo-logo.png" %}
+  {% set client_logo_one_alt = "Rondo" %}
+  {% set client_logo_two = "../images/client-logos/hemlock-logo.svg" %}
+  {% set client_logo_two_alt = "hemlock" %}
+  {% set client_logo_three = "../images/client-logos/epe-logo.png" %}
+  {% set client_logo_three_alt = "EPE" %}
+  {% set client_logo_four = "../images/client-logos/transect-logo.svg" %}
+  {% set client_logo_four_alt = "Transect" %}
+  {% set client_logo_five = "../images/client-logos/lg-logo.png" %}
+  {% set client_logo_five_alt = "LG Solar" %}
+
+  {% set testimonial_author = "John O'Donnell" %}
+  {% set testimonial_author_title = "CEO, Rondo" %}
+  {% set testimonial = "Tigercomm captured our value proposition, then helped us deliver it to a global market. With their help, we’re tracking to exceed our sales goals this year." %}
+
+  {% set testimonal_2_author = "Jimmy Rogers" %}
+  {% set testimonial_2_author_title = "Marketing and Communications Manager, Redaptive" %}
+  {% set testimonial_2 = "Tigercomm took the time to learn about our unique climate solution and helped us distill that message down for a niche segment of customers and press targets. Their persistence and creative approach delivered results for our thought leaders and our brand!" %}  
+
+  {% set success_story_title = "Educating Industry Verticals on a Revolutionary Technology" %}
+  {% set success_story_label = "Rondo" %}
+  {% set success_story_content = "Rondo Energy needed to accelerate and close sales for its breakthrough “heat batteries” that help heavy industries decarbonize and save money in the process. But the business media was heavily focused on green hydrogen as heavy industry’s solution, and Rondo’s revolutionary technology was so widely applicable that it had too many verticals to pursue at once. The company asked Tigercomm to help with market education to lower friction in the sales funnel." %}
+  {% set success_story_url = "/success-stories/rondo" %}
+  {% set success_story_img = "rondo.jpg" %}
+
+  {% include "../sections/hero.html" %}
+  {% include "../sections/split-content.html" %}
+  {# {% include "../sections/large-text.html" %} #}
+  {% include "../sections/info-graphic.html" %}
+  {% set category = "Marketing Communications" %}
+  {% set tag = 'marketing-communications' %}
+  {% include "../sections/success-stories.html" %}
+  {% include "../sections/clients.html" %}
+  {% include "../sections/testimonials.html" %}
+  {% include "../sections/cta.html" %}
+</div>
+{# All templates are recommended to have an h1 present for both accessibility and SEO best practice. This should be at the top of the template before any other textual content. The h1 element below is within a dnd area to allow content editors the ability to adjust the content and alignment of the text. #}
+
+{% endblock body %}

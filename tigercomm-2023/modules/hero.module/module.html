@@ -1,0 +1,47 @@
+<div class="hero">
+  <div
+    class="content-wrapper content-wrapper--vertical-spacing {{ hero_content_wrapper_class }}"
+  >
+    <div class="row-fluid">
+      <div class="span12">
+        {% if module.label %}
+        <h4
+          class="hero__label label"
+          data-aos="fade-right"
+          data-aos-delay="500"
+        >
+          {{ module.label }}
+        </h4>
+        {% endif %}
+        <h1
+          class="{% if hero_title_class %}{{ hero_title_class }}{% endif %} hero__title"
+        >
+          <div data-aos="fade-right" data-aos-delay="500">{{ module.title }}</div>
+          {% if module.sub_title %}
+          <div
+            class="hero__sub-title"
+            data-aos="fade-left"
+            data-aos-delay="1000"
+          >
+            {{ module.sub_title }}
+          </div>
+          {% endif %}
+        </h1>
+        {% if hero_img %}
+        <img src="{{ get_asset_url(hero_img) }}" />
+        {% endif %}
+      </div>
+      <!--end row-->
+      {% if module.content %}
+      <div class="hero__content">{{ module.content }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<div class="content-wrapper">
+  <div class="cta__border">
+    <span data-aos="fade-down-right" data-aos-delay="150"></span>
+    <span data-aos="fade-down-right" data-aos-delay="250"></span>
+    <span data-aos="fade-down-right" data-aos-delay="350"></span>
+  </div>
+</div>

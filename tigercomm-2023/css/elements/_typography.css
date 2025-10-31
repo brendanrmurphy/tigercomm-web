@@ -1,0 +1,230 @@
+body {
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+html[lang^="ja"] body,
+html[lang^="zh"] body,
+html[lang^="ko"] body {
+  line-break: strict;
+  overflow-wrap: normal;
+  word-break: break-all;
+}
+
+/* Paragraphs */
+
+p {
+  margin: 0 0 1.4rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* Anchors */
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 1.4rem;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #000;
+  text-decoration: underline;
+}
+
+h1:last-child,
+h2:last-child,
+h3:last-child,
+h4:last-child,
+h5:last-child,
+h6:last-child {
+  margin-bottom: 0;
+}
+
+h5, .h5 {
+  font-weight: 600;
+}
+
+h6, .h6 {
+  font-weight: 600;
+}
+
+/* Lists */
+
+ul,
+ol {
+  margin: 1.4rem 0 1.4rem;
+  padding-left: 2rem;
+}
+
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+  margin: 0;
+}
+
+li {
+  margin-bottom: 1.2rem;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+ul.no-list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+/* Code blocks */
+
+pre {
+  overflow: auto;
+}
+
+code {
+  vertical-align: bottom;
+}
+
+/* Blockquotes */
+
+blockquote {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.blockquote__quote {
+  position: absolute;
+  top: -0.75rem;
+  left: -1.6rem;
+  font-size: 3.5rem;
+}
+
+.blockquote__author {
+  display: block;
+  margin-top: 0.8rem;
+  margin-left: auto;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.27;
+  font-style: normal;
+  text-align: right;
+}
+
+/* Horizontal rules */
+
+hr {
+  border: none;
+  border-bottom: 1px solid #CCC;
+}
+
+/* Image alt text */
+
+img {
+  font-size: 0.9328rem;
+  word-break: normal;
+}
+
+.label {
+  line-height: 1.4;
+}
+
+.label a {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.label a:hover {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.anchor {
+    /* font-size: 2rem; */
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+}
+
+.anchor.anchor--alt {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.anchor.anchor--alt:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.anchor--multiline {
+  align-items: flex-start;
+}
+
+.anchor--multiline .icon {
+  display: block;
+  margin-top: 0.8rem;
+}
+
+.anchor .icon {
+    /* height: 1.5rem; */
+    display: flex;
+    align-items: center;
+}
+
+.anchor img {
+    margin-left: 0.8rem;
+    width: 1.5rem;
+    position: relative;
+    right: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+.anchor:hover img {
+    right: -0.4rem;
+}
+
+.text--lg {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 767px) {
+  .anchor {
+    font-size: 1.6rem;
+  }
+
+  .text--lg {
+    font-size: 2rem;
+  }
+
+  .blockquote__quote {
+    font-size: 2.4rem;
+    top: -0.25rem;
+    left: -1rem;
+  }
+
+  .blockquote__author {
+    font-size: 1.6rem;
+  }
+}

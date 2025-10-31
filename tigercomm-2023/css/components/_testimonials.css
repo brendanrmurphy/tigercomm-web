@@ -1,0 +1,49 @@
+.testimonials .content-wrapper {
+    position: relative;
+}
+.testimonials__bg {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    right: 0;
+}
+.testimonials .testimonial {
+    position: relative;
+    z-index: 1;
+}
+
+.testimonials .testimonial:not(:last-child) {
+    margin-bottom: 4.8rem;
+}
+
+.testimonial__quote {
+    font-family: var(--font-secondary);
+    font-size: 3.4rem;
+    font-style: italic;
+    font-optical-sizing: auto;
+}
+.testimonial__author {
+    font-size: 3rem;
+    margin-top: 1.6rem;
+}
+.testimonial__author-title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: block;
+}
+
+
+@media (max-width: 768px) {
+    .testimonial__quote {
+        font-size: 2.4rem;
+    }
+
+    .testimonial__author {
+        font-size: 1.8rem;
+    }
+
+    .testimonial__author-title {
+        font-size: 1.6rem;
+    }
+}

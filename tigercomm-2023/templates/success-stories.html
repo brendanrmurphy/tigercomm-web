@@ -1,0 +1,224 @@
+<!--
+  templateType: blog_listing
+  isAvailableForNewContent: true
+  label: Success Stories
+  screenshotPath: ../images/template-previews/blog-post.png
+-->
+{% set template_css = "../../css/templates/success-stories.css" %}
+{% extends "./layouts/base.html" %}
+
+{% set sectors = [] %}
+
+{% for content in contents %}
+  {% for sector in content.widgets.success_story_sectors.body.sector %}
+    {% if sector not in sectors %}
+      {% set _ = sectors.append(sector) %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% set years = [] %}
+
+  {% for content in contents %}
+    {% for year in content.widgets.success_story_years.body.year %}
+      {% if year not in years %}
+        {% set _ = years.append(year) %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+{% block body %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Get all elements with class 'element' and links with class 'filter-link'
+  const elements = document.querySelectorAll('.success-story');
+  const yearLinks = document.querySelectorAll('.filter-year');
+  const sectorLinks = document.querySelectorAll('.filter-sector');
+  let activeYears = []; // Array to store active years
+  let activeSectors = []; // Array to store active sectors
+
+// Function to update visibility based on active filters
+  function updateVisibility() {
+    elements.forEach(function(element) {
+      const dataYears = element.getAttribute('data-years') ? JSON.parse(element.getAttribute('data-years')) : [];
+      const dataSectors = element.getAttribute('data-sectors') ? JSON.parse(element.getAttribute('data-sectors')) : [];
+      
+      // Check if element matches all active years and sectors
+      const matchesYears = activeYears.length === 0 || activeYears.every(year => dataYears.includes(year));
+      const matchesSectors = activeSectors.length === 0 || activeSectors.every(sector => dataSectors.includes(sector));
+
+      // Show or hide element based on filter match
+      if (matchesYears && matchesSectors) {
+        element.style.display = 'block'; // Show the element
+      } else {
+        element.style.display = 'none'; // Hide the element
+      }
+    });
+  }
+  
+  // Add click event listeners to year filter links
+  yearLinks.forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      
+      const targetYear = this.getAttribute('href').substring(1); // Remove the '#'
+      this.classList.toggle('active');
+      
+      // Update activeYears array based on current state of the link
+      if (this.classList.contains('active')) {
+        activeYears.push(targetYear);
+      } else {
+        activeYears = activeYears.filter(year => year !== targetYear);
+      }
+      
+      // Update visibility based on active filters
+      updateVisibility();
+    });
+  });
+  
+  // Add click event listeners to sector filter links
+  sectorLinks.forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      
+      const targetSector = this.getAttribute('href').substring(1); // Remove the '#'
+      this.classList.toggle('active');
+      
+      // Update activeSectors array based on current state of the link
+      if (this.classList.contains('active')) {
+        activeSectors.push(targetSector);
+      } else {
+        activeSectors = activeSectors.filter(sector => sector !== targetSector);
+      }
+
+      // Update visibility based on active filters
+      updateVisibility();
+    });
+  });
+});
+</script>
+<div class="container-fluid body-container body-container--success-story">
+  {% set hero_title = "Success Stories" %}
+  {% set hero_label = "" %}
+  {% if topic == "thought-leadership" %}
+  {% set hero_sub_title = "Thought Leadership" %}
+  {% elif topic == "marketing-communications" %}
+  {% set hero_sub_title = "Marketing Communications" %}
+  {% elif topic == "community-engagement" %}
+  {% set hero_sub_title = "Community Engagement" %}
+  {% elif topic == "public-affairs" %}
+  {% set hero_sub_title = "Public Affairs" %}
+  {% endif %}
+  {% set hero_content_wrapper_class = "hero--sm" %}
+  {% include "../sections/hero.html" %}
+  <div class="content-wrapper">
+    <div class="cta__border">
+      <span data-aos="fade-down-right" data-aos-delay="150"></span>
+      <span data-aos="fade-down-right" data-aos-delay="250"></span>
+      <span data-aos="fade-down-right" data-aos-delay="350"></span>
+    </div>
+  </div>
+  <div class="success-stories content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="row-fluid">
+          <div class="span9">
+            <div class="row-fluid">
+            {% for content in contents %}
+            {% set formatted_sectors = [] %}
+            {% for item_sector in content.widgets.success_story_sectors.body.sector %}
+              {% set lowercase = item_sector|lower %}
+              {% set replaced = lowercase|replace(' ', '_') %}
+              {% set _ = formatted_sectors.append(replaced) %}
+            {% endfor %}
+            {% set formatted_years = [] %}
+              {% for item_year in content.widgets.success_story_years.body.year %}
+                {% set _ = formatted_years.append(item_year) %}
+              {% endfor %}
+            <div class="success-story blog-post__body span6" data-sectors='["{{ formatted_sectors|join('","')}}"]' data-years='["{{ formatted_years|join('","')}}"]'>
+                <a class="success-story__image" href="{{content.absolute_url}}">
+                  <img src="{{ content.post_list_summary_featured_image }}" alt="" />
+                </a>
+                <h2 class="h4 success-story__title"><a href="{{content.absolute_url}}">{{ content.name }}</a></h2>
+                <p class="success-story__excerpt">
+                {% if content.slug == 'success-stories/real' %}
+                As the Massachusetts legislature prepared to expand state commitments to climate progress, it also considered banning retail sales of 100% clean energy – effectively pushing Bay Staters back into the arms of incumbent, monopoly utilities. Several retailers formed the Retail Energy Advancement League (REAL), but were hampered by differences on messaging and how much risk to take – the ban was backed by the popular, then-Attorney General Maura Healey, (who led the race for governor by 44 points). A combined tens of millions in sales was at severe risk for nearly a dozen retailers.
+                {% elif content.slug == 'success-stories/lightsource-bp'%}
+                As one of the world’s biggest solar developers, Lightsource bp is facing increasing skepticism from local residents, who are targeted with anti-renewables propaganda from the oil and gas industry. In fact, local “NIMBY” resistance (“Not In My Back Yard”) objections have led to more project cancellations, creating a multi-billion-dollar threat to the entire clean energy transition.
+                {% elif content.slug == 'success-stories/nextracker'%}
+                As for most global companies, the pandemic disrupted supply chains for Nextracker, the world’s leading maker of solar trackers and software. CEO Dan Shugar saw early that the cost of sluggish supply chains outweighed savings from manufacturing in China. He leaned into the challenge, aggressively reshoring manufacturing to the U.S. before the Inflation Reduction Act incentivized others. The company was leading the way, but few outside it knew that – an unfilled opportunity as the company prepared to go public in February 2023.
+                {% elif content.slug == 'success-stories/rondo'%}
+                Rondo Energy needed to accelerate and close sales for its breakthrough “heat batteries” that help heavy industries decarbonize and save money in the process. But the business media was heavily focused on green hydrogen as heavy industry’s solution, and Rondo’s revolutionary technology was so widely applicable that it had too many verticals to pursue at once. The company asked Tigercomm to help with market education to lower friction in the sales funnel.
+                {% elif content.slug == 'success-stories/hemlock-semiconductor-ulcsa'%}
+                Subsidized Chinese competition threatened the market position of America’s top manufacturer of the high-purity polysilicon used in solar panels. To grow its sales, <a href="https://www.hscpoly.com/" target="_blank">Hemlock Semiconductor (HSC)</a> needed solar buyers to consider the benefits of domestically made products.
+                {% elif content.slug == 'success-stories/electric-power-engineers'%}
+                Electric Power Engineers (EPE) is a leading engineering consultancy. The firm had created an AI-based software offering, and spun off the division that sold it, ENERi-AI, shortly before the major annual trade show RE+. The company wanted to accelerate its organic growth by boosting customer traffic at its trade show booth, but the spinoff had no brand presence. With weeks to go before the trade show, EPE CEO Hala Ballouz asked Tigercomm to help jump-start its customer outreach.
+                {% elif content.slug == 'success-stories/transect'%}
+                Transect’s young, charismatic CEO was out to disrupt the entire environmental engineering field by completely automating and expanding the traditionally lengthy process of evaluating a site for solar or wind viability. Her approach was so revolutionary, it required a significant market education job so developers could understand this faster, vastly less expensive alternative to legacy environmental engineering evaluations. Oh – and they needed that done within one month before the crucial RE+ trade show at which the CEO would be speaking.
+                {% elif content.slug == 'success-stories/soluna'%}
+                Soluna Computing builds data centers to perform “batchable” computing jobs that can be executed intermittently, enabling them to run off the excess energy from neighboring solar and wind farms. The company wanted to build inbound leads from both computing customers, such as bitcoin miners, and renewable energy developers. With distinct market segments, a highly technical value proposition, and a significantly different product, Soluna faced a challenging market education task.
+                {% elif content.slug == 'success-stories/lg-solar'%}
+                The start of the pandemic threatened the ability of solar installation companies to engage homeowners who wanted to generate their own clean electricity. Solar panel makers such as LG Solar found themselves reliant on a sales model – in-person, kitchen-table conversations – that was effectively impossible. The company faced a sales cliff it couldn’t afford.
+                {% elif content.slug == 'success-stories/apex-clean-energy'%}
+                As an independent renewable energy developer with national ambitions, Apex Clean Energy needed to break out of the ranks of larger developers and into the emerging market of corporate buyers of renewable energy (DCPs). The sales team needed to get around RFPs by attracting inbound interest from DCPs to talk directly with Apex.
+                {% elif content.slug == 'success-stories/e-on'%}
+                German renewable energy developer E.ON wanted to launch an innovative maintenance service to shorten wind turbine repair times. Instead of commonly used heavy cranes, the company would offer a lighter, faster “climbing crane” that slid up the turbine, making quicker work of critical  repairs. E.ON needed a precision launch for its new service to maximize sales traction at the crucial WINDPOWER conference, targeting companies that included those that E.ON’s development business competed against in building wind farms.
+                {% elif content.slug == 'success-stories/plus-power'%}
+                Plus Power is the U.S. leader in developing utility-scale battery projects that balance power flows on the grid. The company had focused on project execution and clearing regulatory hurdles before building its brand. But as it approached the final phase of a large fundraising close, it needed to raise its profile to create buzz among the investors who were interested in the company. A complicating factor was the highly technical nature of Plus Power projects’ benefits to the grid.
+                {% elif content.slug == 'success-stories/pvcase'%}
+                Lithuania-based solar design software company PVcase was preparing to acquire another software company to expand its offering to the EU market. In the weeks before Intersolar Europe, the continent’s biggest solar trade show, PVcase needed to frame the benefit of the acquisition to customers while helping it cement an important round of funding…on its own terms.
+                {% elif content.slug == 'success-stories/vestas'%}
+                Chris Brown was the high-octane president of Vestas’ largest market group, covering all of North America. Though wind energy faced headwinds created by aggressive attacks from Donald Trump and his Department of Energy, Chris wanted to boost sales with a public case that wind had become the most economic new energy choice for utilities and other large power customers.
+                {% elif content.slug == 'success-stories/ausra'%}
+                Utility-scale solar project developer Ausra grew as a company backed by two of the biggest names in venture capital: Khosla Ventures and Kleiner-Perkins. The investors wanted to get the company acquired. Tigercomm had been Ausra’s agency of record for three years, helping the company generate a spate of national business media. Tigercomm was asked to help cap this run with a strategic communications plan for Ausra’s flagship project, which would come online during negotiations with several potential buyers.
+                {% elif content.slug == 'success-stories/rockwool'%}
+                Over 50 counties across 10 states competed to land ROCKWOOL’s newest eco-friendly insulation factory. The global company selected Jefferson County, WV, which partnered with the company to announce it had won. They then released factory design plans, followed by a public groundbreaking featuring statewide officials. This triggered aggressive community opposition that grew to 12K opponents and imperiled construction of this critical $250M plant. Company’s leaders were being verbally battered in local public meetings when ROCKWOOL approached Tigercomm for help.
+                {% elif content.slug == 'success-stories/aes'%}
+                Global energy company AES had achieved strong ties with the local community around the largest wind farm in Arizona. The company wanted to cement its relationships with local and state officials through an in-person event that would celebrate a major construction milestone and attract local media attention. But the event’s remote location – Winslow, four hours outside of Phoenix – and summer temperatures posed significant challenges. And safety concerns prohibited the company from offering media a trip to the top of the iconic turbines.
+                {% elif content.slug == 'success-stories/solarcity'%}
+                As more Americans installed solar panels on their roofs, many utilities began to see the trend as a direct threat to their monopoly dominance over electricity sales. The industry’s trade association wrote its infamous memo warning utilities that continued residential solar would create a “death spiral” for utilities’ dominance of the power industry. These powerful companies began to attack homeowners’ ability to sell power back to the grid at the same price as the utility sold them power. The residential rooftop installation asked Tigercomm to help.
+                {% elif content.slug == 'success-stories/renew-financial'%}
+                Property Assessed Clean Energy (PACE) lending was launched as a great way for homeowners to pay for eco-friendly home improvements by paying the cost as part of their property tax bill over time. But a few unscrupulous contractors left unhappy homeowners in their wake, and their stories were leveraged by the mortgage banking industry – which saw PACE as direct competition – to lobby lawmakers to ban PACE from counties…or entire states. Renew Financial, a leader in advocating ethical PACE lending sales, was facing the loss of entire markets, and asked Tigercomm to help.
+                {% elif content.slug == 'success-stories/special-initiative-offshore-wind'%}
+                While firmly rooted in northern Europe’s economy, the offshore wind industry was hard-pressed to start in the U.S. A lack of experienced companies and supportive policies, combined with hostility by the natural gas and fishing industries made catalyzing the industry a daunting task. The University of Delaware’s Special Initiative on Offshore Wind (SIOW) was created to change that, and it turned to us for help.
+                {% elif content.slug == 'success-stories/renewable-america'%}
+                When renewable energy deployment started scaling, the oil and gas industry wanted to erode its support among the statewide officials witnessing renewables’ growth. Industry associations wanted to head off a loss of Congressional support as they sought to win long-term extensions of vital tax credits for wind and solar. The then-American Wind Energy Association’s C3 arm, A Renewable America (ARA), asked Tigercomm to help devise and run the approach.
+                {% endif %}
+                </p>
+                <a class="anchor" href="{{content.absolute_url}}">Read more <img src="{{ get_asset_url("../images/blue-arrow.svg") }}" /></a>
+            </div>
+          {% endfor %}
+        </div>
+        </div>
+        <div class="blog-aside span3">
+          {% module "post_filter" path="@hubspot/post_filter" expand_link_text='see all', filter_type='topic', list_title='Services', max_links=10, order_by='name', overrideable=False, select_blog=164109001989, label='Post Filter' %}
+
+          {% if sectors %}
+          <div class="hs_cos_wrapper_widget">
+          <h3>Sectors</h3>
+          <ul>
+          {% for sector in sectors %}
+            {% set lowercase = sector|lower %}
+            {% set replaced = lowercase|replace(' ', '_') %}
+            <li><a class="filter-link filter-sector" href="#{{ replaced }}">{{sector}} <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M14.5,1.5l-13,13m0-13,13,13" transform="translate(-1 -1)"></path></svg></a></li>
+          {% endfor %}
+          </ul>
+          </div>
+          {% endif %}
+          {% if years %}
+          <div class="hs_cos_wrapper_widget">
+          <h3>Years</h3>
+          <ul>
+          {% for year in years %}
+            <li><a class="filter-link filter-year" href="#{{ year }}">{{year}} <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M14.5,1.5l-13,13m0-13,13,13" transform="translate(-1 -1)"></path></svg></a></li>
+          {% endfor %}
+          </ul>
+          </div>
+          {% endif %}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,54 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Landing Page
+  screenshotPath: ../images/template-previews/landing-page.png
+-->
+{% set template_css = "../../css/templates/about.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block header %}
+  {% global_partial path="./partials/header-no-navigation.html" %}
+{% endblock header %}
+{% block body %}
+  {% dnd_area "dnd_area_header"
+  label="Header section",
+  class="header-container header-container--landing-page"
+%}
+{% end_dnd_area %}
+{% set hero_title = content.title %}
+  {% set hero_content_wrapper_class = "hero--sm" %}
+  {% include "../sections/hero.html" %}
+    <div class="content-wrapper">
+    <div class="cta__border ">
+        <span data-aos="fade-down-right" data-aos-delay="150"></span>
+        <span data-aos="fade-down-right" data-aos-delay="250"></span>
+        <span data-aos="fade-down-right" data-aos-delay="350"></span>
+      </div>
+    </div>
+  <div class="page-content content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+    <div class="span12">
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--landing-page"
+%}
+
+  {# Three column image with text #}
+  <div class="page-content content-wrapper content-wrapper--vertical-spacing">
+
+  {% include_dnd_partial
+    path="../sections/multi-column-content.html",
+    context={
+      "background_color": "#FFFFFF"
+    }
+  %}
+
+{% end_dnd_area %}
+</div>
+</div>
+</div>
+{% endblock body %}
+{% block footer %}
+  {% global_partial path="./partials/footer.html" %}
+{% endblock footer %}

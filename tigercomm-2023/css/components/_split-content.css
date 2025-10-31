@@ -1,0 +1,40 @@
+.split-content__img-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
+.split-content__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.split-content__img-caption {
+    padding: 3.2rem;
+}
+
+.content-col .button {
+  margin-top: 3.2rem;
+}
+
+@media (min-width: 980px) {
+  .split-content .content-wrapper {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .split-content__img-col {
+      margin-bottom: 3.2rem;
+  }
+
+  .content-col .button {
+    margin-top: 1.6rem;
+  }
+}

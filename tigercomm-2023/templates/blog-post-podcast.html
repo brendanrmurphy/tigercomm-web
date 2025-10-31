@@ -1,0 +1,61 @@
+<!--
+  templateType: blog_post
+  isAvailableForNewContent: true
+  label: Podcast - blog post
+  screenshotPath: ../images/template-previews/blog-post.png
+-->
+<!-- dev-refresh-5 -->
+
+{% module "podcast_settings" path="/tigercomm-2023/modules/podcast-settings" %}
+
+{% set template_css = "../../css/templates/blog.css" %}
+
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+<style>
+.player .hs-embed-wrapper {
+margin: 0 !important;
+max-width: 100% !important;
+}
+</style>
+<div class="body-container body-container--blog-post">
+  {# Blog post #}
+  {% set tags = "" %}
+  {% if content.tag_list %}
+      {% for tag in content.tag_list %}
+        {% do tags.append(tag.name) %}{% if not loop.last %}{% do tags.append(" | ") %}{% endif %}
+      {% endfor %}
+  {% endif %}
+  {% set episode_number = "Episode " ~ content.widgets.podcast_settings.body.episode_number %}
+  {% set hero_label = "Scaling Clean Podcast" %}
+  {% set hero_title = content.name %}
+  {% set hero_sub_title = "" %}
+  {% set hero_title_class = "" %}
+  {% set hero_content_wrapper_class = "hero--sm" %}
+  {% set hero_content = '<p class="blog-item__author"><span class="blog-item__published">{{ content.publish_date|format_datetime("MMMM d, yyyy") }}</span></p> {% blog_social_sharing "blog_social_sharing" overrideable=False, label="Blog Social Sharing" %}' %} 
+  {% include "../sections/hero.html" %}
+  <div class="content-wrapper row-fluid" data-episode-number="{{ episode_number }}">
+    <div class="cta__border">
+      <span data-aos="fade-down-right" data-aos-delay="150"></span>
+      <span data-aos="fade-down-right" data-aos-delay="250"></span>
+      <span data-aos="fade-down-right" data-aos-delay="350"></span>
+    </div>
+  </div>  
+  <div class="blog-post content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+    <article class="span8">
+    {% if content.widgets.podcast_settings.body.embed_code %}
+      <div class="player">
+        {{ content.widgets.podcast_settings.body.embed_code }}
+      </div>
+    {% endif %}
+      <div class="blog-post__body">
+        {{ content.post_body }}
+      </div>
+    </article>
+    {% include "../sections/podcast-sidebar.html" %}
+    </div>
+  </div>
+</div>
+{% endblock body %}

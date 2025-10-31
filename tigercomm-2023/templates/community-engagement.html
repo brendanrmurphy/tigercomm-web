@@ -1,0 +1,60 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Community Engagement
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% set template_css = "../../css/templates/service.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+
+<div class="container-fluid body-container body-container--home">
+    {% set hero_label = "Community Engagement" %}
+    {% set hero_title = "Win community approval for projects" %}
+    {% set hero_content = "<p data-aos='fade' data-aos-delay='750'>Clean energy developers need support from local communities to build renewable energy infrastructure, such as wind and solar farms. But developers face increasingly project-fatal opposition from loud minorities of locals who organize online, then shout at local officials in the hearing room. We’ve pioneered and deployed community engagement strategies and digital best practices for developers to cut project risk and boost their ability to win the “social license” needed to secure permits from local officials for clean energy projects.</p>" %}
+    {% set large_text = "Our industry-leading approach has helped dozens of clean economy companies use marcom to support better B2B sales – especially when lead times are long and price tags are high." %}
+    {% set split_content_text = "<p>Tigercomm employs America’s leading experts on successful community engagement for clean economy companies. We conducted the first-ever poll of rural Americans’ views of renewable energy, and surveyed the nation’s leading developers on their program’s strengths. Check out our analysis of current practices for onshore wind, micromobility and offshore wind.</p><ul><li><a class='anchor anchor--alt' href='#success-stories'>Success Story</a></li><li><a class='anchor anchor--alt' href='#sample-clients'>Sample Clients</a></li><li><a class='anchor anchor--alt' href='#testimonials'>Testimonial</a></li></ul>" %}
+    {% set split_content_img = "../images/services/community-tile.jpg" %}
+    {% set img_alt = "" %}
+    {% set img_caption = "ROCKWOOL faced 8K opponents in a 55K-person county. Tigercomm designed and executed the community engagement plan that helped its proposed eco-insulation factory get built." %}
+    {% set theme = "quaternary" %}
+    {% set info_graphic_title = "PROCESS / Community Engagement" %}
+    {% set info_graphic_img = "../images/services/community-diagram.jpg" %}
+    {% set cta_contact_type = "community" %}
+  
+    {% set clients_title = "Sample Clients" %}
+    {% set client_logo_one = "../images/client-logos/solar-city-logo.svg" %}
+    {% set client_logo_one_alt = "Solar City" %}
+    {% set client_logo_two = "../images/client-logos/lightsource-bp-logo.jpg" %}
+    {% set client_logo_two_alt = "Lightsource BP" %}
+    {% set client_logo_three = "../images/client-logos/rockwool-logo.png" %}
+    {% set client_logo_three_alt = "Rockwool" %}
+    {% set client_logo_four = "../images/client-logos/aes-logo.svg" %}
+    {% set client_logo_four_alt = "AES" %}
+
+    {% set testimonial_label = "Testimonial" %}
+    {% set testimonial_author = "Mary Grikas" %}
+    {% set testimonial_author_title = "Senior Vice President, Marketing & Community Relations, U.S., Lightsource bp" %}
+    {% set testimonial = "Tigercomm was thorough, perceptive and returned significant value. They helped us capture and advance our company’s practices in a way that fit our culture and staff capacity." %}
+  
+    {% set success_story_title = "Major Developer Raises the Bar for Responsible Solar, Wins Over Skeptics" %}
+    {% set success_story_label = "Lightsource bp" %}
+    {% set success_story_content = "As one of the world’s biggest solar developers, Lightsource bp is facing increasing skepticism from local residents, who are targeted with anti-renewables propaganda from the oil and gas industry. In fact, local “NIMBY” resistance (“Not In My Back Yard”) objections have led to more project cancellations, creating a multibillion-dollar threat to the entire clean energy transition." %}
+    {% set success_story_url = "/success-stories/lightsource-bp" %}
+    {% set success_story_img = "lightsource-bp.jpg" %}
+  
+    {% include "../sections/hero.html" %}
+    {% include "../sections/split-content.html" %}
+    {# {% include "../sections/large-text.html" %} #}
+    {% include "../sections/info-graphic.html" %}
+    {% set category = "Community Engagement" %}
+    {% set tag = 'community-engagement' %}
+    {% include "../sections/success-stories.html" %}
+    {% include "../sections/clients.html" %}
+    {% include "../sections/testimonials.html" %}
+    {% include "../sections/cta.html" %}
+</div>
+{# All templates are recommended to have an h1 present for both accessibility and SEO best practice. This should be at the top of the template before any other textual content. The h1 element below is within a dnd area to allow content editors the ability to adjust the content and alignment of the text. #}
+
+{% endblock body %}

@@ -1,0 +1,118 @@
+{% set total_columns_count = 12 %}
+
+/* CSS variables */
+
+:root {
+  /* --column-gap: 2.13% */
+  --column-gap: 3%;
+  --column-width-multiplier: 8.333;
+}
+
+
+body {
+  overflow-x: hidden;
+}
+
+.body-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.body-container-wrapper {
+  flex: 1;
+}
+
+
+/* Mobile layout */
+
+.row-fluid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+{% for span_num in range(1, total_columns_count + 1) %}
+  {{ ".row-fluid .span" ~ span_num }}{{ loop.last ? null : "," }}
+{%- endfor -%} {
+  min-height: 1px;
+  width: 100%;
+}
+
+/* Desktop layout */
+
+@media (min-width: 768px) {
+  .row-fluid {
+    /* flex-wrap: nowrap; */
+    justify-content: space-between;
+  }
+
+  {% for span_num in range(1, total_columns_count) %}
+    {{ ".row-fluid .span" ~ span_num }} {
+      width: calc(var(--column-width-multiplier) * 1% * {{ span_num  }} - var(--column-gap) * ({{ total_columns_count - span_num }} * var(--column-width-multiplier) / 100));
+    }
+  {% endfor %}
+}
+
+
+/* .dnd-section, */
+.content-wrapper,
+.blog-post {
+  width: 100%;
+  max-width: 144rem;
+  padding-left: 12rem;
+  padding-right: 12rem;
+  margin: 0 auto;
+}
+
+/* .dnd-section, */
+.content-wrapper--vertical-spacing {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.content-wrapper--vertical-spacing--sm {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+
+/* .dnd-section > .row-fluid {
+  max-width: 128rem;
+} */
+
+@media (max-width: 1440px) {
+  /* .dnd-section, */
+  .content-wrapper, .blog-post  {
+    max-width: 128rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+@media (max-width: 980px) {
+  /* .dnd-section, */
+  .content-wrapper, .blog-post {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+    
+  /* .dnd-section, */
+  .content-wrapper--vertical-spacing {
+    padding: 4rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* .dnd-section, */
+  .content-wrapper, .blog-post {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* .dnd-section, */
+  .content-wrapper--vertical-spacing,
+  .content-wrapper--vertical-spacing--sm {
+    padding: 3rem 1.5rem;
+  }
+}

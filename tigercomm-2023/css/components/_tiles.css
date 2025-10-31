@@ -1,0 +1,175 @@
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2%;
+  row-gap: 1.4rem;
+}
+
+.tile {
+  position: relative;
+  width: 49%;
+  padding-bottom: 50%;
+  overflow: hidden;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.tile:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -30rem;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  transform: skewX(-30deg);
+  transition: 0.3s;
+} 
+
+.tile--animate:hover:after {
+  left: 25rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tile--animate:hover .tile__front {
+  height: 100%;
+}
+
+.tile--animate:hover .tile__back {
+  opacity: 1;
+}
+
+.tile--animate:hover .tile__title {
+  opacity: 0;
+}
+
+.tile__img {
+  height: 60%;
+  width: 100%;
+  position: absolute;
+  background-size: cover;
+}
+
+.tile__front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  padding: 2rem 4rem 2rem 2rem;
+  transition: all 0.25s ease-in;
+}
+
+.tile__front img {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.tile__back {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.25s ease-in;
+  transition-delay: 0.1s;
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tile__back p {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.tile__title {
+  font-family: {{ theme.global_fonts.primary.font }};
+  /* font-size: 1.5rem; */
+  font-weight: 700;
+  line-height: 1.333;
+  color: #fff;
+  opacity: 1;
+  transition: all 0.25s ease-in;
+  font-size: 1.75vw;
+}
+
+.tile--primary,
+.tile--primary .tile__front,
+.tile--primary .tile__back {
+  background-color: {{ theme.global_colors.primary.color }};
+  background-position: 40% center;
+  background-size: cover;
+}
+
+.tile--quinary,
+.tile--quinary .tile__front,
+.tile--quinary .tile__back {
+  background: {{ theme.global_colors.quinary.color }};
+}
+
+.tile--alt,
+.tile--alt .tile__front,
+.tile--alt .tile__back {
+  background: #2E4B68;
+}
+
+.tile--quaternary,
+.tile--quaternary .tile__front,
+.tile--quaternary .tile__back {
+  background: {{ theme.global_colors.quaternary.color }};
+}
+
+/* .tiles-section .span4 {
+  width: 40%;
+}
+
+.tiles-section .span8 { 
+  width: 60%;
+} */
+
+@media (max-width: 979px) {
+  .tiles-section .span4,
+  .tiles-section .span8 {
+    width: 100% !important;
+  }
+
+  .tile__title {
+    font-size: 1.5vw;
+  }
+
+  .tile__back p {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .tiles {  
+    margin: 0; 
+  }
+  
+  .tile {
+    width: 100%;
+    padding-bottom: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .tile__title {
+    font-size: 5vw;
+  }
+
+  .tile__back p {
+    font-size: 3vw;
+  }
+}
+
+@media (min-width: 1200px) {
+    .tile__title {
+        font-size: 2.2rem;
+    }
+}

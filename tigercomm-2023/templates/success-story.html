@@ -1,0 +1,125 @@
+<!--
+  templateType: blog_post
+  isAvailableForNewContent: true
+  label: Success Story
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% module "success_story_sectors" path="/tigercomm-2023/modules/sectors" %}
+{% module "success_story_years" path="/tigercomm-2023/modules/years" %}
+
+{% set template_css = "../../css/templates/success-story.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+{% if request.path == '/success-stories/rondo' %}
+{% include "../sections/success-stories/rondo.html" %}
+{% elif request.path == '/success-stories/lightsource-bp' %}
+{% include "../sections/success-stories/lightsource-bp.html" %}
+{% elif request.path == '/success-stories/nextracker' %}
+{% include "../sections/success-stories/nextracker.html" %}
+{% elif request.path == '/success-stories/real' %}
+{% include "../sections/success-stories/real.html" %}
+{% elif request.path == '/success-stories/hemlock-semiconductor-ulcsa' %}
+{% include "../sections/success-stories/hemlock-semiconductor-ulcsa.html" %}
+{% elif request.path == '/success-stories/electric-power-engineers' %}
+{% include "../sections/success-stories/electric-power-engineers.html" %}
+{% elif request.path == '/success-stories/transect' %}
+{% include "../sections/success-stories/transect.html" %}
+{% elif request.path == '/success-stories/soluna' %}
+{% include "../sections/success-stories/soluna.html" %}
+{% elif request.path == '/success-stories/lg-solar' %}
+{% include "../sections/success-stories/lg-solar.html" %}
+{% elif request.path == '/success-stories/apex-clean-energy' %}
+{% include "../sections/success-stories/apex-clean-energy.html" %}
+{% elif request.path == '/success-stories/e-on' %}
+{% include "../sections/success-stories/e-on.html" %}
+{% elif request.path == '/success-stories/plus-power' %}
+{% include "../sections/success-stories/plus-power.html" %}
+{% elif request.path == '/success-stories/pvcase' %}
+{% include "../sections/success-stories/pvcase.html" %}
+{% elif request.path == '/success-stories/vestas' %}
+{% include "../sections/success-stories/vestas.html" %}
+{% elif request.path == '/success-stories/ausra' %}
+{% include "../sections/success-stories/ausra.html" %}
+{% elif request.path == '/success-stories/rockwool' %}
+{% include "../sections/success-stories/rockwool.html" %}
+{% elif request.path == '/success-stories/aes' %}
+{% include "../sections/success-stories/aes.html" %}
+{% elif request.path == '/success-stories/solarcity' %}
+{% include "../sections/success-stories/solarcity.html" %}
+{% elif request.path == '/success-stories/renew-financial' %}
+{% include "../sections/success-stories/renew-financial.html" %}
+{% elif request.path == '/success-stories/special-initiative-offshore-wind' %}
+{% include "../sections/success-stories/special-initiative-offshore-wind.html" %}
+{% elif request.path == '/success-stories/renewable-america' %}
+{% include "../sections/success-stories/renewable-america.html" %}
+{% endif %}
+<div class="container-fluid body-container body-container--success-story">
+  {% set hero_title = title %}
+  {% set hero_sub_title = sub_title %}
+  {% set hero_label = "Success Story | " + "<a href=" + category_url + ">" + category + "</a>" %}
+  {% set hero_img = ""  %}
+  {% include "../sections/hero.html" %}
+  <div class="content-wrapper">
+    <div class="cta__border">
+      <span data-aos="fade-down-right" data-aos-delay="150"></span>
+      <span data-aos="fade-down-right" data-aos-delay="250"></span>
+      <span data-aos="fade-down-right" data-aos-delay="350"></span>
+    </div>
+  </div>
+  <div class="success-story__content content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="span7">
+        <div class="row-fluid">
+          <div class="span-12">
+          <h2>Approach</h2>
+          {{ approach }}
+          </div>
+        </div>  
+        <div class="row-fluid">
+          <div class="span-12">
+            <h2>Challenge</h2>
+            {{ challenge }}
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span-12">
+            <h2>Results</h2>
+            {{ results }}
+          </div>
+        </div>
+      </div>
+      <div class="span5">
+        <img src="{{ get_asset_url('../images/success-stories/' + success_story_img)}}" />
+        {% if success_story_img_one %}
+        <img src="{{ get_asset_url('../images/success-stories/' + success_story_img_one)}}" />
+        {% endif %}
+        {% if success_story_img_one_caption %}
+        <p class="success-story-img-caption">{{ success_story_img_one_caption }}</p>
+        {% endif %}
+        {% if success_story_img_two %}
+        <img src="{{ get_asset_url('../images/success-stories/' + success_story_img_two)}}" />
+        {% endif %}
+        {% if success_story_img_two_caption %}
+        <p class="success-story-img-caption">{{ success_story_img_two_caption }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if testimonial %}
+  {% set testimonial_label = "Testimonial" %}
+  {% include "../sections/testimonials.html" %}
+  {% endif %}
+  {% if featured_coverage %}
+   <div class="success-story__content content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="span-12">
+        <h3>Featured Coverage</h3>
+        {{ featured_coverage }}
+      </div>
+    </div>
+   </div>
+   {% endif %}
+   {% include "../sections/cta.html" %}
+</div>
+{% endblock body %}

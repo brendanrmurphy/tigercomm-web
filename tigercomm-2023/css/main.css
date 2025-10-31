@@ -1,0 +1,270 @@
+/* Theme base styles */
+
+/* Tools
+Any animations, or functions used throughout the project.
+Note: _macros.css needs to be imported into each stylesheet where macros are used and not included here
+*/
+
+/* Generic
+This is where reset, normalize & box-sizing styles go.
+*/
+
+{% include './generic/_reset.css' %}
+{% include './generic/_normalize.css' %}
+
+{% include './vendor/_aos.css' %}
+
+/* Objects
+Non-cosmetic design patterns including grid and layout classes)
+*/
+
+{% include './objects/_layout.css' %}
+{% include './objects/_containers-dnd.css' %}
+
+/* Elements
+Base HMTL elements are styled in this section (<body>, <h1>, <a>, <p>, <button> etc.)
+*/
+
+{% include './elements/_typography.css' %}
+{% include './elements/_buttons.css' %}
+{% include './elements/_forms.css' %}
+{% include './elements/_tables.css' %}
+
+/* Components
+Specific pieces of UI that are stylized. Typically used for global partial styling
+*/
+
+{% include './components/_header.css' %}
+{% include './components/_default-modules.css' %}
+{% include './components/_tiles.css' %}
+{% include './components/_hero.css' %}
+{% include './components/_footer.css' %}
+{% include './components/_cta.css' %}
+{% include './components/_split-content.css' %}
+{% include './components/_page-title.css' %}
+{% include './components/_large-text.css' %}
+{% include './components/_clients.css' %}
+{% include './components/_success-stories.css' %}
+{% include './components/_testimonials.css' %}
+{% include './components/_info-graphic.css' %}
+{% include './components/_team.css' %}
+{% include './components/_cards.css' %}
+{% include './components/_accordion.css' %}
+
+/* Utilities
+Helper classes with ability to override anything that comes before it
+*/
+
+{% include './utilities/_helper.css' %}
+
+:root {
+  --primary-color: {{ theme.global_colors.primary.color }};
+  --secondary-color: {{ theme.global_colors.secondary.color  }};
+  --tertiary-color: {{ theme.global_colors.tertiary.color }};
+  --quaternary-color: {{ theme.global_colors.quaternary.color }};
+  --quinary-color: {{ theme.global_colors.quinary.color }};
+  --light-gray: {{ theme.global_colors.light.color }};
+  --font-primary: {{ theme.global_fonts.primary.font }};
+  --font-secondary: {{ theme.global_fonts.secondary.font }};
+  --hsf-default-field-label__font-family: {{ theme.global_fonts.secondary.font }};
+  --hsf-default-background__padding: 0;
+}
+
+body {
+  background: #fff;
+}
+
+/* 
+.hero-section.dnd-section {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+} */
+
+/* .dnd_area-row-1-background-color {
+    background: {{ theme.global_colors.light.color }} !important;
+} */
+
+.module {
+  width: 100%;
+}
+
+.module img {
+    max-width: 100%;
+}
+
+.section-title {
+    margin-bottom: 6.4rem;
+}
+
+@media (max-width: 767px) {
+    .section-title {
+        margin-bottom: 3.2rem;
+    }
+}
+
+.img-caption {
+    padding: 0 2.4rem 2.4rem;
+    color: white;
+    font-size: 1.8rem;
+}
+
+@media (max-width: 767px) {
+  .img-caption {
+    font-size: 1.6rem;
+  }
+}
+
+.img--primary {
+  border-bottom: 2.4rem solid;
+  border-color: {{ theme.global_colors.primary.color }};
+}
+
+.img-caption--primary {
+    background: {{ theme.global_colors.primary.color }};
+}
+
+.img--quinary {
+  border-bottom: 2.4rem solid;
+  border-color: {{ theme.global_colors.quinary.color }};
+}
+
+.img-caption--quinary {
+    background: {{ theme.global_colors.quinary.color }};
+}
+
+.img--alt {
+  border-bottom: 2.4rem solid;
+  border-color: #2E4B68;
+}
+
+.img-caption--alt {
+    background: #2E4B68;
+}
+
+.img--quaternary {
+  border-bottom: 2.4rem solid;
+  border-color: {{ theme.global_colors.quaternary.color }};
+}
+
+.img--round {
+  border-radius: 50%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.img-caption--quaternary {
+    background: {{ theme.global_colors.quaternary.color }};
+}
+
+.list--plain {
+  list-style: none;
+  padding: 0;
+}
+
+.row--alt {
+  background: var(--light-gray);
+}
+.sidebar h2, .sidebar h3 {
+  margin-bottom: 1.6rem;
+}
+.sidebar h4, .sidebar h5, .sidebar h6 {
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.sidebar.sidebar h3 {
+  font-size: 2.2rem;
+}
+
+.sidebar.sidebar p {
+  font-size: 1.6rem;
+}
+
+.sidebar .block:not(:last-child) {
+  margin-bottom: 3.2rem;
+}
+
+.hs-social-follow {
+  margin-bottom: 1.6rem;
+}
+.hs-social-follow__icon.hs-social-follow__icon  svg {
+  fill: #fff !important;
+  width: 2rem;
+  height: 2rem;
+}
+
+.hs-social-follow__link:not(:last-child) {
+  margin-right: 1.6rem;
+}
+
+.blog-aside .block h3 {
+  font-size: 2.6rem;
+  margin-bottom: 2rem;
+}
+
+.blog-aside .hs_cos_wrapper_widget,
+.blog-aside .block {
+  display: block;
+  margin-bottom: 3.2rem;
+}
+
+.blog-aside .block ul {
+  padding-left: 0;
+}
+
+.blog-aside .block li {
+  font-size: 1.6rem;
+  list-style: none;
+}
+
+.blog-aside .block a:not(.filter-expand-link) {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.body-container--success-story .filter-link-count {
+  display: none;
+}
+
+@media(min-width: 768px){
+  .hs-content-path-scaling-clean-the-podcast .span6:first-child {
+    width: 58%;
+    padding-right: 2%;
+  }
+
+  .hs-content-path-scaling-clean-the-podcast .span6:last-child {
+    width: 40%;
+  }
+}
+
+.main-content img {
+  max-width: 100%;
+}
+
+.hs-pagination {
+  margin: 2rem 0;
+  font-size: 2rem;
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.bio__title {
+  display: block;
+  font-size: 1.6rem;
+}
+
+.bio__description {
+  font-size: 2.0rem;
+}
+
+@media(min-width: 768px){
+  .bio {
+    flex-direction: row;
+    align-items: center;
+  }
+}

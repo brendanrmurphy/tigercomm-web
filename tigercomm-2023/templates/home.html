@@ -1,0 +1,115 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Home
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% set template_css = "../../css/templates/home.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+<div class="container-fluid body-container body-container--home"><div style="display:none;">{{ request.path }}</div>
+    {% set hero_title = "Communications Powerhouse" %}
+    {% set hero_sub_title = "For Clean Economy Companies" %}
+    {% set hero_content = '<blockquote class="blockquote" data-aos="fade" data-aos-delay="3000"><span class="blockquote__quote">&ldquo;</span>Tigercomm’s a strategic asset, not just a PR firm.
+    Look far and wide, but you won’t find an equal … 
+    or even a close second.”<span class="blockquote__author">–  Mark Bassett<br />then-CEO of Hemlock Semiconductor</span></blockquote>' %}
+    {% include "../sections/hero.html" %}
+  {# <div class="hero row-fluid-wrapper">
+    <div class="hero-section row-fluid">
+      <div class="span12">
+      <h1 class="page-title"><div data-aos='fade-right' data-aos-delay='500'>Communications Powerhouse</div><div class="sub-title" data-aos='fade-left' data-aos-delay='1000' style='color: #2B2B35'>For Clean Economy Companies</div></h1>
+      </div><!--end row-->
+      <blockquote class="blockquote" data-aos="fade" data-aos-delay="3000"><span class="blockquote__quote">&ldquo;</span>Tigercomm’s a strategic asset, not just a PR firm.
+      Look far and wide, but you won’t find an equal … 
+      or even a close second.”<span class="blockquote__author">–  Mark Bassett<br />then-CEO of Hemlock Semiconductor</span></blockquote>
+    </div>
+  </div><!--end row-wrapper -->  #}
+
+  <div class="stripe">
+  <img class="" src="{{ get_asset_url("../images/tile-1.jpg") }}" data-aos="flip-up" data-aos-delay="1500" data-aos-transition="200" />
+  <img class="" src="{{ get_asset_url("../images/tile-2.jpg") }}" data-aos="flip-up" data-aos-delay="2000" data-aos-transition="200" />
+  <img class="" src="{{ get_asset_url("../images/tile-3.jpg") }}" data-aos="flip-up" data-aos-delay="2500" data-aos-transition="200" />
+  </div>
+  <div class="content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid-wrapper">
+      <div class="row-fluid">
+        <div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+          <div class="tiles-section row-fluid-wrapper row-depth-1 row-number-1 dnd_area-dnd_partial-1-row-0-vertical-alignment dnd-section">
+            <div class="row-fluid">
+              <div class="span5 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+                <div class="row-fluid-wrapper row-depth-1 row-number-1 dnd-row">
+                  <div class="row-fluid">
+                    <div class="module our-solutions" data-aos="fade" data-aos-delay="250" data-aos-offset="500">
+                      <div class="label">Our Solutions</div>
+                      <h2>What Challenge Are You Facing?</h2> 
+                      <p>During the last 21 years, over 190 clean economy clients have turned to us to successfully communicate with customers, investors, communities and policymakers.</p>
+                      <p>Explore our cleantech PR and communications services for your company’s business challenge.</p>
+                      {# <p><a href="/services" class="anchor anchor--multiline">Explore our cleantech PR and communications services for your company’s business challenge: <span class="icon"><img src="{{ get_asset_url("../images/blue-arrow.svg") }}" /></span></a></p> #}
+                    </div>
+                    <div class="panel desktop-only">
+                      <p>Actually, we’ve got a unique challenge that doesn’t fit the options above.</p>
+                      <a class="anchor anchor--alt" href="/contact?help_me_=nda">I’d like to discuss it confidentially under NDA.</a>
+                    </div>
+                  </div><!--end row-->
+                </div><!--end row-wrapper -->
+              </div><!--end widget-span -->
+              <div class="span7 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+                <div class="row-fluid-wrapper row-depth-1 row-number-1 dnd-row">
+                    <div class="module tiles">
+                      <a href="/services/marketing-communications" class="tile tile--animate tile--primary" data-aos="flip-right" data-aos-delay="500" data-aos-offset="500">
+                        <div class="tile__img" style="background-image: url({{ get_asset_url("../images/services/turbo-tile.jpg") }})"></div>
+                        <div class="tile__front">
+                          <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+                          <h3 class="tile__title">Turbocharge your sales through better product marketing</h3>
+                        </div>
+                        <div class="tile__back">
+                          <p>Many clean economy companies offer B2B industrial goods and services to a limited pool of customers who don’t buy with a mouse click. However, too many still use the legacy marketing approach of expecting sales teams to provide early-stage customer education. Marketing research shows B2B customers start their “buyer's journey” through online searches and content, before they engage sales team members.</p>
+                        </div>
+                      </a>
+                      <a href="/services/thought-leadership" class="tile tile--animate tile--quinary" data-aos="flip-right" data-aos-delay="750" data-aos-offset="500">
+                        <div class="tile__img" style="background-image: url({{ get_asset_url("../images/services/narrate-tile.jpg") }})"></div>
+                        <div class="tile__front">
+                          <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+                          <h3 class="tile__title">Narrate your company and executives to markets and investors</h3>
+                        </div>
+                        <div class="tile__back">
+                          <p>There are several points in a company’s growth when it’s crucial to narrate a company and its leadership team, not just its products. Whether you’re securing early-stage funding, building valuation for potential acquirers, or preparing for an IPO … we can help.</p>
+                        </div>
+                      </a>
+                      <a href="/services/public-affairs" class="tile tile--animate tile--alt" data-aos="flip-right" data-aos-delay="1000" data-aos-offset="250">
+                        <div class="tile__img" style="background-image: url({{ get_asset_url("../images/services/secure-tile.jpg") }})"></div>
+                        <div class="tile__front">
+                          <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+                          <h3 class="tile__title">Secure fair treatment from policymakers</h3>
+                        </div>
+                        <div class="tile__back">
+                          <p>Clean economy companies are typically building new sectors within industries dominated by mature incumbents unwilling to relinquish market share. Instead, they weaponize lobbying and political influence to block the growth of clean economy challengers.</p>
+                        </div>
+                      </a>
+                      <a href="/services/community-engagement" class="tile tile--animate tile--quaternary" data-aos="flip-right" data-aos-delay="1250" data-aos-offset="250">
+                        <div class="tile__img" style="background-image: url({{ get_asset_url("../images/services/community-tile.jpg") }})"></div>
+                        <div class="tile__front">
+                          <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+                          <h3 class="tile__title">Win a community’s approval to build your project</h3>
+                        </div>
+                        <div class="tile__back">
+                          <p>Clean energy developers need support from local communities to build renewable energy infrastructure, such as wind and solar farms. But developers face increasingly project-fatal opposition from loud minorities of locals who organize online, then shout at local officials in the hearing room. We’ve pioneered and deployed community engagement strategies and digital best practices for developers to cut project risk and boost their ability to win the “social license” needed to secure permits from local officials.</p>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="panel desktop-none">
+                      <p>Actually, we’ve got a unique challenge that doesn’t fit the options above.</p>
+                      <a class="anchor anchor--alt" href="/contact?help_me_=nda">I’d like to discuss it confidentially under NDA.</a>
+                    </div>
+                </div><!--end row-wrapper -->
+              </div><!--end widget-span -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

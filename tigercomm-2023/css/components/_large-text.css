@@ -1,0 +1,3 @@
+.large-text-section {
+    background: {{ theme.global_colors.light.color }};
+}

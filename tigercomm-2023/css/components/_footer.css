@@ -1,0 +1,69 @@
+.footer {
+  padding: 4rem 0;
+}
+
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer .row-fluid {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer .content-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.expertise-logo {
+    width: 12.8rem;
+}
+
+.footer h3 {
+   color: #fff !important;
+}
+
+.footer a {
+    color: #fff;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer li {
+    font-size: 1.4rem;
+    margin-bottom: 0;
+}
+
+.footer p {
+    color: #fff !important;
+    font-size: 1.4rem;
+}
+
+.footer .contact-col {
+    margin-bottom: 3.2rem;
+}
+
+@media (min-width: 768px){
+    .footer .social-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer .hs-social-follow {
+        margin-top: 2.8rem;
+    }
+
+    .footer h3 {
+        margin-top: 3.8rem;
+    }
+}

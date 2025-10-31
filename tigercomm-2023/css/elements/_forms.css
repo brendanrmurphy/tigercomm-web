@@ -1,0 +1,313 @@
+/* Fields */
+.hs-form-field {
+  margin-bottom: 1.4rem;
+}
+
+/* Labels */
+form label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+/* Form Title */
+.form-title {
+  margin-bottom: 0;
+  background: none;
+}
+
+/* Help text */
+form legend {
+  font-size: 0.875rem;
+}
+
+/* Inputs */
+form input[type=text],
+form input[type=search],
+form input[type=email],
+form input[type=password],
+form input[type=tel],
+form input[type=number],
+form input[type=file],
+form select,
+form textarea {
+  display: inline-block;
+  font-size: 1.6rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+form fieldset {
+  max-width: 100% !important;
+}
+
+/* Inputs - checkbox/radio */
+
+form .inputs-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+form .inputs-list > li {
+  display: block;
+  margin: 0.7rem 0;
+}
+
+form .inputs-list input,
+form .inputs-list span {
+  vertical-align: middle;
+}
+
+form input[type=checkbox],
+form input[type=radio] {
+  cursor: pointer;
+  margin-right: 0.35rem;
+}
+
+/* Inputs - date picker */
+
+.hs-dateinput {
+  position: relative;
+}
+
+.hs-dateinput:before {
+  content:'\01F4C5';
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fn-date-picker .pika-table thead th {
+  color: #FFF;
+}
+
+.fn-date-picker td.is-selected .pika-button {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.fn-date-picker td .pika-button:hover,
+.fn-date-picker td .pika-button:focus {
+  border-radius: 0 !important;
+  color: #FFF;
+}
+
+/* Inputs - file picker */
+
+form input[type=file] {
+  background-color: transparent;
+  border: initial;
+  padding: initial;
+}
+
+/* Headings and text */
+
+form .hs-richtext,
+form .hs-richtext p {
+  font-size: 0.875rem;
+  margin: 0 0 1.4rem;
+}
+
+form .hs-richtext img {
+  max-width: 100% !important;
+}
+
+/* GDPR */
+
+.legal-consent-container .hs-form-booleancheckbox-display > span,
+.legal-consent-container .hs-form-booleancheckbox-display > span p {
+  margin-left: 1rem !important;
+}
+
+/* Validation */
+
+.hs-form-required {
+  color: #EF6B51;
+}
+
+.hs-input.invalid.error {
+  border-color: #EF6B51;
+}
+
+.hs-error-msg {
+  color: #EF6B51;
+  margin-top: 0.35rem;
+}
+
+/* Submit button */
+
+form input[type=submit],
+form .hs-button {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.15s linear;
+  white-space: normal;
+}
+
+/* Captcha */
+
+.grecaptcha-badge {
+  margin: 0 auto;
+}
+
+{% if ( get_asset_version("@hubspot/search_input") == "1" ) %}
+  /* Search button input field and suggestions */
+  .body-container-wrapper .hs-search-field__button {
+    padding: 15px;
+  }
+
+  .body-container-wrapper .hs-search-field__bar--button-inline .hs-search-field__button {
+    margin-left: 6px;
+    margin-bottom: 0;
+  }
+
+  .body-container-wrapper .hs-search-field__button svg {
+    height: 15px;
+    fill: #fff;
+  }
+
+  .body-container-wrapper .hs-search-field__bar > form > .hs-search-field__input {
+    padding: 10px;
+  }
+
+  .body-container-wrapper .hs-search-field__suggestions li a {
+    color: #494A52;
+    padding: 0.35rem 0.7rem;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+{% endif %}
+
+
+.hs-form-html [data-hsfc-id=Renderer] .hsfc-Step .hsfc-Step__Content {
+  padding: 0;
+}
+
+/* Global form inputs */
+/* Form Layout Spacing */
+.hs-form-html [data-hsfc-id="Renderer"] {
+  --hsf-default-row__horizontal-spacing: 3rem;
+  --hsf-default-row__vertical-spacing: 1.5rem;
+  --hsf-default-module__vertical-spacing: 1rem;
+  --hsf-default-background__padding: 4rem;
+}
+
+/* Button Styles */
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-Button {
+  align-items: center;
+    border: .4rem solid #ff6200;
+    border-radius: 4rem;
+    color: #2b2b35;
+    display: inline-flex;
+    flex: none;
+    font-family: var(--font-primary);
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 2.4;
+    padding: 0 4.2rem;
+    background-color: rgb(239, 239, 239);
+}
+
+/* Button Hover, Focus, Active */
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-Button:hover:not([disabled]) {
+  transform: translateY(-1px);
+  filter: brightness(110%);
+  background-color: #ff6200;
+}
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-Button:active:not([disabled]) {
+  transform: translateY(1px);
+  box-shadow: none;
+  background-color: #ff6200;
+}
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-Button:focus:not([disabled]) {
+  outline: 2px solid #333;
+  background-color: #ff6200;
+}
+
+/* Input & Textarea Styles */
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextInput,
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextareaInput {
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  background-color: #fff;
+  border: 0.2rem solid #d1d6dc;
+  border-radius: .8rem;
+  color: #2b2b35;
+}
+
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextInput::placeholder,
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextareaInput::placeholder {
+  color: rgb(37, 51, 66);
+}
+
+/* Labels & Descriptions */
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-FieldLabel {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 1.8rem;
+  color: rgb(33, 45, 58);
+}
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-FieldDescription,
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-FieldFooter {
+  font-family: var(--font-primary);
+  font-size: 0.8em;
+  color: rgba(81, 99, 131, 0.87);
+}
+
+/* Checkbox & Radio Styles */
+.hs-form-html [data-hsfc-id="Renderer"] input[type="checkbox"],
+.hs-form-html [data-hsfc-id="Renderer"] input[type="radio"] {
+  background-color: rgb(245, 248, 250);
+  border: 1px solid rgb(149, 148, 148);
+  padding: 8px;
+}
+
+/* Heading / Rich Text */
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-Heading,
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-RichText {
+  font-family: var(--font-primary);
+  color: rgb(33, 45, 58);
+}
+
+/* Alerts */
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-ErrorAlert {
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  color: rgb(229, 21, 32);
+}
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-InfoAlert {
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  color: rgb(37, 51, 66);
+}
+
+/* Progress Bar */
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-ProgressBarText {
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  color: rgb(33, 45, 58);
+}
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-ProgressBarProgress {
+  background-color: rgba(1, 129, 132, 1);
+  border-color: rgb(149, 148, 148);
+}
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-ProgressBarTrack {
+  background-color: rgba(217, 217, 217, 1);
+}
+
+.hs-form-html .hsfc-CheckboxField .hsfc-FieldLabel {
+  display: flex;
+  align-items: flex-start;
+}
+
+.hs-form-html .hsfc-CheckboxField .hsfc-FieldLabel .hsfc-CheckboxInput {
+  margin-top: 0.5rem;
+}

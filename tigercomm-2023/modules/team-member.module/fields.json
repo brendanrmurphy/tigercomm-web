@@ -1,0 +1,14 @@
+[
+  {
+    "name": "job_title",
+    "label": "Job Title",
+    "type": "text",
+    "required": false
+  },
+  {
+    "name": "linked_in_url",
+    "label": "LinkedIn URL",
+    "type": "text",
+    "required": false
+  }
+]

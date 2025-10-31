@@ -1,0 +1,31 @@
+<div id="testimonials" class="testimonials row-fluid-wrapper row--alt">
+  <div class="content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="row-fluid-wrapper">
+            {% if testimonial %}
+            <div class="testimonial">
+              {% if testimonial_label %}<h4 class="label">{{ testimonial_label }}</h4>{% endif %}
+              <div class="testimonial__quote">&ldquo;{{ testimonial }}&rdquo;</div>
+              <div class="testimonial__author">
+                {{ testimonial_author }}
+                <span class="testimonial__author-title">{{ testimonial_author_title }}</span>
+              </div>
+            </div>
+            {% endif %}
+            {% if testimonial_2 %}
+            <div class="testimonial">
+              {% if testimonial_2_label %}<h4 class="label">{{ testimonial_2_label }}</h4>{% endif %}
+              <div class="testimonial__quote">&ldquo;{{ testimonial_2 }}&rdquo;</div>
+              <div class="testimonial__author">
+                {{ testimonal_2_author }}
+                <span class="testimonial__author-title">{{ testimonial_2_author_title }}</span>
+              </div>
+            </div>
+            {% endif %}
+        </div><!--end row-wrapper -->
+      </div><!--end widget-span -->
+    </div>
+    <img class="testimonials__bg" src="{{ get_asset_url("../images/claw.svg") }}" alt="" />
+  </div>
+</div>

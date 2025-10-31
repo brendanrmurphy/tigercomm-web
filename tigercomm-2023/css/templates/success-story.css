@@ -1,0 +1,21 @@
+
+.success-story__content .row-fluid:not(:last-child) {
+    margin-bottom: 4rem;
+}
+
+.success-story__content img {
+    max-width: 100%;
+    width: 100%;
+}
+
+.success-story-img-caption {
+    font-style: italic;
+    font-size: 1.4rem;
+    margin-bottom: 1.6rem;
+}
+
+@media (max-width: 767px) {
+    .success-story__content > .row-fluid {
+        flex-direction: column-reverse;
+    }
+}

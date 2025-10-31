@@ -1,0 +1,30 @@
+.team-member__img {
+    border-radius: 50%;
+    max-width: 100%;
+}
+
+.img-col {
+    margin-bottom: 3.2rem;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.img-wrapper {
+    position: relative;
+}
+
+.linkedin__icon {
+    z-index: 1;
+    position: absolute;
+    bottom: 0rem;
+    right: 2rem;
+}
+
+.linkedin__icon img {
+    width: 4rem;
+}
+
+.foobar {
+    color: var(--foo);
+}

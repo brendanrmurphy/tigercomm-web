@@ -1,0 +1,17 @@
+[
+  {
+    "name": "guest_name",
+    "label": "Guest Name",
+    "type": "text",
+    "required": false,
+    "inline_help_text": "Enter the full name of the podcast guest."
+  },
+  {
+    "name": "embed_code",
+    "label": "Podcast Player Embed Code",
+    "type": "richtext",
+    "supported_features": ["iframe"],
+    "required": false,
+    "inline_help_text": "Paste the Spotify iframe embed code here."
+  }
+]

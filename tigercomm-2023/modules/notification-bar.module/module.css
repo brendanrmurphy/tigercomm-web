@@ -1,0 +1,15 @@
+.notification-bar {
+  padding: 1rem 1rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.notification-bar p {
+    font-size: 1.4rem;
+}
+
+.notification-bar a {
+  color: inherit;
+  text-decoration: underline;
+}

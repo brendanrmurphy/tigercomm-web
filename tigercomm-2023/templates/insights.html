@@ -1,0 +1,103 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Insights
+  screenshotPath: ../images/template-previews/about.png
+-->
+{% set template_css = "../../css/templates/insights.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+  {% set hero_title = "Insights" %}
+  {% include "../sections/hero.html" %}
+    <div class="content-wrapper">
+    <div class="cta__border">
+        <span data-aos="fade-down-right" data-aos-delay="250"></span>
+        <span data-aos="fade-down-right" data-aos-delay="350"></span>
+        <span data-aos="fade-down-right" data-aos-delay="450"></span>
+      </div>
+    </div>
+    <div class="row-fluid-wrapper">
+      <div class="content-wrapper content-wrapper--vertical-spacing">
+      <div class="row-fluid" data-aos="fade-up" data-aos-delay="500" data-aos-offset="250">
+        <p>Tigercomm’s Insights is an industry-leading source of original research, analysis and insight into advancing communications practices to scale clean economy companies.</p>
+        <p>Our staff experts are uniquely equipped to provide these insights because we’re one of the few teams with extensive success communicating not just for the private sector, but also in government, politics and nonprofit advocacy groups.</p>
+        <h2 class="h4">Our insight stream comes from our:</h2>
+      </div>
+    </div>
+    <div class="row-fluid-wrapper row--alt">
+      <div class="content-wrapper content-wrapper--vertical-spacing">
+          <div class="module cards row-fluid">
+            <a href="https://www.youtube.com/playlist?list=PLB8XYCq2Wah9nOrSos2ZXRt5Ok0he0Z5G" class="card card--quinary" data-aos="flip-right" data-aos-delay="500" data-aos-offset="250">
+              <div class="card__img" style="background-image: url({{ get_asset_url("../images/insights/this-week-in-cleantech.png") }});">  
+                {# <img src="{{ get_asset_url("../images/insights/this-week-in-cleantech-1000.jpg") }}" /> #}
+              </div>  
+              <div class="card__front">
+                <h3 class="card__title">This Week in Cleantech</h3>
+                <p>Co-hosting of “This Week in Cleantech” with Renewable Energy World</p>
+              </div>
+              <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+            </a>
+            <a href="/insights/tag/cleantech-roundtables" class="card card--quinary" data-aos="flip-right" data-aos-delay="500" data-aos-offset="250">
+              <div class="card__img" style="background-image: url({{ get_asset_url("../images/insights/cleantech-roundtables.png") }});">
+                {# <img src="{{ get_asset_url("../images/insights/cleantech-roundtables-1000.png") }}" /> #}
+              </div>
+              <div class="card__front">
+                <h3 class="card__title">Cleantech Roundtables</h3>
+                <p>Regular convening of top podcasters, investors and journalists who cover clean economy</p>
+              </div>
+              <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+            </a>
+            <a href="/insights/tag/market-better" class="card card--quinary" data-aos="flip-right" data-aos-delay="500" data-aos-offset="250">
+              <div class="card__img" style="background-image: url({{ get_asset_url("../images/insights/market-better.png") }});">
+              {# <img src="{{ get_asset_url("../images/insights/market-better-1000.jpg") }}" /> #}
+              </div>
+              <div class="card__front">
+                <h3 class="card__title">Market Better</h3>
+                <p>“Market Better” series of groundbreaking analysis contrasting cutting edge practices vs. those common in clean economy companies</p>
+              </div>
+              <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+            </a>
+            <a href="/scaling-clean-podcast" class="card card--quinary card--scaling-clean" data-aos="flip-right" data-aos-delay="500" data-aos-offset="250">
+              <div class="card__img">
+                <img src="{{ get_asset_url("../images/insights/scaling-clean-1000.jpg") }}" />
+              </div>
+              <div class="card__front">
+                <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+                <h3 class="card__title">Scaling Clean Podcast</h3>
+                <p>Scaling Clean podcast curating best leadership and management practices from the top clean economy CEOs and leading investors</p>
+              </div>
+            </a>
+            <a href="/insights/tag/expert-interviews" class="card card--quinary card--expert-interviews" data-aos="flip-right" data-aos-delay="500" data-aos-offset="250">
+              <div class="card__img" style="background-image: url({{ get_asset_url("../images/insights/expert-interviews-800.jpg") }});">
+              </div>
+              <div class="card__front">
+                <h3 class="card__title">Expert Interviews</h3>
+                <p>Interviews and analysis by our staff experts</p>
+              </div>
+              <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+            </a>
+            <a href="/insights/tag/leading-conference-talks" class="card card--quinary" data-aos="flip-right" data-aos-delay="500" data-aos-offset="250">
+              <div class="card__img" style="background-image: url({{ get_asset_url("../images/insights/leading-conference-talks.png") }});">
+                {# <img src="{{ get_asset_url("../images/insights/leading-conference-talks.png") }}" /> #}
+              </div>
+              <div class="card__front">
+                <h3 class="card__title">Leading Conference Talks</h3>
+                <p>Appearances on industry podcasts and at major industry conferences</p>
+              </div>
+              <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+            </a>
+            <a href="/insights" class="card card--quinary card--cleantech-basics" data-aos="flip-right" data-aos-delay="500" data-aos-offset="250">
+              <div class="card__img">
+                <img src="{{ get_asset_url("../images/logo.svg") }}" />
+              </div>
+              <div class="card__front">
+                <h3 class="card__title">Clean Energy Blog by Tigercomm</h3>
+                <p>Expert Insights & Tips</p>
+              </div>
+              <img src="{{ get_asset_url("../images/white-arrow.svg") }}" />
+            </a>
+          </div>
+      </div>
+    </div>
+{% endblock body %}

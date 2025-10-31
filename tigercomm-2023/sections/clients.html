@@ -1,0 +1,35 @@
+<div id="sample-clients" class="clients row-fluid-wrapper {{ classname }}">
+  <div class="content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="span12 clients__content">
+        <h4 class="clients__label label">{{ clients_title }}</h4>
+        <div class="module client-list">
+          {% if client_logo_one %}
+          <img src="{{ get_asset_url(client_logo_one) }}" alt="{{ client_logo_one_alt }}" />
+          {% endif %}
+          {% if client_logo_two %}
+          <img src="{{ get_asset_url(client_logo_two) }}" alt="{{ client_logo_two_alt }}" />
+          {% endif %}
+          {% if client_logo_three %}
+          <img src="{{ get_asset_url(client_logo_three) }}" alt="{{ client_logo_three_alt }}" />
+          {% endif %}
+          {% if client_logo_four %}
+          <img src="{{ get_asset_url(client_logo_four) }}" alt="{{ client_logo_four_alt }}" />
+          {% endif %}
+          {% if client_logo_five %}
+          <img src="{{ get_asset_url(client_logo_five) }}" alt="{{ client_logo_five_alt }}" />
+          {% endif %}
+          {% if client_logo_six %}
+          <img src="{{ get_asset_url(client_logo_six) }}" alt="{{ client_logo_six_alt }}" />
+          {% endif %}
+          {% if client_logo_seven %}
+          <img src="{{ get_asset_url(client_logo_seven) }}" alt="{{ client_logo_seven_alt }}" />
+          {% endif %}
+          {% if client_logo_eight %}
+          <img src="{{ get_asset_url(client_logo_eight) }}" alt="{{ client_logo_eight_alt }}" />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

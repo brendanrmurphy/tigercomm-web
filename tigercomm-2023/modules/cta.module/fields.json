@@ -1,0 +1,47 @@
+[
+  {
+    "id": "enabled",
+    "type": "boolean",
+    "display": "toggle",
+    "label": "Enable Module",
+    "name": "enabled",
+    "default": false,
+    "inline_help_text": "Toggle to enable or disable this CTA module"
+  },
+  {
+    "id": "title",
+    "type": "text",
+    "display": "Title",
+    "label": "Title",
+    "name": "title",
+    "default": "",
+    "placeholder": "Enter a title"
+  },
+  {
+    "id": "description",
+    "type": "richtext",
+    "display": "Description",
+    "label": "Description",
+    "name": "description",
+    "default": "",
+    "placeholder": "Enter a detailed description"
+  },
+  {
+    "id": "contact_type",
+    "type": "text",
+    "display": "Contact Type",
+    "label": "Contact Type",
+    "name": "contact_type",
+    "default": "",
+    "placeholder": "Enter contact type (e.g. /training)"
+  },
+  {
+    "id": "button_label",
+    "type": "text",
+    "display": "Button Label",
+    "label": "Button Label",
+    "name": "button_label",
+    "default": "",
+    "placeholder": "Enter button label text"
+  }
+]

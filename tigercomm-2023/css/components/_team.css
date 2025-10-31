@@ -1,0 +1,43 @@
+.team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 5%;
+    row-gap: 5rem;
+}
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    text-align: center;
+}
+.team-member img {
+    border-radius: 50%;  
+    max-width: 100%;  
+    margin-bottom: 1.6rem;
+}
+
+.team-member__name {
+    font-size: 2.2rem;
+    margin-bottom: 0;
+}
+.team-member__title {
+    font-size: 1.4rem;
+}
+
+@media (max-width: 980px) {
+    .team-member {
+        width: 50%;
+    }
+}
+
+@media (max-width: 767px) {
+    .team-member {
+        width: 100%;
+    }
+
+    .team-member img {
+        max-width: 80%;
+    }
+}

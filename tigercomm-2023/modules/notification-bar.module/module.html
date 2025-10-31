@@ -1,0 +1,15 @@
+{% set now = unixtimestamp(local_dt) %}
+{% set has_start = module.start_date is defined and module.start_date %}
+{% set has_end = module.end_date is defined and module.end_date %}
+
+{% set start_time = has_start ? module.start_date|unixtimestamp : 0 %}
+{% set end_time = has_end ? module.end_date|unixtimestamp : null %}
+{% if request.path == '/' %}
+{% if now >= start_time and (not has_end or now <= end_time) %}
+  <div class="notification-bar"
+       style="background-color: {{ module.background_color.css }};
+              color: {{ module.text_color.css }};">
+    {{ module.alert_message }}
+  </div>
+{% endif %}
+{% endif %}
