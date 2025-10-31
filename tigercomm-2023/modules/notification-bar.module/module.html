@@ -1,15 +1,67 @@
 {% set now = unixtimestamp(local_dt) %}
-{% set has_start = module.start_date is defined and module.start_date %}
-{% set has_end = module.end_date is defined and module.end_date %}
+{% set all_messages = [] %}
 
-{% set start_time = has_start ? module.start_date|unixtimestamp : 0 %}
-{% set end_time = has_end ? module.end_date|unixtimestamp : null %}
-{% if request.path == '/' %}
-{% if now >= start_time and (not has_end or now <= end_time) %}
+{% for msg in [module.message_1, module.message_2, module.message_3] %}
+  {% if msg and msg.text %}
+    {% set has_start = msg.start_date is defined and msg.start_date %}
+    {% set has_end = msg.end_date is defined and msg.end_date %}
+    {% set start_time = has_start ? msg.start_date|unixtimestamp : 0 %}
+    {% set end_time = has_end ? msg.end_date|unixtimestamp : null %}
+    {% if now >= start_time and (not has_end or now <= end_time) %}
+      {% do all_messages.append(msg) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% if all_messages|length > 0 %}
   <div class="notification-bar"
        style="background-color: {{ module.background_color.css }};
               color: {{ module.text_color.css }};">
-    {{ module.alert_message }}
+    {% for msg in all_messages %}
+      <div class="notification-message">
+        {{ msg.text }}
+      </div>
+    {% endfor %}
   </div>
-{% endif %}
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const messages = document.querySelectorAll('.notification-message');
+      if (!messages.length) return;
+
+      // Pick random starting index
+      let index = Math.floor(Math.random() * messages.length);
+
+      const fadeDuration = 1000;  // ms
+      const displayDuration = 8000; // ms
+
+      function showMessage(i) {
+        messages.forEach((m, idx) => {
+          if (idx === i) {
+            m.classList.add('active');
+          } else {
+            m.classList.remove('active');
+          }
+        });
+      }
+
+      // Show first random message immediately
+      showMessage(index);
+
+      setInterval(() => {
+        const nextIndex = (index + 1) % messages.length;
+        const current = messages[index];
+        const next = messages[nextIndex];
+
+        // Fade out current
+        current.style.opacity = 0;
+        setTimeout(() => {
+          current.classList.remove('active');
+          next.classList.add('active');
+          next.style.opacity = 1;
+          index = nextIndex;
+        }, fadeDuration);
+      }, displayDuration + fadeDuration);
+    });
+  </script>
 {% endif %}

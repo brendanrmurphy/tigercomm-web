@@ -1,9 +1,72 @@
 [
   {
-    "name": "alert_message",
-    "label": "Alert Message",
-    "type": "richtext",
-    "default": "<p>This is an alert message</p>"
+    "name": "message_1",
+    "label": "Message 1 (optional)",
+    "type": "group",
+    "children": [
+      {
+        "name": "text",
+        "label": "Message Text",
+        "type": "richtext",
+        "default": ""
+      },
+      {
+        "name": "start_date",
+        "label": "Start Date/Time (optional)",
+        "type": "datetime"
+      },
+      {
+        "name": "end_date",
+        "label": "End Date/Time (optional)",
+        "type": "datetime"
+      }
+    ]
+  },
+  {
+    "name": "message_2",
+    "label": "Message 2 (optional)",
+    "type": "group",
+    "children": [
+      {
+        "name": "text",
+        "label": "Message Text",
+        "type": "richtext",
+        "default": ""
+      },
+      {
+        "name": "start_date",
+        "label": "Start Date/Time (optional)",
+        "type": "datetime"
+      },
+      {
+        "name": "end_date",
+        "label": "End Date/Time (optional)",
+        "type": "datetime"
+      }
+    ]
+  },
+  {
+    "name": "message_3",
+    "label": "Message 3 (optional)",
+    "type": "group",
+    "children": [
+      {
+        "name": "text",
+        "label": "Message Text",
+        "type": "richtext",
+        "default": ""
+      },
+      {
+        "name": "start_date",
+        "label": "Start Date/Time (optional)",
+        "type": "datetime"
+      },
+      {
+        "name": "end_date",
+        "label": "End Date/Time (optional)",
+        "type": "datetime"
+      }
+    ]
   },
   {
     "name": "background_color",
@@ -22,15 +85,5 @@
       "color": "#ffffff",
       "opacity": 100
     }
-  },
-  {
-    "name": "start_date",
-    "label": "Start Date/Time",
-    "type": "datetime"
-  },
-  {
-    "name": "end_date",
-    "label": "End Date/Time",
-    "type": "datetime"
   }
 ]
