@@ -1,5 +1,11 @@
 [
   {
+    "name": "display_name",
+    "label": "Name",
+    "type": "text",
+    "required": false
+  },
+  {
     "name": "job_title",
     "label": "Job Title",
     "type": "text",
@@ -10,5 +16,15 @@
     "label": "LinkedIn URL",
     "type": "text",
     "required": false
+  },
+  {
+    "name": "headshot",
+    "label": "Headshot Image",
+    "type": "image",
+    "required": false,
+    "resize_options": {
+      "show_height": false,
+      "show_width": false
+    }
   }
 ]

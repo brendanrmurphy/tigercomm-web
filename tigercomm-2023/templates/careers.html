@@ -4,10 +4,10 @@
   label: Careers
   screenshotPath: ../images/template-previews/about.png
 -->
-{% set template_css = "../../css/templates/careers.css" %}
 {% extends "./layouts/base.html" %}
 
 {% block body %}
+  {% set template_css = "../../css/templates/careers.css" %}
   {% set hero_title = page_meta.html_title %}
   {% set hero_content_wrapper_class = "hero--sm" %}
   {% include "../sections/hero.html" %}

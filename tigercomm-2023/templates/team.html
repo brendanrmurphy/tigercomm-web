@@ -4,84 +4,105 @@
   label: Team
   screenshotPath: ../images/template-previews/about.png
 -->
-{% set template_css = "../../css/templates/team.css" %}
 {% extends "./layouts/base.html" %}
 
 {% block body %}
+  {% set template_css = "../../css/templates/team.css" %}
   {% set hero_title = "Team" %}
   {% set hero_content_wrapper_class = "hero--sm" %}
   {% include "../sections/hero.html" %}
-    <div class="content-wrapper">
-    <div class="cta__border ">
-        <span data-aos="fade-down-right" data-aos-delay="150"></span>
-        <span data-aos="fade-down-right" data-aos-delay="250"></span>
-        <span data-aos="fade-down-right" data-aos-delay="350"></span>
-      </div>
+
+  <div class="content-wrapper">
+    <div class="cta__border">
+      <span data-aos="fade-down-right" data-aos-delay="150"></span>
+      <span data-aos="fade-down-right" data-aos-delay="250"></span>
+      <span data-aos="fade-down-right" data-aos-delay="350"></span>
     </div>
-    <div class="content-wrapper content-wrapper--vertical-spacing">
-      <div class="row-fluid">
-        <p>Tigercomm’s staff of experts are a best-in-industry team with over a century of combined experience helping climate solutions providers meet big goals and solve tough problems. Helping businesses like yours is all we do.</p>
-      </div>
+  </div>
+
+  <div class="content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <p>Tigercomm's staff of experts are a best-in-industry team with over a century of combined experience helping climate solutions providers meet big goals and solve tough problems. Helping businesses like yours is all we do.</p>
     </div>
-    <div class="content-wrapper content-wrapper--vertical-spacing">
-      <div class="row-fluid">
-        <div class="team">
-          <a href="/about/staff/mike-casey" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/mike.jpg") }}" />
-            <h3 class="team-member__name">Mike Casey</h3>
-            <div class="team-member__title">President</div>
-          </a>
-          <a href="/about/staff/melissa-meehan-baldwin" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/melissa.jpg") }}" />
-            <h3 class="team-member__name">Melissa Baldwin</h3>
-            <div class="team-member__title">Senior Vice President</div>
-          </a>
-          <a href="/about/staff/bridgette-borst-ombres" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/bridgette.jpg") }}" />
-            <h3 class="team-member__name">Bridgette Borst Ombres</h3>
-            <div class="team-member__title">Senior Counselor, Media Relations</div>
-          </a>
-          <a href="/about/staff/jamie-meckley" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/jamie.jpg") }}" />
-            <h3 class="team-member__name">Jamie Meckley</h3>
-            <div class="team-member__title">Senior Researcher</div>
-          </a>
-          <a href="/about/staff/phoebe-lease" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/phoebe.jpg") }}" />
-            <h3 class="team-member__name">Phoebe Lease</h3>
-            <div class="team-member__title">Senior Account Manager, Community Engagement</div>
-          </a>
-          <a href="/about/staff/nathaniel-schub" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/nat.jpg") }}" />
-            <h3 class="team-member__name">Nathaniel Schub</h3>
-            <div class="team-member__title">Account Consultant, Data Analysis</div>
-          </a>
-          <a href="/about/staff/ayelet-hines" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/ayelet.jpg") }}" />
-            <h3 class="team-member__name">Ayelet Hines</h3>
-            <div class="team-member__title">Vice President, Community Engagement</div>
-          </a>
-          <a href="/about/staff/alex-petersen" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/alex-2025.jpg") }}" />
-            <h3 class="team-member__name">Alex Petersen</h3>
-            <div class="team-member__title">Senior Account Manager</div>
-          </a>
-          <a href="/about/staff/clare-quirin" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/clare.jpg") }}" />
-            <h3 class="team-member__name">Clare Quirin</h3>
-            <div class="team-member__title">Account Manager</div>
-          </a>
-          <a href="/about/staff/ivy-aning" class="team-member">
-            <img src="{{ get_asset_url ("../images/team/ivy.jpg") }}" />
-            <h3 class="team-member__name">Ivy Aning</h3>
-            <div class="team-member__title">Director of Business Operations</div>
-          </a>
-          <div class="team-member">
-            <img src="{{ get_asset_url ("../images/team/brian.jpg") }}" />
-            <h3 class="team-member__name">Brian Mendes</h3>
-            <div class="team-member__title">Video and Podcast Producer</div>
-          </div>
+  </div>
+
+  <div class="content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="team">
+
+        <a href="/about/staff/mike-casey" class="team-member">
+          <img src="{{ get_asset_url("../images/team/mike.jpg") }}" />
+          <h3 class="team-member__name">Mike Casey</h3>
+          <div class="team-member__title">President</div>
+        </a>
+
+        <a href="/about/staff/melissa-meehan-baldwin" class="team-member">
+          <img src="{{ get_asset_url("../images/team/melissa.jpg") }}" />
+          <h3 class="team-member__name">Melissa Baldwin</h3>
+          <div class="team-member__title">Senior Vice President</div>
+        </a>
+
+        <a href="/about/staff/ayelet-hines" class="team-member">
+          <img src="{{ get_asset_url("../images/team/ayelet.jpg") }}" />
+          <h3 class="team-member__name">Ayelet Hines</h3>
+          <div class="team-member__title">Vice President, Community Engagement</div>
+        </a>
+
+        <div class="team-member">
+          <img src="{{ get_asset_url("../images/team/pierre.jpg") }}" />
+          <h3 class="team-member__name">Pierre DuBois</h3>
+          <div class="team-member__title">Director of Strategic Campaigns</div>
         </div>
+
+        <a href="/about/staff/alex-petersen" class="team-member">
+          <img src="{{ get_asset_url("../images/team/alex-2025.jpg") }}" />
+          <h3 class="team-member__name">Alex Petersen</h3>
+          <div class="team-member__title">Senior Account Manager</div>
+        </a>
+
+        <a href="/about/staff/bridgette-borst-ombres" class="team-member">
+          <img src="{{ get_asset_url("../images/team/bridgette.jpg") }}" />
+          <h3 class="team-member__name">Bridgette Borst Ombres</h3>
+          <div class="team-member__title">Senior Counselor, Media Relations</div>
+        </a>
+
+        <a href="/about/staff/clare-quirin" class="team-member">
+          <img src="{{ get_asset_url("../images/team/clare.jpg") }}" />
+          <h3 class="team-member__name">Clare Quirin</h3>
+          <div class="team-member__title">Account Manager</div>
+        </a>
+
+        <a href="/about/staff/phoebe-lease" class="team-member">
+          <img src="{{ get_asset_url("../images/team/phoebe.jpg") }}" />
+          <h3 class="team-member__name">Phoebe Lease</h3>
+          <div class="team-member__title">Senior Account Manager, Community Engagement</div>
+        </a>
+
+        <a href="/about/staff/jamie-meckley" class="team-member">
+          <img src="{{ get_asset_url("../images/team/jamie.jpg") }}" />
+          <h3 class="team-member__name">Jamie Meckley</h3>
+          <div class="team-member__title">Senior Researcher</div>
+        </a>
+
+        <a href="/about/staff/ivy-aning" class="team-member">
+          <img src="{{ get_asset_url("../images/team/ivy.jpg") }}" />
+          <h3 class="team-member__name">Ivy Aning</h3>
+          <div class="team-member__title">Director of Business Operations</div>
+        </a>
+
+        <div class="team-member">
+          <img src="{{ get_asset_url("../images/team/brian.jpg") }}" />
+          <h3 class="team-member__name">Brian Mendes</h3>
+          <div class="team-member__title">Video and Podcast Producer</div>
+        </div>
+
+        <a href="/about/staff/nathaniel-schub" class="team-member">
+          <img src="{{ get_asset_url("../images/team/nat.jpg") }}" />
+          <h3 class="team-member__name">Nathaniel Schub</h3>
+          <div class="team-member__title">Account Consultant, Data Analysis</div>
+        </a>
+
       </div>
     </div>
+  </div>
 {% endblock body %}

@@ -8,35 +8,22 @@
 {% extends "./layouts/base.html" %}
 
 {% module "team_member_settings" path="/tigercomm-2023/modules/team-member" %}
+{% module "hero" path="/tigercomm-2023/modules/hero" %}
 
 {% block body %}
-  {% if request.path == '/about/staff/mike-casey' %}
-  {% include "../sections/team/mike-casey.html" %}
-  {% elif request.path == '/about/staff/melissa-meehan-baldwin' %}
-  {% include "../sections/team/melissa-meehan-baldwin.html" %}
-  {% elif request.path == '/about/staff/bridgette-borst-ombres' %}
-  {% include "../sections/team/bridgette-borst-ombres.html" %}
-  {% elif request.path == '/about/staff/jamie-meckley' %}
-  {% include "../sections/team/jamie-meckley.html" %}
-  {% elif request.path == '/about/staff/phoebe-lease' %}
-  {% include "../sections/team/phoebe-lease.html" %}
-  {% elif request.path == '/about/staff/nathaniel-schub' %}
-  {% include "../sections/team/nathaniel-schub.html" %}
-  {% elif request.path == '/about/staff/ayelet-hines' %}
-  {% include "../sections/team/ayelet-hines.html" %}
-  {% elif request.path == '/about/staff/ivy-aning' %}
-  {% include "../sections/team/ivy-aning.html" %}
-  {% elif request.path == '/about/staff/alex-petersen' %}
-    {% include "../sections/team/alex-petersen.html" %}
-  {% elif request.path == '/about/staff/clare-quirin' %}
-    {% include "../sections/team/clare-quirin.html" %}
-  {% endif %}
 
-  {% if content.team_member_settings.body.job_title %}
-    {% set title = content.team_member_settings.body.job_title %}
+  {% if content.widgets.team_member_settings.body.display_name != '' %}
+    {% set name = content.widgets.team_member_settings.body.display_name %}
   {% endif %}
-  {% if content.team_member_settings.body.linked_in_url %}
-    {% set linked_in_url = content.team_member_settings.body.linked_in_url %}
+  {% if content.widgets.team_member_settings.body.job_title != '' %}
+    {% set title = content.widgets.team_member_settings.body.job_title %}
+  {% endif %}
+  {% if content.widgets.team_member_settings.body.linked_in_url != ''  %}
+    {% set linked_in_url = content.widgets.team_member_settings.body.linked_in_url %}
+  {% endif %}
+  {% if content.widgets.team_member_settings.body.headshot.src != '' %}
+    {% set img_url = content.widgets.team_member_settings.body.headshot.src %}
+    {% set alt_text = content.widgets.team_member_settings.body.headshot.alt %}
   {% endif %}
 
   {% set hero_title = name %}
@@ -44,7 +31,7 @@
   {% set hero_label = '<a href="/team">Team</a>' %}
   {% set hero_content_wrapper_class = "hero--sm" %}
   {% include "../sections/hero.html" %}
-    <div class="content-wrapper">
+    <div class="content-wrapper" data-test="{{ display_name }}">
     <div class="cta__border">
         <span data-aos="fade-down-right" data-aos-delay="150"></span>
         <span data-aos="fade-down-right" data-aos-delay="250"></span>
@@ -55,10 +42,12 @@
     <div class="row-fluid">
       <div class="img-col span4">
         <div class="img-wrapper">
+          {% if img_url %}
             <div class="featured-image">
-              <img class="team-member__img" src="{{ get_asset_url('../images/team/'  + img_url )}}" alt="{{ name }}"/>
+              <img class="team-member__img" src="{{ img_url }}" alt="{{ alt_text }}"/>
             </div>
-          {% if linked_in_url != "" %}
+          {% endif %}
+          {% if linked_in_url %}
           <a class="linkedin__icon" href="{{ linked_in_url }}"><img src="{{ get_asset_url('../images/linkedin.svg') }}" alt="linkedin" /></a>
           {% endif %}
         </div>
