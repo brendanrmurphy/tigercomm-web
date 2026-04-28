@@ -1,8 +1,8 @@
 <div class="hero">
 <div class="content-wrapper content-wrapper--vertical-spacing {{ hero_content_wrapper_class }}">
     <div class="row-fluid">
-        <div class="span12">
-            {% if hero_label %}<h4 class="hero__label label" data-aos='fade-right' data-aos-delay='500'>{{ hero_label }}</h4>{% endif %}
+        <header class="span12">
+            {% if hero_label %}<p class="h4 hero__label label" data-aos='fade-right' data-aos-delay='500'>{{ hero_label }}</p>{% endif %}
             <h1 class="{% if hero_title_class %}{{ hero_title_class }}{% endif %} hero__title">
                 <div data-aos='fade-right' data-aos-delay='500'>{{ hero_title }}</div>
                 {% if hero_sub_title %}<div class="hero__sub-title" data-aos='fade-left' data-aos-delay='1000'>{{ hero_sub_title }}</div>{% endif %}
@@ -14,7 +14,7 @@
                 <img src="{{ get_asset_url(hero_img) }}" />
             {% endif %}
             
-        </div><!--end row-->
+        </header><!--end row-->
         {% if hero_content %}
         <div class="hero__content">
             {{ hero_content }}

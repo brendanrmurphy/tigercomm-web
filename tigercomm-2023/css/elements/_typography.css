@@ -70,8 +70,9 @@ h6, .h6 {
 
 ul,
 ol {
-  margin: 1.4rem 0 1.4rem;
+  margin: 2rem 0 2rem;
   padding-left: 2rem;
+  line-height: 1.6;
 }
 
 ul ul,

@@ -50,6 +50,7 @@ Specific pieces of UI that are stylized. Typically used for global partial styli
 {% include './components/_team.css' %}
 {% include './components/_cards.css' %}
 {% include './components/_accordion.css' %}
+{% include './components/_who-we-serve.css' %}
 
 /* Utilities
 Helper classes with ability to override anything that comes before it
@@ -64,6 +65,7 @@ Helper classes with ability to override anything that comes before it
   --quaternary-color: {{ theme.global_colors.quaternary.color }};
   --quinary-color: {{ theme.global_colors.quinary.color }};
   --light-gray: {{ theme.global_colors.light.color }};
+  --gray: #ddd;
   --font-primary: {{ theme.global_fonts.primary.font }};
   --font-secondary: {{ theme.global_fonts.secondary.font }};
   --hsf-default-field-label__font-family: {{ theme.global_fonts.secondary.font }};
@@ -94,13 +96,27 @@ body {
 }
 
 .section-title {
+    margin-top: 6.4rem;
     margin-bottom: 6.4rem;
 }
 
 @media (max-width: 767px) {
     .section-title {
+        margin-top: 3.2rem;
         margin-bottom: 3.2rem;
     }
+}
+
+figure {
+  margin: 0 0 4rem 0;
+}
+
+figure img {
+  max-width: 100%;
+}
+
+figcaption {
+  font-size: 1.6rem;
 }
 
 .img-caption {
@@ -110,6 +126,10 @@ body {
 }
 
 @media (max-width: 767px) {
+  figcaption {
+    font-size: 1.4rem;
+  }
+  
   .img-caption {
     font-size: 1.6rem;
   }
@@ -267,4 +287,12 @@ body {
     flex-direction: row;
     align-items: center;
   }
+}
+
+
+.img-section {
+  width: 100%;
+  height: 20rem;
+  background-size: cover;
+  background-position: center;
 }

@@ -1,0 +1,26 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Tabs Demo
+  screenshotPath: ../images/template-previews/blog-post.png
+-->
+{% module "hero" path="/tigercomm-2023/modules/hero" %} {% module "cta"
+path="/tigercomm-2023/modules/cta" %} {% set template_css =
+"../../css/templates/page.css" %} {% extends "./layouts/base.html" %} {% block
+body %}
+<div class="body-container body-container--blog-post">
+  <div
+    class="page-content content-wrapper content-wrapper--vertical-spacing"
+  >
+    <div class="row-fluid" style="padding-bottom: 30rem">
+      <div class="mb-3"><h2 class="h3">PR & Media Relations Services</h2>
+      <div class="cta__border mb-2">
+            <span data-aos="fade-down-right" data-aos-delay="150" class="aos-init aos-animate"></span>
+            <span data-aos="fade-down-right" data-aos-delay="250" class="aos-init aos-animate"></span>
+            <span data-aos="fade-down-right" data-aos-delay="350" class="aos-init aos-animate"></span>
+          </div></div>
+          {% include "../sections/tabs.html" %}
+    </div>
+  </div>
+</div>
+{% endblock body %}

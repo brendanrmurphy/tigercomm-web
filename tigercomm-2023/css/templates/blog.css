@@ -277,8 +277,16 @@
 .hs-blog-social-share .hs-blog-social-share-item-linkedin {
   margin-right: 1rem;
 }
-.blog-post .player .hs-embed-content-wrapper > div {
+.blog-post .player {
+  margin-bottom: 2rem;
+}
+/* .blog-post .player .hs-embed-content-wrapper > div {
   padding-bottom: 33.333% !important;
+} */
+
+.blog-aside {
+  display: flex;
+  flex-direction: column;
 }
 
 .blog-aside img {
@@ -309,24 +317,68 @@
 }
 
 .block-listen ul img {
-  max-width: 6rem;
+  max-width: 5rem;
   max-height: 5rem;
+  min-width: 5rem;
 }
 
 .block-listen ul {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  column-gap: 1.5rem;
-  row-gap: 1.5rem;
+  gap: 2rem;
+  margin-bottom: 0;
 }
 
 .block-listen li {
   margin-bottom: 0;
 }
 
+.block-logos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.block-logos img {
+  width: 50%;
+}
+
+.block-headshots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.block-headers > * {
+  flex: 1;
+}
+
+.block-scaling-clean,
+.block-this-week-in-cleantech {
+  border-top: 1px solid var(--gray);
+  margin-bottom: 3.2rem;
+  padding-top: 2rem;
+}
+
+.block-scaling-clean .logo,
+.block-this-week-in-cleantech .logo {
+  max-width: 26rem;
+  margin: 0;
+}
+
 @media screen and (min-width: 768px) {
   .blog-item__title {
     font-size: 3.5rem;
+  }
+
+  .block-headshots .host-img {
+    max-width: 40%;
+  }
+
+  .block-logos img {
+    max-width: 40%;
   }
 }

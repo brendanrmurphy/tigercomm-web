@@ -1,0 +1,198 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Industry
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% set template_css = "../../css/templates/service.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+
+<div class="container-fluid body-container body-container--home">
+  {% set hero_label = "Industry" %}
+  {% set hero_title = "Solar Energy Public Relations" %}
+  {% set hero_sub_title = "Strategic PR and Community Engagement for Solar Companies to Win Hearts, Minds, and Market Share" %}
+  {% set hero_content = "<p data-aos='fade' data-aos-delay='750'>Dozens of B2C and B2B solar companies rely on Tigercomm’s solar energy public relations, marketing communications, and community engagement expertise. As a leading solar power PR company, we help clients earn attention, build trust, and drive growth.</p>" %}
+  {% set large_text = "Our industry-leading approach has helped dozens of clean economy companies use marcom to support better B2B sales – especially when lead times are long and price tags are high." %}
+  {% set split_content_text = "<p>As a top solar power PR firm for 20+ years, we deliver expert solar energy public relations and marketing communications that elevate brands and drive commercial growth. Our solar energy community engagement and public affairs strategies help developers build support, shape opinions, and cut project risk so developers can secure the “social license” to win a county permit to build a project in rural America.</p>
+  </p><ul><li><a class='anchor anchor--alt' href='/success-stories'>Success Stories</a></li><li><a class='anchor anchor--alt' href='#sample-clients'>Clients</a></li><li><a class='anchor anchor--alt' href='#testimonials'>Testimonials</a></li><li><a class='anchor anchor--alt' href='/contact'>Contact Us</a></li></ul>" %}
+  {% set split_content_img = "../images/solar-industries/silicon-ranch.jpg" %}
+  {% set img_alt = "A solar farm with sheep herding between rows of panels" %}
+  {% set img_caption = "Silicon Ranch Snipesville Solar Farm Georgia - Photo Credit Nextpower" %}
+  {% set theme = "primary" %}
+  {% set info_graphic_title = "PROCESS / Marketing Communications" %}
+  {% set info_graphic_img = "../images/diagram.jpg" %}
+  {% set cta_contact_type = "turbocharge" %}
+
+  {% set clients_title = "Our Clients" %}
+  {% set client_logo_one = "../images/client-logos/edp-logo.png" %}
+  {% set client_logo_one_alt = "EDP" %}
+  {% set client_logo_two = "../images/client-logos/seia-logo.png" %}
+  {% set client_logo_two_alt = "SEIA" %}
+  {% set client_logo_three = "../images/client-logos/lightsource-bp-logo.png" %}
+  {% set client_logo_three_alt = "Lightsource BP" %}
+  {% set client_logo_four = "../images/client-logos/lg-logo.png" %}
+  {% set client_logo_four_alt = "LG Electronics" %}
+  {% set client_logo_five = "../images/client-logos/apex-logo.png" %}
+  {% set client_logo_five_alt = "Apex Clean Energy" %}
+  {% set client_logo_six = "../images/client-logos/trina-logo.jpg" %}
+  {% set client_logo_six_alt = "Trina Solar" %}
+
+  {% set client_logos = [
+    {
+      "src": "../images/client-logos/edp-logo.png",
+      "alt": "EDP"
+    },
+    {
+      "src": "../images/client-logos/seia-logo.png",
+      "alt": "SEIA"
+    },
+    {
+      "src": "../images/client-logos/lightsource-bp-logo.png",
+      "alt": "Lightsource BP"
+    },
+    {
+      "src": "../images/client-logos/apex-logo.svg",
+      "alt": "Apex Clean Energy"
+    },{
+      "src": "../images/client-logos/nextpower-logo.jpg",
+      "alt": "Nextpower"
+    },
+    {
+      "src": "../images/client-logos/lg-logo.png",
+      "alt": "LG Electronics"
+    },
+    {
+      "src": "../images/client-logos/trina-solar-logo.png",
+      "alt": "Trina Solar"
+    },
+    {
+      "src": "../images/client-logos/atlas-renewables-logo.png",
+      "alt": "Atlas Renewables"
+    },
+    {
+      "src": "../images/client-logos/geenex-logo.png",
+      "alt": "Geenex"
+    }
+  ] %}
+
+  {% set testimonials = [
+  {
+    "quote": "Companies with the generic objective of increasing earned media impressions hire a PR firm. Cleantech leaders looking to solve a challenge or achieve a big goal hire Tigercomm.",
+    "author": "Brian Lynch",
+    "author_title": "Director of Solar + Storage"
+  },
+  {
+    "quote": "Tigercomm was thorough, perceptive and returned significant value. They helped us capture and advance our company’s practices in a way that fit our culture and staff capacity.",
+    "author": "Mary Grikas",
+    "author_title": "Senior Vice President, Marketing & Community Relations, U.S., Lightsource bp"
+  },
+  {
+    "quote": "Tigercomm seamlessly integrated with our executive and communications teams, quickly building a robust digital platform that has generated both unprecedented lead flow and industry accolades. The ability of Tigercomm to balance authentic leadership substance with cutting edge content marketing practices resulted in meaningful connections with diverse yet precise audiences, and cemented our position as a clean energy thought leader.",
+    "author": "Steve Bowers",
+    "author_title": "Vice President, Marketing & Communications, Apex Clean Energy"
+  },
+  {
+    "quote": "Tigercomm worked with our in-house team to position Nextracker as not just a leading solar OEM, but one of the leading companies across renewable energy. It has made a real difference in how investors see the company.",
+    "author": "Daniel Shugar",
+    "author_title": "CEO and Founder, Nextracker"
+  }
+] %}
+  {% include "../sections/hero.html" %}
+  {% include "../sections/split-content.html" %}
+  <div class="row-fluid-wrapper">
+    <div class="content-wrapper content-wrapper--vertical-spacing content-wrapper--vertical-spacing--sm pt-0">
+      <div class="row-fluid pull-img pull-img--right mb-4">
+        <div class="image-col">
+          <figure>
+            <img
+              class=""
+              src="{{ get_asset_url('../images/solar-industries/wright-solar-alt.jpg') }}"
+              alt="The sun setting behind a row of solar panels"
+            />
+            <figcaption>
+              Wright Solar - Photo Credit Nextpower
+            </figcaption>
+          </figure>
+        </div>
+        <div class="content-col">
+          <h2 class="h3">Community Engagement for Solar Projects</h2>
+          <p class="font--sm">Local opposition is the biggest roadblock to America’s clean energy future. Yet, much of the industry still uses outdated tactics from a bygone era of low-friction permitting.</p>
+          <p class="font--sm">Success requires a new approach. Today’s high-friction environment demands sophisticated campaign tactics and political savvy to navigate a development environment marked by shrinking local media, the popularity of Facebook, disinformation from incumbent energy sources, and growing political polarization.</p>
+          <p class="font--sm">Tigercomm specializes in applying a campaign approach to help solar developers win the community’s approval to build solar, wind and storage projects.</p>
+          <p class="font--sm"><a href="/services/community-engagement" class="anchor">Read More <img src="{{ get_asset_url("../images/blue-arrow.svg") }}" /></a></p>
+        </div>
+      </div>
+      <h3 class="h4 mt-6" data-aos="fade-right">PROCESS / Community Engagement</h3>
+      <a href="{{ get_asset_url('../images/services/community-diagram.jpg') }}" target="_blank"><img style="max-width: 100%" data-aos="fade-up" src="{{ get_asset_url('../images/services/community-diagram.jpg') }}" /></a>
+      <h3 class="h4 mt-6">Services</h3>
+      {% include "../sections/tabs.html" %}
+    </div>
+  </div>
+  <div class="row-fluid-wrapper">
+    <div class="content-wrapper content-wrapper--vertical-spacing">
+      <div class="row-fluid pull-img">
+        <div class="image-col">
+          <figure>
+            <img
+              class=""
+              src="{{ get_asset_url('../images/solar-industries/dji.jpg') }}"
+              alt="Two engineers walking through a solar farm"
+            />
+            <figcaption class="text-right">
+              Photo Credit Nextpower
+            </figcaption>
+          </figure>
+        </div>
+        <div class="content-col">
+          <h2 class="h3">Solar PR and Marcom</h2>
+          <p class="font--sm">Many solar energy companies rely on B2B sales, with long lead time and technical value propositions. However, many still lean on their sales teams to provide early-stage customer education. This doesn’t match modern buyers’ use of online search and content to begin their buying decision. That’s why solar energy marketing communications is critical to capturing attention, building trust, and moving prospects through the top of the sales funnel.</p>
+          <p class="font--sm">As a leading solar power PR firm, our proven services have helped dozens of companies turn solar energy communications into a powerful B2B sales engine.</p>
+          <p class="font--sm">Tigercomm can help you turbocharge your sales through better product marketing, media relations, and marketing communications.</p>
+          <p class="font--sm"><a href="/services/marketing-communications" class="anchor">Read More <img src="{{ get_asset_url("../images/blue-arrow.svg") }}" /></a></p>
+        </div>
+      </div>
+      <h3 class="h4 mt-6" data-aos="fade-right">PROCESS / Marketing Communications</h3>
+      <a href="{{ get_asset_url('../images/diagram.jpg') }}" target="_blank"><img style="max-width: 100%" data-aos="fade-up" src="{{ get_asset_url('../images/diagram.jpg') }}" /></a>
+      <h3 class="h4 mt-6">Services</h3>
+      {% include "../sections/tabs.html" %}
+      <div class="flex justify-center"><a href="/contact" class="button mt-4 text-center">Book a Call Now</a></div>
+    </div>
+  </div>
+
+  <div id="who-we-serve" class="who-we-serve row-fluid-wrapper row--alt">
+    <div class="content-wrapper content-wrapper--vertical-spacing">
+      <div class="row-fluid">
+        <div class="span5">
+          <h2>Who We Serve</h2>
+          <div class="cta__border mb-3">
+            <span data-aos="fade-down-right" data-aos-delay="150" class="aos-init aos-animate"></span>
+            <span data-aos="fade-down-right" data-aos-delay="250" class="aos-init aos-animate"></span>
+            <span data-aos="fade-down-right" data-aos-delay="350" class="aos-init aos-animate"></span>
+          </div>
+          <p class="font--sm">Tigercomm has partnered with companies in every part of the industry value chain, including original equipment manufacturers (OEMs), SaaS providers, project developers, and every type of company in between. Our long, proven track record and tailored solar marketing and community engagement strategies make us a trusted partner for companies driving the solar transition.</p>
+        </div>
+        <div class="span6">
+          <ul>
+            <li><img src="{{ get_asset_url("../images/check-leaf.svg") }}" alt="" /><span>Solar and Renewable Energy Developers</span></li>
+            <li><img src="{{ get_asset_url("../images/check-leaf.svg") }}" alt="" /><span>Utility-Scale Solar Developers and Independent Power Producers (IPPs)</span></li>
+            <li><img src="{{ get_asset_url("../images/check-leaf.svg") }}" alt="" /><span>C&amp;I Commercial &amp; Industrial Scale Solar Developers</span></li>
+            <li><img src="{{ get_asset_url("../images/check-leaf.svg") }}" alt="" /><span>Community Solar Developers</span></li>
+            <li><img src="{{ get_asset_url("../images/check-leaf.svg") }}" alt="" /><span>Solar + Storage Commercial &amp; Industrial Developers</span></li>
+            <li><img src="{{ get_asset_url("../images/check-leaf.svg") }}" alt="" /><span>Solar Engineering, Procurement, and Construction (EPCs)</span></li>
+            <li><img src="{{ get_asset_url("../images/check-leaf.svg") }}" alt="" /><span>Solar Manufacturers (OEMs)</span></li>
+            <li><img src="{{ get_asset_url("../images/check-leaf.svg") }}" alt="" /><span>Solar Software as a Service (SaaS)</span></li>
+            <li><img src="{{ get_asset_url("../images/check-leaf.svg") }}" alt="" /><span>Solar Operations &amp; Maintenance (O&amp;M) Service Providers</span></li>
+          </ul>
+        </div>
+        <img class="testimonials__bg" src="{{ get_asset_url("../images/claw.svg") }}" alt="" />
+      </div>
+    </div>
+  </div>
+
+  {% include "../sections/client-list.html" %}
+  {% include "../sections/testimonial-list.html" %}
+  {% include "../sections/cta.html" %}
+</div>
+{% endblock body %}

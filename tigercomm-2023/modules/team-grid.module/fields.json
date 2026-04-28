@@ -1,0 +1,102 @@
+[
+  {
+    "name": "staff_heading",
+    "label": "Staff Heading",
+    "type": "text",
+    "default": "Team"
+  },
+  {
+    "name": "partner_heading",
+    "label": "Partner Heading",
+    "type": "text",
+    "default": "Partners"
+  },
+  {
+    "name": "show_partners",
+    "label": "Show Partners Section",
+    "type": "boolean",
+    "default": true
+  },
+  {
+    "type": "group",
+    "name": "staff_members",
+    "label": "Staff Members",
+    "occurrence": {
+      "min": 0,
+      "max": null,
+      "sorting_label_field": "staff_members.staff_full_name",
+      "default": 0
+    },
+    "children": [
+      {
+        "name": "staff_full_name",
+        "label": "Full Name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "staff_job_title",
+        "label": "Title",
+        "type": "text"
+      },
+      {
+        "name": "staff_headshot",
+        "label": "Headshot",
+        "type": "image"
+      },
+      {
+        "name": "staff_profile_page",
+        "label": "Profile Page",
+        "type": "page"
+      },
+      {
+        "name": "staff_profile_url",
+        "label": "Profile URL",
+        "type": "url",
+        "help_text": "Optional. Link to this person's profile page."
+      }
+    ],
+    "default": []
+  },
+  {
+    "type": "group",
+    "name": "partner_members",
+    "label": "Partner Members",
+    "occurrence": {
+      "min": 0,
+      "max": null,
+      "sorting_label_field": "partner_members.partner_full_name",
+      "default": 0
+    },
+    "children": [
+      {
+        "name": "partner_full_name",
+        "label": "Full Name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "partner_job_title",
+        "label": "Title",
+        "type": "text"
+      },
+      {
+        "name": "partner_headshot",
+        "label": "Headshot",
+        "type": "image"
+      },
+      {
+        "name": "partner_profile_page",
+        "label": "Profile Page",
+        "type": "page"
+      },
+      {
+        "name": "partner_profile_url",
+        "label": "Profile URL",
+        "type": "url",
+        "help_text": "Optional. Link to this person's profile page."
+      }
+    ],
+    "default": []
+  }
+]

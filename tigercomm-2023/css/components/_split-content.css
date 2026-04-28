@@ -1,3 +1,7 @@
+.split-content {
+  column-gap: 4%;
+}
+
 .split-content__img-wrapper {
   position: relative;
   width: 100%;
@@ -17,6 +21,10 @@
 
 .split-content__img-caption {
     padding: 3.2rem;
+}
+
+.split-content__img-col figure {
+  margin: 0;
 }
 
 .content-col .button {

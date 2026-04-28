@@ -1,0 +1,26 @@
+<div id="sample-clients" class="clients row-fluid-wrapper {{ classname }}">
+  <div class="content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="span12 clients__content">
+
+        {% if clients_title %}
+          <h4 class="clients__label label">{{ clients_title }}</h4>
+        {% endif %}
+
+        <div class="module client-list">
+          {% if client_logos and client_logos|length > 0 %}
+            {% for logo in client_logos %}
+              {% if logo.src %}
+                <img
+                  src="{{ get_asset_url(logo.src) }}"
+                  alt="{{ logo.alt|default('Client logo') }}"
+                />
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

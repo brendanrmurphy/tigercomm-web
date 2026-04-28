@@ -1,3 +1,52 @@
 .split-content .content-wrapper {
     padding-top: 0;
 }
+
+.pull-img {
+    display: flex;
+    gap: 4rem;
+}
+
+.pull-img .content-col {
+}
+
+.pull-img .image-col figure {
+    margin: 0;
+}
+
+.pull-img--right .image-col {
+}
+
+.who-we-serve ul {
+    columns: 1;
+}
+
+@media(min-width: 980px){
+    .pull-img {
+        gap: 6rem;
+    }
+    .pull-img .content-col {
+        flex: 0 0 50%;
+    }
+
+    .pull-img .image-col {
+        flex: 1;
+        margin-left: calc(50% - 50vw);
+    }
+
+    .pull-img--right {
+        flex-direction: row-reverse;
+    }
+
+    .pull-img--right .image-col {
+        margin: 0 calc(50% - 50vw) 0 0;
+    }
+}
+
+@media(min-width: 1200px){
+    .pull-img .content-col {
+        flex: 0 0 60%;
+    }
+}
+
+

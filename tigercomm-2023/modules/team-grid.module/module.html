@@ -1,0 +1,81 @@
+<div class="team">
+  {% for member in module.staff_members %}
+    {% set href = member.staff_profile_url.href %}
+    <div class="team-member">
+      {% if href %}
+        <a
+          href="{{ href }}"
+          {% if target %}target="{{ target }}"{% endif %}
+          {% if rel %}rel="{{ rel }}"{% endif %}
+        >
+      {% endif %}
+
+        {% if member.staff_headshot and member.staff_headshot.src %}
+          <img
+            src="{{ member.staff_headshot.src }}"
+            alt="{{ member.staff_full_name }}"
+          >
+        {% endif %}
+
+        <h3 class="team-member__name">
+          {{ member.staff_full_name }}
+        </h3>
+
+        {% if member.staff_job_title %}
+          <div class="team-member__title">
+            {{ member.staff_job_title }}
+          </div>
+        {% endif %}
+
+      {% if href %}
+        </a>
+      {% endif %}
+
+    </div>
+
+  {% endfor %}
+</div>
+
+{% if module.show_partners %}
+  <h2 class="section-title text-center">
+    {{ module.partner_heading }}
+  </h2>
+
+  <div class="team">
+    {% for member in module.partner_members %}
+      {% set href = member.partner_profile_url.href %}
+      <div class="team-member">
+        {% if href %}
+          <a
+            href="{{ href }}"
+            {% if target %}target="{{ target }}"{% endif %}
+            {% if rel %}rel="{{ rel }}"{% endif %}
+          >
+        {% endif %}
+
+          {% if member.partner_headshot and member.partner_headshot.src %}
+            <img
+              src="{{ member.partner_headshot.src }}"
+              alt="{{ member.partner_full_name }}"
+            >
+          {% endif %}
+
+          <h3 class="team-member__name">
+            {{ member.partner_full_name }}
+          </h3>
+
+          {% if member.partner_job_title %}
+            <div class="team-member__title">
+              {{ member.partner_job_title }}
+            </div>
+          {% endif %}
+
+        {% if href %}
+          </a>
+        {% endif %}
+
+      </div>
+
+    {% endfor %}
+  </div>
+{% endif %}

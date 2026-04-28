@@ -17,7 +17,7 @@
   {% else %}
     <div class="block block-hosted-by">
       <h3 class="block__title">Hosted by Melissa Baldwin</h3>
-      <img class="host-img img--round" src="{{ get_asset_url ("../images/team/melissa.jpg")
+      <img class="host-img img--round" alt="Melissa Baldwin" src="{{ get_asset_url ("../images/team/melissa.jpg")
       }}" />
       <p>
         Melissa Baldwin is the senior vice president of Tigercomm, a clean-economy
@@ -40,10 +40,11 @@
             class="social-links__icon social-links__icon--icon"
             target="_blank"
             rel="noopener"
+            aria-label="Apple Podcasts"
           >
             <img
-              src="https://www.tigercomm.us/hubfs/1024px-Apple_Music_logo.svg.png"
-              alt="1024px-Apple_Music_logo.svg"
+              src="{{ get_asset_url("../images/apple-podcasts.svg") }}"
+              alt="Apple Podcasts logo"
             />
           </a>
         </li>
@@ -53,9 +54,10 @@
             class="social-links__icon social-links__icon--icon"
             target="_blank"
             rel="noopener"
+            aria-label="Spotify"
           >
             <img
-              src="https://www.tigercomm.us/hubfs/Spotify%20logo.png"
+              src="{{ get_asset_url("../images/spotify.svg") }}"
               alt="Spotify logo"
             />
           </a>
@@ -66,10 +68,11 @@
             class="social-links__icon social-links__icon--icon"
             target="_blank"
             rel="noopener"
+            aria-label="Amazon Music"
           >
             <img
               src="https://www.tigercomm.us/hubfs/amazon%20music.png"
-              alt="amazon music"
+              alt="Amazon Music logo"
             />
           </a>
         </li>
@@ -79,10 +82,11 @@
             class="social-links__icon social-links__icon--icon"
             target="_blank"
             rel="noopener"
+            aria-label="iHeart Radio"
           >
             <img
               src="https://www.tigercomm.us/hubfs/i.%20heart%20radio.jpg"
-              alt="i. heart radio"
+              alt="iHeart Radio logo"
             />
           </a>
         </li>
@@ -92,15 +96,22 @@
             class="social-links__icon social-links__icon--icon"
             target="_blank"
             rel="noopener"
+            aria-label="Radio Public"
           >
             <img
               src="https://www.tigercomm.us/hubfs/radiopublic-wordmark-red@3x.png"
               alt="radiopublic-wordmark-red@3x"
               style="height: 25px"
+              alt="Radio Public logo"
             />
           </a>
         </li>
         <li></li>
       </ul>
+  </div>
+  <div class="block block-this-week-in-cleantech">
+    <h3>This Week in Cleantech</h3>
+    <p>Catch the weekly roundup of the top five climate and clean energy stories in fifteen minutes or less</p>
+    <a class="btn btn--small" href="/this-week-in-cleantech-podcast">Listen Now</a>
   </div>
 </aside>

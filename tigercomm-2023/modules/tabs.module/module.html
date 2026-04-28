@@ -1,0 +1,166 @@
+<section class="hover-tabs" data-hover-tabs>
+  <div class="hover-tabs__left" role="tablist" aria-orientation="vertical">
+    <button
+      class="hover-tabs__tab is-active"
+      type="button"
+      role="tab"
+      aria-selected="true"
+      data-tab="0"
+    >
+      <span>Media Relations & Pitching</span>
+    </button>
+    <button
+      class="hover-tabs__tab"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      data-tab="1"
+    >
+      <span>Media Training & Interview Prep</span>
+    </button>
+    <button
+      class="hover-tabs__tab"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      data-tab="2"
+    >
+      <span
+        >Client Events, Ribbon Cutting, Ground Breaking & Press
+        Conferences</span
+      >
+    </button>
+  </div>
+  <div class="hover-tabs__right">
+    <div class="hover-tabs__panel is-active" role="tabpanel" data-panel="0">
+      <h3>Media Relations & Pitching</h3>
+      <ul>
+        <li>Build conference and event strategy</li>
+        <li>
+          Identify speaking opportunities and submit abstracts/speaker
+          applications
+        </li>
+        <li>Coordinate meetings and outreach with key contacts at events</li>
+        <li>
+          Prepare speakers and provide on-site or virtual support including
+          Draft remarks/speeches, dry runs
+        </li>
+      </ul>
+    </div>
+    <div class="hover-tabs__panel" role="tabpanel" data-panel="1" hidden>
+      <h3>Media Training & Interview Prep</h3>
+      <ul>
+        <li>Identify award opportunities</li>
+        <li>Draft and submit compelling nominations</li>
+      </ul>
+    </div>
+    <div class="hover-tabs__panel" role="tabpanel" data-panel="2" hidden>
+      <h3>
+        Client Events, Ribbon Cutting, Ground Breaking & Press Conferences
+      </h3>
+      <ul>
+        <li>Media, speaker, and podcast training</li>
+        <li>Thought leadership development and planning sessions</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    (function () {
+      document.querySelectorAll("[data-hover-tabs]").forEach((root) => {
+        const tabs = Array.from(root.querySelectorAll(".hover-tabs__tab"));
+        const panels = Array.from(root.querySelectorAll(".hover-tabs__panel"));
+        if (!tabs.length || !panels.length) return;
+
+        // Start state: whatever is marked active in markup, else 0
+        let activeIndex = tabs.findIndex((t) =>
+          t.classList.contains("is-active"),
+        );
+        if (activeIndex < 0) activeIndex = 0;
+
+        // Sticky state: last clicked (defaults to initial active)
+        let committedIndex = activeIndex;
+
+        // Tracks whether the current active state is coming from hover (temporary)
+        let isHoverPreview = false;
+
+        function setActive(idx, { commit = false } = {}) {
+          activeIndex = idx;
+
+          if (commit) {
+            committedIndex = idx;
+            isHoverPreview = false;
+          }
+
+          tabs.forEach((t, i) => {
+            const isActive = i === activeIndex;
+            t.classList.toggle("is-active", isActive);
+            t.setAttribute("aria-selected", isActive ? "true" : "false");
+            t.setAttribute("tabindex", isActive ? "0" : "-1");
+          });
+
+          panels.forEach((p, i) => {
+            const isActive = i === activeIndex;
+            p.classList.toggle("is-active", isActive);
+            if (isActive) p.removeAttribute("hidden");
+            else p.setAttribute("hidden", "");
+          });
+        }
+
+        tabs.forEach((tab, i) => {
+          // Hover = preview only (not sticky)
+          tab.addEventListener("mouseenter", () => {
+            isHoverPreview = true;
+            setActive(i, { commit: false });
+          });
+
+          // Click = sticky
+          tab.addEventListener("click", () => {
+            setActive(i, { commit: true });
+          });
+
+          tab.addEventListener("keydown", (e) => {
+            // Arrow navigation previews (not sticky) unless they "commit" separately
+            if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+              e.preventDefault();
+              const next = (activeIndex + 1) % tabs.length;
+              isHoverPreview = true;
+              setActive(next, { commit: false });
+              tabs[next].focus();
+            }
+
+            if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+              e.preventDefault();
+              const prev = (activeIndex - 1 + tabs.length) % tabs.length;
+              isHoverPreview = true;
+              setActive(prev, { commit: false });
+              tabs[prev].focus();
+            }
+
+            // Optional: commit with Enter/Space for accessibility
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setActive(i, { commit: true });
+            }
+          });
+        });
+
+        root.addEventListener("mouseenter", () =>
+          root.classList.add("is-hovering"),
+        );
+
+        // When leaving the whole component:
+        // If the user only hovered (didn't click), revert to last committed tab.
+        root.addEventListener("mouseleave", () => {
+          root.classList.remove("is-hovering");
+          if (isHoverPreview) {
+            setActive(committedIndex, { commit: false });
+            isHoverPreview = false;
+          }
+        });
+
+        // Initialize
+        setActive(activeIndex, { commit: true });
+      });
+    })();
+  </script>
+</section>
