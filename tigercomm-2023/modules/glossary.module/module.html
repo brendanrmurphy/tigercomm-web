@@ -1,0 +1,92 @@
+{% set sorted_terms = module.terms|sort(false, false, "term_title") %}
+
+<section id="glossary-top" class="glossary" aria-label="Glossary">
+  {% if sorted_terms|length %}
+    <span class="glossary__sticky-sentinel" aria-hidden="true"></span>
+    <nav class="glossary__alpha-nav" aria-label="Glossary letters" data-glossary-nav>
+      {% set letter = "" %}
+      {% for term in sorted_terms %}
+        {% set title = term.term_title|trim %}
+        {% set first = title|truncate(1, true, "")|upper %}
+        {% set letter_id = first|lower|regex_replace("[^a-z0-9]", "") %}
+        {% if title and letter != first %}
+          {% set letter = first %}
+          <a class="glossary__alpha-link" href="#letter-{{ letter_id }}">{{ letter }}</a>
+        {% endif %}
+      {% endfor %}
+      <a class="glossary__back-to-top" href="#">Back to top</a>
+    </nav>
+
+    <div class="glossary__list">
+      {% set letter = "" %}
+      {% for term in sorted_terms %}
+        {% set title = term.term_title|trim %}
+        {% set first = title|truncate(1, true, "")|upper %}
+        {% set letter_id = first|lower|regex_replace("[^a-z0-9]", "") %}
+        {% if title and letter != first %}
+          {% set letter = first %}
+          <h2 id="letter-{{ letter_id }}" class="glossary__letter">{{ letter }}</h2>
+        {% endif %}
+
+        <article class="glossary__term">
+          <h3 class="glossary__term-title">{{ term.term_title }}</h3>
+          <div class="glossary__definition">
+            {{ term.term_definition }}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <p class="glossary__empty">Add terms to populate the glossary.</p>
+  {% endif %}
+</section>
+
+{% require_js %}
+  <script>
+    (function () {
+      const navs = document.querySelectorAll("[data-glossary-nav]");
+
+      navs.forEach((nav) => {
+        const sentinel = nav.previousElementSibling;
+
+        if (!sentinel || !sentinel.classList.contains("glossary__sticky-sentinel")) {
+          return;
+        }
+
+        const setStickyState = () => {
+          const sentinelTop = sentinel.getBoundingClientRect().top;
+          nav.classList.toggle("is-sticky", sentinelTop < 0);
+        };
+
+        setStickyState();
+        window.addEventListener("scroll", setStickyState, { passive: true });
+        window.addEventListener("resize", setStickyState);
+      });
+    })();
+  </script>
+{% end_require_js %}
+
+{% if sorted_terms|length %}
+  {% require_js %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": ["DefinedTermSet", "Book"],
+        "@id": "{{ content.absolute_url }}#glossary",
+        "name": "{{ content.name|default(content.title)|escapejson }}",
+        "terms": [
+          {% for term in sorted_terms %}
+            {
+              "@type": "DefinedTerm",
+              "@id": "{{ content.absolute_url }}#{{ term.term_title|trim|lower|regex_replace("[^a-z0-9]+", "-")|escapejson }}",
+              "name": "{{ term.term_title|escapejson }}",
+              "description": "{{ term.term_definition|striptags|trim|escapejson }}",
+              "inDefinedTermSet": "{{ content.absolute_url }}#glossary"
+            }{{ "," if not loop.last }}
+          {% endfor %}
+        ]
+      }
+    </script>
+  {% end_require_js %}
+{% endif %}

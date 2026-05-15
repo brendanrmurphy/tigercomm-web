@@ -1,0 +1,161 @@
+.glossary {
+  max-width: 104rem;
+}
+
+.glossary__sticky-sentinel {
+  display: block;
+  height: 0.1rem;
+}
+
+.glossary__alpha-nav {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 4rem;
+  padding: 1.2rem 0;
+  background: #fff;
+  border-top: 0.1rem solid var(--gray);
+  border-bottom: 0.1rem solid var(--gray);
+}
+
+.glossary__alpha-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  color: var(--primary-color);
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  border: 0.1rem solid transparent;
+}
+
+.glossary__alpha-link:hover,
+.glossary__alpha-link:focus {
+  color: #fff;
+  background: var(--primary-color);
+}
+
+.glossary__letter {
+  scroll-margin-top: 8rem;
+  margin: 0 0 2.4rem;
+  padding-bottom: 1.2rem;
+  color: var(--primary-color);
+  border-bottom: 0.3rem solid var(--primary-color);
+}
+
+.glossary__letter:not(:first-child) {
+  margin-top: 6.4rem;
+}
+
+.glossary__term {
+  display: grid;
+  grid-template-columns: minmax(20rem, 30%) 1fr;
+  gap: 3.2rem;
+  padding: 4.8rem 0;
+  border-bottom: 0.1rem solid var(--gray);
+}
+
+.glossary__term-title {
+  margin: 0;
+  color: #2b2b35;
+  font-family: var(--font-primary);
+  font-size: 2.2rem;
+  line-height: 1.25;
+}
+
+.glossary__definition {
+  color: #444;
+}
+
+.glossary__definition p,
+.glossary__definition li {
+  font-size: 1.8rem;
+  line-height: 1.65;
+}
+
+.glossary__definition p:not(:last-child),
+.glossary__definition ul:not(:last-child),
+.glossary__definition ol:not(:last-child) {
+  margin-bottom: 1.6rem;
+}
+
+.glossary__empty {
+  padding: 3.2rem;
+  background: var(--light-gray);
+}
+
+.glossary__back-to-top {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.8rem;
+  margin-left: auto;
+  padding: 0 1rem;
+  color: var(--primary-color);
+  background: transparent;
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.glossary__alpha-nav.is-sticky .glossary__back-to-top {
+  display: inline-flex;
+}
+
+.glossary__back-to-top:hover,
+.glossary__back-to-top:focus {
+  color: var(--primary-color);
+  background: transparent;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .glossary__alpha-nav {
+    position: static;
+    gap: 0.3rem;
+    margin-bottom: 3.2rem;
+    padding: 1rem 0;
+  }
+
+  .glossary__alpha-link {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.4rem;
+  }
+
+  .glossary__letter {
+    scroll-margin-top: 2rem;
+  }
+
+  .glossary__term {
+    display: block;
+    padding: 3.6rem 0;
+  }
+
+  .glossary__term-title {
+    margin-bottom: 1.2rem;
+    font-size: 2rem;
+  }
+
+  .glossary__definition p,
+  .glossary__definition li {
+    font-size: 1.6rem;
+  }
+
+  .glossary__back-to-top {
+    min-height: 2.5rem;
+    margin-left: 0.4rem;
+    padding: 0 0.8rem;
+    font-size: 1.2rem;
+  }
+}

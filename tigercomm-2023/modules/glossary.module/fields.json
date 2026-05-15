@@ -1,0 +1,28 @@
+[
+  {
+    "type": "group",
+    "name": "terms",
+    "label": "Terms",
+    "occurrence": {
+      "min": 0,
+      "max": null,
+      "sorting_label_field": "terms.term_title",
+      "default": 0
+    },
+    "children": [
+      {
+        "name": "term_title",
+        "label": "Term title",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "term_definition",
+        "label": "Term definition",
+        "type": "richtext",
+        "required": true
+      }
+    ],
+    "default": []
+  }
+]
