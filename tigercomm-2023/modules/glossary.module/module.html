@@ -3,6 +3,18 @@
 <section id="glossary-top" class="glossary" aria-label="Glossary">
   {% if sorted_terms|length %}
     <span class="glossary__sticky-sentinel" aria-hidden="true"></span>
+    <div class="glossary__search" data-glossary-search-wrap>
+      <label class="glossary__search-label" for="glossary-search-{{ name }}">Search glossary</label>
+      <input
+        id="glossary-search-{{ name }}"
+        class="glossary__search-input"
+        type="search"
+        placeholder="enter terms"
+        autocomplete="off"
+        data-glossary-search
+      >
+    </div>
+
     <nav class="glossary__alpha-nav" aria-label="Glossary letters" data-glossary-nav>
       {% set letter = "" %}
       {% for term in sorted_terms %}
@@ -11,13 +23,13 @@
         {% set letter_id = first|lower|regex_replace("[^a-z0-9]", "") %}
         {% if title and letter != first %}
           {% set letter = first %}
-          <a class="glossary__alpha-link" href="#letter-{{ letter_id }}">{{ letter }}</a>
+          <a class="glossary__alpha-link" href="#letter-{{ letter_id }}" data-glossary-alpha-link data-glossary-letter="{{ letter_id }}">{{ letter }}</a>
         {% endif %}
       {% endfor %}
       <a class="glossary__back-to-top" href="#">Back to top</a>
     </nav>
 
-    <div class="glossary__list">
+    <div class="glossary__list" data-glossary-list>
       {% set letter = "" %}
       {% for term in sorted_terms %}
         {% set title = term.term_title|trim %}
@@ -25,10 +37,10 @@
         {% set letter_id = first|lower|regex_replace("[^a-z0-9]", "") %}
         {% if title and letter != first %}
           {% set letter = first %}
-          <h2 id="letter-{{ letter_id }}" class="glossary__letter">{{ letter }}</h2>
+          <h2 id="letter-{{ letter_id }}" class="glossary__letter" data-glossary-letter-heading data-glossary-letter="{{ letter_id }}">{{ letter }}</h2>
         {% endif %}
 
-        <article class="glossary__term">
+        <article class="glossary__term" data-glossary-term data-glossary-letter="{{ letter_id }}">
           <h3 class="glossary__term-title">{{ term.term_title }}</h3>
           <div class="glossary__definition">
             {{ term.term_definition }}
@@ -36,36 +48,12 @@
         </article>
       {% endfor %}
     </div>
+    <p class="glossary__no-results" hidden data-glossary-no-results>No glossary terms match your search.</p>
 
   {% else %}
     <p class="glossary__empty">Add terms to populate the glossary.</p>
   {% endif %}
 </section>
-
-{% require_js %}
-  <script>
-    (function () {
-      const navs = document.querySelectorAll("[data-glossary-nav]");
-
-      navs.forEach((nav) => {
-        const sentinel = nav.previousElementSibling;
-
-        if (!sentinel || !sentinel.classList.contains("glossary__sticky-sentinel")) {
-          return;
-        }
-
-        const setStickyState = () => {
-          const sentinelTop = sentinel.getBoundingClientRect().top;
-          nav.classList.toggle("is-sticky", sentinelTop < 0);
-        };
-
-        setStickyState();
-        window.addEventListener("scroll", setStickyState, { passive: true });
-        window.addEventListener("resize", setStickyState);
-      });
-    })();
-  </script>
-{% end_require_js %}
 
 {% if sorted_terms|length %}
   {% require_js %}
