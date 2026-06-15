@@ -11,12 +11,22 @@
 {% extends "./layouts/base.html" %}
 
 {% block body %}
+{% set success_story_v2 = false %}
 {% if request.path == '/success-stories/rondo' %}
 {% include "../sections/success-stories/rondo.html" %}
 {% elif request.path == '/success-stories/lightsource-bp' %}
 {% include "../sections/success-stories/lightsource-bp.html" %}
 {% elif request.path == '/success-stories/nextracker' %}
 {% include "../sections/success-stories/nextracker.html" %}
+{% elif request.path == '/success-stories/nextpower-pittsburgh' %}
+{% set success_story_v2 = true %}
+{% include "../sections/success-stories/nextpower-pittsburgh.html" %}
+{% elif request.path == '/success-stories/project-lucy' %}
+{% set success_story_v2 = true %}
+{% include "../sections/success-stories/project-lucy.html" %}
+{% elif request.path == '/success-stories/nextpower-pv-mag-re-plus' %}
+{% set success_story_v2 = true %}
+{% include "../sections/success-stories/nextpower-pv-mag-re-plus.html" %}
 {% elif request.path == '/success-stories/real' %}
 {% include "../sections/success-stories/real.html" %}
 {% elif request.path == '/success-stories/hemlock-semiconductor-ulcsa' %}
@@ -54,6 +64,123 @@
 {% elif request.path == '/success-stories/renewable-america' %}
 {% include "../sections/success-stories/renewable-america.html" %}
 {% endif %}
+{% if success_story_v2 %}
+<div class="container-fluid body-container body-container--success-story-v2">
+  {% set hero_title = title %}
+  {% set hero_sub_title = sub_title %}
+  {% set hero_title_class = "success-story-v2__hero-title" %}
+  {% set hero_label = "Success Story | " + "<a href=" + category_url + ">" + category + "</a>" %}
+  {% set hero_img = "" %}
+  {% if at_a_glance %}
+  {% set hero_content = "<p class='success-story-v2__hero-summary'>" + at_a_glance + "</p>" %}
+  {% endif %}
+  {% include "../sections/hero.html" %}
+
+  <div class="content-wrapper">
+    <div class="cta__border">
+      <span data-aos="fade-down-right" data-aos-delay="150"></span>
+      <span data-aos="fade-down-right" data-aos-delay="250"></span>
+      <span data-aos="fade-down-right" data-aos-delay="350"></span>
+    </div>
+  </div>
+
+  {% if project_details or metrics %}
+  <div class="success-story-v2__glance row--alt">
+    <div class="content-wrapper content-wrapper--vertical-spacing--sm">
+      <h2 class="h4 label">At A Glance</h2>
+      {% if project_details %}
+      <dl class="success-story-v2__details">
+        {% for detail in project_details %}
+        <div class="success-story-v2__detail">
+          <dt>{{ detail.label }}</dt>
+          <dd>{{ detail.value }}</dd>
+        </div>
+        {% endfor %}
+      </dl>
+      {% endif %}
+
+      {% if metrics %}
+      <div class="success-story-v2__metrics">
+        {% for metric in metrics %}
+        <div class="success-story-v2__metric">
+          <div class="success-story-v2__metric-value">{{ metric.value }}</div>
+          <div class="success-story-v2__metric-label">{{ metric.label }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="success-story-v2__content content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="span7">
+        {% if challenge %}
+        <section class="success-story-v2__section">
+          <h2>Challenge</h2>
+          {{ challenge }}
+        </section>
+        {% endif %}
+        {% if strategy %}
+        <section class="success-story-v2__section">
+          <h2>Strategy</h2>
+          {{ strategy }}
+        </section>
+        {% endif %}
+        {% if execution %}
+        <section class="success-story-v2__section">
+          <h2>Execution</h2>
+          {{ execution }}
+        </section>
+        {% endif %}
+        {% if results %}
+        <section class="success-story-v2__section">
+          <h2>Results</h2>
+          {{ results }}
+        </section>
+        {% endif %}
+      </div>
+      <aside class="success-story-v2__media span5">
+        {% if success_story_img_path %}
+        <img src="{{ get_asset_url(success_story_img_path) }}" alt="{{ success_story_img_alt }}" />
+        {% elif success_story_img %}
+        <img src="{{ get_asset_url('../images/success-stories/' + success_story_img) }}" alt="{{ success_story_img_alt }}" />
+        {% endif %}
+        {% if success_story_img_caption %}
+        <p class="success-story-img-caption">{{ success_story_img_caption }}</p>
+        {% endif %}
+        {% if success_story_img_one %}
+        <img src="{{ get_asset_url('../images/success-stories/' + success_story_img_one) }}" alt="" />
+        {% endif %}
+        {% if success_story_img_one_caption %}
+        <p class="success-story-img-caption">{{ success_story_img_one_caption }}</p>
+        {% endif %}
+        {% if about_client %}
+        <section class="success-story-v2__about-client">
+          <h2 class="h4 label">About the Client</h2>
+          {{ about_client }}
+        </section>
+        {% endif %}
+      </aside>
+    </div>
+  </div>
+
+  {% if featured_coverage %}
+  <section class="success-story-v2__coverage content-wrapper">
+    <h2>As Seen In</h2>
+    {{ featured_coverage }}
+  </section>
+  {% endif %}
+
+  {% if testimonial %}
+  {% set testimonial_label = "Testimonial" %}
+  {% include "../sections/testimonials.html" %}
+  {% endif %}
+
+  {% include "../sections/cta.html" %}
+</div>
+{% else %}
 <div class="container-fluid body-container body-container--success-story">
   {% set hero_title = title %}
   {% set hero_sub_title = sub_title %}
@@ -75,7 +202,7 @@
           <h2>Approach</h2>
           {{ approach }}
           </div>
-        </div>  
+        </div>
         <div class="row-fluid">
           <div class="span-12">
             <h2>Challenge</h2>
@@ -122,4 +249,5 @@
    {% endif %}
    {% include "../sections/cta.html" %}
 </div>
+{% endif %}
 {% endblock body %}

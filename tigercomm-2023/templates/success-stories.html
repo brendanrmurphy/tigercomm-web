@@ -124,6 +124,46 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="row-fluid">
           <div class="span9">
             <div class="row-fluid">
+            {# Temporary fixture cards for reviewing unpublished success stories. #}
+            {% if request.query_dict.preview_new_stories == "true" %}
+              {% set preview_stories = [
+                {
+                  "url": "/success-stories/project-lucy",
+                  "image": "lucy.jpg",
+                  "alt": "News coverage from Project Lucy's groundbreaking, including pv magazine, Dallas Innovates, and ChosunBiz coverage.",
+                  "title": "Storm-Tested Coverage Delivered Investor Confidence in $524M Solar Project",
+                  "sub_title": "18 Media Placements. 40+ VIPs. One Winter Storm.",
+                  "blurb": "How Tigercomm turned a weather crisis into a high-impact groundbreaking for a $524M Korean-led solar project in Texas."
+                },
+                {
+                  "url": "/success-stories/nextpower-pittsburgh",
+                  "image": "nextpower-steel.jpg",
+                  "alt": "News coverage from Nextpower's Pittsburgh factory expansion, including WESA NPR, Canary Media, and Pittsburgh Business Times.",
+                  "title": "Big Coverage Connected Client with Customer Requirements",
+                  "sub_title": "Full Sweep of Local TV, 20+ Media Stories. Top-tier Trades and Business Press. Follow-on Coverage Weeks Later.",
+                  "blurb": "How Tigercomm turned a regional factory expansion into a national manufacturing story, enabling Nextpower to connect with customer demands for domestic content and supply chain stability."
+                },
+                {
+                  "url": "/success-stories/nextpower-pv-mag-re-plus",
+                  "image": "nextpower.jpg",
+                  "alt": "pv magazine news coverage featuring Nextpower's RE+ cover story &quot;Battling the Elements&quot; and hail damage feature article.",
+                  "title": "Client Dominates Top Trade Magazine During Biggest Show of the Year",
+                  "sub_title": "How 1 Interview Led to 3 Articles, Including Cover Story Image Circulated to 40K+ Potential Customers",
+                  "blurb": "How Tigercomm helped Nextpower convert editorial coverage into a sales advantage at the year's most important industry gathering."
+                }
+              ] %}
+              {% for preview_story in preview_stories %}
+              <div class="success-story success-story--new blog-post__body span6">
+                <a class="success-story__image" href="{{ preview_story.url }}">
+                  <img src="{{ get_asset_url('../images/success-stories/' + preview_story.image) }}" alt="{{ preview_story.alt }}" />
+                </a>
+                <h2 class="h4 success-story__title"><a href="{{ preview_story.url }}">{{ preview_story.title }}</a></h2>
+                <h3 class="success-story__sub-title">{{ preview_story.sub_title }}</h3>
+                <p class="success-story__excerpt">{{ preview_story.blurb }}</p>
+                <a class="anchor" href="{{ preview_story.url }}">Read more <img src="{{ get_asset_url("../images/blue-arrow.svg") }}" /></a>
+              </div>
+              {% endfor %}
+            {% endif %}
             {% for content in contents %}
             {% set formatted_sectors = [] %}
             {% for item_sector in content.widgets.success_story_sectors.body.sector %}
@@ -135,13 +175,48 @@ document.addEventListener("DOMContentLoaded", function() {
               {% for item_year in content.widgets.success_story_years.body.year %}
                 {% set _ = formatted_years.append(item_year) %}
               {% endfor %}
-            <div class="success-story blog-post__body span6" data-sectors='["{{ formatted_sectors|join('","')}}"]' data-years='["{{ formatted_years|join('","')}}"]'>
+            {% set listing_img = "" %}
+            {% set listing_img_alt = "" %}
+            {% set listing_title = "" %}
+            {% set listing_sub_title = "" %}
+            {% set listing_blurb = "" %}
+            {% if content.slug == 'success-stories/project-lucy' %}
+              {% set listing_img = "lucy.jpg" %}
+              {% set listing_img_alt = "News coverage from Project Lucy's groundbreaking, including pv magazine, Dallas Innovates, and ChosunBiz coverage." %}
+              {% set listing_title = "Storm-Tested Coverage Delivered Investor Confidence in $524M Solar Project" %}
+              {% set listing_sub_title = "18 Media Placements. 40+ VIPs. One Winter Storm." %}
+              {% set listing_blurb = "How Tigercomm turned a weather crisis into a high-impact groundbreaking for a $524M Korean-led solar project in Texas." %}
+            {% elif content.slug == 'success-stories/nextpower-pittsburgh' %}
+              {% set listing_img = "nextpower-steel.jpg" %}
+              {% set listing_img_alt = "News coverage from Nextpower's Pittsburgh factory expansion, including WESA NPR, Canary Media, and Pittsburgh Business Times." %}
+              {% set listing_title = "Big Coverage Connected Client with Customer Requirements" %}
+              {% set listing_sub_title = "Full Sweep of Local TV, 20+ Media Stories. Top-tier Trades and Business Press. Follow-on Coverage Weeks Later." %}
+              {% set listing_blurb = "How Tigercomm turned a regional factory expansion into a national manufacturing story, enabling Nextpower to connect with customer demands for domestic content and supply chain stability." %}
+            {% elif content.slug == 'success-stories/nextpower-pv-mag-re-plus' %}
+              {% set listing_img = "nextpower.jpg" %}
+              {% set listing_img_alt = "pv magazine news coverage featuring Nextpower's RE+ cover story &quot;Battling the Elements&quot; and hail damage feature article." %}
+              {% set listing_title = "Client Dominates Top Trade Magazine During Biggest Show of the Year" %}
+              {% set listing_sub_title = "How 1 Interview Led to 3 Articles, Including Cover Story Image Circulated to 40K+ Potential Customers" %}
+              {% set listing_blurb = "How Tigercomm helped Nextpower convert editorial coverage into a sales advantage at the year's most important industry gathering." %}
+            {% endif %}
+            <div class="success-story{% if listing_img %} success-story--new{% endif %} blog-post__body span6" data-sectors='["{{ formatted_sectors|join('","')}}"]' data-years='["{{ formatted_years|join('","')}}"]'>
                 <a class="success-story__image" href="{{content.absolute_url}}">
+                  {% if listing_img %}
+                  <img src="{{ get_asset_url('../images/success-stories/' + listing_img) }}" alt="{{ listing_img_alt }}" />
+                  {% elif content.post_list_summary_featured_image %}
                   <img src="{{ content.post_list_summary_featured_image }}" alt="" />
+                  {% else %}
+                  <img src="{{ get_asset_url('../images/large-placeholder-image.png') }}" alt="" />
+                  {% endif %}
                 </a>
-                <h2 class="h4 success-story__title"><a href="{{content.absolute_url}}">{{ content.name }}</a></h2>
+                <h2 class="h4 success-story__title"><a href="{{content.absolute_url}}">{% if listing_title %}{{ listing_title }}{% else %}{{ content.name }}{% endif %}</a></h2>
+                {% if listing_sub_title %}
+                <h3 class="success-story__sub-title">{{ listing_sub_title }}</h3>
+                {% endif %}
                 <p class="success-story__excerpt">
-                {% if content.slug == 'success-stories/real' %}
+                {% if listing_blurb %}
+                {{ listing_blurb }}
+                {% elif content.slug == 'success-stories/real' %}
                 As the Massachusetts legislature prepared to expand state commitments to climate progress, it also considered banning retail sales of 100% clean energy – effectively pushing Bay Staters back into the arms of incumbent, monopoly utilities. Several retailers formed the Retail Energy Advancement League (REAL), but were hampered by differences on messaging and how much risk to take – the ban was backed by the popular, then-Attorney General Maura Healey, (who led the race for governor by 44 points). A combined tens of millions in sales was at severe risk for nearly a dozen retailers.
                 {% elif content.slug == 'success-stories/lightsource-bp'%}
                 As one of the world’s biggest solar developers, Lightsource bp is facing increasing skepticism from local residents, who are targeted with anti-renewables propaganda from the oil and gas industry. In fact, local “NIMBY” resistance (“Not In My Back Yard”) objections have led to more project cancellations, creating a multi-billion-dollar threat to the entire clean energy transition.
