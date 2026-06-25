@@ -1,0 +1,46 @@
+{% set faq_items = module.faq_items %}
+
+<section class="faq" aria-label="Frequently asked questions">
+  {% if faq_items|length %}
+    <div class="faq__list">
+      {% for item in faq_items %}
+        {% if item.question or item.answer %}
+          <details class="faq__item">
+            <summary class="faq__question">
+              <span class="faq__question-text">{{ item.question }}</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer">
+              {{ item.answer }}
+            </div>
+          </details>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="faq__empty">Add FAQ items to populate this module.</p>
+  {% endif %}
+</section>
+
+{% if faq_items|length %}
+  {% require_js %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {% for item in faq_items %}
+            {
+              "@type": "Question",
+              "name": "{{ item.question|striptags|trim|escapejson }}",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "{{ item.answer|striptags|trim|escapejson }}"
+              }
+            }{{ "," if not loop.last }}
+          {% endfor %}
+        ]
+      }
+    </script>
+  {% end_require_js %}
+{% endif %}

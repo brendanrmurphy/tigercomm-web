@@ -310,7 +310,7 @@ h1,
   color: {{ h1_font.color }};
   font-size: {{ h1_font.size ~ h1_font.size_unit }};
   text-transform: {{ h1_text_transform }};
-  line-height: 1.04;
+  line-height: 1.12;
 }
 
 h2,
@@ -319,7 +319,7 @@ h2,
   color: {{ h2_font.color }};
   font-size: {{ h2_font.size ~ h2_font.size_unit }};
   text-transform: {{ h2_text_transform }};
-  line-height: 1.12;
+  line-height: 1.2;
 }
 
 h3,

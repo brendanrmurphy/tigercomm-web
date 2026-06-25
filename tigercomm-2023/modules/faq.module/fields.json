@@ -1,0 +1,54 @@
+[
+  {
+    "label": "FAQ items",
+    "name": "faq_items",
+    "type": "group",
+    "occurrence": {
+      "default": 3,
+      "min": 0,
+      "max": null,
+      "sorting_label_field": "faq_items.question"
+    },
+    "children": [
+      {
+        "label": "Question",
+        "name": "question",
+        "type": "text",
+        "required": true,
+        "default": "What question should this FAQ answer?"
+      },
+      {
+        "label": "Answer",
+        "name": "answer",
+        "type": "richtext",
+        "required": true,
+        "enabled_features": [
+          "advanced_emphasis",
+          "alignment",
+          "block",
+          "emoji",
+          "font_family",
+          "font_size",
+          "lists",
+          "link",
+          "standard_emphasis"
+        ],
+        "default": "<p>Add a concise answer here. You can use formatting, links, and lists.</p>"
+      }
+    ],
+    "default": [
+      {
+        "question": "What question should this FAQ answer?",
+        "answer": "<p>Add a concise answer here. You can use formatting, links, and lists.</p>"
+      },
+      {
+        "question": "Can I add more FAQ items?",
+        "answer": "<p>Yes. This module uses a repeater field, so editors can add as many question and answer pairs as needed.</p>"
+      },
+      {
+        "question": "Can answers include rich formatting?",
+        "answer": "<p>Yes. The answer field is rich text and supports links, lists, and standard text formatting.</p>"
+      }
+    ]
+  }
+]

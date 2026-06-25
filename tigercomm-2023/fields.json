@@ -213,7 +213,7 @@
               }
             },
             "default": {
-              "size": 9.8,
+              "size": 9.2,
               "size_unit": "rem",
               "styles": {
                 "text-decoration": "none"
