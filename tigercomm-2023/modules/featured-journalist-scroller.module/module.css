@@ -1,0 +1,413 @@
+.featured-journalist-scroller {
+  background: #fff;
+  color: #2b2b35;
+  --journalist-accent: #ff6200;
+  --journalist-accent-blue: #001eff;
+  --journalist-accent-cyan: #38bdf2;
+  --journalist-bg-soft: #f3f3f1;
+  --journalist-card-height: auto;
+  --journalist-ink: #2b2b35;
+  --journalist-muted: #5f5f68;
+  --journalist-rule: rgba(43, 43, 53, 0.1);
+  overflow: hidden;
+  padding: 7.2rem 0;
+}
+
+.featured-journalist-scroller__inner {
+  margin: 0 auto;
+  max-width: 144rem;
+}
+
+.featured-journalist-scroller__heading {
+  color: var(--journalist-ink);
+  font-family: "Bitter", serif;
+  font-size: clamp(2rem, 2vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 2.4rem;
+  max-width: 72rem;
+}
+
+.featured-journalist-scroller__viewport {
+  cursor: grab;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: hidden;
+  position: relative;
+  touch-action: pan-y;
+  --journalist-edge-fade: min(8vw, 8rem);
+  width: 100%;
+}
+
+.featured-journalist-scroller--static .featured-journalist-scroller__viewport {
+  cursor: default;
+}
+
+.featured-journalist-scroller__fade {
+  bottom: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: var(--journalist-edge-fade);
+  z-index: 5;
+}
+
+.featured-journalist-scroller__fade--left {
+  background: linear-gradient(90deg, #fff 0, #fff 18%, rgba(255, 255, 255, 0));
+  left: 0;
+}
+
+.featured-journalist-scroller__fade--right {
+  background: linear-gradient(270deg, #fff 0, #fff 18%, rgba(255, 255, 255, 0));
+  right: 0;
+}
+
+.featured-journalist-scroller__track {
+  animation: featured-journalist-scroll var(--journalist-scroll-duration, 140s) linear infinite;
+  display: flex;
+  gap: 2.4rem;
+  position: relative;
+  width: max-content;
+  will-change: transform;
+  z-index: 1;
+}
+
+.featured-journalist-scroller--static .featured-journalist-scroller__track {
+  animation: none;
+  transform: none !important;
+  width: auto;
+}
+
+.featured-journalist-scroller--static .featured-journalist-scroller__list {
+  justify-content: flex-start;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.featured-journalist-scroller--static .featured-journalist-scroller__item {
+  margin-left: 0;
+}
+
+.featured-journalist-scroller--reverse .featured-journalist-scroller__track {
+  animation-direction: reverse;
+}
+
+.featured-journalist-scroller.is-enhanced .featured-journalist-scroller__track {
+  animation: none;
+}
+
+.featured-journalist-scroller.is-dragging .featured-journalist-scroller__viewport {
+  cursor: grabbing;
+}
+
+.featured-journalist-scroller.is-dragging .featured-journalist-card {
+  user-select: none;
+}
+
+.featured-journalist-scroller__viewport:hover .featured-journalist-scroller__track,
+.featured-journalist-scroller__viewport:focus-within .featured-journalist-scroller__track {
+  animation-play-state: paused;
+}
+
+.featured-journalist-scroller__list {
+  align-items: stretch;
+  display: flex;
+  gap: 2.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.featured-journalist-scroller__item {
+  --journalist-slide-accent: var(--journalist-accent);
+  display: flex;
+  flex: 0 0 auto;
+  margin: 0;
+  width: min(78vw, 42rem);
+}
+
+.featured-journalist-scroller__item:nth-child(3n + 2) {
+  --journalist-slide-accent: var(--journalist-accent-cyan);
+}
+
+.featured-journalist-scroller__item:nth-child(3n) {
+  --journalist-slide-accent: var(--journalist-accent-blue);
+}
+
+.featured-journalist-scroller--outlet-only .featured-journalist-scroller__item {
+  width: min(64vw, 22rem);
+}
+
+.featured-journalist-card {
+  align-items: stretch;
+  background: var(--journalist-bg-soft);
+  border: 0.1rem solid rgba(43, 43, 53, 0.08);
+  border-radius: 0;
+  box-shadow: inset 0 0 0 0.1rem rgba(255, 255, 255, 0.72);
+  box-sizing: border-box;
+  display: flex;
+  height: var(--journalist-card-height);
+  padding: 1.6rem 1.8rem;
+  position: relative;
+  transition: background-color 0.15s linear;
+  width: 100%;
+}
+
+.featured-journalist-card::after {
+  background: var(--journalist-slide-accent);
+  bottom: 0;
+  content: "";
+  height: 0.2rem;
+  left: 0;
+  opacity: 0.72;
+  position: absolute;
+  right: 0;
+}
+
+.featured-journalist-card:focus-within,
+.featured-journalist-card:hover {
+  background: #eeeeeb;
+}
+
+.featured-journalist-card__image-wrap {
+  background: #e4e4e1;
+  border: 0;
+  border-radius: 50%;
+  flex: 0 0 4.2rem;
+  height: 4.2rem;
+  overflow: hidden;
+  width: 4.2rem;
+}
+
+.featured-journalist-card__image {
+  display: block;
+  filter: grayscale(1);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.featured-journalist-card__content {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  gap: 1.6rem;
+  justify-content: space-between;
+  min-width: 0;
+  width: 100%;
+}
+
+.featured-journalist-scroller--outlet-only .featured-journalist-card__content {
+  justify-content: center;
+}
+
+.featured-journalist-card__journalist {
+  align-items: center;
+  border-left: 0.1rem solid var(--journalist-rule);
+  box-sizing: border-box;
+  color: inherit;
+  display: flex;
+  gap: 1.2rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-left: 1.6rem;
+  text-decoration: none;
+}
+
+.featured-journalist-card__journalist:hover,
+.featured-journalist-card__journalist:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.featured-journalist-card__name {
+  color: var(--journalist-ink);
+  display: block;
+  font-family: "Bitter", serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.featured-journalist-card__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.featured-journalist-card__title {
+  color: var(--journalist-muted);
+  display: block;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.25;
+  margin-top: 0.3rem;
+}
+
+.featured-journalist-card__outlet-logo-wrap {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 0;
+  width: 100%;
+}
+
+.featured-journalist-card__outlet-link {
+  align-items: center;
+  align-self: stretch;
+  box-sizing: border-box;
+  color: inherit;
+  display: inline-flex;
+  flex: 0 0 14rem;
+  justify-content: center;
+  max-width: 14rem;
+  text-decoration: none;
+}
+
+.featured-journalist-scroller--outlet-only .featured-journalist-card__outlet-link {
+  flex-basis: 100%;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.featured-journalist-card__outlet-link:hover,
+.featured-journalist-card__outlet-link:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.featured-journalist-card__outlet-logo-wrap--primary {
+  min-height: 0;
+}
+
+.featured-journalist-card__outlet-logo {
+  display: block;
+  height: 3.8rem;
+  max-height: 3.8rem;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  width: 13.6rem;
+}
+
+.featured-journalist-card__outlet-placeholder {
+  background: #e7e7e4;
+  border: 0;
+  color: var(--journalist-muted);
+  display: inline-block;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.1;
+  max-width: 13.6rem;
+  overflow: hidden;
+  padding: 0.6rem 0.8rem;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.featured-journalist-scroller--outlet-only .featured-journalist-card__outlet-placeholder {
+  max-width: 100%;
+}
+
+@keyframes featured-journalist-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-50% - 1.2rem), 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-journalist-scroller__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+  }
+
+  .featured-journalist-scroller__list[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .featured-journalist-scroller {
+    padding: 4rem 0;
+  }
+
+  .featured-journalist-scroller__viewport {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .featured-journalist-scroller__heading {
+    font-size: clamp(1.9rem, 6vw, 2.6rem);
+    margin-bottom: 2rem;
+  }
+
+  .featured-journalist-card {
+    padding: 1.3rem;
+  }
+
+  .featured-journalist-card__content {
+    gap: 1.2rem;
+  }
+
+  .featured-journalist-card__journalist {
+    gap: 1rem;
+    padding-left: 1.2rem;
+  }
+
+  .featured-journalist-card__image-wrap {
+    flex-basis: 3.8rem;
+    height: 3.8rem;
+    width: 3.8rem;
+  }
+
+  .featured-journalist-card__name {
+    font-size: 1.5rem;
+  }
+
+  .featured-journalist-card__outlet-logo {
+    height: 3.2rem;
+    max-height: 3.2rem;
+    max-width: 10.8rem;
+    width: 10.8rem;
+  }
+
+  .featured-journalist-card__outlet-link {
+    flex-basis: 11.2rem;
+    max-width: 11.2rem;
+  }
+
+  .featured-journalist-card__outlet-placeholder {
+    font-size: 1.1rem;
+    max-width: 10.8rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1440px) {
+  .featured-journalist-scroller__inner {
+    max-width: 128rem;
+  }
+
+  .featured-journalist-scroller__viewport {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 980px) {
+  .featured-journalist-scroller__viewport {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+}

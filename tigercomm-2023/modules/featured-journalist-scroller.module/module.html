@@ -1,0 +1,148 @@
+{% set journalist_rows = [] %}
+{% set slider_style = module.slider_style or "outlet_journalist" %}
+{% set show_journalist_details = slider_style != "outlet_only" %}
+
+{% if module.journalist_table %}
+  {% set query = module.hubdb_query|trim %}
+  {% set all_rows = query ? hubdb_table_rows(module.journalist_table, query) : hubdb_table_rows(module.journalist_table) %}
+
+  {% for row in all_rows %}
+    {% do journalist_rows.append(row) %}
+  {% endfor %}
+{% endif %}
+
+{% set visible_count = journalist_rows|length %}
+{% set duration = module.scroller.duration or 140 %}
+{% set direction_class = module.scroller.direction == "right" ? "featured-journalist-scroller--reverse" : "" %}
+{% set style_class = slider_style == "outlet_only" ? "featured-journalist-scroller--outlet-only" : "" %}
+{% set scroller_label = module.content.heading or "Featured journalists" %}
+{% set max_items = module.max_journalists|int %}
+{% set has_item_limit = module.item_count_mode == "limit" and max_items > 0 %}
+{% set rendered_count = visible_count %}
+
+{% if has_item_limit and max_items < visible_count %}
+  {% set rendered_count = max_items %}
+{% endif %}
+
+{% set animation_enabled = module.scroller.enable_animation != false %}
+{% set is_static_scroller = rendered_count <= 1 or not animation_enabled %}
+{% set static_class = is_static_scroller ? "featured-journalist-scroller--static" : "" %}
+{% set track_count = is_static_scroller ? 1 : 2 %}
+
+<section class="featured-journalist-scroller {{ direction_class }} {{ style_class }} {{ static_class }}" style="--journalist-scroll-duration: {{ duration }}s;" data-featured-journalist-scroller>
+  <div class="featured-journalist-scroller__inner">
+    {% if module.content.heading %}
+      <h3 class="featured-journalist-scroller__heading">{{ module.content.heading }}</h3>
+    {% endif %}
+
+    {% if visible_count > 0 %}
+      <div class="featured-journalist-scroller__viewport" aria-label="{{ scroller_label }}" data-featured-journalist-viewport>
+        <div class="featured-journalist-scroller__track" data-featured-journalist-track>
+          {% for track_index in range(0, track_count) %}
+            <ul class="featured-journalist-scroller__list" {% if track_index == 1 %}aria-hidden="true"{% endif %}>
+              {% for journalist in journalist_rows %}
+                {% if not has_item_limit or loop.index <= max_items %}
+                  {% set journalist_name = journalist[module.columns.journalist_name] or journalist.name %}
+                  {% set journalist_title_raw = journalist[module.columns.journalist_title] %}
+                  {% set journalist_title = journalist_title_raw.value or journalist_title_raw %}
+                  {% set journalist_url_raw = journalist[module.columns.journalist_url] %}
+                  {% set journalist_url = journalist_url_raw.url.href or journalist_url_raw.url or journalist_url_raw.href or journalist_url_raw.value or journalist_url_raw %}
+                  {% set headshot = journalist[module.columns.headshot] %}
+                  {% set headshot_src = headshot.url or headshot.src %}
+                  {% set headshot_alt = headshot.altText or headshot.alt or journalist_name %}
+                  {% set outlet_raw = journalist[module.columns.media_outlet] %}
+                  {% set outlet = outlet_raw %}
+                  {% if not outlet_raw %}
+                    {% set outlet = journalist %}
+                  {% elif outlet_raw[0].id or outlet_raw[0].name or outlet_raw[0][module.columns.media_outlet_name] or outlet_raw[0][1].value %}
+                    {% set outlet = outlet_raw[0] %}
+                  {% endif %}
+                  {% set outlet_name = "" %}
+
+                  {% if outlet[module.columns.media_outlet_name].value %}
+                    {% set outlet_name = outlet[module.columns.media_outlet_name].value %}
+                  {% elif outlet[module.columns.media_outlet_name] %}
+                    {% set outlet_name = outlet[module.columns.media_outlet_name] %}
+                  {% elif outlet[1].value %}
+                    {% set outlet_name = outlet[1].value %}
+                  {% elif outlet.name %}
+                    {% set outlet_name = outlet.name %}
+                  {% elif outlet.name.value %}
+                    {% set outlet_name = outlet.name.value %}
+                  {% elif outlet.label %}
+                    {% set outlet_name = outlet.label %}
+                  {% elif outlet.label.value %}
+                    {% set outlet_name = outlet.label.value %}
+                  {% elif outlet %}
+                    {% set outlet_name = outlet %}
+                  {% endif %}
+
+                  {% set outlet_logo = outlet[module.columns.media_outlet_logo] %}
+                  {% set outlet_logo_src = outlet_logo.url or outlet_logo.src or outlet_logo.value.url or outlet_logo.value.src %}
+                  {% set outlet_logo_alt = outlet_logo.altText or outlet_logo.alt or outlet_logo.value.altText or outlet_logo.value.alt or outlet_name %}
+                  {% set outlet_placeholder = outlet_name or "Media Outlet" %}
+                  {% set outlet_tag_url_raw = outlet[module.columns.media_outlet_tag_url] %}
+                  {% set outlet_tag_url = outlet_tag_url_raw.url.href or outlet_tag_url_raw.url or outlet_tag_url_raw.href or outlet_tag_url_raw.value or outlet_tag_url_raw %}
+                  {% set outlet_logo_url = outlet_tag_url %}
+
+                  <li class="featured-journalist-scroller__item">
+                    <div class="featured-journalist-card">
+                      <div class="featured-journalist-card__content">
+                        {% if outlet_logo_url %}
+                          <a class="featured-journalist-card__outlet-link" href="{{ outlet_logo_url }}" target="_blank" rel="noopener">
+                        {% else %}
+                          <span class="featured-journalist-card__outlet-link">
+                        {% endif %}
+                            <span class="featured-journalist-card__outlet-logo-wrap featured-journalist-card__outlet-logo-wrap--primary">
+                              {% if outlet_logo_src %}
+                                <img class="featured-journalist-card__outlet-logo" src="{{ outlet_logo_src }}" alt="{{ outlet_logo_alt }}" loading="lazy">
+                              {% else %}
+                                <span class="featured-journalist-card__outlet-placeholder" aria-label="{{ outlet_placeholder }}">
+                                  {{ outlet_placeholder }}
+                                </span>
+                              {% endif %}
+                            </span>
+                        {% if outlet_logo_url %}
+                          </a>
+                        {% else %}
+                          </span>
+                        {% endif %}
+                        {% if show_journalist_details %}
+                          {% if journalist_url %}
+                            <a class="featured-journalist-card__journalist" href="{{ journalist_url }}" target="_blank" rel="noopener">
+                          {% else %}
+                            <span class="featured-journalist-card__journalist">
+                          {% endif %}
+                            {% if headshot_src %}
+                              <span class="featured-journalist-card__image-wrap">
+                                <img class="featured-journalist-card__image" src="{{ headshot_src }}" alt="{{ headshot_alt }}" loading="lazy">
+                              </span>
+                            {% endif %}
+                            <span class="featured-journalist-card__text">
+                              <span class="featured-journalist-card__name">{{ journalist_name }}</span>
+                              {% if journalist_title %}
+                                <span class="featured-journalist-card__title">{{ journalist_title }}</span>
+                              {% endif %}
+                            </span>
+                          {% if journalist_url %}
+                            </a>
+                          {% else %}
+                            </span>
+                          {% endif %}
+                        {% endif %}
+                      </div>
+                    </div>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endfor %}
+        </div>
+        {% if not is_static_scroller %}
+          <span class="featured-journalist-scroller__fade featured-journalist-scroller__fade--left" aria-hidden="true"></span>
+          <span class="featured-journalist-scroller__fade featured-journalist-scroller__fade--right" aria-hidden="true"></span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>

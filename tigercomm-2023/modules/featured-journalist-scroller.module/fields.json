@@ -1,0 +1,166 @@
+[
+  {
+    "label": "Source HubDB table",
+    "name": "journalist_table",
+    "type": "hubdbtable",
+    "help_text": "Use a journalist table with a media outlet relation, or use the media outlet table directly for outlet-only sliders.",
+    "required": false
+  },
+  {
+    "label": "HubDB query",
+    "name": "hubdb_query",
+    "type": "text",
+    "help_text": "Optional HubDB query string, for example orderBy=sort_order&limit=12. Leave blank to use all table rows.",
+    "default": "orderBy=sort_order"
+  },
+  {
+    "label": "Items to show",
+    "name": "item_count_mode",
+    "type": "choice",
+    "display": "radio",
+    "choices": [
+      ["all", "All items"],
+      ["limit", "Limit items"]
+    ],
+    "default": "all"
+  },
+  {
+    "label": "Item limit",
+    "name": "max_journalists",
+    "type": "number",
+    "display": "text",
+    "help_text": "Only used when Items to show is set to Limit items.",
+    "min": 1,
+    "max": 50,
+    "step": 1,
+    "default": 12,
+    "visibility": {
+      "controlling_field": "item_count_mode",
+      "controlling_value_regex": "limit",
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "label": "Slider style",
+    "name": "slider_style",
+    "type": "choice",
+    "display": "radio",
+    "choices": [
+      ["outlet_journalist", "Outlet + Journalist"],
+      ["outlet_only", "Outlet only"]
+    ],
+    "default": "outlet_journalist"
+  },
+  {
+    "label": "Column names",
+    "name": "columns",
+    "type": "group",
+    "children": [
+      {
+        "label": "Journalist name column",
+        "name": "journalist_name",
+        "type": "text",
+        "required": true,
+        "default": "name"
+      },
+      {
+        "label": "Journalist title column",
+        "name": "journalist_title",
+        "type": "text",
+        "help_text": "Optional title/role column on each journalist row.",
+        "default": "title"
+      },
+      {
+        "label": "Journalist URL column",
+        "name": "journalist_url",
+        "type": "text",
+        "help_text": "Optional URL column on each journalist row. Default maps to the TWIC Author URL column.",
+        "default": "twic_author_url"
+      },
+      {
+        "label": "Headshot image column",
+        "name": "headshot",
+        "type": "text",
+        "default": "headshot"
+      },
+      {
+        "label": "Media outlet relation column",
+        "name": "media_outlet",
+        "type": "text",
+        "help_text": "Relation column on the journalist table.",
+        "default": "outlet"
+      },
+      {
+        "label": "Media outlet name column",
+        "name": "media_outlet_name",
+        "type": "text",
+        "help_text": "Name column on the related media outlet HubDB row.",
+        "default": "name"
+      },
+      {
+        "label": "Media outlet logo column",
+        "name": "media_outlet_logo",
+        "type": "text",
+        "help_text": "Image column on the related media outlet HubDB row.",
+        "default": "logo"
+      },
+      {
+        "label": "Media outlet tag URL column",
+        "name": "media_outlet_tag_url",
+        "type": "text",
+        "help_text": "TWIC tag URL column on the related media outlet HubDB row.",
+        "default": "twic_tag_url"
+      }
+    ]
+  },
+  {
+    "label": "Content",
+    "name": "content",
+    "type": "group",
+    "children": [
+      {
+        "label": "Title",
+        "name": "heading",
+        "type": "text",
+        "default": "Featured Guests"
+      }
+    ]
+  },
+  {
+    "label": "Scroller",
+    "name": "scroller",
+    "type": "group",
+    "children": [
+      {
+        "label": "Enable animation",
+        "name": "enable_animation",
+        "type": "boolean",
+        "display": "toggle",
+        "default": true
+      },
+      {
+        "label": "Animation pace",
+        "name": "duration",
+        "type": "number",
+        "display": "text",
+        "help_text": "Higher numbers move more slowly.",
+        "min": 20,
+        "max": 300,
+        "step": 5,
+        "suffix": "s",
+        "default": 140
+      },
+      {
+        "label": "Direction",
+        "name": "direction",
+        "type": "choice",
+        "display": "radio",
+        "choices": [
+          ["left", "Left"],
+          ["right", "Right"]
+        ],
+        "default": "left"
+      }
+    ]
+  }
+]
