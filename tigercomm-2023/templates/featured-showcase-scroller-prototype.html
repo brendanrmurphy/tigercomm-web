@@ -1,16 +1,16 @@
 <!--
   templateType: page
   isAvailableForNewContent: true
-  label: Featured Journalist Scroller Prototype
+  label: Featured Showcase Scroller Prototype
   screenshotPath: ../images/template-previews/blog-post.png
 -->
 {% set template_css = "../../css/templates/page.css" %}
 {% extends "./layouts/base.html" %}
 
 {% block body %}
-  <div class="body-container body-container--featured-journalist-scroller-prototype">
+  <div class="body-container body-container--featured-showcase-scroller-prototype">
     {% dnd_area "dnd_area"
-      label="Featured journalist scroller prototype"
+      label="Featured media scroller prototype"
     %}
       {% dnd_section
         vertical_alignment="MIDDLE"
@@ -20,8 +20,8 @@
           width=12
         %}
           {% module_attribute "html" %}
-            <h1>Featured Journalist Scroller Prototype</h1>
-            <p>Use the module below to connect the journalist HubDB table, map the journalist/media outlet columns, and preview the ticker behavior.</p>
+            <h1>Featured Showcase Scroller Prototype</h1>
+            <p>Use the module below to connect a HubDB table, map the logo/person/source columns, and preview the ticker behavior.</p>
           {% end_module_attribute %}
         {% end_dnd_module %}
       {% end_dnd_section %}
@@ -30,7 +30,7 @@
         full_width=true
       %}
         {% dnd_module
-          path="../modules/featured-journalist-scroller"
+          path="../modules/featured-showcase-scroller"
         %}
         {% end_dnd_module %}
       {% end_dnd_section %}

@@ -34,6 +34,20 @@ max-width: 100%;
     <span data-aos="fade-down-right" data-aos-delay="350"></span>
   </div>
 </div>
+{% dnd_area "top_showcase_area"
+  label="Top showcase section",
+  class=""
+%}
+  {% dnd_section
+    full_width=true,
+    vertical_alignment="TOP"
+  %}
+    {% dnd_module
+      path="../modules/featured-showcase-scroller"
+    %}
+    {% end_dnd_module %}
+  {% end_dnd_section %}
+{% end_dnd_area %}
 <div class="blog-post blog-listing content-wrapper content-wrapper--vertical-spacing" data-blog-id="{{ blog.id }}">
   <div class="row-fluid">
     <div class="span8 main-content">

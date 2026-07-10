@@ -1,9 +1,9 @@
 [
   {
     "label": "Source HubDB table",
-    "name": "journalist_table",
+    "name": "source_table",
     "type": "hubdbtable",
-    "help_text": "Use a journalist table with a media outlet relation, or use the media outlet table directly for outlet-only sliders.",
+    "help_text": "Use a table of people, clients, names, or media outlets. Rows can include a related logo/source row, or stand alone for logo-only sliders.",
     "required": false
   },
   {
@@ -26,7 +26,7 @@
   },
   {
     "label": "Item limit",
-    "name": "max_journalists",
+    "name": "max_items",
     "type": "number",
     "display": "text",
     "help_text": "Only used when Items to show is set to Limit items.",
@@ -41,74 +41,74 @@
     }
   },
   {
-    "label": "Slider style",
-    "name": "slider_style",
+    "label": "Showcase format",
+    "name": "showcase_format",
     "type": "choice",
     "display": "radio",
     "choices": [
-      ["outlet_journalist", "Outlet + Journalist"],
-      ["outlet_only", "Outlet only"]
+      ["details", "Details"],
+      ["logo_only", "Logo only"]
     ],
-    "default": "outlet_journalist"
+    "default": "details"
   },
   {
-    "label": "Column names",
+    "label": "Source columns",
     "name": "columns",
     "type": "group",
     "children": [
       {
-        "label": "Journalist name column",
-        "name": "journalist_name",
+        "label": "Primary name column",
+        "name": "primary_name",
         "type": "text",
         "required": true,
         "default": "name"
       },
       {
-        "label": "Journalist title column",
-        "name": "journalist_title",
+        "label": "Primary detail column",
+        "name": "primary_detail",
         "type": "text",
-        "help_text": "Optional title/role column on each journalist row.",
+        "help_text": "Optional title, role, client, or descriptor column on each primary row.",
         "default": "title"
       },
       {
-        "label": "Journalist URL column",
-        "name": "journalist_url",
+        "label": "Primary URL column",
+        "name": "primary_url",
         "type": "text",
-        "help_text": "Optional URL column on each journalist row. Default maps to the TWIC Author URL column.",
+        "help_text": "Optional URL column on each primary row.",
         "default": "twic_author_url"
       },
       {
-        "label": "Headshot image column",
-        "name": "headshot",
+        "label": "Primary image column",
+        "name": "primary_image",
         "type": "text",
-        "default": "headshot"
+        "default": "image"
       },
       {
-        "label": "Media outlet relation column",
-        "name": "media_outlet",
+        "label": "Related source column",
+        "name": "related_source",
         "type": "text",
-        "help_text": "Relation column on the journalist table.",
-        "default": "outlet"
+        "help_text": "Optional relation column for a client, media outlet, logo, or other source row.",
+        "default": "related_source"
       },
       {
-        "label": "Media outlet name column",
-        "name": "media_outlet_name",
+        "label": "Related source name column",
+        "name": "related_source_name",
         "type": "text",
-        "help_text": "Name column on the related media outlet HubDB row.",
+        "help_text": "Name column on the related source row.",
         "default": "name"
       },
       {
-        "label": "Media outlet logo column",
-        "name": "media_outlet_logo",
+        "label": "Related source logo column",
+        "name": "related_source_logo",
         "type": "text",
-        "help_text": "Image column on the related media outlet HubDB row.",
+        "help_text": "Logo or image column on the related source row.",
         "default": "logo"
       },
       {
-        "label": "Media outlet tag URL column",
-        "name": "media_outlet_tag_url",
+        "label": "Related source URL column",
+        "name": "related_source_url",
         "type": "text",
-        "help_text": "TWIC tag URL column on the related media outlet HubDB row.",
+        "help_text": "Optional URL column on the related source row.",
         "default": "twic_tag_url"
       }
     ]

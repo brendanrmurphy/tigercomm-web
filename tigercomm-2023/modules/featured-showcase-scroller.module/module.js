@@ -3,7 +3,7 @@
   const DEFAULT_SPEED = 40;
 
   const getDuration = (scroller) => {
-    const value = getComputedStyle(scroller).getPropertyValue("--journalist-scroll-duration");
+    const value = getComputedStyle(scroller).getPropertyValue("--showcase-scroll-duration");
     const seconds = parseFloat(value);
 
     return Number.isFinite(seconds) && seconds > 0 ? seconds : DEFAULT_DURATION;
@@ -28,15 +28,15 @@
   };
 
   const initScroller = (scroller) => {
-    if (scroller.dataset.featuredJournalistScrollerInitialized === "true") {
+    if (scroller.dataset.featuredShowcaseScrollerInitialized === "true") {
       return;
     }
 
-    const viewport = scroller.querySelector("[data-featured-journalist-viewport]");
-    const track = scroller.querySelector("[data-featured-journalist-track]");
-    const firstList = track ? track.querySelector(".featured-journalist-scroller__list") : null;
+    const viewport = scroller.querySelector("[data-featured-showcase-viewport]");
+    const track = scroller.querySelector("[data-featured-showcase-track]");
+    const firstList = track ? track.querySelector(".featured-showcase-scroller__list") : null;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const isStaticScroller = scroller.classList.contains("featured-journalist-scroller--static");
+    const isStaticScroller = scroller.classList.contains("featured-showcase-scroller--static");
 
     if (!viewport || !track || !firstList) {
       return;
@@ -51,16 +51,16 @@
     let pointerId = null;
     let dragStartX = 0;
     let dragStartOffset = 0;
-    const direction = scroller.classList.contains("featured-journalist-scroller--reverse") ? 1 : -1;
+    const direction = scroller.classList.contains("featured-showcase-scroller--reverse") ? 1 : -1;
 
     const equalizeCards = () => {
-      const cards = Array.from(scroller.querySelectorAll(".featured-journalist-card"));
+      const cards = Array.from(scroller.querySelectorAll(".featured-showcase-card"));
 
       if (!cards.length) {
         return;
       }
 
-      scroller.style.setProperty("--journalist-card-height", "auto");
+      scroller.style.setProperty("--showcase-card-height", "auto");
       track.getBoundingClientRect();
 
       const tallestCard = cards.reduce((height, card) => {
@@ -68,12 +68,12 @@
       }, 0);
 
       if (tallestCard) {
-        scroller.style.setProperty("--journalist-card-height", `${tallestCard}px`);
+        scroller.style.setProperty("--showcase-card-height", `${tallestCard}px`);
       }
     };
 
     if (isStaticScroller) {
-      scroller.dataset.featuredJournalistScrollerInitialized = "true";
+      scroller.dataset.featuredShowcaseScrollerInitialized = "true";
       scroller.classList.add("is-enhanced");
       return;
     }
@@ -187,14 +187,14 @@
       }
     });
 
-    scroller.dataset.featuredJournalistScrollerInitialized = "true";
+    scroller.dataset.featuredShowcaseScrollerInitialized = "true";
     scroller.classList.add("is-enhanced");
     measure();
     window.requestAnimationFrame(tick);
   };
 
   const init = () => {
-    const scrollers = document.querySelectorAll("[data-featured-journalist-scroller]");
+    const scrollers = document.querySelectorAll("[data-featured-showcase-scroller]");
 
     scrollers.forEach(initScroller);
   };
