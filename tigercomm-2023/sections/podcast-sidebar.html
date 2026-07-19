@@ -1,5 +1,11 @@
 <aside class="blog-aside span4">
   <a href="{{ group.absolute_url }}"><img class="logo" src="{{ get_asset_url ("../images/scaling-clean-logo.png") }}" alt="Scaling Clean the Podcast" /></a>
+  {% if show_sidebar_intro %}
+    <div class="block block-blog-intro">
+      <p>This show is a cross between NPR's <a href="https://www.npr.org/series/490248027/how-i-built-this" target="_blank">"How I Built This"</a> and The New York Times' <a href="https://www.nytimes.com/column/corner-office" target="_blank">"Corner Office"</a> series. We glean and curate usable tips from experienced cleantech leaders in a compact, rich 30 minutes.</p>
+      <p><strong>Covering:</strong> Founder's journey, leadership lessons learned, change management, hiring & firing, advice for the next generation, and recruitment & retention.</p>
+    </div>
+  {% endif %}
   {% if content.post_body %}
     <div class="block block-guest">
       <div class="block__label">Guest</div>

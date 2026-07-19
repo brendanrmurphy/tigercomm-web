@@ -1,18 +1,60 @@
 {% set showcase_rows = [] %}
 {% set showcase_format = module.showcase_format or "details" %}
 {% set show_primary_details = showcase_format != "logo_only" %}
+{% set scroller_enabled = true %}
+{% if module.enabled == false %}
+  {% set scroller_enabled = false %}
+{% endif %}
 
-{% if module.source_table %}
-  {% set query = module.hubdb_query|trim %}
+{% if scroller_enabled and module.source_table %}
+  {% set query = (module.hubdb_query or "")|trim %}
   {% set all_rows = query ? hubdb_table_rows(module.source_table, query) : hubdb_table_rows(module.source_table) %}
+  {% if query and all_rows|length == 0 and "category=" in query and "category__" not in query %}
+    {% set contains_query = query|replace("category=", "category__contains=") %}
+    {% set all_rows = hubdb_table_rows(module.source_table, contains_query) %}
+  {% endif %}
+  {% set ordered_row_ids_raw = (module.ordered_row_ids or "")|replace("\r", ",")|replace("\n", ",")|replace("\t", ",")|replace(";", ",")|replace(" ", ",") %}
+  {% set ordered_row_ids = ordered_row_ids_raw|split(",") %}
+  {% set ordered_row_id_values = [] %}
+  {% set has_ordered_row_ids = ordered_row_ids_raw|replace(",", "")|trim|length > 0 %}
 
-  {% for row in all_rows %}
-    {% do showcase_rows.append(row) %}
+  {% for ordered_row_id in ordered_row_ids %}
+    {% set ordered_row_id_value = (ordered_row_id|trim|int) ~ "" %}
+    {% if ordered_row_id|trim|int and ordered_row_id_value not in ordered_row_id_values %}
+      {% do ordered_row_id_values.append(ordered_row_id_value) %}
+    {% endif %}
   {% endfor %}
+
+  {% if has_ordered_row_ids %}
+    {% set ordered_row_matches = [] %}
+    {% for ordered_row_id_value in ordered_row_id_values %}
+      {% for row in all_rows %}
+        {% set row_id = (row.hs_id or row.id) ~ "" %}
+        {% if row_id == ordered_row_id_value and row_id not in ordered_row_matches %}
+          {% do showcase_rows.append(row) %}
+          {% do ordered_row_matches.append(row_id) %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    {% for row in all_rows %}
+      {% set row_id = (row.hs_id or row.id) ~ "" %}
+      {% if row_id not in ordered_row_matches %}
+        {% do showcase_rows.append(row) %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {% for row in all_rows %}
+      {% do showcase_rows.append(row) %}
+    {% endfor %}
+  {% endif %}
 {% endif %}
 
 {% set visible_count = showcase_rows|length %}
-{% set duration = module.scroller.duration or 140 %}
+{% set speed = module.scroller.duration|int %}
+{% if module.scroller.duration == "" %}
+  {% set speed = 80 %}
+{% endif %}
+{% set fallback_duration = speed > 0 ? 6400 / speed : 0 %}
 {% set direction_class = module.scroller.direction == "right" ? "featured-showcase-scroller--reverse" : "" %}
 {% set style_class = showcase_format == "logo_only" ? "featured-showcase-scroller--logo-only" : "" %}
 {% set scroller_label = module.content.heading or "Featured showcase" %}
@@ -24,125 +66,171 @@
   {% set rendered_count = max_items %}
 {% endif %}
 
-{% set animation_enabled = module.scroller.enable_animation != false %}
+{% set animation_enabled = module.scroller.enable_animation != false and speed > 0 %}
 {% set is_static_scroller = rendered_count <= 1 or not animation_enabled %}
 {% set static_class = is_static_scroller ? "featured-showcase-scroller--static" : "" %}
 {% set track_count = is_static_scroller ? 1 : 2 %}
 
-<section class="featured-showcase-scroller {{ direction_class }} {{ style_class }} {{ static_class }}" style="--showcase-scroll-duration: {{ duration }}s;" data-featured-showcase-scroller>
-  <div class="featured-showcase-scroller__inner">
-    {% if module.content.heading %}
-      <h3 class="featured-showcase-scroller__heading">{{ module.content.heading }}</h3>
-    {% endif %}
+{% if scroller_enabled %}
+  <section class="featured-showcase-scroller {{ direction_class }} {{ style_class }} {{ static_class }}" style="--showcase-scroll-speed: {{ speed }}; --showcase-scroll-duration: {{ fallback_duration }}s;" data-featured-showcase-scroller>
+    <div class="featured-showcase-scroller__inner">
+      {% if module.content.heading or (visible_count > 0 and not is_static_scroller) %}
+        <div class="featured-showcase-scroller__header">
+          {% if module.content.heading %}
+            <h3 class="featured-showcase-scroller__heading">{{ module.content.heading }}</h3>
+          {% endif %}
+          {% if visible_count > 0 and not is_static_scroller %}
+            <div class="featured-showcase-scroller__controls" aria-label="Featured showcase controls">
+              <button class="featured-showcase-scroller__control featured-showcase-scroller__control--prev" type="button" aria-label="Previous item" data-featured-showcase-prev></button>
+              <button class="featured-showcase-scroller__control featured-showcase-scroller__control--pause" type="button" aria-label="Pause scroller" aria-pressed="false" data-featured-showcase-pause>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </button>
+              <button class="featured-showcase-scroller__control featured-showcase-scroller__control--next" type="button" aria-label="Next item" data-featured-showcase-next></button>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
 
-    {% if visible_count > 0 %}
-      <div class="featured-showcase-scroller__viewport" aria-label="{{ scroller_label }}" data-featured-showcase-viewport>
-        <div class="featured-showcase-scroller__track" data-featured-showcase-track>
-          {% for track_index in range(0, track_count) %}
-            <ul class="featured-showcase-scroller__list" {% if track_index == 1 %}aria-hidden="true"{% endif %}>
-              {% for showcase_item in showcase_rows %}
-                {% if not has_item_limit or loop.index <= max_items %}
-                  {% set primary_name = showcase_item[module.columns.primary_name] or showcase_item.name %}
-                  {% set primary_detail_raw = showcase_item[module.columns.primary_detail] %}
-                  {% set primary_detail = primary_detail_raw.value or primary_detail_raw %}
-                  {% set primary_url_raw = showcase_item[module.columns.primary_url] %}
-                  {% set primary_url = primary_url_raw.url.href or primary_url_raw.url or primary_url_raw.href or primary_url_raw.value or primary_url_raw %}
-                  {% set primary_image = showcase_item[module.columns.primary_image] %}
-                  {% set primary_image_src = primary_image.url or primary_image.src %}
-                  {% set primary_image_alt = primary_image.altText or primary_image.alt or primary_name %}
-                  {% set related_source_raw = showcase_item[module.columns.related_source] %}
-                  {% set related_source = related_source_raw %}
-                  {% if not related_source_raw %}
-                    {% set related_source = showcase_item %}
-                  {% elif related_source_raw[0].id or related_source_raw[0].name or related_source_raw[0][module.columns.related_source_name] or related_source_raw[0][1].value %}
-                    {% set related_source = related_source_raw[0] %}
-                  {% endif %}
-                  {% set related_source_name = "" %}
-
-                  {% if related_source[module.columns.related_source_name].value %}
-                    {% set related_source_name = related_source[module.columns.related_source_name].value %}
-                  {% elif related_source[module.columns.related_source_name] %}
-                    {% set related_source_name = related_source[module.columns.related_source_name] %}
-                  {% elif related_source[1].value %}
-                    {% set related_source_name = related_source[1].value %}
-                  {% elif related_source.name %}
-                    {% set related_source_name = related_source.name %}
-                  {% elif related_source.name.value %}
-                    {% set related_source_name = related_source.name.value %}
-                  {% elif related_source.label %}
-                    {% set related_source_name = related_source.label %}
-                  {% elif related_source.label.value %}
-                    {% set related_source_name = related_source.label.value %}
-                  {% elif related_source %}
-                    {% set related_source_name = related_source %}
-                  {% endif %}
-
-                  {% set related_source_logo = related_source[module.columns.related_source_logo] %}
-                  {% set related_source_logo_src = related_source_logo.url or related_source_logo.src or related_source_logo.value.url or related_source_logo.value.src %}
-                  {% set related_source_logo_alt = related_source_logo.altText or related_source_logo.alt or related_source_logo.value.altText or related_source_logo.value.alt or related_source_name %}
-                  {% set related_source_placeholder = related_source_name or "Source" %}
-                  {% set related_source_url_raw = related_source[module.columns.related_source_url] %}
-                  {% set related_source_url = related_source_url_raw.url.href or related_source_url_raw.url or related_source_url_raw.href or related_source_url_raw.value or related_source_url_raw %}
-                  {% set related_source_logo_url = related_source_url %}
-
-                  <li class="featured-showcase-scroller__item">
-                    <div class="featured-showcase-card">
-                      <div class="featured-showcase-card__content">
-                        {% if related_source_logo_url %}
-                          <a class="featured-showcase-card__source-link" href="{{ related_source_logo_url }}" target="_blank" rel="noopener">
-                        {% else %}
-                          <span class="featured-showcase-card__source-link">
+      {% if visible_count > 0 %}
+        <div class="featured-showcase-scroller__viewport" aria-label="{{ scroller_label }}" data-featured-showcase-viewport>
+          <div class="featured-showcase-scroller__track" data-featured-showcase-track>
+            {% for track_index in range(0, track_count) %}
+              <ul class="featured-showcase-scroller__list" {% if track_index == 1 %}aria-hidden="true"{% endif %}>
+                {% for showcase_item in showcase_rows %}
+                  {% if not has_item_limit or loop.index <= max_items %}
+                    {% set primary_name = showcase_item[module.columns.primary_name] or showcase_item.name %}
+                    {% set primary_detail_raw = showcase_item[module.columns.primary_detail] %}
+                    {% set primary_detail = primary_detail_raw.value or primary_detail_raw %}
+                    {% set primary_url_raw = showcase_item[module.columns.primary_url] %}
+                    {% set primary_url = primary_url_raw.url.href or primary_url_raw.url or primary_url_raw.href or primary_url_raw.value or primary_url_raw %}
+                    {% set primary_link_enabled = primary_url ? true : false %}
+                    {% if primary_url and group.id %}
+                      {% set primary_clean_url = primary_url|split("?")|first|split("#")|first %}
+                      {% if "/author/" in primary_url %}
+                        {% set primary_author_slug = primary_clean_url|split("/author/")|last|split("/")|first %}
+                        {% if primary_author_slug %}
+                          {% set primary_link_enabled = blog_recent_author_posts(group.id, primary_author_slug, 1)|length > 0 %}
                         {% endif %}
-                            <span class="featured-showcase-card__source-logo-wrap featured-showcase-card__source-logo-wrap--primary">
-                              {% if related_source_logo_src %}
-                                <img class="featured-showcase-card__source-logo" src="{{ related_source_logo_src }}" alt="{{ related_source_logo_alt }}" loading="lazy">
-                              {% else %}
-                                <span class="featured-showcase-card__source-placeholder" aria-label="{{ related_source_placeholder }}">
-                                  {{ related_source_placeholder }}
-                                </span>
-                              {% endif %}
-                            </span>
-                        {% if related_source_logo_url %}
-                          </a>
-                        {% else %}
-                          </span>
+                      {% elif "/tag/" in primary_url %}
+                        {% set primary_tag_slug = primary_clean_url|split("/tag/")|last|split("/")|first %}
+                        {% if primary_tag_slug %}
+                          {% set primary_link_enabled = blog_recent_tag_posts(group.id, primary_tag_slug, 1)|length > 0 %}
                         {% endif %}
-                        {% if show_primary_details %}
-                          {% if primary_url %}
-                            <a class="featured-showcase-card__person" href="{{ primary_url }}" target="_blank" rel="noopener">
+                      {% endif %}
+                    {% endif %}
+                    {% set primary_image = showcase_item[module.columns.primary_image] %}
+                    {% set primary_image_src = primary_image.url or primary_image.src %}
+                    {% set primary_image_alt = primary_image.altText or primary_image.alt or primary_name %}
+                    {% set related_source_raw = showcase_item[module.columns.related_source] %}
+                    {% set related_source = related_source_raw %}
+                    {% if not related_source_raw %}
+                      {% set related_source = showcase_item %}
+                    {% elif related_source_raw[0].id or related_source_raw[0].name or related_source_raw[0][module.columns.related_source_name] or related_source_raw[0][1].value %}
+                      {% set related_source = related_source_raw[0] %}
+                    {% endif %}
+                    {% set related_source_name = "" %}
+
+                    {% if related_source[module.columns.related_source_name].value %}
+                      {% set related_source_name = related_source[module.columns.related_source_name].value %}
+                    {% elif related_source[module.columns.related_source_name] %}
+                      {% set related_source_name = related_source[module.columns.related_source_name] %}
+                    {% elif related_source[1].value %}
+                      {% set related_source_name = related_source[1].value %}
+                    {% elif related_source.name %}
+                      {% set related_source_name = related_source.name %}
+                    {% elif related_source.name.value %}
+                      {% set related_source_name = related_source.name.value %}
+                    {% elif related_source.label %}
+                      {% set related_source_name = related_source.label %}
+                    {% elif related_source.label.value %}
+                      {% set related_source_name = related_source.label.value %}
+                    {% elif related_source %}
+                      {% set related_source_name = related_source %}
+                    {% endif %}
+
+                    {% set related_source_logo = related_source[module.columns.related_source_logo] %}
+                    {% set related_source_logo_src = related_source_logo.url or related_source_logo.src or related_source_logo.value.url or related_source_logo.value.src %}
+                    {% set related_source_logo_alt = related_source_logo.altText or related_source_logo.alt or related_source_logo.value.altText or related_source_logo.value.alt or related_source_name %}
+                    {% set related_source_placeholder = related_source_name or "Source" %}
+                    {% set related_source_url_raw = related_source[module.columns.related_source_url] %}
+                    {% set related_source_url = related_source_url_raw.url.href or related_source_url_raw.url or related_source_url_raw.href or related_source_url_raw.value or related_source_url_raw %}
+                    {% set related_source_logo_url = related_source_url %}
+                    {% set related_source_link_enabled = related_source_logo_url ? true : false %}
+                    {% if related_source_logo_url and group.id %}
+                      {% set related_source_clean_url = related_source_logo_url|split("?")|first|split("#")|first %}
+                      {% if "/author/" in related_source_logo_url %}
+                        {% set related_source_author_slug = related_source_clean_url|split("/author/")|last|split("/")|first %}
+                        {% if related_source_author_slug %}
+                          {% set related_source_link_enabled = blog_recent_author_posts(group.id, related_source_author_slug, 1)|length > 0 %}
+                        {% endif %}
+                      {% elif "/tag/" in related_source_logo_url %}
+                        {% set related_source_tag_slug = related_source_clean_url|split("/tag/")|last|split("/")|first %}
+                        {% if related_source_tag_slug %}
+                          {% set related_source_link_enabled = blog_recent_tag_posts(group.id, related_source_tag_slug, 1)|length > 0 %}
+                        {% endif %}
+                      {% endif %}
+                    {% endif %}
+
+                    <li class="featured-showcase-scroller__item">
+                      <div class="featured-showcase-card">
+                        <div class="featured-showcase-card__content">
+                          {% if related_source_logo_url and related_source_link_enabled %}
+                            <a class="featured-showcase-card__source-link" href="{{ related_source_logo_url }}" target="_blank" rel="noopener">
                           {% else %}
-                            <span class="featured-showcase-card__person">
+                            <span class="featured-showcase-card__source-link">
                           {% endif %}
-                            {% if primary_image_src %}
-                              <span class="featured-showcase-card__image-wrap">
-                                <img class="featured-showcase-card__image" src="{{ primary_image_src }}" alt="{{ primary_image_alt }}" loading="lazy">
+                              <span class="featured-showcase-card__source-logo-wrap featured-showcase-card__source-logo-wrap--primary">
+                                {% if related_source_logo_src %}
+                                  <img class="featured-showcase-card__source-logo" src="{{ related_source_logo_src }}" alt="{{ related_source_logo_alt }}" loading="lazy" draggable="false">
+                                {% else %}
+                                  <span class="featured-showcase-card__source-placeholder" aria-label="{{ related_source_placeholder }}">
+                                    {{ related_source_placeholder }}
+                                  </span>
+                                {% endif %}
                               </span>
-                            {% endif %}
-                            <span class="featured-showcase-card__text">
-                              <span class="featured-showcase-card__name">{{ primary_name }}</span>
-                              {% if primary_detail %}
-                                <span class="featured-showcase-card__title">{{ primary_detail }}</span>
-                              {% endif %}
-                            </span>
-                          {% if primary_url %}
+                          {% if related_source_logo_url and related_source_link_enabled %}
                             </a>
                           {% else %}
                             </span>
                           {% endif %}
-                        {% endif %}
+                          {% if show_primary_details %}
+                            {% if primary_url and primary_link_enabled %}
+                              <a class="featured-showcase-card__person" href="{{ primary_url }}" target="_blank" rel="noopener">
+                            {% else %}
+                              <span class="featured-showcase-card__person">
+                            {% endif %}
+                              {% if primary_image_src %}
+                                <span class="featured-showcase-card__image-wrap">
+                                  <img class="featured-showcase-card__image" src="{{ primary_image_src }}" alt="{{ primary_image_alt }}" loading="lazy" draggable="false">
+                                </span>
+                              {% endif %}
+                              <span class="featured-showcase-card__text">
+                                <span class="featured-showcase-card__name">{{ primary_name }}</span>
+                                {% if primary_detail %}
+                                  <span class="featured-showcase-card__title">{{ primary_detail }}</span>
+                                {% endif %}
+                              </span>
+                            {% if primary_url and primary_link_enabled %}
+                              </a>
+                            {% else %}
+                              </span>
+                            {% endif %}
+                          {% endif %}
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                {% endif %}
-              {% endfor %}
-            </ul>
-          {% endfor %}
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endfor %}
+          </div>
+          {% if not is_static_scroller %}
+            <span class="featured-showcase-scroller__fade featured-showcase-scroller__fade--left" aria-hidden="true"></span>
+            <span class="featured-showcase-scroller__fade featured-showcase-scroller__fade--right" aria-hidden="true"></span>
+          {% endif %}
         </div>
-        {% if not is_static_scroller %}
-          <span class="featured-showcase-scroller__fade featured-showcase-scroller__fade--left" aria-hidden="true"></span>
-          <span class="featured-showcase-scroller__fade featured-showcase-scroller__fade--right" aria-hidden="true"></span>
-        {% endif %}
-      </div>
-    {% endif %}
-  </div>
-</section>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}

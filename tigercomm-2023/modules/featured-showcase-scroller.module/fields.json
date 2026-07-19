@@ -1,5 +1,12 @@
 [
   {
+    "label": "Show scroller",
+    "name": "enabled",
+    "type": "boolean",
+    "display": "toggle",
+    "default": true
+  },
+  {
     "label": "Source HubDB table",
     "name": "source_table",
     "type": "hubdbtable",
@@ -10,8 +17,15 @@
     "label": "HubDB query",
     "name": "hubdb_query",
     "type": "text",
-    "help_text": "Optional HubDB query string, for example orderBy=sort_order&limit=12. Leave blank to use all table rows.",
+    "help_text": "Optional HubDB query string, for example category__contains=featured_twic_guests&orderBy=sort_order. Leave blank to use all table rows.",
     "default": "orderBy=sort_order"
+  },
+  {
+    "label": "Ordered row IDs",
+    "name": "ordered_row_ids",
+    "type": "text",
+    "help_text": "Optional HubDB row IDs separated by commas, spaces, or new lines. These rows render first in this order, followed by the remaining rows from the HubDB query.",
+    "default": ""
   },
   {
     "label": "Items to show",
@@ -75,7 +89,7 @@
         "name": "primary_url",
         "type": "text",
         "help_text": "Optional URL column on each primary row.",
-        "default": "twic_author_url"
+        "default": "author_url"
       },
       {
         "label": "Primary image column",
@@ -109,7 +123,7 @@
         "name": "related_source_url",
         "type": "text",
         "help_text": "Optional URL column on the related source row.",
-        "default": "twic_tag_url"
+        "default": "tag_url"
       }
     ]
   },
@@ -139,16 +153,14 @@
         "default": true
       },
       {
-        "label": "Animation pace",
+        "label": "Animation speed",
         "name": "duration",
         "type": "number",
         "display": "text",
-        "help_text": "Higher numbers move more slowly.",
-        "min": 20,
-        "max": 300,
+        "help_text": "Approximate movement speed. 0 stops automatic movement; 80 is medium; higher numbers move faster.",
+        "min": 0,
         "step": 5,
-        "suffix": "s",
-        "default": 140
+        "default": 80
       },
       {
         "label": "Direction",

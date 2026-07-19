@@ -33,6 +33,10 @@
   margin-bottom: 6rem;
 }
 
+.blog-top-showcase-area {
+  padding-top: 6rem;
+}
+
 .blog-post .row-fluid {
   --column-gap: 6%;
 }
@@ -227,6 +231,21 @@
   border-bottom: 1px solid #ccc;
   margin-bottom: 3.2rem;
   padding-bottom: 2rem;
+}
+
+.blog-item--empty {
+  color: #5f5f68;
+  font-weight: 600;
+}
+
+.blog-item--empty p {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .blog-top-showcase-area {
+    padding-top: 4rem;
+  }
 }
 
 .blog-items .blog-item img,

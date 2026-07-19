@@ -20,12 +20,23 @@ max-width: 100%;
 {% set show_topics = true %}
 {% set show_recent = false %}
 {% set show_authors = false %}
-{% if !tag %}
+{% set listing_author = blog_author or author %}
+{% if !tag and !listing_author %}
 {% set hero_title = "This Week in Cleantech" %}
 {% set hero_sub_title = "Top five cleantech stories.<br />Fifteen minutes. Every week." %}
 {% else %}
-{% set hero_title = tag.name %}
+{% set hero_title = "This Week in Cleantech" %}
+{% set hero_sub_title = listing_author.display_name or page_meta.html_title|split("|")|last|trim %}
 {% endif %}
+{% set listing_posts = contents %}
+{% if tag and listing_posts|length == 0 %}
+  {% set listing_posts = blog_recent_tag_posts(group.id, tag, 200) %}
+{% elif listing_author and listing_posts|length == 0 %}
+  {% set listing_posts = blog_recent_author_posts(group.id, listing_author.slug or listing_author, 200) %}
+{% endif %}
+{% set is_first_listing_page = !current_page_num or current_page_num == 1 %}
+{% set show_main_intro = !tag and !listing_author and is_first_listing_page %}
+{% set show_sidebar_intro = tag or listing_author or not is_first_listing_page %}
 {% include "../sections/hero.html" %}
 <div class="content-wrapper">
   <div class="cta__border">
@@ -36,26 +47,32 @@ max-width: 100%;
 </div>
 {% dnd_area "top_showcase_area"
   label="Top showcase section",
-  class=""
+  class="content-wrapper blog-top-showcase-area"
 %}
-  {% dnd_section
-    full_width=true,
-    vertical_alignment="TOP"
-  %}
-    {% dnd_module
-      path="../modules/featured-showcase-scroller"
-    %}
-    {% end_dnd_module %}
+  {% dnd_section %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/featured-showcase-scroller",
+          label="Featured showcase scroller",
+          enabled=false
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
   {% end_dnd_section %}
 {% end_dnd_area %}
 <div class="blog-post blog-listing content-wrapper content-wrapper--vertical-spacing" data-blog-id="{{ blog.id }}">
   <div class="row-fluid">
     <div class="span8 main-content">
-    <div class="blog-intro">
-    <p>This Week in Cleantech (TWIC) offers a weekly roundup of the top five news stories in climate and clean energy in fifteen minutes or less. If you are feeling overwhelmed by energy industry news, this is a great shortcut. TWIC is co-hosted by Factor This’s Paul Gerke and Tigercomm’s Mike Casey.</p>
-    </div>
+    {% if show_main_intro %}
+      <div class="blog-intro">
+        <p>This Week in Cleantech (TWIC) offers a weekly roundup of the top five news stories in climate and clean energy in fifteen minutes or less. If you are feeling overwhelmed by energy industry news, this is a great shortcut. TWIC is co-hosted by Factor This’s Paul Gerke and Tigercomm’s Mike Casey.</p>
+      </div>
+    {% endif %}
     <div class="blog-items">
-    {% for content in contents %}
+    {% if listing_posts|length > 0 %}
+    {% for content in listing_posts %}
         <div class="blog-item">
           <div class="blog-item__header">
             <h2 class="blog-item__title"><a href="{{content.absolute_url}}">{{ content.name }}</a></h2>
@@ -74,7 +91,7 @@ max-width: 100%;
               <div class="blog-item__topics">
                   <span>Topics:</span>
                   {% for topic in content.topic_list %}
-                  <a href="{{ group.absolute_url }}/tag/{{ topic.slug }}">{{ topic.name }}</a>{% if not loop.last %}<span class="sep"></span>{% endif %}
+                  <a href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic.name }}</a>{% if not loop.last %}<span class="sep"></span>{% endif %}
                   {% endfor %}
               </div>
             {% endif %}
@@ -99,6 +116,11 @@ max-width: 100%;
           </div>
         </div>
     {% endfor %}
+    {% else %}
+        <div class="blog-item blog-item--empty">
+          <p>No episodes found for this archive.</p>
+        </div>
+    {% endif %}
     </div>
       {% dnd_area "dnd_area"
         label="Main section",
