@@ -7,6 +7,17 @@
     "default": true
   },
   {
+    "label": "Content source",
+    "name": "source_mode",
+    "type": "choice",
+    "display": "radio",
+    "choices": [
+      ["hubdb", "HubDB"],
+      ["manual_blog_features", "Manual blog features"]
+    ],
+    "default": "hubdb"
+  },
+  {
     "label": "Source HubDB table",
     "name": "source_table",
     "type": "hubdbtable",
@@ -19,6 +30,85 @@
     "type": "text",
     "help_text": "Optional HubDB query string, for example category__contains=featured_twic_guests&orderBy=sort_order. Leave blank to use all table rows.",
     "default": "orderBy=sort_order"
+  },
+  {
+    "label": "Manual blog features",
+    "name": "manual_blog_features",
+    "type": "group",
+    "occurrence": {
+      "default": 0,
+      "min": 0,
+      "max": 12,
+      "sorting_label_field": "manual_blog_features.feature_title"
+    },
+    "children": [
+      {
+        "label": "Title",
+        "name": "feature_title",
+        "type": "text",
+        "default": "Featured blog"
+      },
+      {
+        "label": "Small title",
+        "name": "feature_label",
+        "type": "text",
+        "help_text": "Optional smaller label displayed above the main title."
+      },
+      {
+        "label": "Episode",
+        "name": "feature_episode",
+        "type": "text",
+        "help_text": "Optional episode number or episode label, such as Episode 42."
+      },
+      {
+        "label": "Guest label",
+        "name": "feature_guest_label",
+        "type": "text",
+        "default": "Featured Guest"
+      },
+      {
+        "label": "Guest name",
+        "name": "feature_guest_name",
+        "type": "text"
+      },
+      {
+        "label": "Logo",
+        "name": "feature_logo",
+        "type": "image"
+      },
+      {
+        "label": "Description",
+        "name": "feature_description",
+        "type": "richtext",
+        "default": "<p>Add a short description.</p>"
+      },
+      {
+        "label": "Link",
+        "name": "feature_link",
+        "type": "url"
+      },
+      {
+        "label": "First host name",
+        "name": "host_one_name",
+        "type": "text"
+      },
+      {
+        "label": "First host headshot",
+        "name": "host_one_headshot",
+        "type": "image"
+      },
+      {
+        "label": "Second host name",
+        "name": "host_two_name",
+        "type": "text"
+      },
+      {
+        "label": "Second host headshot",
+        "name": "host_two_headshot",
+        "type": "image"
+      }
+    ],
+    "default": []
   },
   {
     "label": "Ordered row IDs",

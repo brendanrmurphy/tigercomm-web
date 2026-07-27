@@ -1,0 +1,59 @@
+[
+  {
+    "label": "Services",
+    "name": "services",
+    "type": "group",
+    "occurrence": {
+      "default": 4,
+      "min": 1,
+      "max": 8,
+      "sorting_label_field": "services.service_title"
+    },
+    "children": [
+      {
+        "label": "Title",
+        "name": "service_title",
+        "type": "text",
+        "required": true,
+        "default": "Service title"
+      },
+      {
+        "label": "Description",
+        "name": "description",
+        "type": "richtext",
+        "required": true,
+        "default": "<p>Add a short service description.</p>"
+      },
+      {
+        "label": "Link",
+        "name": "link",
+        "type": "url"
+      },
+      {
+        "label": "Image",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "label": "Theme",
+        "name": "theme",
+        "type": "choice",
+        "display": "select",
+        "choices": [
+          ["primary", "Primary"],
+          ["quinary", "Quinary"],
+          ["alt", "Alt"],
+          ["quaternary", "Quaternary"]
+        ],
+        "default": "primary"
+      }
+    ],
+    "default": [
+      {
+        "service_title": "Marketing Communications",
+        "description": "<p>A lot of clean economy companies offer B2B industrial goods and services to a limited pool of customers that don't buy with a mouse click. But too many still use the legacy marketing approach that forces sales teams to do the early-stage customer education.</p>",
+        "theme": "primary"
+      }
+    ]
+  }
+]

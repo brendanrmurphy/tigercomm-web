@@ -1,12 +1,36 @@
 {% set showcase_rows = [] %}
+{% set source_mode = module.source_mode or "hubdb" %}
 {% set showcase_format = module.showcase_format or "details" %}
+{% if source_mode == "manual_blog_features" %}
+  {% set showcase_format = "blog_features" %}
+{% endif %}
 {% set show_primary_details = showcase_format != "logo_only" %}
 {% set scroller_enabled = true %}
 {% if module.enabled == false %}
   {% set scroller_enabled = false %}
 {% endif %}
 
-{% if scroller_enabled and module.source_table %}
+{% if scroller_enabled and source_mode == "manual_blog_features" %}
+  {% if module.manual_blog_features|length > 0 %}
+    {% for manual_feature in module.manual_blog_features %}
+      {% set manual_feature_title = manual_feature.feature_title|trim %}
+      {% set manual_feature_description = manual_feature.feature_description|striptags|trim %}
+      {% set manual_feature_logo = manual_feature.feature_logo.src or manual_feature.feature_logo.url %}
+      {% set manual_feature_url = manual_feature.feature_link.url.href or manual_feature.feature_link.url or manual_feature.feature_link.href or manual_feature.feature_link %}
+      {% set is_placeholder_feature = manual_feature_title == "Featured blog" and manual_feature_description == "Add a short description." and not manual_feature_logo and not manual_feature_url and not manual_feature.host_one_name and not manual_feature.host_two_name %}
+      {% if not is_placeholder_feature %}
+        {% do showcase_rows.append(manual_feature) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if showcase_rows|length == 0 %}
+    {% do showcase_rows.append("default_twic_justin_worland") %}
+    {% do showcase_rows.append("default_twic_kelly_livingston") %}
+    {% do showcase_rows.append("default_twic_ivan_penn") %}
+    {% do showcase_rows.append("default_scaling_clean_kevin_smith") %}
+    {% do showcase_rows.append("default_community_engagement_trainings") %}
+  {% endif %}
+{% elif scroller_enabled and module.source_table %}
   {% set query = (module.hubdb_query or "")|trim %}
   {% set all_rows = query ? hubdb_table_rows(module.source_table, query) : hubdb_table_rows(module.source_table) %}
   {% if query and all_rows|length == 0 and "category=" in query and "category__" not in query %}
@@ -57,6 +81,9 @@
 {% set fallback_duration = speed > 0 ? 6400 / speed : 0 %}
 {% set direction_class = module.scroller.direction == "right" ? "featured-showcase-scroller--reverse" : "" %}
 {% set style_class = showcase_format == "logo_only" ? "featured-showcase-scroller--logo-only" : "" %}
+{% if showcase_format == "blog_features" %}
+  {% set style_class = style_class ~ " featured-showcase-scroller--blog-features" %}
+{% endif %}
 {% set scroller_label = module.content.heading or "Featured showcase" %}
 {% set max_items = module.max_items|int %}
 {% set has_item_limit = module.item_count_mode == "limit" and max_items > 0 %}
@@ -113,6 +140,179 @@
               <ul class="featured-showcase-scroller__list" {% if track_index == 1 %}aria-hidden="true"{% endif %}>
                 {% for showcase_item in showcase_rows %}
                   {% if not has_item_limit or loop.index <= max_items %}
+                    {% if showcase_format == "blog_features" %}
+                      {% if showcase_item == "default_twic_justin_worland" %}
+                        {% set feature_label = "This Week in Cleantech" %}
+                        {% set feature_episode = "Episode 1" %}
+                        {% set feature_guest_label = "Featured Guest" %}
+                        {% set feature_guest_name = "Justin Worland" %}
+                        {% set feature_title = "" %}
+                        {% set feature_description = "<p><strong>TIME</strong></p><p>Featured guest on This Week in Cleantech, Tigercomm's fast weekly roundup of the top climate and clean energy stories.</p>" %}
+                        {% set feature_logo_src = get_asset_url("../images/insights/this-week-in-cleantech.png") %}
+                        {% set feature_logo_alt = "This Week in Cleantech" %}
+                        {% set feature_url = "/this-week-in-cleantech-podcast" %}
+                        {% set host_one_name = "Mike Casey" %}
+                        {% set host_one_image_src = get_asset_url("../images/team/mike-casey.jpg") %}
+                        {% set host_one_image_alt = "Mike Casey" %}
+                        {% set host_two_name = "Paul Gerke" %}
+                        {% set host_two_image_src = get_asset_url("../images/team/paul-gerke.jpg") %}
+                        {% set host_two_image_alt = "Paul Gerke" %}
+                      {% elif showcase_item == "default_twic_kelly_livingston" %}
+                        {% set feature_label = "This Week in Cleantech" %}
+                        {% set feature_episode = "Episode 2" %}
+                        {% set feature_guest_label = "Featured Guest" %}
+                        {% set feature_guest_name = "Kelly Livingston" %}
+                        {% set feature_title = "" %}
+                        {% set feature_description = "<p><strong>ABC News</strong></p><p>Featured guest on This Week in Cleantech, covering timely climate and clean energy news in a compact weekly format.</p>" %}
+                        {% set feature_logo_src = get_asset_url("../images/insights/this-week-in-cleantech.png") %}
+                        {% set feature_logo_alt = "This Week in Cleantech" %}
+                        {% set feature_url = "/this-week-in-cleantech-podcast" %}
+                        {% set host_one_name = "Mike Casey" %}
+                        {% set host_one_image_src = get_asset_url("../images/team/mike-casey.jpg") %}
+                        {% set host_one_image_alt = "Mike Casey" %}
+                        {% set host_two_name = "Paul Gerke" %}
+                        {% set host_two_image_src = get_asset_url("../images/team/paul-gerke.jpg") %}
+                        {% set host_two_image_alt = "Paul Gerke" %}
+                      {% elif showcase_item == "default_twic_ivan_penn" %}
+                        {% set feature_label = "This Week in Cleantech" %}
+                        {% set feature_episode = "Episode 3" %}
+                        {% set feature_guest_label = "Featured Guest" %}
+                        {% set feature_guest_name = "Ivan Penn" %}
+                        {% set feature_title = "" %}
+                        {% set feature_description = "<p><strong>The New York Times</strong></p><p>Featured guest on This Week in Cleantech, joining Mike Casey and Paul Gerke for clean energy news and analysis.</p>" %}
+                        {% set feature_logo_src = get_asset_url("../images/insights/this-week-in-cleantech.png") %}
+                        {% set feature_logo_alt = "This Week in Cleantech" %}
+                        {% set feature_url = "/this-week-in-cleantech-podcast" %}
+                        {% set host_one_name = "Mike Casey" %}
+                        {% set host_one_image_src = get_asset_url("../images/team/mike-casey.jpg") %}
+                        {% set host_one_image_alt = "Mike Casey" %}
+                        {% set host_two_name = "Paul Gerke" %}
+                        {% set host_two_image_src = get_asset_url("../images/team/paul-gerke.jpg") %}
+                        {% set host_two_image_alt = "Paul Gerke" %}
+                      {% elif showcase_item == "default_scaling_clean_kevin_smith" %}
+                        {% set feature_label = "Scaling Clean Podcast" %}
+                        {% set feature_episode = "Featured Episode" %}
+                        {% set feature_guest_label = "Guest" %}
+                        {% set feature_guest_name = "Kevin Smith" %}
+                        {% set feature_title = "" %}
+                        {% set feature_description = "<p><strong>CEO of Lightsource bp</strong></p><p>Featured Scaling Clean guest sharing practical leadership lessons for cleantech CEOs, investors, and the people who advise them.</p>" %}
+                        {% set feature_logo_src = get_asset_url("../images/scaling-clean-logo.png") %}
+                        {% set feature_logo_alt = "Scaling Clean podcast" %}
+                        {% set feature_url = "/scaling-clean-podcast" %}
+                        {% set host_one_name = "Melissa Baldwin" %}
+                        {% set host_one_image_src = get_asset_url("../images/team/melissa.jpg") %}
+                        {% set host_one_image_alt = "Melissa Baldwin" %}
+                        {% set host_two_name = "" %}
+                        {% set host_two_image_src = "" %}
+                        {% set host_two_image_alt = "" %}
+                      {% elif showcase_item == "default_community_engagement_trainings" %}
+                        {% set feature_label = "Training" %}
+                        {% set feature_episode = "" %}
+                        {% set feature_guest_label = "Speaker" %}
+                        {% set feature_guest_name = "Ayelet Hines" %}
+                        {% set feature_title = "Community Engagement Trainings" %}
+                        {% set feature_description = "<p>Hands-on workshops at RE+ shows and company offsites that help clean energy developers sharpen outreach, messaging, and strategies to earn local support.</p>" %}
+                        {% set feature_logo_src = get_asset_url("../images/logo.svg") %}
+                        {% set feature_logo_alt = "Tigercomm" %}
+                        {% set feature_url = "/services/community-engagement" %}
+                        {% set host_one_name = "Ayelet Hines" %}
+                        {% set host_one_image_src = get_asset_url("../images/team/ayelet.jpg") %}
+                        {% set host_one_image_alt = "Ayelet Hines" %}
+                        {% set host_two_name = "" %}
+                        {% set host_two_image_src = "" %}
+                        {% set host_two_image_alt = "" %}
+                      {% else %}
+                        {% set feature_label = showcase_item.feature_label %}
+                        {% set feature_episode = showcase_item.feature_episode %}
+                        {% set feature_guest_label = showcase_item.feature_guest_label %}
+                        {% set feature_guest_name = showcase_item.feature_guest_name %}
+                        {% set feature_title = showcase_item.feature_title %}
+                        {% set feature_description = showcase_item.feature_description %}
+                        {% set feature_logo = showcase_item.feature_logo %}
+                        {% set feature_logo_src = feature_logo.src or feature_logo.url %}
+                        {% set feature_logo_alt = feature_logo.alt or feature_logo.altText or feature_title %}
+                        {% set feature_link_raw = showcase_item.feature_link %}
+                        {% set feature_url = feature_link_raw.url.href or feature_link_raw.url or feature_link_raw.href or feature_link_raw %}
+                        {% set host_one_name = showcase_item.host_one_name %}
+                        {% set host_one_image_src = showcase_item.host_one_headshot.src %}
+                        {% set host_one_image_alt = showcase_item.host_one_headshot.alt or host_one_name %}
+                        {% set host_two_name = showcase_item.host_two_name %}
+                        {% set host_two_image_src = showcase_item.host_two_headshot.src %}
+                        {% set host_two_image_alt = showcase_item.host_two_headshot.alt or host_two_name %}
+                      {% endif %}
+                      <li class="featured-showcase-scroller__item">
+                        {% if feature_url %}
+                          <a class="featured-showcase-card featured-showcase-card--blog-feature" href="{{ feature_url }}">
+                        {% else %}
+                          <div class="featured-showcase-card featured-showcase-card--blog-feature">
+                        {% endif %}
+                            <div class="featured-showcase-card__blog-main">
+                              {% if feature_logo_src %}
+                                <div class="featured-showcase-card__blog-logo-wrap">
+                                  <img class="featured-showcase-card__blog-logo" src="{{ feature_logo_src }}" alt="{{ feature_logo_alt }}" loading="lazy" draggable="false">
+                                </div>
+                              {% endif %}
+                              {% if feature_label %}
+                                <span class="featured-showcase-card__blog-label">{{ feature_label }}</span>
+                              {% endif %}
+                              {% if feature_episode %}
+                                <span class="featured-showcase-card__episode">{{ feature_episode }}</span>
+                              {% endif %}
+                              {% if feature_title %}
+                                <span class="featured-showcase-card__blog-title">{{ feature_title }}</span>
+                              {% endif %}
+                              {% if feature_guest_label or feature_guest_name %}
+                                <span class="featured-showcase-card__guest">
+                                  {% if feature_guest_label %}
+                                    <span class="featured-showcase-card__guest-label">{{ feature_guest_label }}</span>
+                                  {% endif %}
+                                  {% if feature_guest_name %}
+                                    <span class="featured-showcase-card__guest-name">{{ feature_guest_name }}</span>
+                                  {% endif %}
+                                </span>
+                              {% endif %}
+                              {% if feature_description %}
+                                <div class="featured-showcase-card__blog-description">{{ feature_description }}</div>
+                              {% endif %}
+                            </div>
+                            {% if host_one_image_src or host_one_name or host_two_image_src or host_two_name %}
+                              <div class="featured-showcase-card__hosts" aria-label="{{ feature_title }} hosts">
+                                <span class="featured-showcase-card__hosts-label">
+                                  {% if showcase_item == "default_community_engagement_trainings" %}
+                                    Speaker
+                                  {% else %}
+                                    Hosted by
+                                  {% endif %}
+                                </span>
+                                {% if host_one_image_src or host_one_name %}
+                                  <span class="featured-showcase-card__host">
+                                    {% if host_one_image_src %}
+                                      <img class="featured-showcase-card__host-image" src="{{ host_one_image_src }}" alt="{{ host_one_image_alt }}" loading="lazy" draggable="false">
+                                    {% endif %}
+                                    {% if host_one_name %}
+                                      <span class="featured-showcase-card__host-name">{{ host_one_name }}</span>
+                                    {% endif %}
+                                  </span>
+                                {% endif %}
+                                {% if host_two_image_src or host_two_name %}
+                                  <span class="featured-showcase-card__host">
+                                    {% if host_two_image_src %}
+                                      <img class="featured-showcase-card__host-image" src="{{ host_two_image_src }}" alt="{{ host_two_image_alt }}" loading="lazy" draggable="false">
+                                    {% endif %}
+                                    {% if host_two_name %}
+                                      <span class="featured-showcase-card__host-name">{{ host_two_name }}</span>
+                                    {% endif %}
+                                  </span>
+                                {% endif %}
+                              </div>
+                            {% endif %}
+                        {% if feature_url %}
+                          </a>
+                        {% else %}
+                          </div>
+                        {% endif %}
+                      </li>
+                    {% else %}
                     {% set primary_name = showcase_item[module.columns.primary_name] or showcase_item.name %}
                     {% set primary_detail_raw = showcase_item[module.columns.primary_detail] %}
                     {% set primary_detail = primary_detail_raw.value or primary_detail_raw %}
@@ -268,6 +468,7 @@
                         </div>
                       </div>
                     </li>
+                    {% endif %}
                   {% endif %}
                 {% endfor %}
               </ul>

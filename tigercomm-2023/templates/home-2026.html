@@ -1,0 +1,303 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Home - 2026
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% set template_css = "../../css/templates/home-2026.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+<div class="container-fluid body-container body-container--home-2026">
+  <section class="home2026-hero" style="background-image: url('{{ get_asset_url("../new-hp/hero-bg.jpg") }}');">
+    <div class="home2026-hero__overlay"></div>
+    <div class="content-wrapper home2026-hero__inner">
+      <div class="home2026-hero__copy">
+        <h1>
+          <span>Communications Powerhouse</span>
+          <strong>For Clean Economy Companies</strong>
+        </h1>
+        <p>We are the world's top PR firm helping clean economy companies boost sales, attract investors, win permits, and secure fair policies.</p>
+        <p>We build communications programs that get results in the AI age.</p>
+      </div>
+      <a class="home2026-hero__cta button" href="/contact">Get in Touch</a>
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--white">
+    <div class="content-wrapper">
+      <h2>Why Tigercomm?</h2>
+      <div class="home2026-intro">
+        <p>Sales goals crushed. Capital raises won. A CEO transformed into her industry's leading voice. A permit secured when rejection loomed. The IPO that set records.</p>
+        <p>For over 20 years, over 190 companies from three continents and 40 U.S. states have turned to us to drive results. Tigercomm is the world's top cleantech communications firm in the AI age.</p>
+        <p>Our four service offerings are specifically designed for companies like yours. But as a full-service agency, we have also helped companies meet dozens of high-stakes, unique challenges. Whatever the engagement, our work drives results.</p>
+      </div>
+      {% module "stats_counter"
+        path="../modules/stats-counter",
+        stats=[
+          {
+            "value": 21,
+            "suffix": "+",
+            "stat_label": "Years in Business"
+          },
+          {
+            "value": 190,
+            "suffix": "+",
+            "stat_label": "Clients Served"
+          },
+          {
+            "value": 40,
+            "suffix": "",
+            "stat_label": "States"
+          },
+          {
+            "value": 85,
+            "suffix": "",
+            "stat_label": "Years of Combined Experience"
+          }
+        ],
+        animation_duration=1400
+      %}
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--gray">
+    <div class="content-wrapper">
+      <h2>What We're Known For</h2>
+      <div class="home2026-intro">
+        <p>An industry leader recently told us: <em>"When companies don't know any better, they use the firms that take orders and bill time. When they have a big goal to meet, they go to Tigercomm."</em></p>
+        <p>We agree.</p>
+        <p>As globally recognized experts, we have set industry best practices in PR, AI visibility, SEO, thought leadership, financial PR, and community engagement. Our expert team helps innovators win support, build visibility, and grow in complex policy and media environments.</p>
+      </div>
+      <h3>Communication Services</h3>
+      {% module "communication_services_tiles"
+        path="../modules/interactive-service-tiles",
+        services=[
+          {
+            "service_title": "Marketing Communications",
+            "description": "<p>A lot of clean economy companies offer B2B industrial goods and services to a limited pool of customers that don't buy with a mouse click. But too many still use the legacy marketing approach that forces sales teams to do the early-stage customer education. Marketing research shows B2B customers start their buyer's journey through online searches and content, before they'll engage sales team members.</p>",
+            "link": { "url": { "href": "/services/marketing-communications" } },
+            "image": { "src": get_asset_url("../images/services/turbo-tile.jpg"), "alt": "Marketing communications session" },
+            "theme": "primary"
+          },
+          {
+            "service_title": "Thought Leadership",
+            "description": "<p>There are several points in a company's growth when it's crucial to narrate a company and its leadership team, not just its products. Whether you're securing early-stage funding, building valuation for potential acquirers, or preparing for an IPO, we can help.</p>",
+            "link": { "url": { "href": "/services/thought-leadership" } },
+            "image": { "src": get_asset_url("../images/services/narrate-tile.jpg"), "alt": "Thought leadership event" },
+            "theme": "quinary"
+          },
+          {
+            "service_title": "Financial PR",
+            "description": "<p>Placeholder copy for Financial PR. This tile can be updated with final positioning, proof points, and service details when the Financial PR content is ready.</p>",
+            "link": { "url": { "href": "/services/thought-leadership" } },
+            "image": { "src": get_asset_url("../images/success-stories/nextracker.jpg"), "alt": "Nextracker at Nasdaq" },
+            "theme": "quinary"
+          },
+          {
+            "service_title": "Public Affairs",
+            "description": "<p>Clean economy companies are typically building new sectors within industries dominated by mature incumbents unwilling to relinquish market share. Instead, they weaponize lobbying and political influence to block the growth of clean economy challengers.</p>",
+            "link": { "url": { "href": "/services/public-affairs" } },
+            "image": { "src": get_asset_url("../images/services/secure-tile.jpg"), "alt": "Public affairs work" },
+            "theme": "alt"
+          },
+          {
+            "service_title": "Community Engagement",
+            "description": "<p>Clean energy developers need support from local communities to build renewable energy infrastructure, such as wind and solar farms. But developers face increasingly project-fatal opposition from loud minorities of locals who organize online, then shout at local officials in the hearing room. We've pioneered and deployed community engagement strategies and digital best practices for developers to cut project risk and boost their ability to win the social license needed to secure permits from local officials.</p>",
+            "link": { "url": { "href": "/services/community-engagement" } },
+            "image": { "src": get_asset_url("../images/services/community-tile.jpg"), "alt": "Community engagement meeting" },
+            "theme": "quaternary"
+          }
+        ]
+      %}
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--white">
+    <div class="content-wrapper">
+      <h2>Who We Serve</h2>
+      <p class="home2026-kicker">If you need to earn support, shape public opinion, or stand out in a crowded market, we're built for you.</p>
+      {% module "who_we_serve_tabs"
+        path="../modules/tabs",
+        tabs=[
+          {
+            "tab_title": "Developers & Project Infrastructure",
+            "tab_content": "<h3>Developers &amp; Project Infrastructure</h3><ul><li>Renewable Energy Developers</li><li>Data Center Developers</li><li>Utilities and Independent Power Producers</li></ul>"
+          },
+          {
+            "tab_title": "Technology & Equipment Providers",
+            "tab_content": "<h3>Technology &amp; Equipment Providers</h3><ul><li>Solar &amp; Wind Manufacturing</li><li>Energy Storage, Microgrids &amp; Grid Tech</li><li>Thermal Storage</li><li>Green Hydrogen, Methanol, Geothermal &amp; Advanced Fuels</li><li>Energy Efficiency Equipment &amp; Services</li><li>Carbon Storage and Sequestration</li></ul>"
+          },
+          {
+            "tab_title": "Services & Specialized Support",
+            "tab_content": "<h3>Services &amp; Specialized Support</h3><ul><li>Engineering, Procurement and Construction</li><li>Operations &amp; Maintenance Services</li><li>Clean Transportation &amp; EV Infrastructure</li><li>Clean Energy SaaS Companies</li><li>Cleantech Professional Services</li><li>Distributed Energy Resource Management &amp; Orchestration</li></ul>"
+          },
+          {
+            "tab_title": "Investment & Advocacy",
+            "tab_content": "<h3>Investment &amp; Advocacy</h3><ul><li>Climate Tech Startups</li><li>Impact-Focused Investors</li><li>Associations</li></ul>"
+          }
+        ]
+      %}
+      <div class="home2026-logo-row" aria-label="Representative clients">
+        <img src="{{ get_asset_url("../images/client-logos/nextpower-logo.jpg") }}" alt="Nextpower">
+        <img src="{{ get_asset_url("../images/client-logos/aes-logo.svg") }}" alt="AES">
+        <img src="{{ get_asset_url("../images/client-logos/rondo-logo.png") }}" alt="Rondo">
+        <img src="{{ get_asset_url("../images/client-logos/seia-logo.png") }}" alt="SEIA">
+        <img src="{{ get_asset_url("../images/client-logos/edp-logo.png") }}" alt="EDP">
+      </div>
+    </div>
+  </section>
+
+  <section class="home2026-proof">
+    <div class="content-wrapper">
+      <h2>Success Stories</h2>
+    </div>
+    <div class="home2026-proof__stage">
+      <button class="home2026-arrow" type="button" aria-label="Previous success story">&larr;</button>
+      <div class="home2026-proof__inner">
+        <img src="{{ get_asset_url("../images/success-stories/nextracker.jpg") }}" alt="Nextracker success story coverage collage">
+        <div class="home2026-proof__copy">
+          <h3>Nextpower</h3>
+          <h4>Laying the communications foundation for a successful IPO</h4>
+          <p>As for most global companies, the pandemic disrupted supply chains for Nextracker, the world's leading maker of solar trackers and software. CEO Dan Shugar saw early that reshoring manufacturing to the U.S. could help the company lead while preparing to go public.</p>
+        </div>
+      </div>
+      <button class="home2026-arrow" type="button" aria-label="Next success story">&rarr;</button>
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--white">
+    <div class="content-wrapper">
+      <h2>What Our Clients Say</h2>
+      <h3>Testimonials</h3>
+      <div class="home2026-testimonials">
+        <img src="{{ get_asset_url("../new-hp/what-clients-say.jpg") }}" alt="Client conversation">
+        <button class="home2026-arrow home2026-arrow--blue" type="button" aria-label="Previous testimonial">&larr;</button>
+        <div class="home2026-testimonial-card">
+          <p>"Tigercomm captured our value proposition, then helped us deliver it to a global market. With their help, we're tracking to exceed our sales goals this year."</p>
+          <cite>- John O'Donnell<br>CEO, Rondo</cite>
+        </div>
+        <div class="home2026-testimonial-card">
+          <p>"Tigercomm worked with our in-house team to position Nextracker as not just a leading solar OEM, but one of the leading companies across renewable energy."</p>
+          <cite>- Daniel Shugar<br>CEO and Founder, Nextracker</cite>
+        </div>
+        <div class="home2026-testimonial-card">
+          <p>"We faced intense, well-organized local opposition to a project that put a significant capital investment and our brand reputation at risk."</p>
+          <cite>- Michael Zarin<br>VP, Group Communications, Rockwool</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--gray home2026-action">
+    <div class="content-wrapper">
+      <h2>Tigers in Action</h2>
+      {% module "tigers_in_action_scroller"
+        path="../modules/featured-showcase-scroller",
+        source_mode="manual_blog_features",
+        content={
+          "heading": ""
+        },
+        scroller={
+          "enable_animation": true,
+          "duration": 55,
+          "direction": "left"
+        }
+      %}
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--white">
+    <div class="content-wrapper home2026-expertise">
+      <h2>Deep Energy Sector Expertise</h2>
+      <div class="home2026-expertise__body">
+        <img src="{{ get_asset_url("../new-hp/sector-expertise.png") }}" alt="Tigercomm team member at industry event">
+        <ul>
+          <li><strong>Cleantech specialization.</strong> We lead in cleantech public relations, working only with clean energy and climate tech companies.</li>
+          <li><strong>Full-spectrum support.</strong> From marketing communications to policy advocacy, we connect strategy to execution.</li>
+          <li><strong>Campaign expertise.</strong> With more than a century of combined political campaign experience, we know how to influence and engage policymakers.</li>
+          <li><strong>Proven results.</strong> We have delivered success in renewable energy public affairs, reputation management, and crisis communications.</li>
+          <li><strong>Experienced, committed team.</strong> Our track record helps shape narratives that drive market wins.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--gray">
+    <div class="content-wrapper home2026-team">
+      <div class="home2026-team__main">
+        <h2>Meet the Team</h2>
+        <img src="{{ get_asset_url("../new-hp/our-team.jpg") }}" alt="Tigercomm team members">
+        <p>Behind everything we do is a team of hardworking people who care about delivering impactful, lasting work. We collaborate, challenge each other, and always leave room for some fun.</p>
+      </div>
+      <div class="home2026-team__leaders">
+        <h3>Our Senior Leadership</h3>
+        <a class="home2026-leader" href="/about/staff/mike-casey">
+          <img src="{{ get_asset_url("../images/team/mike.jpg") }}" alt="Mike Casey">
+          <p><strong>Mike Casey</strong><span>President</span></p>
+        </a>
+        <a class="home2026-leader" href="/about/staff/melissa-meehan-baldwin">
+          <img src="{{ get_asset_url("../images/team/melissa.jpg") }}" alt="Melissa Baldwin">
+          <p><strong>Melissa Baldwin</strong><span>Senior Vice President</span></p>
+        </a>
+        <a class="home2026-leader" href="/about/staff/ayelet-hines">
+          <img src="{{ get_asset_url("../images/team/ayelet.jpg") }}" alt="Ayelet Hines">
+          <p><strong>Ayelet Hines</strong><span>Vice President, Community Engagement</span></p>
+        </a>
+        <a class="button" href="/team">Meet the rest</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--white">
+    <div class="content-wrapper">
+      <h2>Frequently Asked Questions</h2>
+      {% module "home_2026_faq"
+        path="../modules/faq",
+        faq_items=[
+          {
+            "question": "Is PR for cleantech different from other industries?",
+            "answer": "<p>Yes. Cleantech companies operate at the intersection of markets, policy, infrastructure, media, and local approval. Communications need to account for that complexity.</p>"
+          },
+          {
+            "question": "How can PR help my cleantech company?",
+            "answer": "<p>Effective PR can shape market perception, support sales, attract investors, reduce project risk, and build credibility with policymakers and communities.</p>"
+          },
+          {
+            "question": "Do you do community engagement trainings in person?",
+            "answer": "<p>Yes. Tigercomm hosts hands-on trainings at industry events and company offsites.</p>"
+          },
+          {
+            "question": "Do you have a network of local consultants across the country?",
+            "answer": "<p>We build market-specific teams and strategies around each client's geography, project needs, and approval environment.</p>"
+          },
+          {
+            "question": "Do you handle ribbon cutting or groundbreaking ceremonies?",
+            "answer": "<p>Yes. We support public events when they advance the broader communications strategy.</p>"
+          },
+          {
+            "question": "Do you handle award submissions and event abstracts?",
+            "answer": "<p>Yes. We help clients identify, package, and pursue high-value opportunities.</p>"
+          },
+          {
+            "question": "Do you work with both B2B and B2C cleantech companies?",
+            "answer": "<p>Yes. Our work spans B2B industrial companies, developers, investors, SaaS providers, and public-facing clean economy brands.</p>"
+          },
+          {
+            "question": "How long will it take to see results from our PR campaign?",
+            "answer": "<p>Timing depends on the goals, starting position, market conditions, and campaign scope. We align expectations during strategy development.</p>"
+          },
+          {
+            "question": "Do you work with startups on smaller budgets?",
+            "answer": "<p>We evaluate fit based on goals, urgency, and whether the available scope can produce meaningful outcomes.</p>"
+          },
+          {
+            "question": "What regions do you work in?",
+            "answer": "<p>Tigercomm has served clients across the United States and internationally.</p>"
+          }
+        ]
+      %}
+    </div>
+  </section>
+</div>
+{% endblock body %}

@@ -1,68 +1,23 @@
 <section class="hover-tabs" data-hover-tabs>
   <div class="hover-tabs__left" role="tablist" aria-orientation="vertical">
-    <button
-      class="hover-tabs__tab is-active"
-      type="button"
-      role="tab"
-      aria-selected="true"
-      data-tab="0"
-    >
-      <span>Media Relations & Pitching</span>
-    </button>
-    <button
-      class="hover-tabs__tab"
-      type="button"
-      role="tab"
-      aria-selected="false"
-      data-tab="1"
-    >
-      <span>Media Training & Interview Prep</span>
-    </button>
-    <button
-      class="hover-tabs__tab"
-      type="button"
-      role="tab"
-      aria-selected="false"
-      data-tab="2"
-    >
-      <span
-        >Client Events, Ribbon Cutting, Ground Breaking & Press
-        Conferences</span
+    {% for tab in module.tabs %}
+      <button
+        class="hover-tabs__tab{% if loop.first %} is-active{% endif %}"
+        type="button"
+        role="tab"
+        aria-selected="{{ "true" if loop.first else "false" }}"
+        data-tab="{{ loop.index0 }}"
       >
-    </button>
+        <span>{{ tab.tab_title }}</span>
+      </button>
+    {% endfor %}
   </div>
   <div class="hover-tabs__right">
-    <div class="hover-tabs__panel is-active" role="tabpanel" data-panel="0">
-      <h3>Media Relations & Pitching</h3>
-      <ul>
-        <li>Build conference and event strategy</li>
-        <li>
-          Identify speaking opportunities and submit abstracts/speaker
-          applications
-        </li>
-        <li>Coordinate meetings and outreach with key contacts at events</li>
-        <li>
-          Prepare speakers and provide on-site or virtual support including
-          Draft remarks/speeches, dry runs
-        </li>
-      </ul>
-    </div>
-    <div class="hover-tabs__panel" role="tabpanel" data-panel="1" hidden>
-      <h3>Media Training & Interview Prep</h3>
-      <ul>
-        <li>Identify award opportunities</li>
-        <li>Draft and submit compelling nominations</li>
-      </ul>
-    </div>
-    <div class="hover-tabs__panel" role="tabpanel" data-panel="2" hidden>
-      <h3>
-        Client Events, Ribbon Cutting, Ground Breaking & Press Conferences
-      </h3>
-      <ul>
-        <li>Media, speaker, and podcast training</li>
-        <li>Thought leadership development and planning sessions</li>
-      </ul>
-    </div>
+    {% for tab in module.tabs %}
+      <div class="hover-tabs__panel{% if loop.first %} is-active{% endif %}" role="tabpanel" data-panel="{{ loop.index0 }}"{% if not loop.first %} hidden{% endif %}>
+        {{ tab.tab_content }}
+      </div>
+    {% endfor %}
   </div>
   <script>
     (function () {

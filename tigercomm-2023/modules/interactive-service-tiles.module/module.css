@@ -1,0 +1,274 @@
+.interactive-service-tiles {
+  display: flex;
+  gap: 1.2rem;
+  height: 36rem;
+  margin-top: 1.8rem;
+  overflow: hidden;
+}
+
+.interactive-service-tile {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  min-width: 16rem;
+  container-type: inline-size;
+  align-items: flex-end;
+  overflow: hidden;
+  border-bottom: 0.8rem solid var(--primary-color);
+  color: #fff;
+  isolation: isolate;
+  transition: flex 320ms ease, filter 260ms ease;
+}
+
+.interactive-service-tile--primary {
+  border-bottom-color: var(--primary-color);
+}
+
+.interactive-service-tile--quinary {
+  border-bottom-color: var(--quinary-color);
+}
+
+.interactive-service-tile--alt {
+  border-bottom-color: #2E4B68;
+}
+
+.interactive-service-tile--quaternary {
+  border-bottom-color: var(--quaternary-color);
+}
+
+.interactive-service-tile:hover,
+.interactive-service-tile:focus-within {
+  flex-grow: 4;
+  color: #fff;
+}
+
+.interactive-service-tiles:hover .interactive-service-tile {
+  flex: 0 1 16rem;
+}
+
+.interactive-service-tiles:focus-within .interactive-service-tile {
+  flex: 0 1 16rem;
+}
+
+.interactive-service-tiles:hover .interactive-service-tile:hover,
+.interactive-service-tiles:hover .interactive-service-tile:focus-within,
+.interactive-service-tiles:focus-within .interactive-service-tile:focus-within {
+  flex: 1 1 calc(100% - 68rem);
+}
+
+.interactive-service-tiles:hover .interactive-service-tile:not(:hover) {
+  filter: saturate(0.75);
+}
+
+.interactive-service-tile__image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 260ms ease;
+}
+
+.interactive-service-tile:hover .interactive-service-tile__image,
+.interactive-service-tile:focus-within .interactive-service-tile__image {
+  transform: scale(1.05);
+}
+
+.interactive-service-tile__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.86;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.4) 34%, rgba(0, 0, 0, 0.04) 72%);
+  transition: opacity 260ms ease, background 260ms ease;
+}
+
+.interactive-service-tile:hover .interactive-service-tile__shade,
+.interactive-service-tile:focus-within .interactive-service-tile__shade {
+  opacity: 0.9;
+}
+
+.interactive-service-tile--primary:hover .interactive-service-tile__shade,
+.interactive-service-tile--primary:focus-within .interactive-service-tile__shade {
+  background: rgba(255, 98, 0, 0.9);
+}
+
+.interactive-service-tile--quinary:hover .interactive-service-tile__shade,
+.interactive-service-tile--quinary:focus-within .interactive-service-tile__shade {
+  background: rgba(30, 47, 64, 0.9);
+}
+
+.interactive-service-tile--alt:hover .interactive-service-tile__shade,
+.interactive-service-tile--alt:focus-within .interactive-service-tile__shade {
+  background: rgba(46, 75, 104, 0.9);
+}
+
+.interactive-service-tile--quaternary:hover .interactive-service-tile__shade,
+.interactive-service-tile--quaternary:focus-within .interactive-service-tile__shade {
+  background: rgba(0, 31, 255, 0.9);
+}
+
+.interactive-service-tile__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 0;
+  transition: padding 260ms ease, width 260ms ease;
+}
+
+.interactive-service-tile:hover .interactive-service-tile__content,
+.interactive-service-tile:focus-within .interactive-service-tile__content {
+  width: min(62rem, 100%);
+  padding: 2.4rem;
+}
+
+.interactive-service-tile__content h4 {
+  margin-bottom: 0;
+  height: 6.2rem;
+  padding: 1rem 1.2rem;
+  background: var(--primary-color);
+  color: #fff;
+  display: -webkit-box;
+  opacity: 1;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  text-shadow: none;
+  transform: none;
+  word-break: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: clamp(1.15rem, 5.5cqw, 1.55rem);
+  line-height: 1.12;
+  transition:
+    opacity 180ms ease 0ms,
+    background 180ms ease 0ms,
+    padding 180ms ease 0ms;
+}
+
+@supports not (font-size: 1cqw) {
+  .interactive-service-tile__content h4 {
+    font-size: clamp(1.15rem, 0.95vw, 1.55rem);
+  }
+}
+
+.interactive-service-tile--primary .interactive-service-tile__content h4 {
+  background: var(--primary-color);
+}
+
+.interactive-service-tile--quinary .interactive-service-tile__content h4 {
+  background: var(--quinary-color);
+}
+
+.interactive-service-tile--alt .interactive-service-tile__content h4 {
+  background: #2E4B68;
+}
+
+.interactive-service-tile--quaternary .interactive-service-tile__content h4 {
+  background: var(--quaternary-color);
+}
+
+.interactive-service-tile__description {
+  max-width: 58rem;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    max-height 0ms linear 320ms,
+    margin 0ms linear 320ms,
+    opacity 220ms ease 0ms,
+    transform 220ms ease 0ms;
+}
+
+.interactive-service-tile:hover .interactive-service-tile__description,
+.interactive-service-tile:focus-within .interactive-service-tile__description {
+  max-height: 28rem;
+  margin-top: 1.4rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    max-height 0ms linear 320ms,
+    margin 0ms linear 320ms,
+    opacity 240ms ease 340ms,
+    transform 240ms ease 340ms;
+}
+
+.interactive-service-tile:hover .interactive-service-tile__content h4,
+.interactive-service-tile:focus-within .interactive-service-tile__content h4 {
+  display: block;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+  padding: 0;
+  background: transparent;
+  text-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.55);
+  font-size: revert;
+  line-height: revert;
+  -webkit-line-clamp: unset;
+  animation: interactive-service-title-reveal 560ms ease both;
+}
+
+.interactive-service-tiles:hover .interactive-service-tile:not(:hover):not(:focus-within) .interactive-service-tile__content {
+  padding: 0;
+}
+
+.interactive-service-tiles:hover .interactive-service-tile:not(:hover):not(:focus-within) .interactive-service-tile__content h4 {
+  height: 6.2rem;
+  overflow: hidden;
+  opacity: 0.72;
+  transform: none;
+  animation: none;
+}
+
+.interactive-service-tile__description p {
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1.45;
+}
+
+@keyframes interactive-service-title-reveal {
+  0%,
+  54% {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 980px) {
+  .interactive-service-tiles {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .interactive-service-tile,
+  .interactive-service-tile:hover,
+  .interactive-service-tile:focus-within {
+    min-height: 24rem;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .interactive-service-tile__description {
+    max-height: none;
+    margin-top: 1.4rem;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .interactive-service-tile:hover .interactive-service-tile__content h4,
+  .interactive-service-tile:focus-within .interactive-service-tile__content h4 {
+    animation: none;
+  }
+
+  .interactive-service-tile__content {
+    padding: 0;
+  }
+}

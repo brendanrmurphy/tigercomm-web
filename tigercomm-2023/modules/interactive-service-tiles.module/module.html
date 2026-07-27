@@ -1,0 +1,39 @@
+{% set service_items = module.services %}
+
+{% if service_items|length %}
+  <div class="interactive-service-tiles" data-interactive-service-tiles>
+    {% for service in service_items %}
+      {% set href = service.link.url.href or service.link.url or service.link.href %}
+      {% set image_src = service.image.src or service.image.url %}
+      {% set image_alt = service.image.alt or service.service_title %}
+
+      {% if href %}
+        <a class="interactive-service-tile interactive-service-tile--{{ service.theme }}" href="{{ href }}">
+          {% if image_src %}
+            <img class="interactive-service-tile__image" src="{{ image_src }}" alt="{{ image_alt }}" loading="lazy">
+          {% endif %}
+          <div class="interactive-service-tile__shade" aria-hidden="true"></div>
+          <div class="interactive-service-tile__content">
+            <h4>{{ service.service_title }}</h4>
+            <div class="interactive-service-tile__description">
+              {{ service.description }}
+            </div>
+          </div>
+        </a>
+      {% else %}
+        <div class="interactive-service-tile interactive-service-tile--{{ service.theme }}">
+          {% if image_src %}
+            <img class="interactive-service-tile__image" src="{{ image_src }}" alt="{{ image_alt }}" loading="lazy">
+          {% endif %}
+          <div class="interactive-service-tile__shade" aria-hidden="true"></div>
+          <div class="interactive-service-tile__content">
+            <h4>{{ service.service_title }}</h4>
+            <div class="interactive-service-tile__description">
+              {{ service.description }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

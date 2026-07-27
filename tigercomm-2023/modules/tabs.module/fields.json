@@ -1,0 +1,43 @@
+[
+  {
+    "label": "Tabs",
+    "name": "tabs",
+    "type": "group",
+    "occurrence": {
+      "default": 3,
+      "min": 1,
+      "max": 10,
+      "sorting_label_field": "tabs.tab_title"
+    },
+    "children": [
+      {
+        "label": "Tab title",
+        "name": "tab_title",
+        "type": "text",
+        "required": true,
+        "default": "Tab title"
+      },
+      {
+        "label": "Tab content",
+        "name": "tab_content",
+        "type": "richtext",
+        "required": true,
+        "default": "<h3>Tab title</h3><p>Add tab content here.</p>"
+      }
+    ],
+    "default": [
+      {
+        "tab_title": "Media Relations & Pitching",
+        "tab_content": "<h3>Media Relations &amp; Pitching</h3><ul><li>Build conference and event strategy</li><li>Identify speaking opportunities and submit abstracts/speaker applications</li><li>Coordinate meetings and outreach with key contacts at events</li><li>Prepare speakers and provide on-site or virtual support including draft remarks, speeches, and dry runs</li></ul>"
+      },
+      {
+        "tab_title": "Media Training & Interview Prep",
+        "tab_content": "<h3>Media Training &amp; Interview Prep</h3><ul><li>Identify award opportunities</li><li>Draft and submit compelling nominations</li></ul>"
+      },
+      {
+        "tab_title": "Client Events, Ribbon Cutting, Ground Breaking & Press Conferences",
+        "tab_content": "<h3>Client Events, Ribbon Cutting, Ground Breaking &amp; Press Conferences</h3><ul><li>Media, speaker, and podcast training</li><li>Thought leadership development and planning sessions</li></ul>"
+      }
+    ]
+  }
+]
