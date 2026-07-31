@@ -22,7 +22,17 @@
   {% set hero_sub_title = "" %}
   {% set hero_title_class = "" %}
   {% set hero_content_wrapper_class = "hero--sm" %}
-  {% set hero_content = '<a href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}" rel="author">by {{ content.blog_post_author.display_name }}</a> on <time datetime="{{ content.publish_date }}" class="blog-post__timestamp">{{ content.publish_date_localized }}</time>  &#x2022; {{ content.post_body|wordcount|divide(300) }} min. read {% blog_social_sharing "blog_social_sharing" overrideable=False, label="Blog Social Sharing" %}' %} 
+  {% set hero_content %}
+    <time datetime="{{ content.publish_date }}" class="blog-post__timestamp">{{ content.publish_date_localized }}</time>  &#x2022; {{ content.post_body|wordcount|divide(300) }} min. read
+    {% if content.blog_author_list %}
+      <div hidden>
+        {% for author in content.blog_author_list %}
+          <a href="{{ blog_author_url(group.id, author.slug) }}" rel="author">{{ author.display_name }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% blog_social_sharing "blog_social_sharing" overrideable=False, label="Blog Social Sharing" %}
+  {% endset %}
   {% include "../sections/hero.html" %}
   <div class="content-wrapper row-fluid">
     <div class="cta__border">

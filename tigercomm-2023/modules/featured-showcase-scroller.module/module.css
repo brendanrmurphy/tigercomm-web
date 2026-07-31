@@ -155,7 +155,7 @@
 }
 
 .featured-showcase-scroller__track {
-  animation: featured-showcase-scroll var(--showcase-scroll-duration, 80s) linear infinite;
+  animation: none;
   display: flex;
   gap: 2.4rem;
   position: relative;
@@ -178,14 +178,6 @@
 
 .featured-showcase-scroller--static .featured-showcase-scroller__item {
   margin-left: 0;
-}
-
-.featured-showcase-scroller--reverse .featured-showcase-scroller__track {
-  animation-direction: reverse;
-}
-
-.featured-showcase-scroller.is-enhanced .featured-showcase-scroller__track {
-  animation: none;
 }
 
 .featured-showcase-scroller.is-dragging .featured-showcase-scroller__viewport {
@@ -273,7 +265,6 @@
 
 .featured-showcase-card__image {
   display: block;
-  filter: grayscale(1);
   height: 100%;
   object-fit: cover;
   -webkit-user-drag: none;

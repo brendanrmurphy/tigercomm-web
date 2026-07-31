@@ -1,6 +1,8 @@
 (function () {
   const DEFAULT_SPEED = 80;
   const SPEED_SCALE = 4;
+  let observerStarted = false;
+  let initFrame = null;
 
   const getSpeed = (scroller) => {
     const value = getComputedStyle(scroller).getPropertyValue("--showcase-scroll-speed");
@@ -45,6 +47,7 @@
     let listWidth = 0;
     let offset = 0;
     let lastFrame = 0;
+    let isPointerActive = false;
     let isDragging = false;
     let isHovering = false;
     let isPaused = false;
@@ -149,38 +152,89 @@
         return;
       }
 
+      resetDragState();
       pointerId = event.pointerId;
-      isDragging = true;
+      isPointerActive = true;
+      isDragging = false;
       didDrag = false;
       dragStartX = event.clientX;
       dragStartOffset = offset;
-      scroller.classList.add("is-dragging");
-      viewport.setPointerCapture(pointerId);
     };
 
     const onPointerMove = (event) => {
-      if (!isDragging || event.pointerId !== pointerId) {
+      if (!isPointerActive || event.pointerId !== pointerId) {
         return;
       }
 
-      offset = normalizeOffset(dragStartOffset + event.clientX - dragStartX, listWidth);
-      didDrag = didDrag || Math.abs(event.clientX - dragStartX) > 10;
+      const dragDistance = event.clientX - dragStartX;
+
+      if (!isDragging && Math.abs(dragDistance) > 8) {
+        isDragging = true;
+        didDrag = true;
+        scroller.classList.add("is-dragging");
+        if (viewport.setPointerCapture) {
+          try {
+            viewport.setPointerCapture(pointerId);
+          } catch (error) {
+            // Pointer capture can fail if the browser has already canceled the pointer.
+          }
+        }
+      }
+
+      if (!isDragging) {
+        return;
+      }
+
+      offset = normalizeOffset(dragStartOffset + dragDistance, listWidth);
       track.style.transform = `translate3d(${offset}px, 0, 0)`;
     };
 
+    const resetDragState = () => {
+      const activePointerId = pointerId;
+
+      isPointerActive = false;
+      isDragging = false;
+      pointerId = null;
+      scroller.classList.remove("is-dragging");
+
+      if (activePointerId !== null && viewport.hasPointerCapture && viewport.hasPointerCapture(activePointerId)) {
+        try {
+          viewport.releasePointerCapture(activePointerId);
+        } catch (error) {
+          // The pointer may already be released after a cancel, blur, or leave event.
+        }
+      }
+    };
+
     const endDrag = (event) => {
-      if (!isDragging || event.pointerId !== pointerId) {
+      if (!isPointerActive || (event && event.pointerId !== pointerId)) {
         return;
       }
 
-      isDragging = false;
-      scroller.classList.remove("is-dragging");
+      resetDragState();
+    };
 
-      if (viewport.hasPointerCapture(pointerId)) {
-        viewport.releasePointerCapture(pointerId);
+    const onDocumentPointerMove = (event) => {
+      if (!isPointerActive || event.pointerId !== pointerId) {
+        return;
       }
 
-      pointerId = null;
+      const bounds = viewport.getBoundingClientRect();
+      const isOutside =
+        event.clientX < bounds.left ||
+        event.clientX > bounds.right ||
+        event.clientY < bounds.top ||
+        event.clientY > bounds.bottom;
+
+      if (isOutside) {
+        resetDragState();
+      }
+    };
+
+    const onNativeDragStart = (event) => {
+      if (event.target.closest("img, .featured-showcase-card")) {
+        event.preventDefault();
+      }
     };
 
     const onClick = (event) => {
@@ -196,13 +250,20 @@
     viewport.addEventListener("pointermove", onPointerMove);
     viewport.addEventListener("pointerup", endDrag);
     viewport.addEventListener("pointercancel", endDrag);
+    viewport.addEventListener("pointerleave", endDrag);
+    viewport.addEventListener("dragstart", onNativeDragStart);
     viewport.addEventListener("click", onClick, true);
     viewport.addEventListener("mouseenter", () => {
       isHovering = true;
     });
     viewport.addEventListener("mouseleave", () => {
       isHovering = false;
+      endDrag();
     });
+    document.addEventListener("pointerup", endDrag);
+    document.addEventListener("pointercancel", endDrag);
+    document.addEventListener("pointermove", onDocumentPointerMove);
+    window.addEventListener("blur", resetDragState);
 
     if (pauseButton) {
       pauseButton.addEventListener("click", () => {
@@ -250,9 +311,53 @@
     scrollers.forEach(initScroller);
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
+  const scheduleInit = () => {
+    if (initFrame) {
+      return;
+    }
+
+    initFrame = window.requestAnimationFrame(() => {
+      initFrame = null;
+      init();
+    });
+  };
+
+  const watchForEditorUpdates = () => {
+    if (observerStarted || !window.MutationObserver || !document.body) {
+      return;
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      const hasNewScroller = mutations.some((mutation) => {
+        return Array.from(mutation.addedNodes).some((node) => {
+          return node.nodeType === 1 && (
+            node.matches("[data-featured-showcase-scroller]") ||
+            node.querySelector("[data-featured-showcase-scroller]")
+          );
+        });
+      });
+
+      if (hasNewScroller) {
+        scheduleInit();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    observerStarted = true;
+  };
+
+  const boot = () => {
     init();
+    watchForEditorUpdates();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
   }
 }());

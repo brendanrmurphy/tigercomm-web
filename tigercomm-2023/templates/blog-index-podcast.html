@@ -31,8 +31,6 @@ max-width: 100%;
 {% set listing_posts = contents %}
 {% if tag and listing_posts|length == 0 %}
   {% set listing_posts = blog_recent_tag_posts(group.id, tag, 200) %}
-{% elif listing_author and listing_posts|length == 0 %}
-  {% set listing_posts = blog_recent_author_posts(group.id, listing_author.slug or listing_author, 200) %}
 {% endif %}
 {% set is_first_listing_page = !current_page_num or current_page_num == 1 %}
 {% set show_main_intro = !tag and !listing_author and is_first_listing_page %}
@@ -45,23 +43,25 @@ max-width: 100%;
     <span data-aos="fade-down-right" data-aos-delay="350"></span>
   </div>
 </div>
-{% dnd_area "top_showcase_area"
-  label="Top showcase section",
-  class="content-wrapper blog-top-showcase-area"
-%}
-  {% dnd_section %}
-    {% dnd_column %}
-      {% dnd_row %}
-        {% dnd_module
-          path="../modules/featured-showcase-scroller",
-          label="Featured showcase scroller",
-          enabled=false
-        %}
-        {% end_dnd_module %}
-      {% end_dnd_row %}
-    {% end_dnd_column %}
-  {% end_dnd_section %}
-{% end_dnd_area %}
+{% if !tag and !listing_author %}
+  {% dnd_area "top_showcase_area"
+    label="Top showcase section",
+    class="content-wrapper blog-top-showcase-area"
+  %}
+    {% dnd_section %}
+      {% dnd_column %}
+        {% dnd_row %}
+          {% dnd_module
+            path="../modules/featured-showcase-scroller",
+            label="Featured showcase scroller",
+            enabled=false
+          %}
+          {% end_dnd_module %}
+        {% end_dnd_row %}
+      {% end_dnd_column %}
+    {% end_dnd_section %}
+  {% end_dnd_area %}
+{% endif %}
 <div class="blog-post blog-listing content-wrapper content-wrapper--vertical-spacing" data-blog-id="{{ blog.id }}">
   <div class="row-fluid">
     <div class="span8 main-content">
@@ -94,10 +94,11 @@ max-width: 100%;
             <p class="blog-item__author"><span class="blog-item__published">{{ content.publish_date|format_datetime("MMMM d, yyyy") }}</span></p>
             {% if content.topic_list %}
               <div class="blog-item__topics">
-                  <span>Topics:</span>
+                  <span class="blog-item__topics-list">
                   {% for topic in content.topic_list %}
-                  <a href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic.name }}</a>{% if not loop.last %}<span class="sep"></span>{% endif %}
+                  <a class="blog-item__topic" href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic.name }}</a>
                   {% endfor %}
+                  </span>
               </div>
             {% endif %}
             {% if content.widgets.podcast_settings.body.embed_code %}

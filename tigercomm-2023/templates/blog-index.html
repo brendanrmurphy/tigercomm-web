@@ -69,10 +69,11 @@
           <p class="blog-item__author">by <a href="{{ group.absolute_url }}/author/{{ content.blog_post_author.slug }}">{{ content.blog_post_author.display_name }}</a> <span class="blog-item__published"> on {{ content.publish_date_localized }}</span> &#x2022; <span class="blog-item__reading-time">{{ content.post_body|wordcount|divide(300) }} min. read</span>
           {% if content.topic_list %}
             <div class="blog-item__topics">
-                <span>Topics:</span>
+                <span class="blog-item__topics-list">
                 {% for topic in content.topic_list %}
-                <a href="{{ group.absolute_url }}/tag/{{ topic.slug }}">{{ topic.name }}</a>{% if not loop.last %}<span class="sep"></span>{% endif %}
+                <a class="blog-item__topic" href="{{ group.absolute_url }}/tag/{{ topic.slug }}">{{ topic.name }}</a>
                 {% endfor %}
+                </span>
             </div>
           {% endif %}
         </div>

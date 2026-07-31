@@ -70,6 +70,20 @@
 {% set is_static_scroller = rendered_count <= 1 or not animation_enabled %}
 {% set static_class = is_static_scroller ? "featured-showcase-scroller--static" : "" %}
 {% set track_count = is_static_scroller ? 1 : 2 %}
+{% set primary_link_mode = module.primary_link.mode or "url_column" %}
+{% set related_source_link_mode = module.related_source_link.mode or "url_column" %}
+{% set validate_blog_tag_links = module.primary_link.validate_blog_tag_links %}
+{% set validation_blog_id = group.id %}
+{% set validation_tag_slugs = [] %}
+
+{% if validate_blog_tag_links and validation_blog_id %}
+  {% set validation_tags = blog_tags(validation_blog_id, 250) %}
+  {% for validation_tag in validation_tags %}
+    {% if validation_tag.slug and validation_tag.live_posts|int > 0 and validation_tag.slug not in validation_tag_slugs %}
+      {% do validation_tag_slugs.append(validation_tag.slug) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 {% if scroller_enabled %}
   <section class="featured-showcase-scroller {{ direction_class }} {{ style_class }} {{ static_class }}" style="--showcase-scroll-speed: {{ speed }}; --showcase-scroll-duration: {{ fallback_duration }}s;" data-featured-showcase-scroller>
@@ -105,18 +119,35 @@
                     {% set primary_url_raw = showcase_item[module.columns.primary_url] %}
                     {% set primary_url = primary_url_raw.url.href or primary_url_raw.url or primary_url_raw.href or primary_url_raw.value or primary_url_raw %}
                     {% set primary_link_enabled = primary_url ? true : false %}
-                    {% if primary_url and group.id %}
-                      {% set primary_clean_url = primary_url|split("?")|first|split("#")|first %}
-                      {% if "/author/" in primary_url %}
-                        {% set primary_author_slug = primary_clean_url|split("/author/")|last|split("/")|first %}
-                        {% if primary_author_slug %}
-                          {% set primary_link_enabled = blog_recent_author_posts(group.id, primary_author_slug, 1)|length > 0 %}
-                        {% endif %}
-                      {% elif "/tag/" in primary_url %}
-                        {% set primary_tag_slug = primary_clean_url|split("/tag/")|last|split("/")|first %}
-                        {% if primary_tag_slug %}
-                          {% set primary_link_enabled = blog_recent_tag_posts(group.id, primary_tag_slug, 1)|length > 0 %}
-                        {% endif %}
+                    {% if primary_link_mode == "none" %}
+                      {% set primary_url = "" %}
+                      {% set primary_link_enabled = false %}
+                    {% elif primary_link_mode == "blog_tag" %}
+                      {% set primary_url = "" %}
+                      {% set primary_link_enabled = false %}
+                      {% set primary_tag_base_url_raw = (module.primary_link.blog_tag_base_url or "")|trim %}
+                      {% set primary_tag_base_url = primary_tag_base_url_raw ? primary_tag_base_url_raw|regex_replace("/?$", "/") : "" %}
+                      {% set primary_tag_slug_column = module.primary_link.tag_slug_column or "author_tag_slug" %}
+                      {% set primary_tag_slug_raw = showcase_item[primary_tag_slug_column] %}
+                      {% set primary_tag_slug = primary_tag_slug_raw.value or primary_tag_slug_raw %}
+                      {% if !primary_tag_slug %}
+                        {% set primary_tag_slug_source_column = module.primary_link.tag_slug_source_column or module.columns.primary_name or "name" %}
+                        {% set primary_tag_slug_source_raw = showcase_item[primary_tag_slug_source_column] %}
+                        {% set primary_tag_slug_source = primary_tag_slug_source_raw.value or primary_tag_slug_source_raw or primary_name %}
+                        {% set primary_tag_slug = primary_tag_slug_source|striptags|lower|trim|replace("&amp;", "")|replace("&", "")|regex_replace("[^a-z0-9]+", "-")|regex_replace("(^-|-$)", "") %}
+                      {% endif %}
+                      {% if primary_tag_base_url and primary_tag_slug %}
+                        {% set primary_url = primary_tag_base_url ~ primary_tag_slug %}
+                        {% set primary_link_enabled = true %}
+                      {% endif %}
+                      {% if validate_blog_tag_links and primary_tag_slug %}
+                        {% set primary_link_enabled = primary_tag_slug in validation_tag_slugs %}
+                      {% endif %}
+                    {% endif %}
+                    {% if validate_blog_tag_links and primary_url and "/tag/" in primary_url %}
+                      {% set primary_tag_url_slug = primary_url|split("?")|first|split("#")|first|split("/tag/")|last|split("/")|first %}
+                      {% if primary_tag_url_slug %}
+                        {% set primary_link_enabled = primary_tag_url_slug in validation_tag_slugs %}
                       {% endif %}
                     {% endif %}
                     {% set primary_image = showcase_item[module.columns.primary_image] %}
@@ -157,18 +188,35 @@
                     {% set related_source_url = related_source_url_raw.url.href or related_source_url_raw.url or related_source_url_raw.href or related_source_url_raw.value or related_source_url_raw %}
                     {% set related_source_logo_url = related_source_url %}
                     {% set related_source_link_enabled = related_source_logo_url ? true : false %}
-                    {% if related_source_logo_url and group.id %}
-                      {% set related_source_clean_url = related_source_logo_url|split("?")|first|split("#")|first %}
-                      {% if "/author/" in related_source_logo_url %}
-                        {% set related_source_author_slug = related_source_clean_url|split("/author/")|last|split("/")|first %}
-                        {% if related_source_author_slug %}
-                          {% set related_source_link_enabled = blog_recent_author_posts(group.id, related_source_author_slug, 1)|length > 0 %}
-                        {% endif %}
-                      {% elif "/tag/" in related_source_logo_url %}
-                        {% set related_source_tag_slug = related_source_clean_url|split("/tag/")|last|split("/")|first %}
-                        {% if related_source_tag_slug %}
-                          {% set related_source_link_enabled = blog_recent_tag_posts(group.id, related_source_tag_slug, 1)|length > 0 %}
-                        {% endif %}
+                    {% if related_source_link_mode == "none" %}
+                      {% set related_source_logo_url = "" %}
+                      {% set related_source_link_enabled = false %}
+                    {% elif related_source_link_mode == "blog_tag" %}
+                      {% set related_source_logo_url = "" %}
+                      {% set related_source_link_enabled = false %}
+                      {% set related_source_tag_base_url_raw = (module.related_source_link.blog_tag_base_url or "")|trim %}
+                      {% set related_source_tag_base_url = related_source_tag_base_url_raw ? related_source_tag_base_url_raw|regex_replace("/?$", "/") : "" %}
+                      {% set related_source_tag_slug_column = module.related_source_link.tag_slug_column or "" %}
+                      {% set related_source_tag_slug_raw = related_source_tag_slug_column ? related_source[related_source_tag_slug_column] : "" %}
+                      {% set related_source_tag_slug = related_source_tag_slug_raw.value or related_source_tag_slug_raw %}
+                      {% if !related_source_tag_slug %}
+                        {% set related_source_tag_slug_source_column = module.related_source_link.tag_slug_source_column or module.columns.related_source_name or "name" %}
+                        {% set related_source_tag_slug_source_raw = related_source[related_source_tag_slug_source_column] %}
+                        {% set related_source_tag_slug_source = related_source_tag_slug_source_raw.value or related_source_tag_slug_source_raw or related_source_name %}
+                        {% set related_source_tag_slug = related_source_tag_slug_source|striptags|lower|trim|replace("&amp;", "")|replace("&", "")|regex_replace("[^a-z0-9]+", "-")|regex_replace("(^-|-$)", "") %}
+                      {% endif %}
+                      {% if related_source_tag_base_url and related_source_tag_slug %}
+                        {% set related_source_logo_url = related_source_tag_base_url ~ related_source_tag_slug %}
+                        {% set related_source_link_enabled = true %}
+                      {% endif %}
+                      {% if validate_blog_tag_links and related_source_tag_slug %}
+                        {% set related_source_link_enabled = related_source_tag_slug in validation_tag_slugs %}
+                      {% endif %}
+                    {% endif %}
+                    {% if validate_blog_tag_links and related_source_logo_url and "/tag/" in related_source_logo_url %}
+                      {% set related_source_tag_url_slug = related_source_logo_url|split("?")|first|split("#")|first|split("/tag/")|last|split("/")|first %}
+                      {% if related_source_tag_url_slug %}
+                        {% set related_source_link_enabled = related_source_tag_url_slug in validation_tag_slugs %}
                       {% endif %}
                     {% endif %}
 
@@ -176,7 +224,7 @@
                       <div class="featured-showcase-card">
                         <div class="featured-showcase-card__content">
                           {% if related_source_logo_url and related_source_link_enabled %}
-                            <a class="featured-showcase-card__source-link" href="{{ related_source_logo_url }}" target="_blank" rel="noopener">
+                            <a class="featured-showcase-card__source-link" href="{{ related_source_logo_url }}">
                           {% else %}
                             <span class="featured-showcase-card__source-link">
                           {% endif %}
@@ -196,7 +244,7 @@
                           {% endif %}
                           {% if show_primary_details %}
                             {% if primary_url and primary_link_enabled %}
-                              <a class="featured-showcase-card__person" href="{{ primary_url }}" target="_blank" rel="noopener">
+                              <a class="featured-showcase-card__person" href="{{ primary_url }}">
                             {% else %}
                               <span class="featured-showcase-card__person">
                             {% endif %}
