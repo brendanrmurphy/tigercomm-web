@@ -67,8 +67,15 @@ max-width: 100%;
     <div class="span8 main-content">
     {% if show_main_intro %}
       <div class="blog-intro">
-        <p>This show is a cross between NPR's <a href="https://www.npr.org/series/490248027/how-i-built-this" target="_blank">"How I Built This"</a> and The New York Times' <a href="https://www.nytimes.com/column/corner-office" target="_blank">"Corner Office"</a> series. We glean and curate usable tips from experienced cleantech leaders in a compact, rich 30 minutes.</p>
-        <p><strong>Covering:</strong> Founder's journey, leadership lessons learned, change management, hiring & firing, advice for the next generation, and recruitment & retention.</p>
+        {% module_block module "podcast_blog_intro"
+          path="@hubspot/rich_text",
+          label="Blog intro"
+        %}
+          {% module_attribute "html" %}
+            <p>This show is a cross between NPR's <a href="https://www.npr.org/series/490248027/how-i-built-this" target="_blank">"How I Built This"</a> and The New York Times' <a href="https://www.nytimes.com/column/corner-office" target="_blank">"Corner Office"</a> series. We glean and curate usable tips from experienced cleantech leaders in a compact, rich 30 minutes.</p>
+            <p><strong>Covering:</strong> Founder's journey, leadership lessons learned, change management, hiring & firing, advice for the next generation, and recruitment & retention.</p>
+          {% end_module_attribute %}
+        {% end_module_block %}
       </div>
     {% endif %}
     <div class="blog-items">

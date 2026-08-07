@@ -67,7 +67,14 @@ max-width: 100%;
     <div class="span8 main-content">
     {% if show_main_intro %}
       <div class="blog-intro">
-        <p>This Week in Cleantech (TWIC) offers a weekly roundup of the top five news stories in climate and clean energy in fifteen minutes or less. If you are feeling overwhelmed by energy industry news, this is a great shortcut. TWIC is co-hosted by Factor This’s Paul Gerke and Tigercomm’s Mike Casey.</p>
+        {% module_block module "week_cleantech_blog_intro"
+          path="@hubspot/rich_text",
+          label="Blog intro"
+        %}
+          {% module_attribute "html" %}
+            <p>This Week in Cleantech (TWIC) offers a weekly roundup of the top five news stories in climate and clean energy in fifteen(ish) minutes or less. If you are feeling overwhelmed by energy industry news, this is a great shortcut. TWIC is co-hosted by Factor This’s Paul Gerke and Tigercomm’s Mike Casey.</p>
+          {% end_module_attribute %}
+        {% end_module_block %}
       </div>
     {% endif %}
     <div class="blog-items">
