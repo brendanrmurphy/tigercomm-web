@@ -33,7 +33,19 @@ max-width: 100% !important;
   {% set hero_sub_title = "" %}
   {% set hero_title_class = "" %}
   {% set hero_content_wrapper_class = "hero--sm" %}
-  {% set hero_content = '<p class="blog-item__author"><span class="blog-item__published">{{ content.publish_date|format_datetime("MMMM d, yyyy") }}</span></p> {% blog_social_sharing "blog_social_sharing" overrideable=False, label="Blog Social Sharing" %}' %} 
+  {% set hero_content %}
+    <p class="blog-item__author">
+      <span class="blog-item__published">{{ content.publish_date|format_datetime("MMMM d, yyyy") }}</span>
+    </p>
+    {% if content.blog_author_list %}
+      <div hidden>
+        {% for author in content.blog_author_list %}
+          <a href="{{ blog_author_url(group.id, author.slug) }}" rel="author">{{ author.display_name }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% blog_social_sharing "blog_social_sharing" overrideable=False, label="Blog Social Sharing" %}
+  {% endset %}
   {% include "../sections/hero.html" %}
   <div class="content-wrapper row-fluid" data-episode-number="{{ episode_number }}">
     <div class="cta__border">

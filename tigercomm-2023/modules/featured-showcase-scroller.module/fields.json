@@ -1,0 +1,268 @@
+[
+  {
+    "label": "Show scroller",
+    "name": "enabled",
+    "type": "boolean",
+    "display": "toggle",
+    "default": true
+  },
+  {
+    "label": "Source HubDB table",
+    "name": "source_table",
+    "type": "hubdbtable",
+    "help_text": "Use a table of people, clients, names, or media outlets. Rows can include a related logo/source row, or stand alone for logo-only sliders.",
+    "required": false
+  },
+  {
+    "label": "HubDB query",
+    "name": "hubdb_query",
+    "type": "text",
+    "help_text": "Optional HubDB query string, for example category__contains=featured_twic_guests&orderBy=sort_order. Leave blank to use all table rows.",
+    "default": "orderBy=sort_order"
+  },
+  {
+    "label": "Ordered row IDs",
+    "name": "ordered_row_ids",
+    "type": "text",
+    "help_text": "Optional HubDB row IDs separated by commas, spaces, or new lines. These rows render first in this order, followed by the remaining rows from the HubDB query.",
+    "default": ""
+  },
+  {
+    "label": "Items to show",
+    "name": "item_count_mode",
+    "type": "choice",
+    "display": "radio",
+    "choices": [
+      ["all", "All items"],
+      ["limit", "Limit items"]
+    ],
+    "default": "all"
+  },
+  {
+    "label": "Item limit",
+    "name": "max_items",
+    "type": "number",
+    "display": "text",
+    "help_text": "Only used when Items to show is set to Limit items.",
+    "min": 1,
+    "max": 50,
+    "step": 1,
+    "default": 12,
+    "visibility": {
+      "controlling_field": "item_count_mode",
+      "controlling_value_regex": "limit",
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "label": "Showcase format",
+    "name": "showcase_format",
+    "type": "choice",
+    "display": "radio",
+    "choices": [
+      ["details", "Details"],
+      ["logo_only", "Logo only"]
+    ],
+    "default": "details"
+  },
+  {
+    "label": "Primary link",
+    "name": "primary_link",
+    "type": "group",
+    "children": [
+      {
+        "label": "Link source",
+        "name": "mode",
+        "type": "choice",
+        "display": "radio",
+        "help_text": "Use a URL column, generate a blog tag archive URL, or disable primary links.",
+        "choices": [
+          ["url_column", "URL column"],
+          ["blog_tag", "Blog tag archive"],
+          ["none", "No link"]
+        ],
+        "default": "url_column"
+      },
+      {
+        "label": "Blog tag base URL",
+        "name": "blog_tag_base_url",
+        "type": "text",
+        "help_text": "Used when Link source is Blog tag archive. Example: /this-week-in-cleantech-podcast/tag/",
+        "default": ""
+      },
+      {
+        "label": "Slug override column",
+        "name": "tag_slug_column",
+        "type": "text",
+        "help_text": "Optional HubDB column containing the exact slug. If blank or empty for a row, the slug is generated dynamically.",
+        "default": "author_tag_slug"
+      },
+      {
+        "label": "Slug source column",
+        "name": "tag_slug_source_column",
+        "type": "text",
+        "help_text": "HubDB column used to generate the slug when no exact slug is provided. Leave blank to use the primary name column.",
+        "default": "name"
+      },
+      {
+        "label": "Validate tag archive links",
+        "name": "validate_blog_tag_links",
+        "type": "boolean",
+        "display": "toggle",
+        "help_text": "When enabled, primary and related tag archive links only render if the configured blog has posts for that tag.",
+        "default": false
+      }
+    ]
+  },
+  {
+    "label": "Related source link",
+    "name": "related_source_link",
+    "type": "group",
+    "children": [
+      {
+        "label": "Link source",
+        "name": "mode",
+        "type": "choice",
+        "display": "radio",
+        "help_text": "Use a URL column, generate a blog tag archive URL, or disable related source links.",
+        "choices": [
+          ["url_column", "URL column"],
+          ["blog_tag", "Blog tag archive"],
+          ["none", "No link"]
+        ],
+        "default": "url_column"
+      },
+      {
+        "label": "Blog tag base URL",
+        "name": "blog_tag_base_url",
+        "type": "text",
+        "help_text": "Used when Link source is Blog tag archive. Example: /this-week-in-cleantech-podcast/tag/",
+        "default": ""
+      },
+      {
+        "label": "Slug override column",
+        "name": "tag_slug_column",
+        "type": "text",
+        "help_text": "Optional HubDB column on the related source row containing the exact slug. If blank or empty for a row, the slug is generated dynamically.",
+        "default": ""
+      },
+      {
+        "label": "Slug source column",
+        "name": "tag_slug_source_column",
+        "type": "text",
+        "help_text": "Related source row column used to generate the slug when no exact slug is provided. Leave blank to use the related source name column.",
+        "default": "name"
+      }
+    ]
+  },
+  {
+    "label": "Source columns",
+    "name": "columns",
+    "type": "group",
+    "children": [
+      {
+        "label": "Primary name column",
+        "name": "primary_name",
+        "type": "text",
+        "required": true,
+        "default": "name"
+      },
+      {
+        "label": "Primary detail column",
+        "name": "primary_detail",
+        "type": "text",
+        "help_text": "Optional title, role, client, or descriptor column on each primary row.",
+        "default": "title"
+      },
+      {
+        "label": "Primary URL column",
+        "name": "primary_url",
+        "type": "text",
+        "help_text": "Optional URL column on each primary row.",
+        "default": "author_url"
+      },
+      {
+        "label": "Primary image column",
+        "name": "primary_image",
+        "type": "text",
+        "default": "image"
+      },
+      {
+        "label": "Related source column",
+        "name": "related_source",
+        "type": "text",
+        "help_text": "Optional relation column for a client, media outlet, logo, or other source row.",
+        "default": "related_source"
+      },
+      {
+        "label": "Related source name column",
+        "name": "related_source_name",
+        "type": "text",
+        "help_text": "Name column on the related source row.",
+        "default": "name"
+      },
+      {
+        "label": "Related source logo column",
+        "name": "related_source_logo",
+        "type": "text",
+        "help_text": "Logo or image column on the related source row.",
+        "default": "logo"
+      },
+      {
+        "label": "Related source URL column",
+        "name": "related_source_url",
+        "type": "text",
+        "help_text": "Optional URL column on the related source row.",
+        "default": "tag_url"
+      }
+    ]
+  },
+  {
+    "label": "Content",
+    "name": "content",
+    "type": "group",
+    "children": [
+      {
+        "label": "Title",
+        "name": "heading",
+        "type": "text",
+        "default": "Featured Guests"
+      }
+    ]
+  },
+  {
+    "label": "Scroller",
+    "name": "scroller",
+    "type": "group",
+    "children": [
+      {
+        "label": "Enable animation",
+        "name": "enable_animation",
+        "type": "boolean",
+        "display": "toggle",
+        "default": true
+      },
+      {
+        "label": "Animation speed",
+        "name": "duration",
+        "type": "number",
+        "display": "text",
+        "help_text": "Approximate movement speed. 0 stops automatic movement; 80 is medium; higher numbers move faster.",
+        "min": 0,
+        "step": 5,
+        "default": 80
+      },
+      {
+        "label": "Direction",
+        "name": "direction",
+        "type": "choice",
+        "display": "radio",
+        "choices": [
+          ["left", "Left"],
+          ["right", "Right"]
+        ],
+        "default": "left"
+      }
+    ]
+  }
+]
