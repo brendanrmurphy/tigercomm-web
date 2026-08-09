@@ -1,0 +1,67 @@
+[
+  {
+    "label": "Section heading",
+    "name": "section_heading",
+    "type": "text",
+    "required": true,
+    "default": "What Our Clients Say"
+  },
+  {
+    "label": "Testimonials heading",
+    "name": "testimonials_heading",
+    "type": "text",
+    "required": true,
+    "default": "Testimonials"
+  },
+  {
+    "label": "Image",
+    "name": "image",
+    "type": "image",
+    "responsive": true,
+    "resizable": true,
+    "show_loading": true,
+    "default": {
+      "loading": "lazy"
+    }
+  },
+  {
+    "label": "Testimonials",
+    "name": "testimonials",
+    "type": "group",
+    "occurrence": {
+      "default": 3,
+      "min": 1,
+      "max": null,
+      "sorting_label_field": "testimonials.author"
+    },
+    "children": [
+      {
+        "label": "Quote",
+        "name": "quote",
+        "type": "text",
+        "required": true,
+        "default": "Add the client's testimonial."
+      },
+      {
+        "label": "Author",
+        "name": "author",
+        "type": "text",
+        "required": true,
+        "default": "Client name"
+      },
+      {
+        "label": "Title and company",
+        "name": "author_title",
+        "type": "text",
+        "default": "Title, Company"
+      }
+    ],
+    "default": [
+      {
+        "quote": "Add the client's testimonial.",
+        "author": "Client name",
+        "author_title": "Title, Company"
+      }
+    ]
+  }
+]

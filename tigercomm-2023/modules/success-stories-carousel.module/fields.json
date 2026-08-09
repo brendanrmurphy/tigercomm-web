@@ -1,0 +1,79 @@
+[
+  {
+    "label": "Section heading",
+    "name": "section_heading",
+    "type": "text",
+    "required": true,
+    "default": "Success Stories"
+  },
+  {
+    "label": "Selected blog posts",
+    "name": "selected_posts",
+    "type": "group",
+    "help_text": "Add the HubSpot content ID for each blog post. Drag items to control their carousel order. The post title, image, excerpt, and URL are loaded automatically.",
+    "occurrence": {
+      "default": 3,
+      "min": 0,
+      "max": 10,
+      "sorting_label_field": "selected_posts.post_content_id"
+    },
+    "children": [
+      {
+        "label": "Blog post ID",
+        "name": "post_content_id",
+        "type": "text",
+        "required": true,
+        "validation_regex": "^[0-9]{6,18}$",
+        "help_text": "Open the post in HubSpot and copy the numeric content ID from its editor URL."
+      },
+      {
+        "label": "Legacy blog post ID",
+        "name": "post_id",
+        "type": "number",
+        "display": "text",
+        "required": false,
+        "locked": true,
+        "help_text": "Retained for compatibility with previously saved page data."
+      }
+    ],
+    "default": [
+      {
+        "post_content_id": "164138770864"
+      },
+      {
+        "post_content_id": "164138770776"
+      },
+      {
+        "post_content_id": "164138770826"
+      }
+    ]
+  },
+  {
+    "label": "Show excerpts",
+    "name": "show_excerpt",
+    "type": "boolean",
+    "display": "toggle",
+    "default": true
+  },
+  {
+    "label": "Excerpt length",
+    "name": "excerpt_length",
+    "type": "number",
+    "display": "text",
+    "min": 80,
+    "max": 500,
+    "step": 10,
+    "default": 260,
+    "visibility": {
+      "controlling_field": "show_excerpt",
+      "controlling_value_regex": "true",
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "label": "Link label",
+    "name": "link_label",
+    "type": "text",
+    "default": "Read the full story"
+  }
+]

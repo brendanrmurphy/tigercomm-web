@@ -99,6 +99,8 @@
 {% set track_count = is_static_scroller ? 1 : 2 %}
 {% set primary_link_mode = module.primary_link.mode or "url_column" %}
 {% set related_source_link_mode = module.related_source_link.mode or "url_column" %}
+{% set primary_links_new_tab = module.primary_link.open_in_new_tab == true %}
+{% set related_source_links_new_tab = module.related_source_link.open_in_new_tab == true %}
 {% set validate_blog_tag_links = module.primary_link.validate_blog_tag_links %}
 {% set validation_blog_id = group.id %}
 {% set validation_tag_slugs = [] %}
@@ -424,7 +426,7 @@
                       <div class="featured-showcase-card">
                         <div class="featured-showcase-card__content">
                           {% if related_source_logo_url and related_source_link_enabled %}
-                            <a class="featured-showcase-card__source-link" href="{{ related_source_logo_url }}">
+                            <a class="featured-showcase-card__source-link" href="{{ related_source_logo_url }}"{% if related_source_links_new_tab %} target="_blank" rel="noopener"{% endif %}>
                           {% else %}
                             <span class="featured-showcase-card__source-link">
                           {% endif %}
@@ -444,7 +446,7 @@
                           {% endif %}
                           {% if show_primary_details %}
                             {% if primary_url and primary_link_enabled %}
-                              <a class="featured-showcase-card__person" href="{{ primary_url }}">
+                              <a class="featured-showcase-card__person" href="{{ primary_url }}"{% if primary_links_new_tab %} target="_blank" rel="noopener"{% endif %}>
                             {% else %}
                               <span class="featured-showcase-card__person">
                             {% endif %}

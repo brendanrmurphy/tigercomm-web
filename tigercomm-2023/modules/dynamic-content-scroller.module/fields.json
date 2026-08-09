@@ -1,0 +1,223 @@
+[
+  {
+    "label": "Content source",
+    "name": "source_mode",
+    "type": "choice",
+    "display": "radio",
+    "help_text": "Automatically display posts from a blog or curate individual HubSpot pages. Sample Tigers in Action cards appear until the selected source returns content.",
+    "choices": [
+      ["recent_blog", "Recent posts from a blog"],
+      ["selected_pages", "Select site pages"]
+    ],
+    "default": "recent_blog"
+  },
+  {
+    "label": "Blog source",
+    "name": "blog_source",
+    "type": "group",
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "recent_blog",
+      "operator": "EQUAL"
+    },
+    "children": [
+      {
+        "label": "Blog",
+        "name": "blog",
+        "type": "blog"
+      },
+      {
+        "label": "Blog tag",
+        "name": "tag_slug",
+        "type": "tag",
+        "tag_value": "SLUG",
+        "help_text": "Optional. Select a tag to show only posts assigned to it."
+      },
+      {
+        "label": "Number of posts",
+        "name": "item_limit",
+        "type": "number",
+        "display": "slider",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "default": 6
+      },
+      {
+        "label": "Team member label",
+        "name": "team_label",
+        "type": "text",
+        "help_text": "Displayed above the associated Tigercomm team members.",
+        "default": "Hosted by"
+      },
+      {
+        "label": "First team member name",
+        "name": "team_one_name",
+        "type": "text"
+      },
+      {
+        "label": "First team member photo",
+        "name": "team_one_image",
+        "type": "image"
+      },
+      {
+        "label": "Second team member name",
+        "name": "team_two_name",
+        "type": "text"
+      },
+      {
+        "label": "Second team member photo",
+        "name": "team_two_image",
+        "type": "image"
+      }
+    ]
+  },
+  {
+    "label": "Selected site pages",
+    "name": "selected_pages",
+    "type": "group",
+    "help_text": "Add and reorder existing HubSpot website or landing pages. Their current titles, URLs, images, and descriptions are loaded automatically.",
+    "occurrence": {
+      "default": 0,
+      "min": 0,
+      "max": 20,
+      "sorting_label_field": "selected_pages.title_override"
+    },
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "selected_pages",
+      "operator": "EQUAL"
+    },
+    "children": [
+      {
+        "label": "Site page",
+        "name": "selected_page",
+        "type": "page",
+        "help_text": "Select a website page or landing page.",
+        "required": true
+      },
+      {
+        "label": "Title override",
+        "name": "title_override",
+        "type": "text",
+        "help_text": "Optional. Leave blank to use the current page or post title."
+      },
+      {
+        "label": "Image override",
+        "name": "image_override",
+        "type": "image",
+        "help_text": "Optional. Leave blank to use the current featured image."
+      },
+      {
+        "label": "Description override",
+        "name": "description_override",
+        "type": "text",
+        "allow_new_line": true,
+        "help_text": "Optional. Leave blank to use the current meta description or post summary."
+      },
+      {
+        "label": "Team member label",
+        "name": "team_label",
+        "type": "text",
+        "default": "Featuring"
+      },
+      {
+        "label": "First team member name",
+        "name": "team_one_name",
+        "type": "text"
+      },
+      {
+        "label": "First team member photo",
+        "name": "team_one_image",
+        "type": "image"
+      },
+      {
+        "label": "Second team member name",
+        "name": "team_two_name",
+        "type": "text"
+      },
+      {
+        "label": "Second team member photo",
+        "name": "team_two_image",
+        "type": "image"
+      }
+    ],
+    "default": []
+  },
+  {
+    "label": "Content",
+    "name": "content",
+    "type": "group",
+    "children": [
+      {
+        "label": "Heading",
+        "name": "heading",
+        "type": "text",
+        "default": "Featured Content"
+      },
+      {
+        "label": "Show descriptions",
+        "name": "show_descriptions",
+        "type": "boolean",
+        "display": "toggle",
+        "default": true
+      },
+      {
+        "label": "Link label",
+        "name": "link_label",
+        "type": "text",
+        "default": "Read more"
+      },
+      {
+        "label": "Open links in a new tab",
+        "name": "open_in_new_tab",
+        "type": "boolean",
+        "display": "toggle",
+        "default": false
+      }
+    ]
+  },
+  {
+    "label": "Scroller",
+    "name": "scroller",
+    "type": "group",
+    "children": [
+      {
+        "label": "Auto scroll",
+        "name": "autoplay",
+        "type": "boolean",
+        "display": "toggle",
+        "default": true
+      },
+      {
+        "label": "Scroll speed",
+        "name": "speed",
+        "type": "number",
+        "display": "slider",
+        "help_text": "Approximate movement speed in pixels per second.",
+        "min": 10,
+        "max": 100,
+        "step": 5,
+        "default": 30
+      },
+      {
+        "label": "Direction",
+        "name": "direction",
+        "type": "choice",
+        "display": "radio",
+        "choices": [
+          ["left", "Left"],
+          ["right", "Right"]
+        ],
+        "default": "left"
+      },
+      {
+        "label": "Pause on hover or focus",
+        "name": "pause_on_interaction",
+        "type": "boolean",
+        "display": "toggle",
+        "default": true
+      }
+    ]
+  }
+]

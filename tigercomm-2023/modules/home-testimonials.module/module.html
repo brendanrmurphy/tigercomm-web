@@ -1,0 +1,65 @@
+<section class="home2026-section home2026-section--white" aria-labelledby="home-testimonials-heading-{{ name }}">
+  <div class="content-wrapper">
+    {% if module.section_heading %}
+      <h2 id="home-testimonials-heading-{{ name }}">{{ module.section_heading }}</h2>
+    {% endif %}
+    {% if module.testimonials_heading %}
+      <h3>{{ module.testimonials_heading }}</h3>
+    {% endif %}
+    <div class="home2026-testimonials" data-testimonials-carousel>
+      {% if module.image.src %}
+        {% set size_attrs = module.image.width and module.image.height ? 'width="{{ module.image.width }}" height="{{ module.image.height }}"' : "" %}
+        {% if module.image.size_type == "auto" %}
+          {% set size_attrs = 'style="max-width: 100%; height: auto;"' %}
+        {% elif module.image.size_type == "auto_custom_max" %}
+          {% set size_attrs = 'width="{{ module.image.max_width }}" height="{{ module.image.max_height }}" style="max-width: 100%; height: auto;"' %}
+        {% endif %}
+        {% set loading_attr = module.image.loading != "disabled" ? 'loading="{{ module.image.loading }}"' : "" %}
+        <div class="home2026-testimonials__media">
+          <img src="{{ module.image.src|escape_url }}" alt="{{ module.image.alt|escape_attr }}" {{ loading_attr }} {{ size_attrs }}>
+        </div>
+      {% endif %}
+      <div class="home2026-testimonials__content">
+        <div
+          class="home2026-testimonials__viewport"
+          id="home-testimonials-viewport-{{ name }}"
+          data-testimonials-viewport
+          role="region"
+          aria-label="Client testimonials"
+          tabindex="0"
+        >
+          <div class="home2026-testimonials__track" data-testimonials-track>
+            {% for testimonial in module.testimonials %}
+              <article class="home2026-testimonial-card" data-testimonial-card>
+                <p>"{{ testimonial.quote }}"</p>
+                <cite>
+                  <span class="home2026-testimonial-card__author">{{ testimonial.author }}</span>
+                  {% if testimonial.author_title %}
+                    <span class="home2026-testimonial-card__title">{{ testimonial.author_title }}</span>
+                  {% endif %}
+                </cite>
+              </article>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="home2026-testimonials__controls" data-testimonials-controls hidden>
+          <button
+            class="home2026-testimonials__button home2026-testimonials__button--previous"
+            type="button"
+            aria-label="Previous testimonial"
+            aria-controls="home-testimonials-viewport-{{ name }}"
+            data-testimonials-previous
+          ></button>
+          <button
+            class="home2026-testimonials__button home2026-testimonials__button--next"
+            type="button"
+            aria-label="Next testimonial"
+            aria-controls="home-testimonials-viewport-{{ name }}"
+            data-testimonials-next
+          ></button>
+          <span class="home2026-testimonials__status" data-testimonials-status aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

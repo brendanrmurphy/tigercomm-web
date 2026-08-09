@@ -88,6 +88,25 @@
 
       equalizeCards();
       listWidth = firstList.getBoundingClientRect().width + trackGap;
+
+      if (listWidth) {
+        const prepareDuplicateList = (list) => {
+          list.setAttribute("aria-hidden", "true");
+          list.querySelectorAll("a, button, input, select, textarea").forEach((element) => {
+            element.setAttribute("tabindex", "-1");
+          });
+        };
+        const requiredCopies = Math.max(2, Math.ceil(viewport.clientWidth / listWidth) + 2);
+
+        Array.from(track.children).slice(1).forEach(prepareDuplicateList);
+        while (track.children.length < requiredCopies) {
+          const duplicateList = firstList.cloneNode(true);
+
+          prepareDuplicateList(duplicateList);
+          track.appendChild(duplicateList);
+        }
+      }
+
       offset = normalizeOffset(offset, listWidth);
       track.style.transform = `translate3d(${offset}px, 0, 0)`;
     };

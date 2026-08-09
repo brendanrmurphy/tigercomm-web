@@ -25,6 +25,13 @@
         "default": "<p>Add a short service description.</p>"
       },
       {
+        "label": "CTA label",
+        "name": "cta_label",
+        "type": "text",
+        "help_text": "Short call to action displayed when the service is expanded.",
+        "default": "Explore service"
+      },
+      {
         "label": "Link",
         "name": "link",
         "type": "url"
@@ -33,6 +40,25 @@
         "label": "Image",
         "name": "image",
         "type": "image"
+      },
+      {
+        "label": "Image focal point",
+        "name": "image_position",
+        "type": "choice",
+        "display": "select",
+        "help_text": "Choose which part of the image should remain visible as the tile changes width.",
+        "choices": [
+          ["center center", "Center"],
+          ["center top", "Top"],
+          ["center bottom", "Bottom"],
+          ["left center", "Left"],
+          ["right center", "Right"],
+          ["left top", "Top left"],
+          ["right top", "Top right"],
+          ["left bottom", "Bottom left"],
+          ["right bottom", "Bottom right"]
+        ],
+        "default": "center center"
       },
       {
         "label": "Theme",

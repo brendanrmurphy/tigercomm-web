@@ -1,63 +1,39 @@
 .interactive-service-tiles {
-  display: flex;
-  gap: 1.2rem;
-  height: 36rem;
-  margin-top: 1.8rem;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.8rem;
+  margin-top: 2.4rem;
 }
 
 .interactive-service-tile {
   position: relative;
   display: flex;
-  flex: 1 1 0;
-  min-width: 16rem;
-  container-type: inline-size;
+  grid-column: span 2;
+  min-width: 0;
+  min-height: clamp(32rem, 27vw, 40rem);
   align-items: flex-end;
   overflow: hidden;
-  border-bottom: 0.8rem solid var(--primary-color);
+  border-bottom: 0.6rem solid var(--primary-color);
   color: #fff;
   isolation: isolate;
-  transition: flex 320ms ease, filter 260ms ease;
+  text-decoration: none;
 }
 
-.interactive-service-tile--primary {
-  border-bottom-color: var(--primary-color);
-}
-
-.interactive-service-tile--quinary {
-  border-bottom-color: var(--quinary-color);
-}
-
-.interactive-service-tile--alt {
-  border-bottom-color: #2E4B68;
-}
-
-.interactive-service-tile--quaternary {
-  border-bottom-color: var(--quaternary-color);
-}
+.interactive-service-tile--primary { border-bottom-color: var(--primary-color); }
+.interactive-service-tile--quinary { border-bottom-color: var(--quinary-color); }
+.interactive-service-tile--alt { border-bottom-color: #2e4b68; }
+.interactive-service-tile--quaternary { border-bottom-color: var(--quaternary-color); }
 
 .interactive-service-tile:hover,
+.interactive-service-tile:focus,
 .interactive-service-tile:focus-within {
-  flex-grow: 4;
   color: #fff;
+  text-decoration: none;
 }
 
-.interactive-service-tiles:hover .interactive-service-tile {
-  flex: 0 1 16rem;
-}
-
-.interactive-service-tiles:focus-within .interactive-service-tile {
-  flex: 0 1 16rem;
-}
-
-.interactive-service-tiles:hover .interactive-service-tile:hover,
-.interactive-service-tiles:hover .interactive-service-tile:focus-within,
-.interactive-service-tiles:focus-within .interactive-service-tile:focus-within {
-  flex: 1 1 calc(100% - 68rem);
-}
-
-.interactive-service-tiles:hover .interactive-service-tile:not(:hover) {
-  filter: saturate(0.75);
+.interactive-service-tile:focus-visible {
+  outline: 0.3rem solid var(--tertiary-color);
+  outline-offset: -0.4rem;
 }
 
 .interactive-service-tile__image {
@@ -68,207 +44,220 @@
   height: 100%;
   object-fit: cover;
   transform: scale(1);
-  transition: transform 260ms ease;
+  transition: transform 320ms ease;
+  -webkit-user-drag: none;
 }
 
-.interactive-service-tile:hover .interactive-service-tile__image,
-.interactive-service-tile:focus-within .interactive-service-tile__image {
-  transform: scale(1.05);
+.interactive-service-tile.is-active .interactive-service-tile__image {
+  transform: scale(1.025);
 }
 
 .interactive-service-tile__shade {
   position: absolute;
   inset: 0;
   z-index: -1;
-  opacity: 0.86;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.4) 34%, rgba(0, 0, 0, 0.04) 72%);
-  transition: opacity 260ms ease, background 260ms ease;
+  background: transparent;
+  transition: background 240ms ease;
 }
 
-.interactive-service-tile:hover .interactive-service-tile__shade,
-.interactive-service-tile:focus-within .interactive-service-tile__shade {
-  opacity: 0.9;
+.interactive-service-tile--primary.is-active .interactive-service-tile__shade {
+  background: linear-gradient(0deg, rgba(177, 58, 0, 0.96) 0%, rgba(255, 98, 0, 0.78) 55%, rgba(255, 98, 0, 0.18) 100%);
 }
 
-.interactive-service-tile--primary:hover .interactive-service-tile__shade,
-.interactive-service-tile--primary:focus-within .interactive-service-tile__shade {
-  background: rgba(255, 98, 0, 0.9);
+.interactive-service-tile--quinary.is-active .interactive-service-tile__shade {
+  background: linear-gradient(0deg, rgba(20, 35, 49, 0.97) 0%, rgba(30, 47, 64, 0.78) 55%, rgba(30, 47, 64, 0.16) 100%);
 }
 
-.interactive-service-tile--quinary:hover .interactive-service-tile__shade,
-.interactive-service-tile--quinary:focus-within .interactive-service-tile__shade {
-  background: rgba(30, 47, 64, 0.9);
+.interactive-service-tile--alt.is-active .interactive-service-tile__shade {
+  background: linear-gradient(0deg, rgba(34, 57, 80, 0.97) 0%, rgba(46, 75, 104, 0.78) 55%, rgba(46, 75, 104, 0.16) 100%);
 }
 
-.interactive-service-tile--alt:hover .interactive-service-tile__shade,
-.interactive-service-tile--alt:focus-within .interactive-service-tile__shade {
-  background: rgba(46, 75, 104, 0.9);
-}
-
-.interactive-service-tile--quaternary:hover .interactive-service-tile__shade,
-.interactive-service-tile--quaternary:focus-within .interactive-service-tile__shade {
-  background: rgba(0, 31, 255, 0.9);
+.interactive-service-tile--quaternary.is-active .interactive-service-tile__shade {
+  background: linear-gradient(0deg, rgba(0, 18, 148, 0.97) 0%, rgba(0, 31, 255, 0.76) 55%, rgba(0, 31, 255, 0.16) 100%);
 }
 
 .interactive-service-tile__content {
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 0;
-  transition: padding 260ms ease, width 260ms ease;
-}
-
-.interactive-service-tile:hover .interactive-service-tile__content,
-.interactive-service-tile:focus-within .interactive-service-tile__content {
-  width: min(62rem, 100%);
-  padding: 2.4rem;
 }
 
 .interactive-service-tile__content h4 {
-  margin-bottom: 0;
-  height: 6.2rem;
-  padding: 1rem 1.2rem;
-  background: var(--primary-color);
+  display: flex;
+  min-height: 7.2rem;
+  margin: 0;
+  padding: 1.4rem 1.6rem;
+  align-items: center;
+  background: rgba(17, 29, 43, 0.92);
   color: #fff;
-  display: -webkit-box;
-  opacity: 1;
-  overflow: hidden;
-  overflow-wrap: anywhere;
+  font-size: clamp(1.65rem, 1.25vw, 2rem);
+  line-height: 1.15;
+  overflow-wrap: normal;
   text-shadow: none;
-  transform: none;
-  word-break: normal;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  font-size: clamp(1.15rem, 5.5cqw, 1.55rem);
-  line-height: 1.12;
-  transition:
-    opacity 180ms ease 0ms,
-    background 180ms ease 0ms,
-    padding 180ms ease 0ms;
 }
 
-@supports not (font-size: 1cqw) {
-  .interactive-service-tile__content h4 {
-    font-size: clamp(1.15rem, 0.95vw, 1.55rem);
-  }
-}
+.interactive-service-tile--primary .interactive-service-tile__content h4 { background: var(--primary-color); }
+.interactive-service-tile--quinary .interactive-service-tile__content h4 { background: var(--quinary-color); }
+.interactive-service-tile--alt .interactive-service-tile__content h4 { background: #2e4b68; }
+.interactive-service-tile--quaternary .interactive-service-tile__content h4 { background: var(--quaternary-color); }
 
-.interactive-service-tile--primary .interactive-service-tile__content h4 {
-  background: var(--primary-color);
-}
-
-.interactive-service-tile--quinary .interactive-service-tile__content h4 {
-  background: var(--quinary-color);
-}
-
-.interactive-service-tile--alt .interactive-service-tile__content h4 {
-  background: #2E4B68;
-}
-
-.interactive-service-tile--quaternary .interactive-service-tile__content h4 {
-  background: var(--quaternary-color);
+.interactive-service-tile__description,
+.interactive-service-tile__cta {
+  position: absolute;
+  left: 2.6rem;
+  right: 2.6rem;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(0.8rem);
+  transition: opacity 200ms ease, transform 220ms ease, visibility 0ms linear 220ms;
 }
 
 .interactive-service-tile__description {
-  max-width: 58rem;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(1rem);
-  transition:
-    max-height 0ms linear 320ms,
-    margin 0ms linear 320ms,
-    opacity 220ms ease 0ms,
-    transform 220ms ease 0ms;
-}
-
-.interactive-service-tile:hover .interactive-service-tile__description,
-.interactive-service-tile:focus-within .interactive-service-tile__description {
-  max-height: 28rem;
-  margin-top: 1.4rem;
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    max-height 0ms linear 320ms,
-    margin 0ms linear 320ms,
-    opacity 240ms ease 340ms,
-    transform 240ms ease 340ms;
-}
-
-.interactive-service-tile:hover .interactive-service-tile__content h4,
-.interactive-service-tile:focus-within .interactive-service-tile__content h4 {
-  display: block;
-  height: auto;
-  min-height: 0;
-  overflow: visible;
-  padding: 0;
-  background: transparent;
-  text-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.55);
-  font-size: revert;
-  line-height: revert;
-  -webkit-line-clamp: unset;
-  animation: interactive-service-title-reveal 560ms ease both;
-}
-
-.interactive-service-tiles:hover .interactive-service-tile:not(:hover):not(:focus-within) .interactive-service-tile__content {
-  padding: 0;
-}
-
-.interactive-service-tiles:hover .interactive-service-tile:not(:hover):not(:focus-within) .interactive-service-tile__content h4 {
-  height: 6.2rem;
-  overflow: hidden;
-  opacity: 0.72;
-  transform: none;
-  animation: none;
+  bottom: 7.4rem;
 }
 
 .interactive-service-tile__description p {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
   color: #fff;
-  font-size: 1.6rem;
-  line-height: 1.45;
+  font-size: clamp(1.4rem, 1.05vw, 1.6rem);
+  line-height: 1.42;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
 }
 
-@keyframes interactive-service-title-reveal {
-  0%,
-  54% {
-    opacity: 0;
-    transform: translateY(0.8rem);
-  }
+.interactive-service-tile__cta {
+  bottom: 3rem;
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  gap: 0.7rem;
+  color: #fff;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.55);
+  text-underline-offset: 0.35rem;
+}
 
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.interactive-service-tile.is-active .interactive-service-tile__content {
+  height: 100%;
+}
+
+.interactive-service-tile.is-active .interactive-service-tile__content h4 {
+  position: absolute;
+  top: 1.8rem;
+  left: 1.8rem;
+  right: 1.8rem;
+  display: block;
+  min-height: 0;
+  padding: 1.2rem 1.4rem;
+  background: rgba(17, 29, 43, 0.52);
+  font-size: clamp(2.2rem, 2vw, 3rem);
+  line-height: 1.08;
+}
+
+.interactive-service-tile.is-active .interactive-service-tile__description,
+.interactive-service-tile.is-active .interactive-service-tile__cta {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 80ms;
+}
+
+.interactive-service-tile__cta span {
+  transition: transform 180ms ease;
+}
+
+.interactive-service-tile:hover .interactive-service-tile__cta span,
+.interactive-service-tile:focus .interactive-service-tile__cta span {
+  transform: translateX(0.35rem);
 }
 
 @media (max-width: 980px) {
   .interactive-service-tiles {
-    height: auto;
-    flex-direction: column;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .interactive-service-tile,
-  .interactive-service-tile:hover,
-  .interactive-service-tile:focus-within {
-    min-height: 24rem;
-    min-width: 0;
-    flex: 1 1 auto;
+  .interactive-service-tile {
+    grid-column: auto;
+    min-height: 32rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .interactive-service-tiles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .interactive-service-tile {
+    grid-column: auto;
+    width: auto;
+    min-height: 30rem;
+  }
+}
+
+@media (hover: none) {
+  .interactive-service-tile__shade,
+  .interactive-service-tile--primary.is-active .interactive-service-tile__shade,
+  .interactive-service-tile--quinary.is-active .interactive-service-tile__shade,
+  .interactive-service-tile--alt.is-active .interactive-service-tile__shade,
+  .interactive-service-tile--quaternary.is-active .interactive-service-tile__shade {
+    background: linear-gradient(0deg, rgba(17, 29, 43, 0.96) 0%, rgba(17, 29, 43, 0.7) 62%, rgba(17, 29, 43, 0.14) 100%);
+  }
+
+  .interactive-service-tile__content,
+  .interactive-service-tile.is-active .interactive-service-tile__content {
+    height: 100%;
+  }
+
+  .interactive-service-tile__content h4,
+  .interactive-service-tile.is-active .interactive-service-tile__content h4 {
+    position: absolute;
+    top: 2.2rem;
+    left: 2.2rem;
+    right: 2.2rem;
+    display: block;
+    min-height: 0;
+    padding: 0;
+    background: transparent;
+    font-size: clamp(2.1rem, 7vw, 2.8rem);
+    line-height: 1.1;
+  }
+
+  .interactive-service-tile__description,
+  .interactive-service-tile__cta,
+  .interactive-service-tile.is-active .interactive-service-tile__description,
+  .interactive-service-tile.is-active .interactive-service-tile__cta {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
   }
 
   .interactive-service-tile__description {
-    max-height: none;
-    margin-top: 1.4rem;
-    opacity: 1;
-    transform: none;
+    right: 2.2rem;
+    bottom: 6.8rem;
+    left: 2.2rem;
+  }
+
+  .interactive-service-tile__description p {
+    -webkit-line-clamp: 4;
+  }
+
+  .interactive-service-tile__cta {
+    bottom: 2.4rem;
+    left: 2.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive-service-tile__image,
+  .interactive-service-tile__shade,
+  .interactive-service-tile__description,
+  .interactive-service-tile__cta,
+  .interactive-service-tile__cta span {
     transition: none;
-  }
-
-  .interactive-service-tile:hover .interactive-service-tile__content h4,
-  .interactive-service-tile:focus-within .interactive-service-tile__content h4 {
-    animation: none;
-  }
-
-  .interactive-service-tile__content {
-    padding: 0;
   }
 }

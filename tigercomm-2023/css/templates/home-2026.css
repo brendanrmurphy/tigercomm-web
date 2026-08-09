@@ -53,8 +53,10 @@
 .home2026-hero {
   position: relative;
   min-height: 68rem;
-  background-position: center;
+  background-position: center 72%;
+  background-repeat: no-repeat;
   background-size: cover;
+  background-color: #285079;
   color: #fff;
 }
 
@@ -79,33 +81,49 @@
 }
 
 .home2026-hero__copy {
-  max-width: 82rem;
+  flex: 1 1 110rem;
+  max-width: 110rem;
 }
 
 .home2026-hero h1 {
+  max-width: 110rem;
+  margin-bottom: 0;
   color: #fff;
-  text-shadow: 0 0.2rem 1.8rem rgba(0, 0, 0, 0.48);
+  font-size: clamp(4.4rem, 3.7vw, 6.2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  text-shadow: none;
+}
+
+.home2026-hero h1 span,
+.home2026-hero h1 strong {
+  display: block;
 }
 
 .home2026-hero p {
-  max-width: 62rem;
+  max-width: 88rem;
   color: #fff;
   font-weight: 500;
 }
 
 .home2026-hero h1 + p {
-  margin-top: 2rem;
+  margin-top: 3.2rem;
 }
 
-.home2026-hero__cta {
-  align-self: flex-end;
-  margin-bottom: 8rem;
-  border: 0.2rem solid rgba(255, 255, 255, 0.55);
-  background: rgba(210, 210, 210, 0.55);
-  color: var(--primary-color);
-  font-family: var(--font-secondary);
-  font-size: 3rem;
-  font-weight: 900;
+.home2026-hero__cta.button {
+  margin-top: 3.2rem;
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+  color: #fff;
+  white-space: nowrap;
+  box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.2);
+}
+
+.home2026-hero__cta.button:hover,
+.home2026-hero__cta.button:focus {
+  border-color: #fff;
+  background: #fff;
+  color: var(--quinary-color);
 }
 
 .home2026-intro {
@@ -114,8 +132,7 @@
 
 .home2026-intro + .module,
 .home2026-intro + h3,
-.home2026-kicker + .module,
-.home2026-kicker + .home2026-logo-row {
+.home2026-kicker + .module {
   margin-top: 3.2rem;
 }
 
@@ -133,128 +150,48 @@
   line-height: 1.15;
 }
 
-.home2026-logo-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 4rem;
-  margin-top: 4rem;
-}
-
-.home2026-logo-row img {
-  max-width: 15rem;
-  max-height: 5.8rem;
-  object-fit: contain;
-}
-
-.home2026-proof {
-  padding: 8rem 0;
-  background: var(--light-gray);
-}
-
-.home2026-proof__stage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.4rem;
-  margin-top: 3.2rem;
-  padding: 5.6rem 0;
-  background: transparent;
-}
-
-.home2026-proof__inner {
-  display: grid;
-  grid-template-columns: minmax(28rem, 52rem) minmax(28rem, 48rem);
-  justify-content: center;
-  gap: 10rem;
-  width: min(100%, 112rem);
-}
-
-.home2026-proof__inner img {
-  width: 100%;
-  background: #fff;
-}
-
-.home2026-proof__copy h3,
-.home2026-proof__copy h4,
-.home2026-proof__copy p {
-  color: #2b2b35;
-}
-
-.home2026-proof__copy h4 {
-  margin-top: 1.2rem;
-  margin-bottom: 1.8rem;
-  color: var(--quaternary-color);
-}
-
-.home2026-proof__copy p {
-  font-size: 1.7rem;
-}
-
-.home2026-proof .home2026-arrow {
-  color: #2b2b35;
-}
-
-.home2026-arrow {
-  display: inline-flex;
-  width: 5rem;
-  height: 5rem;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  background: transparent;
-  color: #fff;
-  font-size: 3rem;
-}
-
-.home2026-arrow--blue {
-  color: #2b2b35;
-}
-
-.home2026-testimonials {
-  display: grid;
-  grid-template-columns: minmax(24rem, 38rem) 5rem repeat(3, minmax(20rem, 1fr));
-  gap: 1.8rem;
-  align-items: center;
-  margin-top: 3.6rem;
-}
-
 .home2026-section h2 + h3 {
   margin-top: 1.8rem;
 }
 
-.home2026-testimonials > img {
-  width: 100%;
-  height: 42rem;
-  object-fit: cover;
+.home2026-who .featured-showcase-scroller--logo-only {
+  --showcase-section-bg: #fff;
+  margin-top: 7.2rem;
 }
 
-.home2026-testimonial-card {
-  min-height: 42rem;
-  padding: 3rem;
-  background: #001fff;
-  color: #fff;
+.home2026-who .featured-showcase-scroller--logo-only .featured-showcase-scroller__header {
+  justify-content: flex-end;
+  margin-bottom: 1.6rem;
 }
 
-.home2026-testimonial-card p,
-.home2026-testimonial-card cite {
-  color: #fff;
-  font-size: 1.7rem;
-  line-height: 1.45;
+.home2026-who .featured-showcase-scroller--logo-only .featured-showcase-card {
+  min-height: 8rem;
+  padding: 0.8rem;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
-.home2026-testimonial-card p {
-  font-style: italic;
+.home2026-who .featured-showcase-scroller--logo-only .featured-showcase-card:hover,
+.home2026-who .featured-showcase-scroller--logo-only .featured-showcase-card:focus-within {
+  background: transparent;
 }
 
-.home2026-testimonial-card cite {
-  display: block;
-  margin-top: 3rem;
-  font-style: normal;
+.home2026-who .featured-showcase-scroller--logo-only .featured-showcase-card::after {
+  display: none;
 }
 
-.home2026-action .featured-showcase-scroller {
+.home2026-who .featured-showcase-scroller--logo-only .featured-showcase-card__source-logo {
+  width: 20rem;
+  height: 6.4rem;
+  max-width: 100%;
+  max-height: 6.4rem;
+}
+
+.home2026-action .featured-showcase-scroller,
+.home2026-action .dynamic-content-scroller {
   --showcase-section-bg: var(--light-gray);
+  --dynamic-content-bg: var(--light-gray);
   margin-top: 3.2rem;
 }
 
@@ -334,17 +271,6 @@
   font-size: 1.6rem;
 }
 
-@media (max-width: 1180px) {
-  .home2026-testimonials {
-    grid-template-columns: repeat(3, minmax(20rem, 1fr));
-  }
-
-  .home2026-testimonials > img,
-  .home2026-testimonials > button {
-    display: none;
-  }
-}
-
 @media (max-width: 980px) {
   .home2026-hero,
   .home2026-hero__inner {
@@ -352,7 +278,6 @@
   }
 
   .home2026-hero__inner,
-  .home2026-proof__inner,
   .home2026-expertise__body,
   .home2026-team {
     grid-template-columns: 1fr;
@@ -360,24 +285,6 @@
 
   .home2026-hero__inner {
     display: grid;
-  }
-
-  .home2026-hero__cta {
-    align-self: start;
-    margin-bottom: 0;
-  }
-
-  .home2026-proof__stage {
-    display: block;
-    padding: 4rem 2rem;
-  }
-
-  .home2026-proof__stage > .home2026-arrow {
-    display: none;
-  }
-
-  .home2026-proof__inner {
-    gap: 3rem;
   }
 
   .home2026-team {
@@ -406,23 +313,23 @@
     padding-bottom: 5rem;
   }
 
-  .home2026-proof {
-    padding-top: 5.6rem;
+  .home2026-hero h1 {
+    font-size: 4rem;
+    line-height: 1.06;
   }
 
-  .home2026-proof__stage,
-  .home2026-testimonials,
+  .home2026-hero {
+    background-position: center 66%;
+  }
+
+  .home2026-who .featured-showcase-scroller--logo-only {
+    margin-top: 5.6rem;
+  }
+
   .home2026-action .featured-showcase-scroller,
+  .home2026-action .dynamic-content-scroller,
   .home2026-expertise__body {
     margin-top: 2.4rem;
-  }
-
-  .home2026-testimonials {
-    grid-template-columns: 1fr;
-  }
-
-  .home2026-testimonial-card {
-    min-height: auto;
   }
 
   .home2026-leader {

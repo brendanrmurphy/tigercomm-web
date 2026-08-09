@@ -1,0 +1,72 @@
+{% set stories = [] %}
+{% set excerpt_length = module.excerpt_length|int %}
+{% if excerpt_length < 1 %}
+  {% set excerpt_length = 260 %}
+{% endif %}
+
+{% for selected_post in module.selected_posts %}
+  {# post_id supports page data saved before the field was safely migrated from number to text. #}
+  {% set selected_post_id = selected_post.post_content_id or selected_post.post_id %}
+  {% if selected_post_id and selected_post_id|string|length >= 6 %}
+    {% set blog_story = content_by_id(selected_post_id|int) %}
+    {% if blog_story and blog_story.absolute_url %}
+      {% do stories.append(blog_story) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% if stories|length %}
+  <section class="success-stories-carousel" aria-labelledby="success-stories-heading-{{ name }}" data-success-stories-carousel>
+    <div class="content-wrapper">
+      <div class="success-stories-carousel__header">
+        <h2 id="success-stories-heading-{{ name }}">{{ module.section_heading }}</h2>
+        {% if stories|length > 1 %}
+          <div class="success-stories-carousel__controls" aria-label="Success story controls">
+            <button class="success-stories-carousel__control success-stories-carousel__control--previous" type="button" aria-label="Previous success story" data-success-stories-previous></button>
+            <button class="success-stories-carousel__control success-stories-carousel__control--next" type="button" aria-label="Next success story" data-success-stories-next></button>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="success-stories-carousel__viewport" role="region" aria-label="Success stories" tabindex="0" data-success-stories-viewport>
+        {% for story in stories %}
+          {% set story_url = story.absolute_url %}
+          {% set story_image = story.post_list_summary_featured_image or story.featured_image %}
+          {% set story_image_alt = story.featured_image_alt_text or story.name or story.title %}
+          {% set story_title = story.name or story.title %}
+          {% set story_summary = story.post_list_content|striptags|trim %}
+          {% if not story_summary %}
+            {% set story_summary = story.meta_description|striptags|trim %}
+          {% endif %}
+          {% if not story_summary %}
+            {% set story_summary = story.post_body|striptags|trim %}
+          {% endif %}
+
+          <article class="success-stories-carousel__slide{% if loop.first %} is-active{% endif %}" data-success-story-slide{% if not loop.first %} hidden{% endif %}>
+            <div class="success-stories-carousel__media">
+              {% if story_url %}<a href="{{ story_url }}">{% endif %}
+                {% if story_image %}
+                  <img src="{{ story_image|escape_url }}" alt="{{ story_image_alt|escape_attr }}" loading="lazy">
+                {% endif %}
+              {% if story_url %}</a>{% endif %}
+            </div>
+            <div class="success-stories-carousel__copy">
+              <h3>{% if story_url %}<a href="{{ story_url }}">{{ story_title }}</a>{% else %}{{ story_title }}{% endif %}</h3>
+              {% if module.show_excerpt != false and story_summary %}
+                <p>{{ story_summary|truncate(excerpt_length, true, "…") }}</p>
+              {% endif %}
+              {% if story_url and module.link_label %}
+                <a class="success-stories-carousel__link" href="{{ story_url }}">{{ module.link_label }}</a>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+      {% if stories|length > 1 %}
+        <p class="success-stories-carousel__status" aria-live="polite" data-success-stories-status>Showing success story 1 of {{ stories|length }}</p>
+      {% endif %}
+    </div>
+  </section>
+{% elif is_in_editor %}
+  <div class="success-stories-carousel__empty">Add at least one blog post ID to display the Success Stories carousel.</div>
+{% endif %}

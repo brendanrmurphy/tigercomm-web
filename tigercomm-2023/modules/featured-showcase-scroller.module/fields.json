@@ -11,9 +11,10 @@
     "name": "source_mode",
     "type": "choice",
     "display": "radio",
+    "help_text": "Choose whether slides come from a HubDB table or are entered directly in this module.",
     "choices": [
-      ["hubdb", "HubDB"],
-      ["manual_blog_features", "Manual blog features"]
+      ["hubdb", "Pull items from HubDB"],
+      ["manual_blog_features", "Enter feature cards manually"]
     ],
     "default": "hubdb"
   },
@@ -21,20 +22,31 @@
     "label": "Source HubDB table",
     "name": "source_table",
     "type": "hubdbtable",
-    "help_text": "Use a table of people, clients, names, or media outlets. Rows can include a related logo/source row, or stand alone for logo-only sliders.",
-    "required": false
+    "help_text": "Select the table containing the items to display.",
+    "required": false,
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "hubdb",
+      "operator": "EQUAL"
+    }
   },
   {
     "label": "HubDB query",
     "name": "hubdb_query",
     "type": "text",
     "help_text": "Optional HubDB query string, for example category__contains=featured_twic_guests&orderBy=sort_order. Leave blank to use all table rows.",
-    "default": "orderBy=sort_order"
+    "default": "orderBy=sort_order",
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "hubdb",
+      "operator": "EQUAL"
+    }
   },
   {
-    "label": "Manual blog features",
+    "label": "Feature cards",
     "name": "manual_blog_features",
     "type": "group",
+    "help_text": "Add and reorder the individual cards displayed in the scroller.",
     "occurrence": {
       "default": 0,
       "min": 0,
@@ -43,19 +55,19 @@
     },
     "children": [
       {
-        "label": "Title",
+        "label": "Card title",
         "name": "feature_title",
         "type": "text",
         "default": "Featured blog"
       },
       {
-        "label": "Small title",
+        "label": "Eyebrow text",
         "name": "feature_label",
         "type": "text",
         "help_text": "Optional smaller label displayed above the main title."
       },
       {
-        "label": "Episode",
+        "label": "Episode label",
         "name": "feature_episode",
         "type": "text",
         "help_text": "Optional episode number or episode label, such as Episode 42."
@@ -72,18 +84,18 @@
         "type": "text"
       },
       {
-        "label": "Logo",
+        "label": "Card logo",
         "name": "feature_logo",
         "type": "image"
       },
       {
-        "label": "Description",
+        "label": "Card description",
         "name": "feature_description",
         "type": "richtext",
         "default": "<p>Add a short description.</p>"
       },
       {
-        "label": "Link",
+        "label": "Card destination URL",
         "name": "feature_link",
         "type": "url"
       },
@@ -108,14 +120,24 @@
         "type": "image"
       }
     ],
-    "default": []
+    "default": [],
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "manual_blog_features",
+      "operator": "EQUAL"
+    }
   },
   {
     "label": "Ordered row IDs",
     "name": "ordered_row_ids",
     "type": "text",
     "help_text": "Optional HubDB row IDs separated by commas, spaces, or new lines. These rows render first in this order, followed by the remaining rows from the HubDB query.",
-    "default": ""
+    "default": "",
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "hubdb",
+      "operator": "EQUAL"
+    }
   },
   {
     "label": "Items to show",
@@ -153,12 +175,22 @@
       ["details", "Details"],
       ["logo_only", "Logo only"]
     ],
-    "default": "details"
+    "default": "details",
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "hubdb",
+      "operator": "EQUAL"
+    }
   },
   {
     "label": "Primary link",
     "name": "primary_link",
     "type": "group",
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "hubdb",
+      "operator": "EQUAL"
+    },
     "children": [
       {
         "label": "Link source",
@@ -172,6 +204,13 @@
           ["none", "No link"]
         ],
         "default": "url_column"
+      },
+      {
+        "label": "Open primary links in a new tab",
+        "name": "open_in_new_tab",
+        "type": "boolean",
+        "display": "toggle",
+        "default": false
       },
       {
         "label": "Blog tag base URL",
@@ -208,6 +247,11 @@
     "label": "Related source link",
     "name": "related_source_link",
     "type": "group",
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "hubdb",
+      "operator": "EQUAL"
+    },
     "children": [
       {
         "label": "Link source",
@@ -221,6 +265,13 @@
           ["none", "No link"]
         ],
         "default": "url_column"
+      },
+      {
+        "label": "Open related source links in a new tab",
+        "name": "open_in_new_tab",
+        "type": "boolean",
+        "display": "toggle",
+        "default": false
       },
       {
         "label": "Blog tag base URL",
@@ -249,6 +300,11 @@
     "label": "Source columns",
     "name": "columns",
     "type": "group",
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "hubdb",
+      "operator": "EQUAL"
+    },
     "children": [
       {
         "label": "Primary name column",

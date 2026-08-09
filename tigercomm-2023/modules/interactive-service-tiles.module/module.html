@@ -5,12 +5,13 @@
     {% for service in service_items %}
       {% set href = service.link.url.href or service.link.url or service.link.href %}
       {% set image_src = service.image.src or service.image.url %}
-      {% set image_alt = service.image.alt or service.service_title %}
+      {% set image_position = service.image_position or "center center" %}
+      {% set cta_label = service.cta_label or "Explore service" %}
 
       {% if href %}
-        <a class="interactive-service-tile interactive-service-tile--{{ service.theme }}" href="{{ href }}">
+        <a class="interactive-service-tile interactive-service-tile--{{ service.theme }}" href="{{ href|escape_url }}" data-service-tile>
           {% if image_src %}
-            <img class="interactive-service-tile__image" src="{{ image_src }}" alt="{{ image_alt }}" loading="lazy">
+            <img class="interactive-service-tile__image" src="{{ image_src|escape_url }}" alt="" loading="lazy" aria-hidden="true" style="object-position: {{ image_position|escape_attr }};">
           {% endif %}
           <div class="interactive-service-tile__shade" aria-hidden="true"></div>
           <div class="interactive-service-tile__content">
@@ -18,12 +19,13 @@
             <div class="interactive-service-tile__description">
               {{ service.description }}
             </div>
+            <span class="interactive-service-tile__cta">{{ cta_label }} <span aria-hidden="true">→</span></span>
           </div>
         </a>
       {% else %}
-        <div class="interactive-service-tile interactive-service-tile--{{ service.theme }}">
+        <div class="interactive-service-tile interactive-service-tile--{{ service.theme }}" tabindex="0" data-service-tile>
           {% if image_src %}
-            <img class="interactive-service-tile__image" src="{{ image_src }}" alt="{{ image_alt }}" loading="lazy">
+            <img class="interactive-service-tile__image" src="{{ image_src|escape_url }}" alt="" loading="lazy" aria-hidden="true" style="object-position: {{ image_position|escape_attr }};">
           {% endif %}
           <div class="interactive-service-tile__shade" aria-hidden="true"></div>
           <div class="interactive-service-tile__content">

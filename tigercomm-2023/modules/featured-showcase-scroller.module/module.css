@@ -223,6 +223,11 @@
   width: min(64vw, 22rem);
 }
 
+.featured-showcase-scroller--logo-only .featured-showcase-scroller__track,
+.featured-showcase-scroller--logo-only .featured-showcase-scroller__list {
+  gap: clamp(3.6rem, 4vw, 5.6rem);
+}
+
 .featured-showcase-scroller--blog-features .featured-showcase-scroller__item {
   width: min(82vw, 52rem);
 }

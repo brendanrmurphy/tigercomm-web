@@ -13,7 +13,19 @@
 }
 
 .hover-tabs .hover-tabs__right {
+  display: grid;
   padding: 1rem 0;
+}
+
+.hover-tabs .hover-tabs__panel {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.hover-tabs .hover-tabs__panel[hidden] {
+  display: block !important;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .hover-tabs .hover-tabs__tab {
@@ -63,19 +75,6 @@
 .hover-tabs .hover-tabs__panel ul {
   margin-left: 0;
   font-size: 1.8rem;
-}
-
-.hover-tabs.is-measuring .hover-tabs__panel {
-  display: block !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-  position: static !important;
-  transform: none !important;
-  opacity: 1 !important;
-}
-
-.hover-tabs.is-measuring .hover-tabs__panel[hidden] {
-  display: block !important;
 }
 
 @media (max-width: 900px) {

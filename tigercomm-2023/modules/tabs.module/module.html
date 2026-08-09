@@ -22,6 +22,9 @@
   <script>
     (function () {
       document.querySelectorAll("[data-hover-tabs]").forEach((root) => {
+        if (root.dataset.hoverTabsInitialized === "true") return;
+        root.dataset.hoverTabsInitialized = "true";
+
         const tabs = Array.from(root.querySelectorAll(".hover-tabs__tab"));
         const panels = Array.from(root.querySelectorAll(".hover-tabs__panel"));
         if (!tabs.length || !panels.length) return;
