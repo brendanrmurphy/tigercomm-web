@@ -1,0 +1,225 @@
+.body-container--service-page {
+  color: #2b2b35;
+}
+
+.service-page__inner {
+  width: 100%;
+  max-width: 128rem;
+  margin: 0 auto;
+  padding-right: 4rem;
+  padding-left: 4rem;
+}
+
+.service-page__inner--narrow {
+  max-width: 112rem;
+}
+
+.service-page__section {
+  padding: clamp(6rem, 8vw, 10rem) 0;
+}
+
+.body-container--service-page h1,
+.body-container--service-page h2 {
+  text-wrap: balance;
+}
+
+.body-container--service-page h2 {
+  margin-bottom: clamp(2.8rem, 4vw, 4.8rem);
+}
+
+.body-container--service-page p,
+.body-container--service-page li {
+  font-size: clamp(1.7rem, 1.5vw, 1.9rem);
+  line-height: 1.65;
+}
+
+.body-container--service-page .service-page__eyebrow {
+  margin: 0 0 1.6rem;
+  color: var(--primary-color);
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.service-page__hero {
+  padding: clamp(6.4rem, 9vw, 11rem) 0;
+  background: #172f52;
+  color: #fff;
+}
+
+.service-page__hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(32rem, 0.85fr);
+  gap: clamp(4rem, 6vw, 8rem);
+  align-items: center;
+}
+
+.service-page__hero h1 {
+  max-width: 76rem;
+  margin: 0 0 2.8rem;
+  color: #fff;
+  font-size: clamp(4rem, 5.5vw, 7.2rem);
+  line-height: 1.02;
+}
+
+.service-page__hero p {
+  max-width: 72rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.service-page__hero .service-page__eyebrow {
+  color: var(--tertiary-color);
+}
+
+.service-page__hero .service-page__lead {
+  color: #fff;
+  font-size: clamp(2rem, 2vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.service-page__hero-image img {
+  display: block;
+  width: 100%;
+  border-radius: 0.4rem;
+  box-shadow: 1.6rem 1.6rem 0 var(--primary-color);
+}
+
+.service-page__statement {
+  margin: 0 0 3.2rem;
+  color: var(--quinary-color);
+  font-family: var(--font-secondary);
+  font-size: clamp(2.8rem, 3.4vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.service-page__intro .button {
+  margin-top: 1.2rem;
+}
+
+.service-page__services {
+  background: #f4f5f6;
+}
+
+.service-page__services h2,
+.service-page__faq-section h2 {
+  max-width: 82rem;
+}
+
+.service-page__services .hover-tabs {
+  margin-top: 1.2rem;
+}
+
+.service-page__process h2 {
+  max-width: 100rem;
+  margin-bottom: 2rem;
+}
+
+.service-page__process h2 + p {
+  max-width: 86rem;
+}
+
+.service-page__process-visual {
+  margin-top: 4rem;
+}
+
+.service-page__process-visual:focus-visible {
+  outline: 0.2rem solid var(--primary-color);
+  outline-offset: 0.6rem;
+}
+
+.service-page__process-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0.1rem solid rgba(23, 47, 82, 0.12);
+  border-radius: 0.4rem;
+  box-shadow: 0 1.2rem 3.6rem rgba(23, 47, 82, 0.1);
+}
+
+.service-page__process-copy {
+  max-width: 104rem;
+  margin: 5.6rem auto 0;
+}
+
+.service-page__process-copy ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem 4rem;
+  margin: 2.8rem 0 0;
+  padding-left: 2.4rem;
+}
+
+.service-page__process-copy li {
+  padding-left: 0.8rem;
+}
+
+.service-page__why {
+  background: #def5fb;
+}
+
+.service-page__why h2 {
+  max-width: 82rem;
+}
+
+.service-page__faq-section .faq {
+  max-width: none;
+}
+
+.body-container--service-page > .cta {
+  margin: 0;
+}
+
+@media (max-width: 980px) {
+  .service-page__inner {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  .service-page__hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-page__hero-image img {
+    width: min(100%, 64rem);
+    box-shadow: 1rem 1rem 0 var(--primary-color);
+  }
+
+  .service-page__process-visual {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding-bottom: 1.2rem;
+  }
+
+  .service-page__process-visual img {
+    min-width: 90rem;
+  }
+
+  .service-page__process-copy ol {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .service-page__inner {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .service-page__hero h1 {
+    font-size: clamp(3.6rem, 11vw, 5rem);
+  }
+
+  .service-page__statement {
+    font-size: clamp(2.6rem, 8vw, 3.5rem);
+  }
+
+  .service-page__process-visual img {
+    min-width: 78rem;
+  }
+}

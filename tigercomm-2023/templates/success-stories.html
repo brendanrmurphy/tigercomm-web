@@ -142,6 +142,14 @@ document.addEventListener("DOMContentLoaded", function() {
                   "title": "Client Dominates Top Trade Magazine During Biggest Show of the Year",
                   "sub_title": "How 1 Interview Led to 3 Articles, Including Cover Story Image Circulated to 40K+ Potential Customers",
                   "blurb": "How Tigercomm helped Nextpower convert editorial coverage into a sales advantage at the year's most important industry gathering."
+                },
+                {
+                  "url": "/success-stories/virginia-hb-1360",
+                  "image": "stop-overpriced-power-virginia.png",
+                  "alt": "Stop Overpriced Power Virginia campaign graphic alongside the signed legislation.",
+                  "title": "A Technical Bill. A Powerful Opponent. A Legislative Win.",
+                  "sub_title": "A state energy coalition set out to change a highly technical regulation with a short legislative window and a powerful company opposing it. Tigercomm simplified the message, targeted the networks around six key lawmakers and helped the bill become law.",
+                  "blurb": "How Tigercomm turned an obscure utility regulation into a winning issue and helped get a reform signed into law."
                 }
               ] %}
               {% for preview_story in preview_stories %}
@@ -168,11 +176,24 @@ document.addEventListener("DOMContentLoaded", function() {
                 {% set _ = formatted_years.append(item_year) %}
               {% endfor %}
             {% set listing_img = "" %}
+            {% set listing_img_url = "" %}
             {% set listing_img_alt = "" %}
             {% set listing_title = "" %}
             {% set listing_sub_title = "" %}
             {% set listing_blurb = "" %}
-            {% if content.slug == 'success-stories/project-lucy' %}
+            {% if content.widgets.success_story_content and content.widgets.success_story_hero.body.title %}
+              {% set managed_hero = content.widgets.success_story_hero.body %}
+              {% set managed_story = content.widgets.success_story_content.body %}
+              {% set listing_img_url = managed_story.primary_image.src %}
+              {% set listing_img_alt = managed_story.primary_image.alt %}
+              {% set listing_title = managed_hero.title %}
+              {% set listing_sub_title = managed_hero.sub_title %}
+              {% if managed_story.listing_summary %}
+                {% set listing_blurb = managed_story.listing_summary %}
+              {% else %}
+                {% set listing_blurb = managed_hero.content|striptags|trim %}
+              {% endif %}
+            {% elif content.slug == 'success-stories/project-lucy' %}
               {% set listing_img = "lucy.jpg" %}
               {% set listing_img_alt = "News coverage from Project Lucy's groundbreaking, including pv magazine, Dallas Innovates, and ChosunBiz coverage." %}
               {% set listing_title = "Storm-Tested Coverage Delivered Investor Confidence in $524M Solar Project" %}
@@ -190,10 +211,24 @@ document.addEventListener("DOMContentLoaded", function() {
               {% set listing_title = "Client Dominates Top Trade Magazine During Biggest Show of the Year" %}
               {% set listing_sub_title = "How 1 Interview Led to 3 Articles, Including Cover Story Image Circulated to 40K+ Potential Customers" %}
               {% set listing_blurb = "How Tigercomm helped Nextpower convert editorial coverage into a sales advantage at the year's most important industry gathering." %}
+            {% elif content.slug == 'success-stories/virginia-hb-1360' %}
+              {% set listing_img = "stop-overpriced-power-virginia.png" %}
+              {% set listing_img_alt = "Stop Overpriced Power Virginia campaign graphic alongside the signed legislation." %}
+              {% set listing_title = "A Technical Bill. A Powerful Opponent. A Legislative Win." %}
+              {% set listing_sub_title = "HB 1360 Signed into Law Despite a 20-to-1 Spending Disadvantage" %}
+              {% set listing_blurb = "How Tigercomm turned an obscure utility regulation into a winning issue and helped get a reform signed into law." %}
+            {% elif content.slug == 'success-stories/mangrove-lithium-ribbon-cutting' %}
+              {% set listing_img = "mangrove.png" %}
+              {% set listing_img_alt = "Coverage of Mangrove Lithium's refinery opening from The Globe and Mail, the Toronto Star and Mining.com." %}
+              {% set listing_title = "Mangrove Lithium Ribbon Cutting" %}
+              {% set listing_sub_title = "From The Globe and Mail to MotorTrend: How a Ribbon Cutting Put Lithium Refining Startup on the Global Map" %}
+              {% set listing_blurb = "How Tigercomm built investor awareness for the opening of North America's first commercial electrochemical lithium refinery with coverage across mainstream Canadian press, auto/EV, mining trades, and enhanced AI search visibility." %}
             {% endif %}
-            <div class="success-story{% if listing_img %} success-story--new{% endif %} blog-post__body span6" data-sectors='["{{ formatted_sectors|join('","')}}"]' data-years='["{{ formatted_years|join('","')}}"]'>
+            <div class="success-story{% if listing_img or listing_img_url %} success-story--new{% endif %} blog-post__body span6" data-sectors='["{{ formatted_sectors|join('","')}}"]' data-years='["{{ formatted_years|join('","')}}"]'>
                 <a class="success-story__image" href="{{content.absolute_url}}">
-                  {% if listing_img %}
+                  {% if listing_img_url %}
+                  <img src="{{ listing_img_url|escape_url }}" alt="{{ listing_img_alt|escape_attr }}" loading="lazy" />
+                  {% elif listing_img %}
                   <img src="{{ get_asset_url('../images/success-stories/' + listing_img) }}" alt="{{ listing_img_alt }}" />
                   {% elif content.post_list_summary_featured_image %}
                   <img src="{{ content.post_list_summary_featured_image }}" alt="" />

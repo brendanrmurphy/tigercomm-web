@@ -18,18 +18,17 @@
         "default": "Service title"
       },
       {
+        "label": "Hover title",
+        "name": "hover_title",
+        "type": "text",
+        "help_text": "Optional. Use the service page hero title when expanded; the shorter service title remains visible at rest."
+      },
+      {
         "label": "Description",
         "name": "description",
         "type": "richtext",
         "required": true,
         "default": "<p>Add a short service description.</p>"
-      },
-      {
-        "label": "CTA label",
-        "name": "cta_label",
-        "type": "text",
-        "help_text": "Short call to action displayed when the service is expanded.",
-        "default": "Explore service"
       },
       {
         "label": "Link",
@@ -68,6 +67,7 @@
         "choices": [
           ["primary", "Primary"],
           ["quinary", "Quinary"],
+          ["financial", "Financial PR accent"],
           ["alt", "Alt"],
           ["quaternary", "Quaternary"]
         ],

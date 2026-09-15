@@ -22,7 +22,7 @@
     "label": "Source HubDB table",
     "name": "source_table",
     "type": "hubdbtable",
-    "help_text": "Select the table containing the items to display.",
+    "help_text": "Select the table containing the items to display. Rows with disabled checked are hidden.",
     "required": false,
     "visibility": {
       "controlling_field": "source_mode",

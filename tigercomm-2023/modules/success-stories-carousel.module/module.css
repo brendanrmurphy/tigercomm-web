@@ -20,7 +20,7 @@
 .success-stories-carousel__header h2 {
   margin: 0;
   color: #fff;
-  line-height: 1.05;
+  /* line-height: 1.05; */
 }
 
 .success-stories-carousel__controls {
@@ -123,6 +123,7 @@
   width: 100%;
   max-height: 50rem;
   object-fit: contain;
+  padding: 2rem;
   background: #fff;
   border-radius: 0.4rem;
   box-shadow: 0 1.6rem 4rem rgba(0, 0, 0, 0.24);
@@ -135,8 +136,8 @@
 .success-stories-carousel__copy h3 {
   margin: 0;
   color: #fff;
-  font-size: clamp(3rem, 3.3vw, 4.8rem);
-  line-height: 1.08;
+  /* font-size: clamp(3rem, 3.3vw, 4.8rem); */
+  /* line-height: 1.08; */
 }
 
 .success-stories-carousel__copy h3 a {

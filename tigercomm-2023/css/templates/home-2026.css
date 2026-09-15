@@ -1,3 +1,6 @@
+.header {
+  padding: 1rem 0;
+}
 .body-container--home-2026 {
   color: #2b2b35;
   background: #fff;
@@ -29,7 +32,7 @@
 .body-container--home-2026 h2 + .featured-showcase-scroller,
 .body-container--home-2026 h2 + .home2026-testimonials,
 .body-container--home-2026 h2 + .home2026-expertise__body {
-  margin-top: 2.2rem;
+  margin-top: 3rem;
 }
 
 .body-container--home-2026 h3 + .module,
@@ -53,7 +56,7 @@
 .home2026-hero {
   position: relative;
   min-height: 68rem;
-  background-position: center 72%;
+  background-position: center 56%;
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #285079;
@@ -76,8 +79,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 4rem;
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 9.5rem;
+  padding-bottom: 8rem;
 }
 
 .home2026-hero__copy {
@@ -89,10 +92,12 @@
   max-width: 110rem;
   margin-bottom: 0;
   color: #fff;
-  font-size: clamp(4.4rem, 3.7vw, 6.2rem);
-  letter-spacing: -0.02em;
-  line-height: 1.04;
+  /* font-size: clamp(4.4rem, 3.7vw, 8.2rem); */
   text-shadow: none;
+}
+
+.home2026-hero .hero__sub-title {
+  color: #fff;
 }
 
 .home2026-hero h1 span,
@@ -128,6 +133,7 @@
 
 .home2026-intro {
   max-width: 116rem;
+  margin-bottom: 6rem;
 }
 
 .home2026-intro + .module,
@@ -146,7 +152,6 @@
   max-width: 98rem;
   margin-bottom: 0;
   font-size: 2.7rem;
-  font-weight: 800;
   line-height: 1.15;
 }
 
@@ -198,9 +203,17 @@
 .home2026-expertise__body {
   display: grid;
   grid-template-columns: minmax(28rem, 42rem) minmax(0, 1fr);
-  gap: 5.6rem;
+  gap: 4rem;
   align-items: start;
-  margin-top: 3.2rem;
+}
+
+.body-container--home-2026 .home2026-expertise h2 + .home2026-expertise__body {
+  margin-top: 4rem;
+}
+
+.home2026-expertise h2 {
+  letter-spacing: -0.02em;
+  line-height: 1.05;
 }
 
 .home2026-expertise__body img {
@@ -212,11 +225,25 @@
 }
 
 .home2026-expertise__body ul {
-  margin-top: 0;
+  margin: 0;
+  padding-left: 2.2rem;
+  align-self: center;
 }
 
 .home2026-expertise__body li {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.6rem;
+  padding-left: 0.45rem;
+  font-size: 1.85rem;
+  line-height: 1.5;
+}
+
+.home2026-expertise__body li::marker {
+  color: var(--primary-color);
+  font-size: 0.8em;
+}
+
+.home2026-expertise__body li strong {
+  font-weight: 800;
 }
 
 .home2026-team {
@@ -291,6 +318,15 @@
     gap: 5rem;
   }
 
+  .home2026-expertise__body {
+    gap: 3.2rem;
+  }
+
+  .home2026-expertise__body ul {
+    margin-top: 0;
+    align-self: start;
+  }
+
 }
 
 @media (max-width: 767px) {
@@ -309,8 +345,7 @@
   }
 
   .home2026-hero__inner {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding: 5rem 0;
   }
 
   .home2026-hero h1 {
@@ -319,7 +354,7 @@
   }
 
   .home2026-hero {
-    background-position: center 66%;
+    background-position: center 54%;
   }
 
   .home2026-who .featured-showcase-scroller--logo-only {
@@ -330,6 +365,10 @@
   .home2026-action .dynamic-content-scroller,
   .home2026-expertise__body {
     margin-top: 2.4rem;
+  }
+
+  .body-container--home-2026 .home2026-expertise h2 + .home2026-expertise__body {
+    margin-top: 3rem;
   }
 
   .home2026-leader {

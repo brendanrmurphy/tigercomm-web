@@ -156,7 +156,7 @@
       const elapsed = (timestamp - lastFrame) / 1000;
       lastFrame = timestamp;
 
-      if (!reduceMotion.matches && !isDragging && !isHovering && !isPaused && listWidth) {
+      if (!reduceMotion.matches && !isPointerActive && !isDragging && !isHovering && !isPaused && listWidth) {
         const speed = getSpeed(scroller);
 
         offset = normalizeOffset(offset + direction * speed * elapsed, listWidth);
@@ -230,7 +230,13 @@
         return;
       }
 
+      const completedDrag = isDragging;
       resetDragState();
+      if (completedDrag) {
+        window.setTimeout(() => {
+          didDrag = false;
+        }, 0);
+      }
     };
 
     const onDocumentPointerMove = (event) => {
@@ -246,7 +252,7 @@
         event.clientY > bounds.bottom;
 
       if (isOutside) {
-        resetDragState();
+        endDrag(event);
       }
     };
 

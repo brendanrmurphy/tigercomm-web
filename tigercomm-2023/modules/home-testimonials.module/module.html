@@ -1,11 +1,38 @@
+{% set source_mode = module.source_mode or "hubdb" %}
+{% set testimonial_items = [] %}
+
+{% if source_mode == "hubdb" and module.source_table %}
+  {% set query = (module.hubdb_query or "")|trim %}
+  {% set hubdb_rows = query ? hubdb_table_rows(module.source_table, query) : hubdb_table_rows(module.source_table) %}
+  {# Preserve the forgiving category-query behavior used by the showcase scroller. #}
+  {% if query and hubdb_rows|length == 0 and "category=" in query and "category__" not in query %}
+    {% set contains_query = query|replace("category=", "category__contains=") %}
+    {% set hubdb_rows = hubdb_table_rows(module.source_table, contains_query) %}
+  {% endif %}
+  {% for row in hubdb_rows %}
+    {% set row_is_enabled = true %}
+    {% if row.disabled is defined and row.disabled %}
+      {% set row_is_enabled = false %}
+    {% endif %}
+    {% if row_is_enabled %}
+      {% do testimonial_items.append(row) %}
+    {% endif %}
+  {% endfor %}
+{% elif source_mode == "manual" %}
+  {% for testimonial in module.testimonials %}
+    {% do testimonial_items.append(testimonial) %}
+  {% endfor %}
+{% endif %}
+
+{% if testimonial_items|length %}
 <section class="home2026-section home2026-section--white" aria-labelledby="home-testimonials-heading-{{ name }}">
   <div class="content-wrapper">
     {% if module.section_heading %}
       <h2 id="home-testimonials-heading-{{ name }}">{{ module.section_heading }}</h2>
     {% endif %}
-    {% if module.testimonials_heading %}
+    {# {% if module.testimonials_heading %}
       <h3>{{ module.testimonials_heading }}</h3>
-    {% endif %}
+    {% endif %} #}
     <div class="home2026-testimonials" data-testimonials-carousel>
       {% if module.image.src %}
         {% set size_attrs = module.image.width and module.image.height ? 'width="{{ module.image.width }}" height="{{ module.image.height }}"' : "" %}
@@ -29,13 +56,16 @@
           tabindex="0"
         >
           <div class="home2026-testimonials__track" data-testimonials-track>
-            {% for testimonial in module.testimonials %}
+            {% for testimonial in testimonial_items %}
+              {% set quote = testimonial.content if source_mode == "hubdb" else testimonial.quote %}
+              {% set author = testimonial.author %}
+              {% set author_title = testimonial.title if source_mode == "hubdb" else testimonial.author_title %}
               <article class="home2026-testimonial-card" data-testimonial-card>
-                <p>"{{ testimonial.quote }}"</p>
+                <p>“{{ quote|striptags|trim }}”</p>
                 <cite>
-                  <span class="home2026-testimonial-card__author">{{ testimonial.author }}</span>
-                  {% if testimonial.author_title %}
-                    <span class="home2026-testimonial-card__title">{{ testimonial.author_title }}</span>
+                  <span class="home2026-testimonial-card__author">{{ author }}</span>
+                  {% if author_title %}
+                    <span class="home2026-testimonial-card__title">{{ author_title }}</span>
                   {% endif %}
                 </cite>
               </article>
@@ -63,3 +93,12 @@
     </div>
   </div>
 </section>
+{% elif is_in_editor %}
+  <div class="home2026-testimonials__empty">
+    {% if source_mode == "hubdb" %}
+      Select the Testimonials HubDB table and confirm that the category query matches at least one published row.
+    {% else %}
+      Add at least one testimonial.
+    {% endif %}
+  </div>
+{% endif %}

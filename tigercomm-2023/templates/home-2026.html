@@ -9,14 +9,18 @@
 
 {% block body %}
 <div class="container-fluid body-container body-container--home-2026">
-  <section class="home2026-hero" style="background-image: url('{{ get_asset_url("../new-hp/hero-bg.jpg") }}');">
+  <section class="home2026-hero" style="background-image: url('{{ get_asset_url("../new-hp/solar-panels-2.jpg") }}');">
     <div class="home2026-hero__overlay"></div>
     <div class="content-wrapper home2026-hero__inner">
       <div class="home2026-hero__copy">
-        <h1>
+      <h1 class=" hero__title">
+                <div data-aos="fade-right" data-aos-delay="500" class="aos-init aos-animate">Communications Powerhouse</div>
+                <div class="hero__sub-title aos-init aos-animate" data-aos="fade-left" data-aos-delay="1000">For Clean Economy Companies</div>
+            </h1>
+        {# <h1>
           <span>Communications Powerhouse</span>
           <strong>For Clean Economy Companies</strong>
-        </h1>
+        </h1> #}
         <p>We are the world's top PR firm helping clean economy companies boost sales, attract investors, win permits, and secure fair policies.</p>
         <p>We build communications programs that get results in the AI age.</p>
         <a class="home2026-hero__cta button" href="/contact">Get in Touch</a>
@@ -36,7 +40,7 @@
         path="../modules/stats-counter",
         stats=[
           {
-            "value": 21,
+            "value": 23,
             "suffix": "+",
             "stat_label": "Years in Business"
           },
@@ -51,7 +55,7 @@
             "stat_label": "States"
           },
           {
-            "value": 85,
+            "value": 125,
             "suffix": "",
             "stat_label": "Years of Combined Experience"
           }
@@ -75,40 +79,36 @@
         services=[
           {
             "service_title": "Marketing Communications",
-            "description": "<p>Clean economy buyers begin with online research long before they speak with sales. We build positioning, content, and campaigns that educate prospects early and turn visibility into demand.</p>",
-            "link": { "url": { "href": "/services/marketing-communications" } },
+            "hover_title": "Turbocharge your sales through better marketing",
+            "description": "<p>Many clean economy companies offer B2B industrial goods and services to a limited pool of customers who don’t buy with a mouse click. However, too many still use the legacy marketing approach of expecting sales teams to provide early-stage customer education. Marketing research shows B2B customers start their “buyer’s journey” through online searches and content, before they engage sales team members.</p>",
+            "link": { "href": "/services/marketing-communications", "type": "EXTERNAL" },
             "image": { "src": get_asset_url("../images/services/turbo-tile.jpg"), "alt": "Marketing communications session" },
             "image_position": "center center",
             "theme": "primary"
           },
-          {
-            "service_title": "Thought Leadership",
-            "description": "<p>At pivotal moments, companies need to communicate the value of their leadership as clearly as their products. We position executives as authoritative voices who strengthen market trust, fundraising, and valuation.</p>",
-            "link": { "url": { "href": "/services/thought-leadership" } },
-            "image": { "src": get_asset_url("../images/services/narrate-tile.jpg"), "alt": "Thought leadership event" },
-            "image_position": "center center",
-            "theme": "quinary"
-          },
+         
           {
             "service_title": "Financial PR",
             "description": "<p>Capital events demand a clear, credible story. We help clean economy companies communicate funding, transactions, and market milestones to investors, media, and stakeholders.</p>",
-            "link": { "url": { "href": "/services" } },
+            "link": { "href": "/services", "type": "EXTERNAL" },
             "image": { "src": get_asset_url("../images/success-stories/nextracker.jpg"), "alt": "Nextracker at Nasdaq" },
             "image_position": "left top",
             "theme": "quinary"
           },
           {
             "service_title": "Public Affairs",
-            "description": "<p>Clean economy challengers often compete against incumbents with established political influence. We build public affairs campaigns that shape policy, mobilize support, and help new sectors compete.</p>",
-            "link": { "url": { "href": "/services/public-affairs" } },
+            "hover_title": "Secure fair treatment from policymakers",
+            "description": "<p>Clean economy companies are typically building new sectors within industries dominated by mature incumbents unwilling to relinquish market share. Instead, they weaponize lobbying and political influence to block the growth of clean economy challengers.</p>",
+            "link": { "href": "/services/thought-leadership", "type": "EXTERNAL" },
             "image": { "src": get_asset_url("../images/services/secure-tile.jpg"), "alt": "Public affairs work" },
             "image_position": "center bottom",
             "theme": "alt"
           },
           {
             "service_title": "Community Engagement",
-            "description": "<p>Projects move forward when local communities understand their value and trust the developer. We combine grassroots outreach, digital strategy, and credible local voices to reduce risk and build durable support.</p>",
-            "link": { "url": { "href": "/services/community-engagement" } },
+            "hover_title": "Win community approval for projects",
+            "description": "<p>Clean energy developers need support from local communities to build renewable energy infrastructure, such as wind and solar farms. But developers face increasingly project-fatal opposition from loud minorities of locals who organize online, then shout at local officials in the hearing room. We’ve pioneered and deployed community engagement strategies and digital best practices for developers to cut project risk and boost their ability to win the “social license” needed to secure permits from local officials for clean energy projects.</p>",
+            "link": { "href": "/services/community-engagement", "type": "EXTERNAL" },
             "image": { "src": get_asset_url("../images/services/community-tile.jpg"), "alt": "Community engagement meeting" },
             "image_position": "center center",
             "theme": "quaternary"
@@ -116,6 +116,15 @@
         ]
       %}
     </div>
+    <!--  {
+            "service_title": "Thought Leadership",
+            "hover_title": "Narrating companies and executives to markets and investors",
+            "description": "<p>There are several points in a company’s growth when it’s crucial to narrate a company and its leadership team, not just its products. Whether you’re securing early-stage funding, building valuation for potential acquirers, or preparing for an IPO … we can help with clean economy thought leadership.</p>",
+            "link": { "href": "/services/thought-leadership", "type": "EXTERNAL" },
+            "image": { "src": get_asset_url("../images/services/narrate-tile.jpg"), "alt": "Thought leadership event" },
+            "image_position": "center center",
+            "theme": "quinary"
+          }, -->
   </section>
 
   <section class="home2026-section home2026-section--white home2026-who">
@@ -131,15 +140,15 @@
           },
           {
             "tab_title": "Technology & Equipment Providers",
-            "tab_content": "<h3>Technology &amp; Equipment Providers</h3><ul><li>Solar &amp; Wind Manufacturing</li><li>Energy Storage, Microgrids &amp; Grid Tech</li><li>Thermal Storage</li><li>Green Hydrogen, Methanol, Geothermal &amp; Advanced Fuels</li><li>Energy Efficiency Equipment &amp; Services</li><li>Carbon Storage and Sequestration</li></ul>"
+            "tab_content": "<h3>Technology &amp; Equipment Providers</h3><ul><li>Solar &amp; Wind Manufacturing (OEMs)</li><li>Energy Storage (BESS), Microgrids &amp; Grid Tech</li><li>Thermal Storage</li><li>Lithium Refining</li><li>Green Hydrogen, Methanol, Geothermal &amp; Advanced Fuels</li><li>Recycling, Waste-to-Energy</li><li>Energy Efficiency Equipment &amp; Services, Energy-as-a-Service</li><li>Carbon Storage and Sequestration</li></ul>"
           },
           {
-            "tab_title": "Services & Specialized Support",
-            "tab_content": "<h3>Services &amp; Specialized Support</h3><ul><li>Engineering, Procurement and Construction</li><li>Operations &amp; Maintenance Services</li><li>Clean Transportation &amp; EV Infrastructure</li><li>Clean Energy SaaS Companies</li><li>Cleantech Professional Services</li><li>Distributed Energy Resource Management &amp; Orchestration</li></ul>"
+            "tab_title": "SAS & Professional Services",
+            "tab_content": "<h3>SAS & Professional Services</h3><ul><li>Engineering, Procurement and Construction (EPCs)</li><li>Operations &amp; Maintenance Services and Equipment Providers</li><li>Clean Transportation &amp; EV Infrastructure</li><li>Clean Energy SaaS Companies</li><li>Clean Energy Retail Providers</li><li>Cleantech Professional Services</li><li>Distributed Energy Resource Management (DERM) &amp; Orchestration</li></ul>"
           },
           {
-            "tab_title": "Investment & Advocacy",
-            "tab_content": "<h3>Investment &amp; Advocacy</h3><ul><li>Climate Tech Startups</li><li>Impact-Focused Investors</li><li>Associations</li></ul>"
+            "tab_title": "Investors & PortCos",
+            "tab_content": "<h3>Investors & PortCos</h3><ul><li>Climate Tech Startups</li><li>Impact-Focused Investors</li><li>Associations</li></ul>"
           }
         ]
       %}
@@ -186,50 +195,21 @@
 
   {% module "home_2026_testimonials"
     path="../modules/home-testimonials",
+    source_mode="hubdb",
+    source_table=409508264,
+    hubdb_query="category__contains=homepage",
     section_heading="What Our Clients Say",
     testimonials_heading="Testimonials",
     image={
       "src": get_asset_url("../new-hp/what-clients-say.jpg"),
       "alt": "Client conversation",
       "loading": "lazy"
-    },
-    testimonials=[
-      {
-        "quote": "Tigercomm captured our value proposition, then helped us deliver it to a global market. With their help, we're tracking to exceed our sales goals this year.",
-        "author": "John O'Donnell",
-        "author_title": "CEO, Rondo"
-      },
-      {
-        "quote": "Tigercomm worked with our in-house team to position Nextracker as not just a leading solar OEM, but one of the leading companies across renewable energy.",
-        "author": "Daniel Shugar",
-        "author_title": "CEO and Founder, Nextracker"
-      },
-      {
-        "quote": "We faced intense, well-organized local opposition to a project that put a significant capital investment and our brand reputation at risk.",
-        "author": "Michael Zarin",
-        "author_title": "VP, Group Communications, Rockwool"
-      },
-      {
-        "quote": "Tigercomm captured our value proposition, then helped us deliver it to a global market. With their help, we're tracking to exceed our sales goals this year.",
-        "author": "John O'Donnell",
-        "author_title": "CEO, Rondo"
-      },
-      {
-        "quote": "Tigercomm worked with our in-house team to position Nextracker as not just a leading solar OEM, but one of the leading companies across renewable energy.",
-        "author": "Daniel Shugar",
-        "author_title": "CEO and Founder, Nextracker"
-      },
-      {
-        "quote": "We faced intense, well-organized local opposition to a project that put a significant capital investment and our brand reputation at risk.",
-        "author": "Michael Zarin",
-        "author_title": "VP, Group Communications, Rockwool"
-      }
-    ]
+    }
   %}
 
   <section class="home2026-section home2026-section--gray home2026-action">
     <div class="content-wrapper">
-      <h2>Tigers in Action</h2>
+      <h2>Tigers in the Lead</h2>
       {% module "tigers_in_action_scroller"
         path="../modules/dynamic-content-scroller",
         source_mode="selected_pages",
@@ -297,6 +277,9 @@
       <h2>Frequently Asked Questions</h2>
       {% module "home_2026_faq"
         path="../modules/faq",
+        source_mode="hubdb",
+        source_table=409505822,
+        hubdb_query="category__contains=homepage",
         faq_items=[
           {
             "question": "Is PR for cleantech different from other industries?",

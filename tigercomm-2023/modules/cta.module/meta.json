@@ -1,5 +1,5 @@
 {
   "label": "CTA",
-  "content_types": ["SITE_PAGE"],
+  "content_types": ["SITE_PAGE", "BLOG_POST"],
   "icon": "cta"
 }

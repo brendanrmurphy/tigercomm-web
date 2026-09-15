@@ -40,6 +40,20 @@
     max-width: 104rem;
 }
 
+.body-container--success-story-cms .hero__content {
+    max-width: 104rem;
+}
+
+.body-container--success-story-cms .hero__content p {
+    font-family: var(--font-secondary);
+    font-size: 2.8rem;
+    line-height: 1.35;
+}
+
+.body-container--success-story-cms .hero__content p:last-child {
+    margin-bottom: 0;
+}
+
 .success-story-v2__details {
     border-top: 1px solid var(--gray);
     margin: 0 0 3.2rem;
@@ -60,6 +74,10 @@
 
 .success-story-v2__detail dd {
     margin: 0;
+}
+
+.success-story-v2__detail dd p:last-child {
+    margin-bottom: 0;
 }
 
 .success-story-v2__metrics {
@@ -145,6 +163,10 @@
     }
 
     .success-story-v2__hero-summary {
+        font-size: 2.2rem;
+    }
+
+    .body-container--success-story-cms .hero__content p {
         font-size: 2.2rem;
     }
 

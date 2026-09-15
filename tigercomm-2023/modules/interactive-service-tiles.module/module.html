@@ -3,10 +3,9 @@
 {% if service_items|length %}
   <div class="interactive-service-tiles" data-interactive-service-tiles>
     {% for service in service_items %}
-      {% set href = service.link.url.href or service.link.url or service.link.href %}
+      {% set href = service.link.href or service.link.url.href or service.link.url %}
       {% set image_src = service.image.src or service.image.url %}
       {% set image_position = service.image_position or "center center" %}
-      {% set cta_label = service.cta_label or "Explore service" %}
 
       {% if href %}
         <a class="interactive-service-tile interactive-service-tile--{{ service.theme }}" href="{{ href|escape_url }}" data-service-tile>
@@ -15,11 +14,10 @@
           {% endif %}
           <div class="interactive-service-tile__shade" aria-hidden="true"></div>
           <div class="interactive-service-tile__content">
-            <h4>{{ service.service_title }}</h4>
+            <h4><span class="interactive-service-tile__rest-title">{{ service.service_title }}</span><span class="interactive-service-tile__hover-title">{{ service.hover_title or service.service_title }}</span></h4>
             <div class="interactive-service-tile__description">
               {{ service.description }}
             </div>
-            <span class="interactive-service-tile__cta">{{ cta_label }} <span aria-hidden="true">→</span></span>
           </div>
         </a>
       {% else %}
@@ -29,7 +27,7 @@
           {% endif %}
           <div class="interactive-service-tile__shade" aria-hidden="true"></div>
           <div class="interactive-service-tile__content">
-            <h4>{{ service.service_title }}</h4>
+            <h4><span class="interactive-service-tile__rest-title">{{ service.service_title }}</span><span class="interactive-service-tile__hover-title">{{ service.hover_title or service.service_title }}</span></h4>
             <div class="interactive-service-tile__description">
               {{ service.description }}
             </div>

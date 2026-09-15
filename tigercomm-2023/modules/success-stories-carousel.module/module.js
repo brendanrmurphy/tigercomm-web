@@ -13,6 +13,8 @@
     var activeIndex = 0;
     var pointerId = null;
     var pointerStartX = 0;
+    var isDragging = false;
+    var didDrag = false;
 
     if (!viewport || !slides.length) {
       return;
@@ -76,8 +78,30 @@
 
       pointerId = event.pointerId;
       pointerStartX = event.clientX;
-      viewport.classList.add('is-dragging');
-      viewport.setPointerCapture(pointerId);
+      isDragging = false;
+      didDrag = false;
+    });
+
+    viewport.addEventListener('pointermove', function (event) {
+      if (event.pointerId !== pointerId) {
+        return;
+      }
+
+      var distance = event.clientX - pointerStartX;
+
+      if (!isDragging && Math.abs(distance) > 8) {
+        isDragging = true;
+        didDrag = true;
+        viewport.classList.add('is-dragging');
+
+        if (viewport.setPointerCapture) {
+          try {
+            viewport.setPointerCapture(pointerId);
+          } catch (error) {
+            /* Pointer capture is optional. */
+          }
+        }
+      }
     });
 
     function endPointerInteraction(event) {
@@ -86,16 +110,28 @@
       }
 
       var distance = event.clientX - pointerStartX;
+      var completedDrag = isDragging;
 
-      if (viewport.hasPointerCapture(pointerId)) {
-        viewport.releasePointerCapture(pointerId);
+      if (viewport.hasPointerCapture && viewport.hasPointerCapture(pointerId)) {
+        try {
+          viewport.releasePointerCapture(pointerId);
+        } catch (error) {
+          /* Pointer may already be released. */
+        }
       }
 
       pointerId = null;
+      isDragging = false;
       viewport.classList.remove('is-dragging');
 
-      if (Math.abs(distance) >= 50) {
+      if (completedDrag && Math.abs(distance) >= 50) {
         move(distance > 0 ? -1 : 1);
+      }
+
+      if (completedDrag) {
+        window.setTimeout(function () {
+          didDrag = false;
+        }, 0);
       }
     }
 
@@ -105,11 +141,24 @@
       }
 
       pointerId = null;
+      isDragging = false;
+      didDrag = false;
       viewport.classList.remove('is-dragging');
     }
 
     viewport.addEventListener('pointerup', endPointerInteraction);
     viewport.addEventListener('pointercancel', cancelPointerInteraction);
+    viewport.addEventListener('dragstart', function (event) {
+      event.preventDefault();
+    });
+    viewport.addEventListener('click', function (event) {
+      if (!didDrag) {
+        return;
+      }
+
+      event.preventDefault();
+      didDrag = false;
+    }, true);
     showSlide(0);
   }
 

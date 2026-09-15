@@ -1,5 +1,41 @@
 [
   {
+    "label": "Testimonial source",
+    "name": "source_mode",
+    "type": "choice",
+    "display": "radio",
+    "help_text": "Choose whether testimonials come from a HubDB table or are entered directly in this module.",
+    "choices": [
+      ["hubdb", "Pull testimonials from HubDB"],
+      ["manual", "Enter testimonials manually"]
+    ],
+    "default": "hubdb"
+  },
+  {
+    "label": "Testimonials HubDB table",
+    "name": "source_table",
+    "type": "hubdbtable",
+    "help_text": "Select the HubDB table with content, author, title, category, and disabled columns. Rows with disabled checked are hidden.",
+    "required": false,
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "hubdb",
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "label": "HubDB category query",
+    "name": "hubdb_query",
+    "type": "text",
+    "help_text": "Filter the feed by the category option's internal value. Example: category__contains=homepage. You can also add sorting, such as &orderBy=hs_created_at. Leave blank to show all rows.",
+    "default": "category__contains=homepage",
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "hubdb",
+      "operator": "EQUAL"
+    }
+  },
+  {
     "label": "Section heading",
     "name": "section_heading",
     "type": "text",
@@ -28,6 +64,12 @@
     "label": "Testimonials",
     "name": "testimonials",
     "type": "group",
+    "help_text": "Used when Testimonial source is set to Enter testimonials manually.",
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "manual",
+      "operator": "EQUAL"
+    },
     "occurrence": {
       "default": 3,
       "min": 1,

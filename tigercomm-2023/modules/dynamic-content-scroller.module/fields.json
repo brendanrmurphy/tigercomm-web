@@ -44,6 +44,18 @@
         "default": 6
       },
       {
+        "label": "Series title",
+        "name": "series_title",
+        "type": "text",
+        "help_text": "Displayed at the top of every card when no series logo is provided."
+      },
+      {
+        "label": "Series logo",
+        "name": "series_logo",
+        "type": "image",
+        "help_text": "Optional. Replaces the series title at the top of every card."
+      },
+      {
         "label": "Team member label",
         "name": "team_label",
         "type": "text",
@@ -56,6 +68,12 @@
         "type": "text"
       },
       {
+        "label": "First team member role/title",
+        "name": "team_one_role",
+        "type": "text",
+        "help_text": "Examples: Host, Co-host, President, or Community Engagement Lead."
+      },
+      {
         "label": "First team member photo",
         "name": "team_one_image",
         "type": "image"
@@ -63,6 +81,11 @@
       {
         "label": "Second team member name",
         "name": "team_two_name",
+        "type": "text"
+      },
+      {
+        "label": "Second team member role/title",
+        "name": "team_two_role",
         "type": "text"
       },
       {
@@ -103,10 +126,16 @@
         "help_text": "Optional. Leave blank to use the current page or post title."
       },
       {
-        "label": "Image override",
-        "name": "image_override",
+        "label": "Card category/title",
+        "name": "series_title",
+        "type": "text",
+        "help_text": "Displayed at the top of this card when no series logo is provided."
+      },
+      {
+        "label": "Card series logo",
+        "name": "series_logo",
         "type": "image",
-        "help_text": "Optional. Leave blank to use the current featured image."
+        "help_text": "Optional. Replaces the card category/title at the top of this card."
       },
       {
         "label": "Description override",
@@ -127,6 +156,12 @@
         "type": "text"
       },
       {
+        "label": "First team member role/title",
+        "name": "team_one_role",
+        "type": "text",
+        "help_text": "Examples: Host, Featured expert, President, or Community Engagement Lead."
+      },
+      {
         "label": "First team member photo",
         "name": "team_one_image",
         "type": "image"
@@ -134,6 +169,11 @@
       {
         "label": "Second team member name",
         "name": "team_two_name",
+        "type": "text"
+      },
+      {
+        "label": "Second team member role/title",
+        "name": "team_two_role",
         "type": "text"
       },
       {

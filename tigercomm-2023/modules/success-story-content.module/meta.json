@@ -1,0 +1,6 @@
+{
+  "label": "Success Story Content",
+  "global": false,
+  "content_types": ["BLOG_POST"],
+  "is_available_for_new_content": true
+}

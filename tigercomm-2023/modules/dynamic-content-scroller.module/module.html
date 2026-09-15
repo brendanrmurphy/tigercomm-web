@@ -29,8 +29,8 @@
 {% if content_items|length == 0 %}
   {% set showing_samples = true %}
   {% do content_items.append("sample_twic_justin_worland") %}
-  {% do content_items.append("sample_twic_kelly_livingston") %}
-  {% do content_items.append("sample_twic_ivan_penn") %}
+  {# {% do content_items.append("sample_twic_kelly_livingston") %}
+  {% do content_items.append("sample_twic_ivan_penn") %} #}
   {% do content_items.append("sample_scaling_clean_kevin_smith") %}
   {% do content_items.append("sample_community_training") %}
 {% endif %}
@@ -75,62 +75,72 @@
         {% for track_index in range(0, track_count) %}
           <ul class="dynamic-content-scroller__list"{% if track_index > 0 %} aria-hidden="true"{% endif %}>
             {% for content_entry in content_items %}
+              {% set series_title = "" %}
+              {% set series_logo = "" %}
+              {% set series_logo_alt = "" %}
               {% set team_label = "" %}
               {% set team_one_name = "" %}
+              {% set team_one_role = "" %}
               {% set team_one_image = "" %}
               {% set team_two_name = "" %}
+              {% set team_two_role = "" %}
               {% set team_two_image = "" %}
               {% if showing_samples %}
                 {% if content_entry == "sample_twic_justin_worland" %}
+                  {% set series_title = "This Week in Cleantech" %}
                   {% set item_title = "Episode 1: Justin Worland" %}
                   {% set item_url = "/this-week-in-cleantech-podcast" %}
-                  {% set item_image = get_asset_url("../images/insights/this-week-in-cleantech.png") %}
-                  {% set item_image_alt = "This Week in Cleantech" %}
                   {% set item_description = "TIME journalist Justin Worland joins This Week in Cleantech for a fast roundup of climate and clean energy news." %}
                   {% set team_label = "Hosted by" %}
                   {% set team_one_name = "Mike Casey" %}
+                  {% set team_one_role = "Host, This Week in Cleantech" %}
                   {% set team_one_image = get_asset_url("../images/team/mike-casey.jpg") %}
                   {% set team_two_name = "Paul Gerke" %}
+                  {% set team_two_role = "Co-host" %}
                   {% set team_two_image = get_asset_url("../images/team/paul-gerke.jpg") %}
                 {% elif content_entry == "sample_twic_kelly_livingston" %}
+                  {% set series_title = "This Week in Cleantech" %}
                   {% set item_title = "Episode 2: Kelly Livingston" %}
                   {% set item_url = "/this-week-in-cleantech-podcast" %}
-                  {% set item_image = get_asset_url("../images/insights/this-week-in-cleantech.png") %}
-                  {% set item_image_alt = "This Week in Cleantech" %}
                   {% set item_description = "ABC News journalist Kelly Livingston discusses timely climate and clean energy stories with Mike Casey and Paul Gerke." %}
                   {% set team_label = "Hosted by" %}
                   {% set team_one_name = "Mike Casey" %}
+                  {% set team_one_role = "Host, This Week in Cleantech" %}
                   {% set team_one_image = get_asset_url("../images/team/mike-casey.jpg") %}
                   {% set team_two_name = "Paul Gerke" %}
+                  {% set team_two_role = "Co-host" %}
                   {% set team_two_image = get_asset_url("../images/team/paul-gerke.jpg") %}
                 {% elif content_entry == "sample_twic_ivan_penn" %}
+                  {% set series_title = "This Week in Cleantech" %}
                   {% set item_title = "Episode 3: Ivan Penn" %}
                   {% set item_url = "/this-week-in-cleantech-podcast" %}
-                  {% set item_image = get_asset_url("../images/insights/this-week-in-cleantech.png") %}
-                  {% set item_image_alt = "This Week in Cleantech" %}
                   {% set item_description = "The New York Times journalist Ivan Penn joins Mike Casey and Paul Gerke for clean energy news and analysis." %}
                   {% set team_label = "Hosted by" %}
                   {% set team_one_name = "Mike Casey" %}
+                  {% set team_one_role = "Host, This Week in Cleantech" %}
                   {% set team_one_image = get_asset_url("../images/team/mike-casey.jpg") %}
                   {% set team_two_name = "Paul Gerke" %}
+                  {% set team_two_role = "Co-host" %}
                   {% set team_two_image = get_asset_url("../images/team/paul-gerke.jpg") %}
                 {% elif content_entry == "sample_scaling_clean_kevin_smith" %}
-                  {% set item_title = "Scaling Clean: Kevin Smith" %}
+                  {% set series_title = "Scaling Clean Podcast" %}
+                  {% set series_logo = get_asset_url("../images/scaling-clean-logo.png") %}
+                  {% set series_logo_alt = "Scaling Clean Podcast" %}
+                  {% set item_title = "Kevin Smith" %}
                   {% set item_url = "/scaling-clean-podcast" %}
-                  {% set item_image = get_asset_url("../images/scaling-clean-logo.png") %}
-                  {% set item_image_alt = "Scaling Clean podcast" %}
                   {% set item_description = "Lightsource bp CEO Kevin Smith shares practical leadership lessons for cleantech executives, investors, and advisors." %}
                   {% set team_label = "Hosted by" %}
                   {% set team_one_name = "Melissa Baldwin" %}
+                  {% set team_one_role = "Host, Scaling Clean" %}
                   {% set team_one_image = get_asset_url("../images/team/melissa.jpg") %}
                 {% else %}
-                  {% set item_title = "Community Engagement Trainings" %}
+                  {% set series_title = "Community Engagement Trainings" %}
+                  {% set item_title = "Workshop for Renewable Energy Project Permitting & Community Engagement" %}
                   {% set item_url = "/services/community-engagement" %}
-                  {% set item_image = get_asset_url("../images/logo.svg") %}
-                  {% set item_image_alt = "Tigercomm" %}
                   {% set item_description = "Hands-on workshops help clean energy teams sharpen outreach, messaging, and strategies for earning local support." %}
                   {% set team_label = "Led by" %}
                   {% set team_one_name = "Ayelet Hines" %}
+                  {% set team_one_role = "Community Engagement Lead" %}
                   {% set team_one_image = get_asset_url("../images/team/ayelet.jpg") %}
                 {% endif %}
               {% elif source_mode == "selected_pages" %}
@@ -138,26 +148,31 @@
                 {% set source_item = resolved_content[content_id] or resolved_content[content_id ~ ""] %}
                 {% set item_title = content_entry.title_override or source_item.name or source_item.title or source_item.html_title %}
                 {% set item_url = source_item.absolute_url %}
-                {% set override_image = content_entry.image_override %}
-                {% set item_image = override_image.src or source_item.featured_image.url or source_item.featured_image %}
-                {% set item_image_alt = override_image.alt or source_item.featured_image_alt_text or item_title %}
                 {% set item_description = content_entry.description_override or source_item.meta_description or source_item.post_summary or source_item.description %}
+                {% set series_title = content_entry.series_title %}
+                {% set series_logo = content_entry.series_logo.src %}
+                {% set series_logo_alt = content_entry.series_logo.alt or series_title %}
                 {% set team_label = content_entry.team_label or "Featuring" %}
                 {% set team_one_name = content_entry.team_one_name %}
+                {% set team_one_role = content_entry.team_one_role %}
                 {% set team_one_image = content_entry.team_one_image.src %}
                 {% set team_two_name = content_entry.team_two_name %}
+                {% set team_two_role = content_entry.team_two_role %}
                 {% set team_two_image = content_entry.team_two_image.src %}
               {% else %}
                 {% set source_item = content_entry %}
                 {% set item_title = source_item.name or source_item.title or source_item.html_title %}
                 {% set item_url = source_item.absolute_url %}
-                {% set item_image = source_item.featured_image.url or source_item.featured_image %}
-                {% set item_image_alt = source_item.featured_image_alt_text or item_title %}
                 {% set item_description = source_item.meta_description or source_item.post_summary or source_item.description %}
+                {% set series_title = module.blog_source.series_title %}
+                {% set series_logo = module.blog_source.series_logo.src %}
+                {% set series_logo_alt = module.blog_source.series_logo.alt or series_title %}
                 {% set team_label = module.blog_source.team_label or "Hosted by" %}
                 {% set team_one_name = module.blog_source.team_one_name %}
+                {% set team_one_role = module.blog_source.team_one_role %}
                 {% set team_one_image = module.blog_source.team_one_image.src %}
                 {% set team_two_name = module.blog_source.team_two_name %}
+                {% set team_two_role = module.blog_source.team_two_role %}
                 {% set team_two_image = module.blog_source.team_two_image.src %}
               {% endif %}
 
@@ -165,34 +180,46 @@
                 <li class="dynamic-content-scroller__item">
                   <article class="dynamic-content-card{% if showing_samples %} dynamic-content-card--sample{% endif %}">
                     <a class="dynamic-content-card__link" href="{{ item_url|escape_url }}"{% if module.content.open_in_new_tab %} target="_blank" rel="noopener"{% endif %}{% if track_index > 0 %} tabindex="-1"{% endif %}>
-                      {% if item_image %}
-                        <span class="dynamic-content-card__image-wrap">
-                          <img class="dynamic-content-card__image" src="{{ item_image|escape_url }}" alt="{{ item_image_alt|escape_attr }}" loading="lazy" draggable="false">
-                        </span>
-                      {% endif %}
                       <span class="dynamic-content-card__body">
+                        {% if series_logo or series_title or team_one_name or team_two_name %}
+                          <span class="dynamic-content-card__masthead">
+                            {% if series_logo %}
+                              <span class="dynamic-content-card__series-logo-wrap">
+                                <img class="dynamic-content-card__series-logo" src="{{ series_logo|escape_url }}" alt="{{ series_logo_alt|escape_attr }}" loading="lazy" draggable="false">
+                              </span>
+                            {% elif series_title %}
+                              <span class="dynamic-content-card__series-title">{{ series_title }}</span>
+                            {% endif %}
+                            {% if team_one_name or team_two_name %}
+                              <span class="dynamic-content-card__team">
+                                {% if team_label %}<span class="dynamic-content-card__team-label">{{ team_label }}</span>{% endif %}
+                                <span class="dynamic-content-card__people">
+                                  {% if team_one_name %}
+                                    <span class="dynamic-content-card__person">
+                                      {% if team_one_image %}<img src="{{ team_one_image|escape_url }}" alt="" loading="lazy" aria-hidden="true">{% endif %}
+                                      <span class="dynamic-content-card__person-copy">
+                                        <span class="dynamic-content-card__person-name">{{ team_one_name }}</span>
+                                        {% if team_one_role %}<span class="dynamic-content-card__person-role">{{ team_one_role }}</span>{% endif %}
+                                      </span>
+                                    </span>
+                                  {% endif %}
+                                  {% if team_two_name %}
+                                    <span class="dynamic-content-card__person">
+                                      {% if team_two_image %}<img src="{{ team_two_image|escape_url }}" alt="" loading="lazy" aria-hidden="true">{% endif %}
+                                      <span class="dynamic-content-card__person-copy">
+                                        <span class="dynamic-content-card__person-name">{{ team_two_name }}</span>
+                                        {% if team_two_role %}<span class="dynamic-content-card__person-role">{{ team_two_role }}</span>{% endif %}
+                                      </span>
+                                    </span>
+                                  {% endif %}
+                                </span>
+                              </span>
+                            {% endif %}
+                          </span>
+                        {% endif %}
                         <span class="dynamic-content-card__title">{{ item_title }}</span>
                         {% if module.content.show_descriptions != false and item_description %}
                           <span class="dynamic-content-card__description">{{ item_description|striptags|truncate(180, true, "…") }}</span>
-                        {% endif %}
-                        {% if team_one_name or team_two_name %}
-                          <span class="dynamic-content-card__team">
-                            {% if team_label %}<span class="dynamic-content-card__team-label">{{ team_label }}</span>{% endif %}
-                            <span class="dynamic-content-card__people">
-                              {% if team_one_name %}
-                                <span class="dynamic-content-card__person">
-                                  {% if team_one_image %}<img src="{{ team_one_image|escape_url }}" alt="" loading="lazy" aria-hidden="true">{% endif %}
-                                  <span>{{ team_one_name }}</span>
-                                </span>
-                              {% endif %}
-                              {% if team_two_name %}
-                                <span class="dynamic-content-card__person">
-                                  {% if team_two_image %}<img src="{{ team_two_image|escape_url }}" alt="" loading="lazy" aria-hidden="true">{% endif %}
-                                  <span>{{ team_two_name }}</span>
-                                </span>
-                              {% endif %}
-                            </span>
-                          </span>
                         {% endif %}
                         {% if module.content.link_label %}
                           <span class="dynamic-content-card__cta">{{ module.content.link_label }} <span aria-hidden="true">→</span></span>

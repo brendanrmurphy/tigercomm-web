@@ -35,6 +35,7 @@
     var pointerId = null;
     var dragStartX = 0;
     var dragStartOffset = 0;
+    var contentFits = false;
 
     function normalizeOffset(value) {
       if (!listWidth) return value;
@@ -64,6 +65,19 @@
 
       equalizeCards();
       listWidth = firstList.getBoundingClientRect().width + trackGap;
+      contentFits = firstList.getBoundingClientRect().width <= viewport.clientWidth + 1;
+      scroller.classList.toggle("dynamic-content-scroller--fits", contentFits);
+
+      if (contentFits) {
+        Array.prototype.slice.call(track.children, 1).forEach(function (duplicate) {
+          duplicate.remove();
+        });
+        offset = 0;
+        track.style.transform = "translate3d(0, 0, 0)";
+        lastFrame = 0;
+        return;
+      }
+
       if (listWidth && !scroller.classList.contains("dynamic-content-scroller--static")) {
         var requiredCopies = Math.max(2, Math.ceil(viewport.clientWidth / listWidth) + 2);
         Array.prototype.slice.call(track.children, 1).forEach(prepareDuplicate);
@@ -84,6 +98,7 @@
     }
 
     function moveBy(distance) {
+      if (contentFits) return;
       offset = normalizeOffset(offset + distance);
       track.style.transform = "translate3d(" + offset + "px, 0, 0)";
       lastFrame = 0;
@@ -103,7 +118,7 @@
       lastFrame = timestamp;
       var interactionPaused = pauseOnInteraction && (isHovering || isFocusing);
 
-      if (autoplay && !reduceMotion.matches && !isPaused && !interactionPaused && !isDragging && listWidth) {
+      if (autoplay && !contentFits && !reduceMotion.matches && !isPaused && !interactionPaused && !isPointerActive && !isDragging && listWidth) {
         offset = normalizeOffset(offset + direction * speed * elapsed);
         track.style.transform = "translate3d(" + offset + "px, 0, 0)";
       }
@@ -122,6 +137,7 @@
     }
 
     viewport.addEventListener("pointerdown", function (event) {
+      if (contentFits) return;
       if (event.button !== undefined && event.button !== 0) return;
       pointerId = event.pointerId;
       isPointerActive = true;
@@ -150,7 +166,11 @@
 
     function endPointer(event) {
       if (!isPointerActive || (event && event.pointerId !== pointerId)) return;
+      var completedDrag = isDragging;
       resetPointer();
+      if (completedDrag) {
+        window.setTimeout(function () { didDrag = false; }, 0);
+      }
     }
 
     viewport.addEventListener("pointerup", endPointer);
@@ -177,6 +197,10 @@
     });
 
     window.addEventListener("resize", measure);
+    if (window.ResizeObserver) {
+      var resizeObserver = new ResizeObserver(measure);
+      resizeObserver.observe(viewport);
+    }
     scroller.querySelectorAll("img").forEach(function (image) {
       if (!image.complete) image.addEventListener("load", measure, { once: true });
     });

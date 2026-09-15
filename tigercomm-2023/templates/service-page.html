@@ -1,0 +1,155 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Service Page
+  screenshotPath: ../images/template-previews/home.png
+  description: "Reusable, fully editable service-page template with Community Engagement starter content."
+-->
+{% set template_css = "../../css/templates/service-page.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+<div class="container-fluid body-container body-container--service-page">
+  <section class="service-page__hero">
+    <div class="service-page__inner service-page__hero-grid">
+      <div class="service-page__hero-copy">
+        {% module "service_hero_copy"
+          path="@hubspot/rich_text",
+          label="Hero copy",
+          html="<p class='service-page__eyebrow'>Community Engagement</p><h1>Lower Project Risk Through Effective Community Engagement</h1><p class='service-page__lead'>Developers lose projects at a 30% rate largely because too many see permitting as a technical process rather than what it really is: asking a community for permission to build there.</p><p>Clean energy projects do not win permits on facts or polished applications alone. They win when developers understand local concerns, build trusted relationships, and use proven political campaign strategies to give supporters a reason to show up.</p><p>Tigercomm brings more than a century of combined campaign experience to community engagement. For over a decade, we have developed proprietary methods, including influence mapping, strategic philanthropy, cultural reassurance and disciplined campaign planning, to help move votes of local permitting officials.</p>"
+        %}
+      </div>
+      <div class="service-page__hero-image">
+        {% module "service_hero_image"
+          path="@hubspot/linked_image",
+          label="Hero image",
+          img={
+            "alt": "Panel discussion about renewable energy siting and permitting",
+            "loading": "eager",
+            "max_height": 915,
+            "max_width": 1372,
+            "size_type": "auto_custom_max",
+            "src": get_asset_url("../images/services/community-engagement-panel.jpg")
+          }
+        %}
+      </div>
+    </div>
+  </section>
+
+  <section class="service-page__section service-page__intro">
+    <div class="service-page__inner service-page__inner--narrow">
+      {% module "service_intro"
+        path="@hubspot/rich_text",
+        label="Service introduction",
+        html="<p class='service-page__statement'>We help clients build the political support commissioners need to approve projects, even in the face of vocal opposition.</p><p>Our experts work alongside development teams from project entry through permitting, construction and operations. Because every project and community is different, we tailor the team, tactics and level of support to local risks, milestones and political dynamics.</p><p>The earlier we join a project, the more options developers have and the more cost-effective our work can be. Early community intelligence can shape landowner outreach, project design, local messaging, permitting strategy and the order of community conversations before opposition organizes. If your project is in crisis, we can help turn things around quickly.</p><p>Tigercomm helps developers earn community support, manage stakeholder concerns, counter disinformation and secure the approval needed to move from permitting to groundbreaking to operations. Our work supports wind, solar, storage, transmission, data centers and other renewable energy community engagement challenges.</p><p><a class='button' href='/contact?help_me_=community-engagement'>Contact us to learn more</a></p>"
+      %}
+    </div>
+  </section>
+
+  <section class="service-page__section service-page__services">
+    <div class="service-page__inner">
+      {% module "service_capabilities_heading"
+        path="@hubspot/rich_text",
+        label="Services heading",
+        html="<p class='service-page__eyebrow'>Capabilities</p><h2>Our Community Engagement Services</h2>"
+      %}
+      {% module "service_capabilities_tabs"
+        path="../modules/tabs",
+        label="Services tabs",
+        tabs=[
+          { "tab_title": "Strategy based on data", "tab_content": "<h3>Strategy based on data</h3><ul><li>Map the local political landscape.</li><li>Assess risk, influence and public opinion.</li><li>Identify key relationships and decision-makers.</li></ul>" },
+          { "tab_title": "Campaign strategy", "tab_content": "<h3>Campaign strategy</h3><ul><li>Build plans around permit milestones.</li><li>Tailor strategies to local concerns.</li><li>Sequence outreach to build support.</li></ul>" },
+          { "tab_title": "Messaging & content", "tab_content": "<h3>Messaging &amp; content</h3><ul><li>Develop localized project materials.</li><li>Create FAQs, fact sheets and presentations.</li><li>Produce testimonials, op-eds, video and digital content.</li></ul>" },
+          { "tab_title": "Field operations & local presence", "tab_content": "<h3>Field operations &amp; local presence</h3><ul><li>Support project entry and local outreach.</li><li>Staff meetings, hearings and events.</li><li>Recruit and prepare local supporters.</li></ul>" },
+          { "tab_title": "Crisis management", "tab_content": "<h3>Crisis management</h3><ul><li>Assess the project&rsquo;s path forward.</li><li>Monitor sentiment and opposition.</li><li>Lead rapid-response communications.</li><li>Counter misinformation and build support.</li></ul>" },
+          { "tab_title": "Portfolio support & team training", "tab_content": "<h3>Portfolio support &amp; team training</h3><ul><li>Build playbooks, templates and systems.</li><li>Apply lessons across projects.</li><li>Train teams for meetings and opposition.</li></ul>" },
+          { "tab_title": "Government affairs", "tab_content": "<h3>Government affairs</h3><ul><li>Organize local support for approvals.</li><li>Influence state policymakers.</li><li>Engage Congress and federal agencies.</li></ul>" }
+        ]
+      %}
+    </div>
+  </section>
+
+  <section class="service-page__section service-page__process">
+    <div class="service-page__inner">
+      {% module "service_process_heading"
+        path="@hubspot/rich_text",
+        label="Process heading and introduction",
+        html="<p class='service-page__eyebrow'>A campaign-style path</p><h2>Our Renewable Energy Community Engagement Process</h2><p>Tigercomm&rsquo;s process is built for the realities of project development: messy timelines, shifting sentiment, opposition surges and critical approval milestones.</p>"
+      %}
+      <div class="service-page__process-visual" tabindex="0" role="region" aria-label="Scrollable process diagram">
+        {% module "service_process_image"
+          path="@hubspot/linked_image",
+          label="Process diagram",
+          img={
+            "alt": "Six-stage community engagement process: research terrain, map routes, identify levers, build the success path, draft the plan, then execute and iterate",
+            "loading": "lazy",
+            "max_height": 686,
+            "max_width": 1998,
+            "size_type": "auto_custom_max",
+            "src": get_asset_url("../images/services/community-engagement-process.png")
+          }
+        %}
+      </div>
+      <div class="service-page__process-copy">
+        {% module "service_process_details"
+          path="@hubspot/rich_text",
+          label="Process details",
+          html="<p>Our work generally moves through six stages:</p><ol><li><strong>Community research</strong> &mdash; assess local politics, relationships, routes of influence, community sentiment and potential sources of opposition.</li><li><strong>Influence mapping</strong> &mdash; understand the people, organizations and decision-makers who can shape critical approval milestones.</li><li><strong>Leverage assessment</strong> &mdash; determine which relationships, messages, validators and public actions can move opinion and votes.</li><li><strong>Success-path design</strong> &mdash; map the sequence of stakeholders and decisions that must move for the project to win approval.</li><li><strong>Campaign planning</strong> &mdash; build a coordinated plan with localized messaging, content, outreach tactics and milestone-based goals.</li><li><strong>Execution and iteration</strong> &mdash; carry out the plan, measure progress and continually adjust as political conditions change.</li></ol>"
+        %}
+      </div>
+    </div>
+  </section>
+
+  <section class="service-page__section service-page__why">
+    <div class="service-page__inner service-page__inner--narrow">
+      {% module "service_why_tigercomm"
+        path="@hubspot/rich_text",
+        label="Why Tigercomm",
+        html="<p class='service-page__eyebrow'>Why Tigercomm</p><h2>Campaign discipline backed by clean economy expertise</h2><p>Tigercomm is a clean economy communications and public affairs firm with deep experience in community engagement for renewable energy projects and data centers. Our team includes veterans of political campaigns, ballot initiatives, issue campaigns and renewable energy development.</p><p>We conducted the first-ever national poll of rural Americans&rsquo; views on renewable energy and surveyed leading developers on what is and is not working in the field. That research informs our work across onshore wind, solar, storage, transmission, micromobility, data centers and community engagement in renewable energy projects.</p><p>With Tigercomm, clients get more than local outreach. They get the reach of a top renewable energy PR and public affairs firm, plus the campaign discipline needed to build trust, manage risk and win community approval.</p>"
+      %}
+    </div>
+  </section>
+
+  {% module "service_success_stories"
+    path="../modules/success-stories-carousel",
+    label="Success Stories slider",
+    section_heading="Success Stories",
+    show_excerpt=true,
+    excerpt_length=260,
+    link_label="Read the full story"
+  %}
+
+  <section class="service-page__section service-page__faq-section">
+    <div class="service-page__inner service-page__inner--narrow">
+      {% module "service_faq_heading"
+        path="@hubspot/rich_text",
+        label="FAQ heading",
+        html="<p class='service-page__eyebrow'>Answers to common questions</p><h2>Frequently Asked Questions</h2>"
+      %}
+      {% module "service_faq"
+        path="../modules/faq",
+        label="Frequently Asked Questions",
+        faq_items=[
+          { "question": "What does community engagement mean for renewable energy projects?", "answer": "<p>Community engagement for renewable energy projects includes building local trust, understanding stakeholder concerns and earning visible support before a project reaches a critical approval moment. For developers, it includes research, messaging, meetings, stakeholder outreach, supporter recruitment, public hearing preparation and long-term relationship management.</p>" },
+          { "question": "How do you handle local opposition or negative community sentiment?", "answer": "<p>We start by identifying the concerns, people and power dynamics driving opposition. Then we use targeted outreach, trusted local voices, fact-based content and rapid-response messaging to correct misinformation, lower the temperature and make sure officials hear from supporters as well as critics.</p>" },
+          { "question": "Do you help with public meetings and local officials?", "answer": "<p>Yes. Tigercomm helps prepare presentations, talking points, Q&amp;A materials, supporter turnout plans and meeting strategy. We can also support open houses, hearings and local stakeholder meetings so your team enters each room prepared and backed by credible community voices.</p>" },
+          { "question": "How early should we involve Tigercomm?", "answer": "<p>The earlier, the better. We can begin during site selection or early development by assessing political risk, mapping stakeholders and building goodwill before opposition organizes. If a project is already facing pushback, we can also step in quickly with an opposition-response plan.</p>" },
+          { "question": "Can you help if our project is already facing pushback?", "answer": "<p>Yes. We diagnose the source of opposition, correct misinformation, identify persuadable audiences, elevate supportive voices and build a focused plan to improve the project&rsquo;s standing with local stakeholders and decision-makers.</p>" },
+          { "question": "How long does the community engagement process take?", "answer": "<p>It depends on the project, community and permitting timeline. Some engagements last a few months, while utility-scale campaigns often run 6 to 18 months or longer. We scale the work to match the project&rsquo;s risk, timeline and internal capacity.</p>" },
+          { "question": "Do you work with startups or organizations on smaller budgets?", "answer": "<p>Yes. We can tailor support to the highest-impact needs, such as an influence map, message framework, training workshop, public meeting prep or DIY-friendly engagement plan.</p>" }
+        ]
+      %}
+    </div>
+  </section>
+
+  {% module "service_final_cta"
+    path="../modules/cta",
+    label="Final call to action",
+    enabled=true,
+    title="Ready to secure the political support your project needs to build?",
+    description="<p>Contact Tigercomm to learn how our community engagement team can help you earn trust, manage opposition and win the community approval needed to move your project forward.</p>",
+    contact_type="?help_me_=community-engagement",
+    button_label="Get in Touch"
+  %}
+</div>
+{% endblock body %}

@@ -33,7 +33,7 @@
           {% set story_url = story.absolute_url %}
           {% set story_image = story.post_list_summary_featured_image or story.featured_image %}
           {% set story_image_alt = story.featured_image_alt_text or story.name or story.title %}
-          {% set story_title = story.name or story.title %}
+          {% set story_title = (story.name or story.title)|replace("Success Story: ", "")|replace("Success Story:", "")|trim %}
           {% set story_summary = story.post_list_content|striptags|trim %}
           {% if not story_summary %}
             {% set story_summary = story.meta_description|striptags|trim %}

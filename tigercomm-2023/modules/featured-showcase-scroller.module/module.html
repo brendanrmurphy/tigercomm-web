@@ -37,6 +37,17 @@
     {% set contains_query = query|replace("category=", "category__contains=") %}
     {% set all_rows = hubdb_table_rows(module.source_table, contains_query) %}
   {% endif %}
+  {% set enabled_rows = [] %}
+  {% for row in all_rows %}
+    {% set row_is_enabled = true %}
+    {% if row.disabled is defined and row.disabled %}
+      {% set row_is_enabled = false %}
+    {% endif %}
+    {% if row_is_enabled %}
+      {% do enabled_rows.append(row) %}
+    {% endif %}
+  {% endfor %}
+  {% set all_rows = enabled_rows %}
   {% set ordered_row_ids_raw = (module.ordered_row_ids or "")|replace("\r", ",")|replace("\n", ",")|replace("\t", ",")|replace(";", ",")|replace(" ", ",") %}
   {% set ordered_row_ids = ordered_row_ids_raw|split(",") %}
   {% set ordered_row_id_values = [] %}
