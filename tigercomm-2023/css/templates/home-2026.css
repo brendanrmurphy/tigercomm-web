@@ -263,6 +263,10 @@
   margin-bottom: 2.4rem;
 }
 
+.home2026-team__leaders .button {
+  margin-top: 2rem;
+}
+
 .home2026-section h2 + .faq,
 .home2026-section h2 + [data-hs-cos-type="module"] .faq {
   margin-top: 2.8rem;

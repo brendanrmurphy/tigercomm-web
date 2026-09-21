@@ -4,12 +4,13 @@
     "name": "source_mode",
     "type": "choice",
     "display": "radio",
-    "help_text": "Automatically display posts from a blog or curate individual HubSpot pages. Sample Tigers in Action cards appear until the selected source returns content.",
+    "help_text": "Display recent blog posts, curate individual pages, or mix curated items with automatic latest-blog entries. Sample Leading Voices cards appear until the selected source returns content.",
     "choices": [
       ["recent_blog", "Recent posts from a blog"],
-      ["selected_pages", "Select site pages"]
+      ["selected_pages", "Select site pages"],
+      ["mixed", "Mixed: curated pages and latest blog posts"]
     ],
-    "default": "recent_blog"
+    "default": "mixed"
   },
   {
     "label": "Blog source",
@@ -42,6 +43,27 @@
         "max": 20,
         "step": 1,
         "default": 6
+      },
+      {
+        "label": "Content type",
+        "name": "content_type",
+        "type": "choice",
+        "display": "select",
+        "help_text": "Sets the color of the thin border at the top of each card.",
+        "choices": [
+          ["podcast", "Podcast"],
+          ["training", "Training"],
+          ["event", "Event or webinar"],
+          ["article", "Article"],
+          ["other", "Other"]
+        ],
+        "default": "other"
+      },
+      {
+        "label": "Blog accent color",
+        "name": "accent_color",
+        "type": "color",
+        "help_text": "Optional. Sets the top-border color for every card from this blog."
       },
       {
         "label": "Series title",
@@ -126,6 +148,33 @@
         "help_text": "Optional. Leave blank to use the current page or post title."
       },
       {
+        "label": "Content type",
+        "name": "content_type",
+        "type": "choice",
+        "display": "select",
+        "help_text": "Sets the color of the thin border at the top of this card.",
+        "choices": [
+          ["podcast", "Podcast"],
+          ["training", "Training"],
+          ["event", "Event or webinar"],
+          ["article", "Article"],
+          ["other", "Other"]
+        ],
+        "default": "other"
+      },
+      {
+        "label": "Featured image override",
+        "name": "featured_image_override",
+        "type": "image",
+        "help_text": "Optional. Leave blank to use the selected page or post's featured image."
+      },
+      {
+        "label": "Blog or series accent color",
+        "name": "accent_color",
+        "type": "color",
+        "help_text": "Optional. Overrides the content-type color for this card. Use the same color for cards from the same blog or series."
+      },
+      {
         "label": "Card category/title",
         "name": "series_title",
         "type": "text",
@@ -185,6 +234,151 @@
     "default": []
   },
   {
+    "label": "Mixed content items",
+    "name": "mixed_items",
+    "type": "group",
+    "help_text": "Add curated pages and automatic latest-blog entries in the exact order they should appear. Drag rows to reorder them. Duplicates are allowed.",
+    "occurrence": {
+      "default": 0,
+      "min": 0,
+      "max": 20,
+      "sorting_label_field": "mixed_items.item_label"
+    },
+    "visibility": {
+      "controlling_field": "source_mode",
+      "controlling_value_regex": "mixed",
+      "operator": "EQUAL"
+    },
+    "children": [
+      {
+        "label": "Editor label",
+        "name": "item_label",
+        "type": "text",
+        "help_text": "Used only to identify this row while ordering items in the editor.",
+        "default": "Mixed content item"
+      },
+      {
+        "label": "Item source",
+        "name": "source_kind",
+        "type": "choice",
+        "display": "radio",
+        "choices": [
+          ["selected_page", "Curated page or post"],
+          ["latest_blog", "Latest post from a blog"]
+        ],
+        "default": "selected_page"
+      },
+      {
+        "label": "Curated page or post",
+        "name": "selected_page",
+        "type": "page",
+        "help_text": "Used when Item source is Curated page or post."
+      },
+      {
+        "label": "Blog",
+        "name": "blog",
+        "type": "blog",
+        "help_text": "Used when Item source is Latest post from a blog."
+      },
+      {
+        "label": "Blog tag",
+        "name": "tag_slug",
+        "type": "tag",
+        "tag_value": "SLUG",
+        "help_text": "Optional. For a latest-blog item, use the newest post with this tag."
+      },
+      {
+        "label": "Title override",
+        "name": "title_override",
+        "type": "text",
+        "help_text": "Optional. Leave blank to use the selected or latest post title."
+      },
+      {
+        "label": "Content type",
+        "name": "content_type",
+        "type": "choice",
+        "display": "select",
+        "help_text": "Sets the fallback top-border color.",
+        "choices": [
+          ["podcast", "Podcast"],
+          ["training", "Training"],
+          ["event", "Event or webinar"],
+          ["article", "Article"],
+          ["other", "Other"]
+        ],
+        "default": "other"
+      },
+      {
+        "label": "Featured image override",
+        "name": "featured_image_override",
+        "type": "image",
+        "help_text": "Optional. Leave blank to use the selected or latest post's featured image."
+      },
+      {
+        "label": "Blog or series accent color",
+        "name": "accent_color",
+        "type": "color",
+        "help_text": "Optional. Overrides the content-type border color."
+      },
+      {
+        "label": "Card category/title",
+        "name": "series_title",
+        "type": "text",
+        "help_text": "Displayed at the top of the card when no series logo is provided."
+      },
+      {
+        "label": "Card series logo",
+        "name": "series_logo",
+        "type": "image",
+        "help_text": "Optional. Replaces the card category/title."
+      },
+      {
+        "label": "Description override",
+        "name": "description_override",
+        "type": "text",
+        "allow_new_line": true,
+        "help_text": "Optional. Leave blank to use the selected or latest post description."
+      },
+      {
+        "label": "Team member label",
+        "name": "team_label",
+        "type": "text",
+        "default": "Hosted by"
+      },
+      {
+        "label": "First team member name",
+        "name": "team_one_name",
+        "type": "text"
+      },
+      {
+        "label": "First team member role/title",
+        "name": "team_one_role",
+        "type": "text"
+      },
+      {
+        "label": "First team member photo",
+        "name": "team_one_image",
+        "type": "image"
+      },
+      {
+        "label": "Second team member name",
+        "name": "team_two_name",
+        "type": "text"
+      },
+      {
+        "label": "Second team member role/title",
+        "name": "team_two_role",
+        "type": "text"
+      },
+      {
+        "label": "Second team member photo",
+        "name": "team_two_image",
+        "type": "image"
+      }
+    ],
+    "default": []
+  },
+  {
     "label": "Content",
     "name": "content",
     "type": "group",
@@ -193,7 +387,7 @@
         "label": "Heading",
         "name": "heading",
         "type": "text",
-        "default": "Featured Content"
+        "default": ""
       },
       {
         "label": "Show descriptions",

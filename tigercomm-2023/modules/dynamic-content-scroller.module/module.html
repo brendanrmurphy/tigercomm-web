@@ -1,9 +1,11 @@
-{% set source_mode = module.source_mode or "recent_blog" %}
+{% set source_mode = module.source_mode or "mixed" %}
 {% set content_items = [] %}
 {% set resolved_content = {} %}
 {% set showing_samples = false %}
+{% set configured_sources = [] %}
 
 {% if source_mode == "recent_blog" and module.blog_source.blog %}
+  {% do configured_sources.append("blog") %}
   {% set blog_limit = module.blog_source.item_limit|int %}
   {% if blog_limit < 1 %}{% set blog_limit = 6 %}{% endif %}
   {% set tag_slug = module.blog_source.tag_slug|trim %}
@@ -17,6 +19,7 @@
   {% for selected_item in module.selected_pages %}
     {% set selected_id = selected_item.selected_page|int %}
     {% if selected_id %}
+      {% do configured_sources.append(selected_id) %}
       {% do selected_ids.append(selected_id) %}
       {% do content_items.append(selected_item) %}
     {% endif %}
@@ -24,9 +27,44 @@
   {% if selected_ids|length %}
     {% set resolved_content = content_by_ids(selected_ids) %}
   {% endif %}
+{% elif source_mode == "mixed" %}
+  {% set selected_ids = [] %}
+  {% for mixed_item in module.mixed_items %}
+    {% set mixed_source_kind = mixed_item.source_kind or "selected_page" %}
+    {% set mixed_blog_id = mixed_item.blog|int %}
+    {% set mixed_selected_id = mixed_item.selected_page|int %}
+    {# A saved row can retain its blog after HubSpot resets source_kind. If there is
+       no selected page, treat that populated blog as the intended source. #}
+    {% set use_latest_blog = mixed_blog_id and (mixed_source_kind == "latest_blog" or not mixed_selected_id) %}
+    {% if use_latest_blog %}
+      {% do configured_sources.append(mixed_blog_id) %}
+      {% set mixed_tag_slug = mixed_item.tag_slug|trim %}
+      {% if mixed_tag_slug %}
+        {% set mixed_latest_posts = blog_recent_tag_posts(mixed_blog_id, mixed_tag_slug, 1) %}
+        {# Keep the card useful if a tag is renamed or temporarily has no posts. #}
+        {% if mixed_latest_posts|length == 0 %}
+          {% set mixed_latest_posts = blog_recent_posts(mixed_blog_id, 1) %}
+        {% endif %}
+      {% else %}
+        {% set mixed_latest_posts = blog_recent_posts(mixed_blog_id, 1) %}
+      {% endif %}
+      {% if mixed_latest_posts|length %}
+        {% do content_items.append({"source_kind": "latest_blog", "source_item": mixed_latest_posts[0], "settings": mixed_item}) %}
+      {% endif %}
+    {% else %}
+      {% if mixed_selected_id %}
+        {% do configured_sources.append(mixed_selected_id) %}
+        {% do selected_ids.append(mixed_selected_id) %}
+        {% do content_items.append({"source_kind": "selected_page", "content_id": mixed_selected_id, "settings": mixed_item}) %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% if selected_ids|length %}
+    {% set resolved_content = content_by_ids(selected_ids) %}
+  {% endif %}
 {% endif %}
 
-{% if content_items|length == 0 %}
+{% if content_items|length == 0 and configured_sources|length == 0 %}
   {% set showing_samples = true %}
   {% do content_items.append("sample_twic_justin_worland") %}
   {# {% do content_items.append("sample_twic_kelly_livingston") %}
@@ -78,6 +116,10 @@
               {% set series_title = "" %}
               {% set series_logo = "" %}
               {% set series_logo_alt = "" %}
+              {% set item_type = "other" %}
+              {% set item_accent_color = "" %}
+              {% set item_featured_image = "" %}
+              {% set item_featured_image_alt = "" %}
               {% set team_label = "" %}
               {% set team_one_name = "" %}
               {% set team_one_role = "" %}
@@ -87,10 +129,14 @@
               {% set team_two_image = "" %}
               {% if showing_samples %}
                 {% if content_entry == "sample_twic_justin_worland" %}
+                  {% set item_type = "podcast" %}
+                  {% set item_accent_color = "var(--primary-color)" %}
                   {% set series_title = "This Week in Cleantech" %}
                   {% set item_title = "Episode 1: Justin Worland" %}
                   {% set item_url = "/this-week-in-cleantech-podcast" %}
                   {% set item_description = "TIME journalist Justin Worland joins This Week in Cleantech for a fast roundup of climate and clean energy news." %}
+                  {% set item_featured_image = get_asset_url("../images/insights/this-week-in-cleantech-1000.jpg") %}
+                  {% set item_featured_image_alt = "This Week in Cleantech" %}
                   {% set team_label = "Hosted by" %}
                   {% set team_one_name = "Mike Casey" %}
                   {% set team_one_role = "Host, This Week in Cleantech" %}
@@ -99,10 +145,14 @@
                   {% set team_two_role = "Co-host" %}
                   {% set team_two_image = get_asset_url("../images/team/paul-gerke.jpg") %}
                 {% elif content_entry == "sample_twic_kelly_livingston" %}
+                  {% set item_type = "podcast" %}
+                  {% set item_accent_color = "var(--primary-color)" %}
                   {% set series_title = "This Week in Cleantech" %}
                   {% set item_title = "Episode 2: Kelly Livingston" %}
                   {% set item_url = "/this-week-in-cleantech-podcast" %}
                   {% set item_description = "ABC News journalist Kelly Livingston discusses timely climate and clean energy stories with Mike Casey and Paul Gerke." %}
+                  {% set item_featured_image = get_asset_url("../images/insights/this-week-in-cleantech-1000.jpg") %}
+                  {% set item_featured_image_alt = "This Week in Cleantech" %}
                   {% set team_label = "Hosted by" %}
                   {% set team_one_name = "Mike Casey" %}
                   {% set team_one_role = "Host, This Week in Cleantech" %}
@@ -111,10 +161,14 @@
                   {% set team_two_role = "Co-host" %}
                   {% set team_two_image = get_asset_url("../images/team/paul-gerke.jpg") %}
                 {% elif content_entry == "sample_twic_ivan_penn" %}
+                  {% set item_type = "podcast" %}
+                  {% set item_accent_color = "var(--primary-color)" %}
                   {% set series_title = "This Week in Cleantech" %}
                   {% set item_title = "Episode 3: Ivan Penn" %}
                   {% set item_url = "/this-week-in-cleantech-podcast" %}
                   {% set item_description = "The New York Times journalist Ivan Penn joins Mike Casey and Paul Gerke for clean energy news and analysis." %}
+                  {% set item_featured_image = get_asset_url("../images/insights/this-week-in-cleantech-1000.jpg") %}
+                  {% set item_featured_image_alt = "This Week in Cleantech" %}
                   {% set team_label = "Hosted by" %}
                   {% set team_one_name = "Mike Casey" %}
                   {% set team_one_role = "Host, This Week in Cleantech" %}
@@ -123,32 +177,68 @@
                   {% set team_two_role = "Co-host" %}
                   {% set team_two_image = get_asset_url("../images/team/paul-gerke.jpg") %}
                 {% elif content_entry == "sample_scaling_clean_kevin_smith" %}
+                  {% set item_type = "podcast" %}
+                  {% set item_accent_color = "#0091cc" %}
                   {% set series_title = "Scaling Clean Podcast" %}
                   {% set series_logo = get_asset_url("../images/scaling-clean-logo.png") %}
                   {% set series_logo_alt = "Scaling Clean Podcast" %}
                   {% set item_title = "Kevin Smith" %}
                   {% set item_url = "/scaling-clean-podcast" %}
                   {% set item_description = "Lightsource bp CEO Kevin Smith shares practical leadership lessons for cleantech executives, investors, and advisors." %}
+                  {% set item_featured_image = get_asset_url("../images/insights/scaling-clean-1000.jpg") %}
+                  {% set item_featured_image_alt = "Scaling Clean Podcast" %}
                   {% set team_label = "Hosted by" %}
                   {% set team_one_name = "Melissa Baldwin" %}
                   {% set team_one_role = "Host, Scaling Clean" %}
                   {% set team_one_image = get_asset_url("../images/team/melissa.jpg") %}
                 {% else %}
+                  {% set item_type = "training" %}
                   {% set series_title = "Community Engagement Trainings" %}
                   {% set item_title = "Workshop for Renewable Energy Project Permitting & Community Engagement" %}
                   {% set item_url = "/services/community-engagement" %}
                   {% set item_description = "Hands-on workshops help clean energy teams sharpen outreach, messaging, and strategies for earning local support." %}
+                  {% set item_featured_image = get_asset_url("../images/insights/leading-conference-talks-1000.jpg") %}
+                  {% set item_featured_image_alt = "Community engagement training" %}
                   {% set team_label = "Led by" %}
                   {% set team_one_name = "Ayelet Hines" %}
                   {% set team_one_role = "Community Engagement Lead" %}
                   {% set team_one_image = get_asset_url("../images/team/ayelet.jpg") %}
                 {% endif %}
+              {% elif source_mode == "mixed" %}
+                {% set item_settings = content_entry.settings %}
+                {% if content_entry.source_kind == "latest_blog" %}
+                  {% set source_item = content_entry.source_item %}
+                {% else %}
+                  {% set mixed_content_id = content_entry.content_id|int %}
+                  {% set source_item = resolved_content[mixed_content_id] or resolved_content[mixed_content_id ~ ""] %}
+                {% endif %}
+                {% set item_type = item_settings.content_type or "other" %}
+                {% set item_accent_color = item_settings.accent_color.color %}
+                {% set item_title = item_settings.title_override or source_item.name or source_item.title or source_item.html_title %}
+                {% set item_url = source_item.absolute_url %}
+                {% set item_description = item_settings.description_override or source_item.meta_description or source_item.post_summary or source_item.description %}
+                {% set item_featured_image = item_settings.featured_image_override.src or source_item.post_list_summary_featured_image or source_item.featured_image %}
+                {% set item_featured_image_alt = item_settings.featured_image_override.alt or source_item.featured_image_alt_text or item_title %}
+                {% set series_title = item_settings.series_title %}
+                {% set series_logo = item_settings.series_logo.src %}
+                {% set series_logo_alt = item_settings.series_logo.alt or series_title %}
+                {% set team_label = item_settings.team_label or "Hosted by" %}
+                {% set team_one_name = item_settings.team_one_name %}
+                {% set team_one_role = item_settings.team_one_role %}
+                {% set team_one_image = item_settings.team_one_image.src %}
+                {% set team_two_name = item_settings.team_two_name %}
+                {% set team_two_role = item_settings.team_two_role %}
+                {% set team_two_image = item_settings.team_two_image.src %}
               {% elif source_mode == "selected_pages" %}
                 {% set content_id = content_entry.selected_page|int %}
                 {% set source_item = resolved_content[content_id] or resolved_content[content_id ~ ""] %}
+                {% set item_type = content_entry.content_type or "other" %}
+                {% set item_accent_color = content_entry.accent_color.color %}
                 {% set item_title = content_entry.title_override or source_item.name or source_item.title or source_item.html_title %}
                 {% set item_url = source_item.absolute_url %}
                 {% set item_description = content_entry.description_override or source_item.meta_description or source_item.post_summary or source_item.description %}
+                {% set item_featured_image = content_entry.featured_image_override.src or source_item.post_list_summary_featured_image or source_item.featured_image %}
+                {% set item_featured_image_alt = content_entry.featured_image_override.alt or source_item.featured_image_alt_text or item_title %}
                 {% set series_title = content_entry.series_title %}
                 {% set series_logo = content_entry.series_logo.src %}
                 {% set series_logo_alt = content_entry.series_logo.alt or series_title %}
@@ -161,9 +251,13 @@
                 {% set team_two_image = content_entry.team_two_image.src %}
               {% else %}
                 {% set source_item = content_entry %}
+                {% set item_type = module.blog_source.content_type or "other" %}
+                {% set item_accent_color = module.blog_source.accent_color.color %}
                 {% set item_title = source_item.name or source_item.title or source_item.html_title %}
                 {% set item_url = source_item.absolute_url %}
                 {% set item_description = source_item.meta_description or source_item.post_summary or source_item.description %}
+                {% set item_featured_image = source_item.post_list_summary_featured_image or source_item.featured_image %}
+                {% set item_featured_image_alt = source_item.featured_image_alt_text or item_title %}
                 {% set series_title = module.blog_source.series_title %}
                 {% set series_logo = module.blog_source.series_logo.src %}
                 {% set series_logo_alt = module.blog_source.series_logo.alt or series_title %}
@@ -176,10 +270,41 @@
                 {% set team_two_image = module.blog_source.team_two_image.src %}
               {% endif %}
 
+              {# Existing module instances predate the content-type field and resolve to "other". #}
+              {% if not item_type or item_type == "other" %}
+                {% set item_type_hint = (series_title ~ " " ~ item_title ~ " " ~ item_url)|striptags|lower %}
+                {% if "podcast" in item_type_hint or "this week in cleantech" in item_type_hint or "scaling clean" in item_type_hint %}
+                  {% set item_type = "podcast" %}
+                {% elif "training" in item_type_hint or "workshop" in item_type_hint %}
+                  {% set item_type = "training" %}
+                {% elif "event" in item_type_hint or "webinar" in item_type_hint or "conference" in item_type_hint or "roundtable" in item_type_hint %}
+                  {% set item_type = "event" %}
+                {% elif "article" in item_type_hint or "blog" in item_type_hint or "insight" in item_type_hint or "interview" in item_type_hint %}
+                  {% set item_type = "article" %}
+                {% else %}
+                  {% set item_type = "other" %}
+                {% endif %}
+              {% endif %}
+
+              {# Give established blog series distinct defaults while allowing editor overrides. #}
+              {% if not item_accent_color %}
+                {% set item_series_hint = (series_title ~ " " ~ item_title ~ " " ~ item_url)|striptags|lower %}
+                {% if "this week in cleantech" in item_series_hint %}
+                  {% set item_accent_color = "var(--primary-color)" %}
+                {% elif "scaling clean" in item_series_hint %}
+                  {% set item_accent_color = "#0091cc" %}
+                {% endif %}
+              {% endif %}
+
               {% if item_title and item_url %}
                 <li class="dynamic-content-scroller__item">
-                  <article class="dynamic-content-card{% if showing_samples %} dynamic-content-card--sample{% endif %}">
+                  <article class="dynamic-content-card dynamic-content-card--type-{{ item_type|escape_attr }}{% if item_featured_image %} dynamic-content-card--has-featured-image{% endif %}{% if team_one_name and team_two_name %} dynamic-content-card--has-multiple-hosts{% endif %}{% if showing_samples %} dynamic-content-card--sample{% endif %}"{% if item_accent_color %} style="--dynamic-content-type-color: {{ item_accent_color|escape_attr }};"{% endif %}>
                     <a class="dynamic-content-card__link" href="{{ item_url|escape_url }}"{% if module.content.open_in_new_tab %} target="_blank" rel="noopener"{% endif %}{% if track_index > 0 %} tabindex="-1"{% endif %}>
+                      {% if item_featured_image %}
+                        <span class="dynamic-content-card__featured-image-wrap">
+                          <img class="dynamic-content-card__featured-image" src="{{ item_featured_image|escape_url }}" alt="{{ item_featured_image_alt|escape_attr }}" loading="lazy" draggable="false">
+                        </span>
+                      {% endif %}
                       <span class="dynamic-content-card__body">
                         {% if series_logo or series_title or team_one_name or team_two_name %}
                           <span class="dynamic-content-card__masthead">
@@ -191,13 +316,14 @@
                               <span class="dynamic-content-card__series-title">{{ series_title }}</span>
                             {% endif %}
                             {% if team_one_name or team_two_name %}
-                              <span class="dynamic-content-card__team">
-                                {% if team_label %}<span class="dynamic-content-card__team-label">{{ team_label }}</span>{% endif %}
+                              <span class="dynamic-content-card__team{% if item_featured_image %} dynamic-content-card__team--overlay{% endif %}{% if team_one_name and team_two_name %} dynamic-content-card__team--multiple{% endif %}">
+                                {% if team_label and not item_featured_image %}<span class="dynamic-content-card__team-label">{{ team_label }}</span>{% endif %}
                                 <span class="dynamic-content-card__people">
                                   {% if team_one_name %}
                                     <span class="dynamic-content-card__person">
                                       {% if team_one_image %}<img src="{{ team_one_image|escape_url }}" alt="" loading="lazy" aria-hidden="true">{% endif %}
                                       <span class="dynamic-content-card__person-copy">
+                                        {% if team_label and item_featured_image %}<span class="dynamic-content-card__team-label">{{ team_label }}</span>{% endif %}
                                         <span class="dynamic-content-card__person-name">{{ team_one_name }}</span>
                                         {% if team_one_role %}<span class="dynamic-content-card__person-role">{{ team_one_role }}</span>{% endif %}
                                       </span>
@@ -207,6 +333,7 @@
                                     <span class="dynamic-content-card__person">
                                       {% if team_two_image %}<img src="{{ team_two_image|escape_url }}" alt="" loading="lazy" aria-hidden="true">{% endif %}
                                       <span class="dynamic-content-card__person-copy">
+                                        {% if team_label and item_featured_image and not team_one_name %}<span class="dynamic-content-card__team-label">{{ team_label }}</span>{% endif %}
                                         <span class="dynamic-content-card__person-name">{{ team_two_name }}</span>
                                         {% if team_two_role %}<span class="dynamic-content-card__person-role">{{ team_two_role }}</span>{% endif %}
                                       </span>
@@ -241,6 +368,6 @@
   </section>
 {% elif is_in_editor %}
   <div class="dynamic-content-scroller__empty">
-    {% if source_mode == "selected_pages" %}Select at least one site page.{% else %}Select a blog to display recent posts.{% endif %}
+    {% if configured_sources|length %}The configured source returned no content. Check that the selected pages are published and that blog/tag selections contain published posts.{% elif source_mode == "mixed" %}Add at least one mixed content item.{% elif source_mode == "selected_pages" %}Select at least one site page.{% else %}Select a blog to display recent posts.{% endif %}
   </div>
 {% endif %}

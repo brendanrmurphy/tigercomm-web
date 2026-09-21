@@ -70,7 +70,7 @@
   padding: clamp(2.4rem, 2.2vw, 3rem);
   flex-direction: column;
   justify-content: space-between;
-  background: var(--quaternary-color);
+  background: var(--quinary-color);
   color: #fff;
   scroll-snap-align: start;
 }

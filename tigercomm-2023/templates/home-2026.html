@@ -9,7 +9,19 @@
 
 {% block body %}
 <div class="container-fluid body-container body-container--home-2026">
-  <section class="home2026-hero" style="background-image: url('{{ get_asset_url("../new-hp/solar-panels-2.jpg") }}');">
+  <section class="home2026-hero" style="background-image: url('{{ get_asset_url("../images/home/solar-close-up.png") }}');">
+    <script>
+      (function () {
+        var hero = document.currentScript.parentElement;
+        var heroImages = [
+          '{{ get_asset_url("../images/home/energy-storage-image.jpg") }}',
+          '{{ get_asset_url("../images/home/solar-close-up.jpg") }}'
+        ];
+        var selectedImage = heroImages[Math.floor(Math.random() * heroImages.length)];
+
+        hero.style.backgroundImage = 'url("' + selectedImage + '")';
+      })();
+    </script>
     <div class="home2026-hero__overlay"></div>
     <div class="content-wrapper home2026-hero__inner">
       <div class="home2026-hero__copy">
@@ -82,27 +94,18 @@
             "hover_title": "Turbocharge your sales through better marketing",
             "description": "<p>Many clean economy companies offer B2B industrial goods and services to a limited pool of customers who don’t buy with a mouse click. However, too many still use the legacy marketing approach of expecting sales teams to provide early-stage customer education. Marketing research shows B2B customers start their “buyer’s journey” through online searches and content, before they engage sales team members.</p>",
             "link": { "href": "/services/marketing-communications", "type": "EXTERNAL" },
-            "image": { "src": get_asset_url("../images/services/turbo-tile.jpg"), "alt": "Marketing communications session" },
+            "image": { "src": get_asset_url("../images/home/marketing-communications.jpg"), "alt": "Marketing communications session" },
             "image_position": "center center",
             "theme": "primary"
           },
          
           {
-            "service_title": "Financial PR",
+            "service_title": "Investor Communications",
             "description": "<p>Capital events demand a clear, credible story. We help clean economy companies communicate funding, transactions, and market milestones to investors, media, and stakeholders.</p>",
-            "link": { "href": "/services", "type": "EXTERNAL" },
-            "image": { "src": get_asset_url("../images/success-stories/nextracker.jpg"), "alt": "Nextracker at Nasdaq" },
+            "link": { "href": "/services/thought-leadership", "type": "EXTERNAL" },
+            "image": { "src": get_asset_url("../images/home/investor-communications.jpg"), "alt": "Nextpower at Nasdaq" },
             "image_position": "left top",
             "theme": "quinary"
-          },
-          {
-            "service_title": "Public Affairs",
-            "hover_title": "Secure fair treatment from policymakers",
-            "description": "<p>Clean economy companies are typically building new sectors within industries dominated by mature incumbents unwilling to relinquish market share. Instead, they weaponize lobbying and political influence to block the growth of clean economy challengers.</p>",
-            "link": { "href": "/services/thought-leadership", "type": "EXTERNAL" },
-            "image": { "src": get_asset_url("../images/services/secure-tile.jpg"), "alt": "Public affairs work" },
-            "image_position": "center bottom",
-            "theme": "alt"
           },
           {
             "service_title": "Community Engagement",
@@ -112,6 +115,15 @@
             "image": { "src": get_asset_url("../images/services/community-tile.jpg"), "alt": "Community engagement meeting" },
             "image_position": "center center",
             "theme": "quaternary"
+          },
+          {
+            "service_title": "Public Affairs",
+            "hover_title": "Secure fair treatment from policymakers",
+            "description": "<p>Clean economy companies are typically building new sectors within industries dominated by mature incumbents unwilling to relinquish market share. Instead, they weaponize lobbying and political influence to block the growth of clean economy challengers.</p>",
+            "link": { "href": "/services/thought-leadership", "type": "EXTERNAL" },
+            "image": { "src": get_asset_url("../images/home/public-affairs.jpg"), "alt": "Public affairs work" },
+            "image_position": "center bottom",
+            "theme": "alt"
           }
         ]
       %}
@@ -136,19 +148,19 @@
         tabs=[
           {
             "tab_title": "Developers & Project Infrastructure",
-            "tab_content": "<h3>Developers &amp; Project Infrastructure</h3><ul><li>Renewable Energy Developers</li><li>Data Center Developers</li><li>Utilities and Independent Power Producers</li></ul>"
+            "tab_content": "<h3>Developers &amp; Project Infrastructure</h3><ul><li>Renewable Energy Developers</li><li>Utility Scale and Distributed Generation</li><li>Data Center Developers</li><li>Utilities and Independent Power Producers</li><li>Transmission and Distribution</li></ul>"
           },
           {
             "tab_title": "Technology & Equipment Providers",
             "tab_content": "<h3>Technology &amp; Equipment Providers</h3><ul><li>Solar &amp; Wind Manufacturing (OEMs)</li><li>Energy Storage (BESS), Microgrids &amp; Grid Tech</li><li>Thermal Storage</li><li>Lithium Refining</li><li>Green Hydrogen, Methanol, Geothermal &amp; Advanced Fuels</li><li>Recycling, Waste-to-Energy</li><li>Energy Efficiency Equipment &amp; Services, Energy-as-a-Service</li><li>Carbon Storage and Sequestration</li></ul>"
           },
           {
-            "tab_title": "SAS & Professional Services",
-            "tab_content": "<h3>SAS & Professional Services</h3><ul><li>Engineering, Procurement and Construction (EPCs)</li><li>Operations &amp; Maintenance Services and Equipment Providers</li><li>Clean Transportation &amp; EV Infrastructure</li><li>Clean Energy SaaS Companies</li><li>Clean Energy Retail Providers</li><li>Cleantech Professional Services</li><li>Distributed Energy Resource Management (DERM) &amp; Orchestration</li></ul>"
+            "tab_title": "SaaS & Professional Services",
+            "tab_content": "<h3>SaaS & Professional Services</h3><ul><li>Engineering, Procurement and Construction (EPCs)</li><li>Operations &amp; Maintenance Services and Equipment Providers</li><li>Clean Transportation &amp; EV Infrastructure</li><li>Clean Energy SaaS Companies</li><li>Clean Energy Retail Providers</li><li>Cleantech Professional Services</li><li>Distributed Energy Resource Management (DERM) &amp; Orchestration</li></ul>"
           },
           {
-            "tab_title": "Investors & PortCos",
-            "tab_content": "<h3>Investors & PortCos</h3><ul><li>Climate Tech Startups</li><li>Impact-Focused Investors</li><li>Associations</li></ul>"
+            "tab_title": "Investors & Portfolio Companies",
+            "tab_content": "<h3>Investors & Portfolio Companies</h3><ul><li>Climate Tech Startups</li><li>Impact-Focused Investors</li><li>Associations</li></ul>"
           }
         ]
       %}
@@ -184,9 +196,11 @@
     path="../modules/success-stories-carousel",
     section_heading="Success Stories",
     selected_posts=[
-      { "post_content_id": "164138770864" },
-      { "post_content_id": "164138770776" },
-      { "post_content_id": "164138770826" }
+      { "post_content_id": "213649470792" },
+      { "post_content_id": "220218191887" },
+      { "post_content_id": "164204625271" },
+      { "post_content_id": "164109001989" },
+      { "post_content_id": "164138770776" }
     ],
     show_excerpt=true,
     excerpt_length=260,
@@ -209,23 +223,11 @@
 
   <section class="home2026-section home2026-section--gray home2026-action">
     <div class="content-wrapper">
-      <h2>Tigers in the Lead</h2>
+      <h2>The Leading Voices in the Sector</h2>
       {% module "tigers_in_action_scroller"
         path="../modules/dynamic-content-scroller",
-        source_mode="selected_pages",
-        selected_pages=[],
-        content={
-          "heading": "",
-          "show_descriptions": true,
-          "link_label": "Read more",
-          "open_in_new_tab": false
-        },
-        scroller={
-          "autoplay": true,
-          "speed": 30,
-          "direction": "left",
-          "pause_on_interaction": true
-        }
+        label="Leading Voices content",
+        overrideable=True
       %}
     </div>
   </section>
