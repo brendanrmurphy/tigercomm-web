@@ -9,43 +9,70 @@
 
 {% block body %}
 <div class="container-fluid body-container body-container--home-2026">
-  <section class="home2026-hero" style="background-image: url('{{ get_asset_url("../images/home/solar-close-up.png") }}');">
-    <script>
-      (function () {
-        var hero = document.currentScript.parentElement;
-        var heroImages = [
-          '{{ get_asset_url("../images/home/energy-storage-image.jpg") }}',
-          '{{ get_asset_url("../images/home/solar-close-up.jpg") }}'
-        ];
-        var selectedImage = heroImages[Math.floor(Math.random() * heroImages.length)];
-
-        hero.style.backgroundImage = 'url("' + selectedImage + '")';
-      })();
-    </script>
-    <div class="home2026-hero__overlay"></div>
-    <div class="content-wrapper home2026-hero__inner">
-      <div class="home2026-hero__copy">
-      <h1 class=" hero__title">
-                <div data-aos="fade-right" data-aos-delay="500" class="aos-init aos-animate">Communications Powerhouse</div>
-                <div class="hero__sub-title aos-init aos-animate" data-aos="fade-left" data-aos-delay="1000">For Clean Economy Companies</div>
-            </h1>
-        {# <h1>
-          <span>Communications Powerhouse</span>
-          <strong>For Clean Economy Companies</strong>
-        </h1> #}
-        <p>We are the world's top PR firm helping clean economy companies boost sales, attract investors, win permits, and secure fair policies.</p>
-        <p>We build communications programs that get results in the AI age.</p>
-        <a class="home2026-hero__cta button" href="/contact">Get in Touch</a>
-      </div>
-    </div>
-  </section>
+  {% module "home_2026_hero_banner"
+    path="../modules/hero-banner",
+    label="Homepage Hero",
+    content={
+      "title": "Communications Powerhouse",
+      "subtitle": "For Clean Economy Companies",
+      "description": "<p>We are the U.S.'s top cleantech PR and marketing communications firm helping clean economy companies boost sales, attract investors, win permits, and secure fair policies.</p><p>We build communications programs that get results in the AI age.</p>",
+      "buttons": [
+        {
+          "button_text": "Get in Touch",
+          "link": {
+            "url": { "href": "/contact", "type": "EXTERNAL" },
+            "no_follow": false,
+            "open_in_new_tab": false
+          },
+          "style": "primary"
+        }
+      ],
+      "enable_animation": true
+    },
+    background={
+      "images": [
+        {
+          "image": {
+            "src": get_asset_url("../images/home/energy-storage-image.jpg"),
+            "alt": "",
+            "loading": "disabled",
+            "size_type": "auto",
+            "width": 2000,
+            "height": 1334
+          }
+        },
+        {
+          "image": {
+            "src": get_asset_url("../images/home/solar-close-up.jpg"),
+            "alt": "",
+            "loading": "disabled",
+            "size_type": "auto",
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "randomize": true,
+      "position": "center center"
+    },
+    styles={
+      "height": "tall",
+      "vertical_alignment": "center",
+      "text_alignment": "left",
+      "content_width": "wide",
+      "overlay_style": "left-gradient",
+      "overlay_color": { "color": "#001a3a", "opacity": 78 },
+      "text_color": { "color": "#ffffff", "opacity": 100 },
+      "background_color": { "color": "#285079", "opacity": 100 }
+    }
+  %}
 
   <section class="home2026-section home2026-section--white">
     <div class="content-wrapper">
       <h2>Why Tigercomm?</h2>
       <div class="home2026-intro">
         <p>Sales goals crushed. Capital raises won. A CEO transformed into her industry's leading voice. A permit secured when rejection loomed. The IPO that set records.</p>
-        <p>For over 20 years, over 190 companies from three continents and 40 U.S. states have turned to us to drive results. Tigercomm is the world's top cleantech communications firm in the AI age.</p>
+        <p>For over 23 years, over 190 companies from three continents and 40 U.S. states have turned to us to drive results. Tigercomm is the world's top cleantech communications firm in the AI age.</p>
         <p>Our four service offerings are specifically designed for companies like yours. But as a full-service agency, we have also helped companies meet dozens of high-stakes, unique challenges. Whatever the engagement, our work drives results.</p>
       </div>
       {% module "stats_counter"

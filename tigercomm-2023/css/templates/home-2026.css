@@ -53,84 +53,6 @@
   background: #fff;
 }
 
-.home2026-hero {
-  position: relative;
-  min-height: 68rem;
-  background-position: center 56%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #285079;
-  color: #fff;
-}
-
-.home2026-hero__overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(0, 26, 58, 0.78) 0%, rgba(0, 43, 92, 0.58) 42%, rgba(0, 43, 92, 0.16) 100%),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16));
-}
-
-.home2026-hero__inner {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  min-height: 68rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4rem;
-  padding-top: 9.5rem;
-  padding-bottom: 8rem;
-}
-
-.home2026-hero__copy {
-  flex: 1 1 110rem;
-  max-width: 110rem;
-}
-
-.home2026-hero h1 {
-  max-width: 110rem;
-  margin-bottom: 0;
-  color: #fff;
-  /* font-size: clamp(4.4rem, 3.7vw, 8.2rem); */
-  text-shadow: none;
-}
-
-.home2026-hero .hero__sub-title {
-  color: #fff;
-}
-
-.home2026-hero h1 span,
-.home2026-hero h1 strong {
-  display: block;
-}
-
-.home2026-hero p {
-  max-width: 88rem;
-  color: #fff;
-  font-weight: 500;
-}
-
-.home2026-hero h1 + p {
-  margin-top: 3.2rem;
-}
-
-.home2026-hero__cta.button {
-  margin-top: 3.2rem;
-  border-color: var(--primary-color);
-  background: var(--primary-color);
-  color: #fff;
-  white-space: nowrap;
-  box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.2);
-}
-
-.home2026-hero__cta.button:hover,
-.home2026-hero__cta.button:focus {
-  border-color: #fff;
-  background: #fff;
-  color: var(--quinary-color);
-}
-
 .home2026-intro {
   max-width: 116rem;
   margin-bottom: 6rem;
@@ -303,19 +225,9 @@
 }
 
 @media (max-width: 980px) {
-  .home2026-hero,
-  .home2026-hero__inner {
-    min-height: 56rem;
-  }
-
-  .home2026-hero__inner,
   .home2026-expertise__body,
   .home2026-team {
     grid-template-columns: 1fr;
-  }
-
-  .home2026-hero__inner {
-    display: grid;
   }
 
   .home2026-team {
@@ -341,24 +253,6 @@
   .body-container--home-2026 p,
   .body-container--home-2026 li {
     font-size: 1.7rem;
-  }
-
-  .home2026-hero,
-  .home2026-hero__inner {
-    min-height: 52rem;
-  }
-
-  .home2026-hero__inner {
-    padding: 5rem 0;
-  }
-
-  .home2026-hero h1 {
-    font-size: 4rem;
-    line-height: 1.06;
-  }
-
-  .home2026-hero {
-    background-position: center 54%;
   }
 
   .home2026-who .featured-showcase-scroller--logo-only {

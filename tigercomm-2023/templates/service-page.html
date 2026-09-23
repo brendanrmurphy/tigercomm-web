@@ -10,13 +10,13 @@
 
 {% block body %}
 <div class="container-fluid body-container body-container--service-page">
-  <section class="service-page__hero">
-    <div class="service-page__inner service-page__hero-grid">
+  <section class="service-page__hero" style="background-image: linear-gradient(90deg, rgba(12, 32, 58, 0.96) 0%, rgba(18, 47, 82, 0.88) 52%, rgba(18, 47, 82, 0.7) 100%), url('{{ get_asset_url("../images/services/community-tile.jpg") }}');">
+    <div class="content-wrapper service-page__inner service-page__hero-grid">
       <div class="service-page__hero-copy">
         {% module "service_hero_copy"
           path="@hubspot/rich_text",
           label="Hero copy",
-          html="<p class='service-page__eyebrow'>Community Engagement</p><h1>Lower Project Risk Through Effective Community Engagement</h1><p class='service-page__lead'>Developers lose projects at a 30% rate largely because too many see permitting as a technical process rather than what it really is: asking a community for permission to build there.</p><p>Clean energy projects do not win permits on facts or polished applications alone. They win when developers understand local concerns, build trusted relationships, and use proven political campaign strategies to give supporters a reason to show up.</p><p>Tigercomm brings more than a century of combined campaign experience to community engagement. For over a decade, we have developed proprietary methods, including influence mapping, strategic philanthropy, cultural reassurance and disciplined campaign planning, to help move votes of local permitting officials.</p>"
+          html="<p class='service-page__eyebrow'>Community Engagement</p><h1>Lower Project Risk Through Effective Community Engagement</h1><p class='service-page__lead'>Developers lose projects at a 30% rate largely because too many see permitting as a technical process rather than what it really is: asking a community for permission to build there.</p>"
         %}
       </div>
       <div class="service-page__hero-image">
@@ -37,17 +37,33 @@
   </section>
 
   <section class="service-page__section service-page__intro">
-    <div class="service-page__inner service-page__inner--narrow">
-      {% module "service_intro"
-        path="@hubspot/rich_text",
-        label="Service introduction",
-        html="<p class='service-page__statement'>We help clients build the political support commissioners need to approve projects, even in the face of vocal opposition.</p><p>Our experts work alongside development teams from project entry through permitting, construction and operations. Because every project and community is different, we tailor the team, tactics and level of support to local risks, milestones and political dynamics.</p><p>The earlier we join a project, the more options developers have and the more cost-effective our work can be. Early community intelligence can shape landowner outreach, project design, local messaging, permitting strategy and the order of community conversations before opposition organizes. If your project is in crisis, we can help turn things around quickly.</p><p>Tigercomm helps developers earn community support, manage stakeholder concerns, counter disinformation and secure the approval needed to move from permitting to groundbreaking to operations. Our work supports wind, solar, storage, transmission, data centers and other renewable energy community engagement challenges.</p><p><a class='button' href='/contact?help_me_=community-engagement'>Contact us to learn more</a></p>"
-      %}
+    <div class="content-wrapper service-page__inner service-page__intro-grid">
+      <div class="service-page__intro-image">
+        {% module "service_intro_image"
+          path="@hubspot/linked_image",
+          label="Service introduction image",
+          img={
+            "alt": "Panel discussion about renewable energy siting and permitting",
+            "loading": "lazy",
+            "max_height": 956,
+            "max_width": 1430,
+            "size_type": "auto_custom_max",
+            "src": get_asset_url("../images/services/community-engagement-feature.png")
+          }
+        %}
+      </div>
+      <div class="service-page__intro-copy">
+        {% module "service_intro"
+          path="@hubspot/rich_text",
+          label="Service introduction",
+          html="<h2>Clean energy projects do not win permits on facts or polished applications alone.</h2><h3>They win when developers understand local concerns, build trusted relationships, and use proven political campaign strategies to give supporters a reason to show up.</h3><p>Tigercomm brings more than a century of combined campaign experience to community engagement. For over a decade, we have developed proprietary methods, including influence mapping, strategic philanthropy, cultural reassurance and disciplined campaign planning, to help move votes of local permitting officials.</p><p>We help clients build the political support commissioners need to approve projects, even in the face of vocal opposition.</p><p>Our experts work alongside development teams from project entry through permitting, construction and operations. Because every project and community is different, we tailor the team, tactics and level of support to local risks, milestones and political dynamics.</p><p>The earlier we join a project, the more options developers have and the more cost-effective our work can be. Early community intelligence can shape landowner outreach, project design, local messaging, permitting strategy and the order of community conversations before opposition organizes. If your project is in crisis, we can help turn things around quickly.</p><p>Tigercomm helps developers earn community support, manage stakeholder concerns, counter disinformation and secure the approval needed to move from permitting to groundbreaking to operations. Our work supports wind, solar, storage, transmission, data centers and other <strong>renewable energy community engagement challenges</strong>.</p><p><i>Contact us to learn more about how we help developers win projects</i>.</p><p><a class='button' href='/contact?help_me_=community'>Contact Us</a></p>"
+        %}
+      </div>
     </div>
   </section>
 
   <section class="service-page__section service-page__services">
-    <div class="service-page__inner">
+    <div class="content-wrapper service-page__inner">
       {% module "service_capabilities_heading"
         path="@hubspot/rich_text",
         label="Services heading",
@@ -67,28 +83,45 @@
         ]
       %}
     </div>
+    <img class="service-page__services-claw" src="{{ get_asset_url('../images/claw.svg') }}" alt="" aria-hidden="true" loading="lazy">
   </section>
 
   <section class="service-page__section service-page__process">
-    <div class="service-page__inner">
+    <div class="content-wrapper service-page__inner">
       {% module "service_process_heading"
         path="@hubspot/rich_text",
         label="Process heading and introduction",
-        html="<p class='service-page__eyebrow'>A campaign-style path</p><h2>Our Renewable Energy Community Engagement Process</h2><p>Tigercomm&rsquo;s process is built for the realities of project development: messy timelines, shifting sentiment, opposition surges and critical approval milestones.</p>"
+        html="<h2>Our Renewable Energy Community Engagement Process</h2><p>A campaign-style path for earning community acceptance and moving permit votes.</p>"
       %}
-      <div class="service-page__process-visual" tabindex="0" role="region" aria-label="Scrollable process diagram">
-        {% module "service_process_image"
-          path="@hubspot/linked_image",
-          label="Process diagram",
-          img={
-            "alt": "Six-stage community engagement process: research terrain, map routes, identify levers, build the success path, draft the plan, then execute and iterate",
-            "loading": "lazy",
-            "max_height": 686,
-            "max_width": 1998,
-            "size_type": "auto_custom_max",
-            "src": get_asset_url("../images/services/community-engagement-process.png")
-          }
-        %}
+      <ol class="service-page__process-steps" aria-label="Six-stage community engagement process">
+        <li>
+          <h3><span class="service-page__process-step-number" aria-hidden="true">1</span><span>Research Terrain</span></h3>
+          <p>People, politics, history, local economy and risks.</p>
+        </li>
+        <li>
+          <h3><span class="service-page__process-step-number" aria-hidden="true">2</span><span>Map Routes</span></h3>
+          <p>Relationships, validators and paths to decision-makers.</p>
+        </li>
+        <li>
+          <h3><span class="service-page__process-step-number" aria-hidden="true">3</span><span>Identify Levers</span></h3>
+          <p>Supporters, pressure points, proof, partners and forums.</p>
+        </li>
+        <li>
+          <h3><span class="service-page__process-step-number" aria-hidden="true">4</span><span>Build Success Path</span></h3>
+          <p>Which pieces move, in what order, to win.</p>
+        </li>
+        <li>
+          <h3><span class="service-page__process-step-number" aria-hidden="true">5</span><span>Draft the Plan</span></h3>
+          <p>Messaging, content, tactics, calendar and owners.</p>
+        </li>
+        <li>
+          <h3><span class="service-page__process-step-number" aria-hidden="true">6</span><span>Execute + Iterate</span></h3>
+          <p>Run the plan, measure progress and adjust continually.</p>
+        </li>
+      </ol>
+      <div class="service-page__process-difference">
+        <h3>What makes this different</h3>
+        <p>Research becomes routes. Routes become leverage. Leverage becomes a sequenced plan. Execution keeps adapting until the vote is won.</p>
       </div>
       <div class="service-page__process-copy">
         {% module "service_process_details"
@@ -101,11 +134,11 @@
   </section>
 
   <section class="service-page__section service-page__why">
-    <div class="service-page__inner service-page__inner--narrow">
+    <div class="content-wrapper service-page__inner service-page__inner--narrow">
       {% module "service_why_tigercomm"
         path="@hubspot/rich_text",
         label="Why Tigercomm",
-        html="<p class='service-page__eyebrow'>Why Tigercomm</p><h2>Campaign discipline backed by clean economy expertise</h2><p>Tigercomm is a clean economy communications and public affairs firm with deep experience in community engagement for renewable energy projects and data centers. Our team includes veterans of political campaigns, ballot initiatives, issue campaigns and renewable energy development.</p><p>We conducted the first-ever national poll of rural Americans&rsquo; views on renewable energy and surveyed leading developers on what is and is not working in the field. That research informs our work across onshore wind, solar, storage, transmission, micromobility, data centers and community engagement in renewable energy projects.</p><p>With Tigercomm, clients get more than local outreach. They get the reach of a top renewable energy PR and public affairs firm, plus the campaign discipline needed to build trust, manage risk and win community approval.</p>"
+        html="<p class='service-page__eyebrow'>Why Tigercomm</p><h2>Campaign Discipline Backed by Clean Economy Expertise</h2><p>Tigercomm is a clean economy communications and public affairs firm with deep experience in <strong>community engagement for renewable energy projects and data centers</strong>. Our team includes veterans of political campaigns, ballot initiatives, issue campaigns and renewable energy development.</p><p>We conducted <a href='https://www.tigercomm.us/insights/operating-wind-and-solar-farms-might-be-cleantechs-most-underutilized-public-affairs-tool'>the first-ever national poll of rural Americans&rsquo; views on renewable energy</a> and surveyed leading developers on what is and is not working in the field. That research informs our work across onshore wind, solar, storage, transmission, micromobility, data centers and <strong>community engagement in renewable energy projects</strong>.</p><p>With Tigercomm, clients get more than local outreach. They get the reach of a top renewable energy PR and public affairs firm, plus the campaign discipline needed to build trust, manage risk and win community approval.</p>"
       %}
     </div>
   </section>
@@ -120,11 +153,11 @@
   %}
 
   <section class="service-page__section service-page__faq-section">
-    <div class="service-page__inner service-page__inner--narrow">
+    <div class="content-wrapper service-page__inner service-page__inner--narrow">
       {% module "service_faq_heading"
         path="@hubspot/rich_text",
         label="FAQ heading",
-        html="<p class='service-page__eyebrow'>Answers to common questions</p><h2>Frequently Asked Questions</h2>"
+        html="<h2>Frequently Asked Questions</h2>"
       %}
       {% module "service_faq"
         path="../modules/faq",
