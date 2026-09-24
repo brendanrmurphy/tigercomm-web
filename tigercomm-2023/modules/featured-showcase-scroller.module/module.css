@@ -96,6 +96,15 @@
   transform: translateX(-0.2rem) rotate(45deg);
 }
 
+.featured-showcase-scroller__control--prev:hover::before,
+.featured-showcase-scroller__control--prev:focus::before,
+.featured-showcase-scroller__control--prev:active::before,
+.featured-showcase-scroller__control--next:hover::before,
+.featured-showcase-scroller__control--next:focus::before,
+.featured-showcase-scroller__control--next:active::before {
+  border-color: var(--showcase-ink);
+}
+
 .featured-showcase-scroller__control--pause {
   gap: 0.4rem;
 }
@@ -105,6 +114,12 @@
   display: block;
   height: 1rem;
   width: 0.25rem;
+}
+
+.featured-showcase-scroller__control--pause:hover span,
+.featured-showcase-scroller__control--pause:focus span,
+.featured-showcase-scroller__control--pause:active span {
+  background: var(--showcase-ink);
 }
 
 .featured-showcase-scroller.is-paused .featured-showcase-scroller__control--pause {
@@ -220,12 +235,22 @@
 }
 
 .featured-showcase-scroller--logo-only .featured-showcase-scroller__item {
-  width: min(64vw, 22rem);
+  width: min(46vw, 17rem);
 }
 
 .featured-showcase-scroller--logo-only .featured-showcase-scroller__track,
 .featured-showcase-scroller--logo-only .featured-showcase-scroller__list {
-  gap: clamp(3.6rem, 4vw, 5.6rem);
+  gap: clamp(2.4rem, 3vw, 4rem);
+}
+
+.featured-showcase-scroller--logo-only .featured-showcase-card {
+  min-height: 7rem;
+}
+
+.featured-showcase-scroller--logo-only .featured-showcase-card__source-logo {
+  width: 15rem;
+  height: 5rem;
+  max-height: 5rem;
 }
 
 .featured-showcase-scroller--blog-features .featured-showcase-scroller__item {
@@ -600,6 +625,15 @@
 }
 
 @media (max-width: 767px) {
+  .featured-showcase-scroller--logo-only .featured-showcase-scroller__item {
+    width: min(48vw, 15rem);
+  }
+
+  .featured-showcase-scroller--logo-only .featured-showcase-scroller__track,
+  .featured-showcase-scroller--logo-only .featured-showcase-scroller__list {
+    gap: 2rem;
+  }
+
   .featured-showcase-scroller__viewport {
     margin-left: 0;
     margin-right: 0;

@@ -9,6 +9,7 @@
     var viewport = carousel.querySelector('[data-success-stories-viewport]');
     var previousButton = carousel.querySelector('[data-success-stories-previous]');
     var nextButton = carousel.querySelector('[data-success-stories-next]');
+    var count = carousel.querySelector('[data-success-stories-count]');
     var status = carousel.querySelector('[data-success-stories-status]');
     var activeIndex = 0;
     var pointerId = null;
@@ -45,6 +46,10 @@
 
       if (status) {
         status.textContent = 'Showing success story ' + (activeIndex + 1) + ' of ' + slides.length;
+      }
+
+      if (count) {
+        count.textContent = (activeIndex + 1) + ' / ' + slides.length;
       }
     }
 

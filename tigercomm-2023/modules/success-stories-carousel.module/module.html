@@ -20,12 +20,6 @@
     <div class="content-wrapper">
       <div class="success-stories-carousel__header">
         <h2 id="success-stories-heading-{{ name }}">{{ module.section_heading }}</h2>
-        {% if stories|length > 1 %}
-          <div class="success-stories-carousel__controls" aria-label="Success story controls">
-            <button class="success-stories-carousel__control success-stories-carousel__control--previous" type="button" aria-label="Previous success story" data-success-stories-previous></button>
-            <button class="success-stories-carousel__control success-stories-carousel__control--next" type="button" aria-label="Next success story" data-success-stories-next></button>
-          </div>
-        {% endif %}
       </div>
 
       <div class="success-stories-carousel__viewport" role="region" aria-label="Success stories" tabindex="0" data-success-stories-viewport>
@@ -63,6 +57,11 @@
         {% endfor %}
       </div>
       {% if stories|length > 1 %}
+        <div class="success-stories-carousel__controls" aria-label="Success story controls" data-success-stories-controls>
+          <button class="success-stories-carousel__control success-stories-carousel__control--previous" type="button" aria-label="Previous success story" data-success-stories-previous></button>
+          <span class="success-stories-carousel__count" aria-hidden="true" data-success-stories-count>1 / {{ stories|length }}</span>
+          <button class="success-stories-carousel__control success-stories-carousel__control--next" type="button" aria-label="Next success story" data-success-stories-next></button>
+        </div>
         <p class="success-stories-carousel__status" aria-live="polite" data-success-stories-status>Showing success story 1 of {{ stories|length }}</p>
       {% endif %}
     </div>

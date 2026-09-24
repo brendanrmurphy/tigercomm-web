@@ -72,7 +72,7 @@
       <h2>Why Tigercomm?</h2>
       <div class="home2026-intro">
         <p>Sales goals crushed. Capital raises won. A CEO transformed into her industry's leading voice. A permit secured when rejection loomed. The IPO that set records.</p>
-        <p>For over 23 years, over 190 companies from three continents and 40 U.S. states have turned to us to drive results. Tigercomm is the world's top cleantech communications firm in the AI age.</p>
+        <p>For over 23 years, over 190 companies from three continents and 40 U.S. states have turned to us to drive results. Tigercomm is the U.S.'s top cleantech PR and marketing communications firm in the AI age.</p>
         <p>Our four service offerings are specifically designed for companies like yours. But as a full-service agency, we have also helped companies meet dozens of high-stakes, unique challenges. Whatever the engagement, our work drives results.</p>
       </div>
       {% module "stats_counter"
@@ -209,10 +209,10 @@
           "related_source_logo": "logo",
           "related_source_url": "website_url"
         },
-        content={ "heading": "" },
+        content={ "heading": "Featured Clients" },
         scroller={
           "enable_animation": true,
-          "duration": 80,
+          "duration": 100,
           "direction": "left"
         }
       %}
@@ -263,7 +263,20 @@
     <div class="content-wrapper home2026-expertise">
       <h2>Deep Energy Sector Expertise</h2>
       <div class="home2026-expertise__body">
-        <img src="{{ get_asset_url("../new-hp/sector-expertise.png") }}" alt="Tigercomm team member at industry event">
+        <div class="home2026-expertise-collage" aria-label="Tigercomm experts at industry events">
+          <img class="home2026-expertise-collage__primary" src="{{ get_asset_url("../new-hp/sector-expertise-01.jpg") }}" alt="Tigercomm expert leading a roundtable discussion" loading="lazy">
+          <div class="home2026-expertise-collage__supporting">
+            <img class="home2026-expertise-collage__panel" src="{{ get_asset_url("../new-hp/sector-expertise-02.jpg") }}" alt="Tigercomm expert speaking on an industry panel" loading="lazy">
+            <div class="home2026-expertise-collage__pair">
+              <div class="home2026-expertise-collage__tile home2026-expertise-collage__tile--workshop">
+                <img src="{{ get_asset_url("../new-hp/sector-expertise-03.jpg") }}" alt="Tigercomm expert presenting at an industry workshop" loading="lazy">
+              </div>
+              <div class="home2026-expertise-collage__tile home2026-expertise-collage__tile--conversation">
+                <img src="{{ get_asset_url("../new-hp/sector-expertise-04.jpg") }}" alt="Tigercomm experts participating in a conference discussion" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
         <ul>
           <li><strong>Cleantech specialization.</strong> We lead in cleantech public relations, working only with clean energy and climate tech companies.</li>
           <li><strong>Full-spectrum support.</strong> From marketing communications to policy advocacy, we connect strategy to execution.</li>
@@ -285,7 +298,7 @@
       <div class="home2026-team__leaders">
         <h3>Our Senior Leadership</h3>
         <a class="home2026-leader" href="/about/staff/mike-casey">
-          <img src="{{ get_asset_url("../images/team/mike.jpg") }}" alt="Mike Casey">
+          <img src="{{ get_asset_url("../images/team/mike-casey.jpg") }}" alt="Mike Casey">
           <p><strong>Mike Casey</strong><span>President</span></p>
         </a>
         <a class="home2026-leader" href="/about/staff/melissa-meehan-baldwin">

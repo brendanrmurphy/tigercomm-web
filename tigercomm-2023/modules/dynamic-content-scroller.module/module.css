@@ -47,7 +47,11 @@
 }
 
 .dynamic-content-scroller__control:hover,
-.dynamic-content-scroller__control:focus { background: #f3f3f1; }
+.dynamic-content-scroller__control:focus,
+.dynamic-content-scroller__control:active {
+  background: #f3f3f1;
+  color: var(--dynamic-content-ink);
+}
 
 .dynamic-content-scroller__control:focus-visible,
 .dynamic-content-card__link:focus-visible {
@@ -75,6 +79,15 @@
   transform: translateX(-0.2rem) rotate(45deg);
 }
 
+.dynamic-content-scroller__control--previous:hover::before,
+.dynamic-content-scroller__control--previous:focus::before,
+.dynamic-content-scroller__control--previous:active::before,
+.dynamic-content-scroller__control--next:hover::before,
+.dynamic-content-scroller__control--next:focus::before,
+.dynamic-content-scroller__control--next:active::before {
+  border-color: var(--dynamic-content-ink);
+}
+
 .dynamic-content-scroller__control--pause { gap: 0.35rem; }
 
 .dynamic-content-scroller__control--pause span {
@@ -82,6 +95,12 @@
   width: 0.25rem;
   height: 1rem;
   background: currentColor;
+}
+
+.dynamic-content-scroller__control--pause:hover span,
+.dynamic-content-scroller__control--pause:focus span,
+.dynamic-content-scroller__control--pause:active span {
+  background: var(--dynamic-content-ink);
 }
 
 .dynamic-content-scroller.is-paused .dynamic-content-scroller__control--pause span:first-child {
