@@ -253,6 +253,15 @@ form .hs-button {
   color: rgb(37, 51, 66);
 }
 
+/* The dropdown wrapper owns the border; its inner control must not add one. */
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-DropdownInput select,
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-DropdownInput input,
+.hs-form-html [data-hsfc-id="Renderer"] [data-hsfc-id="DropdownInput"] select,
+.hs-form-html [data-hsfc-id="Renderer"] [data-hsfc-id="DropdownInput"] input {
+  border: 0;
+  box-shadow: none;
+}
+
 .hs-form-html .hsfc-DropdownOptions,
 .hs-form-html [data-hsfc-id="DropdownOptions"],
 .hs-form-html .hsfc-DropdownOptions input,
