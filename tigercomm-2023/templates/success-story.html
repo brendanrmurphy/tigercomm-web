@@ -12,10 +12,7 @@
 
 {% block body %}
 {% set success_story_v2 = false %}
-{% if request.path == '/success-stories/aib-data-centers' %}
-{% set success_story_v2 = true %}
-{% include "../sections/success-stories/aib-data-centers.html" %}
-{% elif request.path == '/success-stories/rondo' %}
+{% if request.path == '/success-stories/rondo' %}
 {% include "../sections/success-stories/rondo.html" %}
 {% elif request.path == '/success-stories/lightsource-bp' %}
 {% include "../sections/success-stories/lightsource-bp.html" %}

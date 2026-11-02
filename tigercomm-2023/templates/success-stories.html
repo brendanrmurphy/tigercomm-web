@@ -128,14 +128,6 @@ document.addEventListener("DOMContentLoaded", function() {
             {% if request.query_dict.preview_new_stories == "true" %}
               {% set preview_stories = [
                 {
-                  "url": "/success-stories/aib-data-centers",
-                  "image": "aib-data-centers.jpg",
-                  "alt": "AIB Data Centers logo, a ribbon cutting, and Post and Courier Spartanburg coverage of a new data center planned to replace a crypto mining facility.",
-                  "title": "Boots-on-the-Ground Campaign Won Local Trust for a Data Center Facing a Ban",
-                  "sub_title": "Spartanburg County, SC, was turning against data centers after other developers’ missteps. Tigercomm spent two months on the ground helping AIB show that it was different.",
-                  "blurb": "How Tigercomm turned local research and strategic philanthropy into a community benefits agreement and a way forward."
-                },
-                {
                   "url": "/success-stories/nextpower-pittsburgh",
                   "image": "nextpower-steel.jpg",
                   "alt": "News coverage from Nextpower's Pittsburgh factory expansion, including WESA NPR, Canary Media, and Pittsburgh Business Times.",
@@ -201,12 +193,6 @@ document.addEventListener("DOMContentLoaded", function() {
               {% else %}
                 {% set listing_blurb = managed_hero.content|striptags|trim %}
               {% endif %}
-            {% elif content.slug == 'success-stories/aib-data-centers' %}
-              {% set listing_img = "aib-data-centers.jpg" %}
-              {% set listing_img_alt = "AIB Data Centers logo, a ribbon cutting, and Post and Courier Spartanburg coverage of a new data center planned to replace a crypto mining facility." %}
-              {% set listing_title = "Boots-on-the-Ground Campaign Won Local Trust for a Data Center Facing a Ban" %}
-              {% set listing_sub_title = "Spartanburg County, SC, was turning against data centers after other developers’ missteps. Tigercomm spent two months on the ground helping AIB show it was different." %}
-              {% set listing_blurb = "How Tigercomm turned local research and strategic philanthropy into a community benefits agreement and a way forward." %}
             {% elif content.slug == 'success-stories/project-lucy' %}
               {% set listing_img = "lucy.jpg" %}
               {% set listing_img_alt = "News coverage from Project Lucy's groundbreaking, including pv magazine, Dallas Innovates, and ChosunBiz coverage." %}
