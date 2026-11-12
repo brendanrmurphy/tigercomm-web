@@ -1,0 +1,70 @@
+[
+  {
+    "label": "Stats",
+    "name": "stats",
+    "type": "group",
+    "occurrence": {
+      "default": 4,
+      "min": 1,
+      "max": 8,
+      "sorting_label_field": "stats.stat_label"
+    },
+    "children": [
+      {
+        "label": "Value",
+        "name": "value",
+        "type": "number",
+        "display": "text",
+        "required": true,
+        "min": 0,
+        "step": 1,
+        "default": 21
+      },
+      {
+        "label": "Suffix",
+        "name": "suffix",
+        "type": "text",
+        "default": "+"
+      },
+      {
+        "label": "Stat label",
+        "name": "stat_label",
+        "type": "text",
+        "required": true,
+        "default": "Years in Business"
+      }
+    ],
+    "default": [
+      {
+        "value": 21,
+        "suffix": "+",
+        "stat_label": "Years in Business"
+      },
+      {
+        "value": 190,
+        "suffix": "+",
+        "stat_label": "Clients Served"
+      },
+      {
+        "value": 40,
+        "suffix": "",
+        "stat_label": "States"
+      },
+      {
+        "value": 85,
+        "suffix": "",
+        "stat_label": "Years of Combined Experience"
+      }
+    ]
+  },
+  {
+    "label": "Animation duration",
+    "name": "animation_duration",
+    "type": "number",
+    "display": "text",
+    "help_text": "Count-up duration in milliseconds.",
+    "min": 0,
+    "step": 100,
+    "default": 1400
+  }
+]

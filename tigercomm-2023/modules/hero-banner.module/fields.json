@@ -1,0 +1,256 @@
+[
+  {
+    "label": "Content",
+    "name": "content",
+    "type": "group",
+    "children": [
+      {
+        "label": "Eyebrow",
+        "name": "eyebrow",
+        "type": "text",
+        "help_text": "Optional short label displayed above the title."
+      },
+      {
+        "label": "Title",
+        "name": "title",
+        "type": "text",
+        "required": true,
+        "default": "Add a compelling headline"
+      },
+      {
+        "label": "Subtitle",
+        "name": "subtitle",
+        "type": "text",
+        "help_text": "Optional second line displayed as part of the main heading."
+      },
+      {
+        "label": "Body",
+        "name": "description",
+        "type": "richtext",
+        "default": "<p>Add supporting copy for this page.</p>"
+      },
+      {
+        "label": "Buttons",
+        "name": "buttons",
+        "type": "group",
+        "occurrence": {
+          "default": 1,
+          "min": 0,
+          "max": 2,
+          "sorting_label_field": "content.buttons.button_text"
+        },
+        "children": [
+          {
+            "label": "Button text",
+            "name": "button_text",
+            "type": "text",
+            "required": true,
+            "default": "Get in Touch"
+          },
+          {
+            "label": "Button link",
+            "name": "link",
+            "type": "link",
+            "supported_types": [
+              "EXTERNAL",
+              "CONTENT",
+              "FILE",
+              "EMAIL_ADDRESS",
+              "CALL_TO_ACTION"
+            ],
+            "default": {
+              "url": {
+                "href": "/contact",
+                "type": "EXTERNAL"
+              },
+              "no_follow": false,
+              "open_in_new_tab": false
+            }
+          },
+          {
+            "label": "Button style",
+            "name": "style",
+            "type": "choice",
+            "display": "select",
+            "choices": [
+              ["primary", "Primary"],
+              ["outline", "Outline"]
+            ],
+            "default": "primary"
+          }
+        ],
+        "default": [
+          {
+            "button_text": "Get in Touch",
+            "link": {
+              "url": {
+                "href": "/contact",
+                "type": "EXTERNAL"
+              },
+              "no_follow": false,
+              "open_in_new_tab": false
+            },
+            "style": "primary"
+          }
+        ]
+      },
+      {
+        "label": "Animate content",
+        "name": "enable_animation",
+        "type": "boolean",
+        "display": "toggle",
+        "default": true,
+        "help_text": "Animate the eyebrow, heading, copy, and buttons when the hero enters the viewport."
+      }
+    ]
+  },
+  {
+    "label": "Background",
+    "name": "background",
+    "type": "group",
+    "children": [
+      {
+        "label": "Images",
+        "name": "images",
+        "type": "group",
+        "help_text": "Add one image for a fixed background or multiple images to enable random selection.",
+        "occurrence": {
+          "default": 0,
+          "min": 0,
+          "max": 8
+        },
+        "children": [
+          {
+            "label": "Background image",
+            "name": "image",
+            "type": "image",
+            "responsive": true,
+            "resizable": false,
+            "show_loading": false
+          }
+        ],
+        "default": []
+      },
+      {
+        "label": "Choose a random image on page load",
+        "name": "randomize",
+        "type": "boolean",
+        "display": "toggle",
+        "default": false,
+        "help_text": "When enabled, one of the configured images is selected independently on each page load."
+      },
+      {
+        "label": "Image focal point",
+        "name": "position",
+        "type": "choice",
+        "display": "select",
+        "choices": [
+          ["center center", "Center"],
+          ["center top", "Top"],
+          ["center bottom", "Bottom"],
+          ["left center", "Left"],
+          ["right center", "Right"],
+          ["left top", "Top left"],
+          ["right top", "Top right"],
+          ["left bottom", "Bottom left"],
+          ["right bottom", "Bottom right"]
+        ],
+        "default": "center center"
+      }
+    ]
+  },
+  {
+    "label": "Styles",
+    "name": "styles",
+    "type": "group",
+    "tab": "STYLE",
+    "children": [
+      {
+        "label": "Hero height",
+        "name": "height",
+        "type": "choice",
+        "display": "select",
+        "choices": [
+          ["compact", "Compact"],
+          ["standard", "Standard"],
+          ["tall", "Tall"]
+        ],
+        "default": "standard"
+      },
+      {
+        "label": "Vertical alignment",
+        "name": "vertical_alignment",
+        "type": "choice",
+        "display": "select",
+        "choices": [
+          ["top", "Top"],
+          ["center", "Center"],
+          ["bottom", "Bottom"]
+        ],
+        "default": "center"
+      },
+      {
+        "label": "Text alignment",
+        "name": "text_alignment",
+        "type": "choice",
+        "display": "select",
+        "choices": [
+          ["left", "Left"],
+          ["center", "Center"]
+        ],
+        "default": "left"
+      },
+      {
+        "label": "Content width",
+        "name": "content_width",
+        "type": "choice",
+        "display": "select",
+        "choices": [
+          ["narrow", "Narrow"],
+          ["medium", "Medium"],
+          ["wide", "Wide"]
+        ],
+        "default": "medium"
+      },
+      {
+        "label": "Overlay style",
+        "name": "overlay_style",
+        "type": "choice",
+        "display": "select",
+        "choices": [
+          ["left-gradient", "Left-to-right gradient"],
+          ["uniform", "Uniform"],
+          ["none", "None"]
+        ],
+        "default": "left-gradient"
+      },
+      {
+        "label": "Overlay color",
+        "name": "overlay_color",
+        "type": "color",
+        "default": {
+          "color": "#001a3a",
+          "opacity": 78
+        }
+      },
+      {
+        "label": "Text color",
+        "name": "text_color",
+        "type": "color",
+        "default": {
+          "color": "#ffffff",
+          "opacity": 100
+        }
+      },
+      {
+        "label": "Background color",
+        "name": "background_color",
+        "type": "color",
+        "default": {
+          "color": "#285079",
+          "opacity": 100
+        }
+      }
+    ]
+  }
+]

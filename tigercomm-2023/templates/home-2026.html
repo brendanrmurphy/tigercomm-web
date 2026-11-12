@@ -1,0 +1,395 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Home - 2026
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% set template_css = "../../css/templates/home-2026.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+<div class="container-fluid body-container body-container--home-2026">
+  {% module "home_2026_hero_banner"
+    path="../modules/hero-banner",
+    label="Homepage Hero",
+    content={
+      "title": "Communications Powerhouse",
+      "subtitle": "For Clean Economy Companies",
+      "description": "<p>We are the U.S.'s top cleantech PR and marketing communications firm helping clean economy companies boost sales, attract investors, win permits, and secure fair policies.</p><p>We build communications programs that get results in the AI age.</p>",
+      "buttons": [
+        {
+          "button_text": "Get in Touch",
+          "link": {
+            "url": { "href": "/contact", "type": "EXTERNAL" },
+            "no_follow": false,
+            "open_in_new_tab": false
+          },
+          "style": "primary"
+        }
+      ],
+      "enable_animation": true
+    },
+    background={
+      "images": [
+        {
+          "image": {
+            "src": get_asset_url("../images/home/energy-storage-image.jpg"),
+            "alt": "",
+            "loading": "disabled",
+            "size_type": "auto",
+            "width": 2000,
+            "height": 1334
+          }
+        },
+        {
+          "image": {
+            "src": get_asset_url("../images/home/solar-close-up.jpg"),
+            "alt": "",
+            "loading": "disabled",
+            "size_type": "auto",
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "randomize": true,
+      "position": "center center"
+    },
+    styles={
+      "height": "tall",
+      "vertical_alignment": "center",
+      "text_alignment": "left",
+      "content_width": "wide",
+      "overlay_style": "left-gradient",
+      "overlay_color": { "color": "#001a3a", "opacity": 78 },
+      "text_color": { "color": "#ffffff", "opacity": 100 },
+      "background_color": { "color": "#285079", "opacity": 100 }
+    }
+  %}
+
+  <section class="home2026-section home2026-section--white">
+    <div class="content-wrapper">
+      <h2>Why Tigercomm?</h2>
+      <div class="home2026-intro">
+        <p>Sales goals crushed. Capital raises won. A CEO transformed into her industry's leading voice. A permit secured when rejection loomed. The IPO that set records.</p>
+        <p>For over 23 years, over 190 companies from three continents and 40 U.S. states have turned to us to drive results. Tigercomm is the U.S.'s top cleantech PR and marketing communications firm in the AI age.</p>
+        <p>Our four service offerings are specifically designed for companies like yours. But as a full-service agency, we have also helped companies meet dozens of high-stakes, unique challenges. Whatever the engagement, our work drives results.</p>
+      </div>
+      {% module "stats_counter"
+        path="../modules/stats-counter",
+        stats=[
+          {
+            "value": 23,
+            "suffix": "+",
+            "stat_label": "Years in Business"
+          },
+          {
+            "value": 190,
+            "suffix": "+",
+            "stat_label": "Clients Served"
+          },
+          {
+            "value": 40,
+            "suffix": "",
+            "stat_label": "States"
+          },
+          {
+            "value": 125,
+            "suffix": "",
+            "stat_label": "Years of Combined Experience"
+          }
+        ],
+        animation_duration=1400
+      %}
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--gray">
+    <div class="content-wrapper">
+      <h2>What We're Known For</h2>
+      <div class="home2026-intro">
+        <p>An industry leader recently told us: <em>"When companies don't know any better, they use the firms that take orders and bill time. When they have a big goal to meet, they go to Tigercomm."</em></p>
+        <p>We agree.</p>
+        <p>As globally recognized experts, we have set industry best practices in PR, AI visibility, SEO, thought leadership, financial PR, and community engagement. Our expert team helps innovators win support, build visibility, and grow in complex policy and media environments.</p>
+      </div>
+      <h3>Communications Services</h3>
+      {% module "communication_services_tiles"
+        path="../modules/interactive-service-tiles",
+        services=[
+          {
+            "service_title": "Marketing Communications",
+            "hover_title": "Turbocharge your sales through better marketing",
+            "description": "<p>Many clean economy companies offer B2B industrial goods and services to a limited pool of customers who don’t buy with a mouse click. However, too many still use the legacy marketing approach of expecting sales teams to provide early-stage customer education. Marketing research shows B2B customers start their “buyer’s journey” through online searches and content, before they engage sales team members.</p>",
+            "link": { "href": "/services/marketing-communications", "type": "EXTERNAL" },
+            "image": { "src": get_asset_url("../images/home/marketing-communications.jpg"), "alt": "Marketing communications session" },
+            "image_position": "center center",
+            "theme": "primary"
+          },
+         
+          {
+            "service_title": "Investor Communications",
+            "description": "<p>Capital events demand a clear, credible story. We help clean economy companies communicate funding, transactions, and market milestones to investors, media, and stakeholders.</p>",
+            "link": { "href": "/services/thought-leadership", "type": "EXTERNAL" },
+            "image": { "src": get_asset_url("../images/home/investor-communications.jpg"), "alt": "Nextpower at Nasdaq" },
+            "image_position": "left top",
+            "theme": "quinary"
+          },
+          {
+            "service_title": "Community Engagement",
+            "hover_title": "Win community approval for projects",
+            "description": "<p>Clean energy developers need support from local communities to build renewable energy infrastructure, such as wind and solar farms. But developers face increasingly project-fatal opposition from loud minorities of locals who organize online, then shout at local officials in the hearing room. We’ve pioneered and deployed community engagement strategies and digital best practices for developers to cut project risk and boost their ability to win the “social license” needed to secure permits from local officials for clean energy projects.</p>",
+            "link": { "href": "/services/community-engagement", "type": "EXTERNAL" },
+            "image": { "src": get_asset_url("../images/services/community-tile.jpg"), "alt": "Community engagement meeting" },
+            "image_position": "center center",
+            "theme": "quaternary"
+          },
+          {
+            "service_title": "Public Affairs",
+            "hover_title": "Secure fair treatment from policymakers",
+            "description": "<p>Clean economy companies are typically building new sectors within industries dominated by mature incumbents unwilling to relinquish market share. Instead, they weaponize lobbying and political influence to block the growth of clean economy challengers.</p>",
+            "link": { "href": "/services/thought-leadership", "type": "EXTERNAL" },
+            "image": { "src": get_asset_url("../images/home/public-affairs.jpg"), "alt": "Public affairs work" },
+            "image_position": "center bottom",
+            "theme": "alt"
+          }
+        ]
+      %}
+    </div>
+    <!--  {
+            "service_title": "Thought Leadership",
+            "hover_title": "Narrating companies and executives to markets and investors",
+            "description": "<p>There are several points in a company’s growth when it’s crucial to narrate a company and its leadership team, not just its products. Whether you’re securing early-stage funding, building valuation for potential acquirers, or preparing for an IPO … we can help with clean economy thought leadership.</p>",
+            "link": { "href": "/services/thought-leadership", "type": "EXTERNAL" },
+            "image": { "src": get_asset_url("../images/services/narrate-tile.jpg"), "alt": "Thought leadership event" },
+            "image_position": "center center",
+            "theme": "quinary"
+          }, -->
+  </section>
+
+  <section class="home2026-section home2026-section--white home2026-who">
+    <div class="content-wrapper">
+      <h2>Who We Serve</h2>
+      <p class="home2026-kicker">If you need to earn support, shape public opinion, or stand out in a crowded market, we're built for you.</p>
+      {% module "who_we_serve_tabs"
+        path="../modules/tabs",
+        tabs=[
+          {
+            "tab_title": "Developers & Project Infrastructure",
+            "tab_content": "<h3>Developers &amp; Project Infrastructure</h3><ul><li>Renewable Energy Developers</li><li>Utility Scale and Distributed Generation</li><li>Data Center Developers</li><li>Utilities and Independent Power Producers</li><li>Transmission and Distribution</li></ul>"
+          },
+          {
+            "tab_title": "Technology & Equipment Providers",
+            "tab_content": "<h3>Technology &amp; Equipment Providers</h3><ul><li>Solar &amp; Wind Manufacturing (OEMs)</li><li>Energy Storage (BESS), Microgrids &amp; Grid Tech</li><li>Thermal Storage</li><li>Lithium Refining</li><li>Green Hydrogen, Methanol, Geothermal &amp; Advanced Fuels</li><li>Recycling, Waste-to-Energy</li><li>Energy Efficiency Equipment &amp; Services, Energy-as-a-Service</li><li>Carbon Storage and Sequestration</li></ul>"
+          },
+          {
+            "tab_title": "SaaS & Professional Services",
+            "tab_content": "<h3>SaaS & Professional Services</h3><ul><li>Engineering, Procurement and Construction (EPCs)</li><li>Operations &amp; Maintenance Services and Equipment Providers</li><li>Clean Transportation &amp; EV Infrastructure</li><li>Clean Energy SaaS Companies</li><li>Clean Energy Retail Providers</li><li>Cleantech Professional Services</li><li>Distributed Energy Resource Management (DERM) &amp; Orchestration</li></ul>"
+          },
+          {
+            "tab_title": "Investors & Portfolio Companies",
+            "tab_content": "<h3>Investors & Portfolio Companies</h3><ul><li>Climate Tech Startups</li><li>Impact-Focused Investors</li><li>Associations</li></ul>"
+          }
+        ]
+      %}
+      {% module "home_2026_client_logos"
+        path="../modules/featured-showcase-scroller",
+        source_mode="hubdb",
+        source_table=350943398,
+        hubdb_query="category__contains=featured_clients&orderBy=name",
+        showcase_format="logo_only",
+        primary_link={ "mode": "none" },
+        related_source_link={ "mode": "url_column", "open_in_new_tab": true },
+        columns={
+          "primary_name": "name",
+          "primary_detail": "",
+          "primary_url": "website_url",
+          "primary_image": "logo",
+          "related_source": "",
+          "related_source_name": "name",
+          "related_source_logo": "logo",
+          "related_source_url": "website_url"
+        },
+        content={ "heading": "Featured Clients" },
+        scroller={
+          "enable_animation": true,
+          "duration": 100,
+          "direction": "left"
+        }
+      %}
+    </div>
+  </section>
+
+  {% module "home_2026_success_stories"
+    path="../modules/success-stories-carousel",
+    section_heading="Success Stories",
+    selected_posts=[
+      { "post_content_id": "213649470792" },
+      { "post_content_id": "220218191887" },
+      { "post_content_id": "164204625271" },
+      { "post_content_id": "164109001989" },
+      { "post_content_id": "164138770776" }
+    ],
+    show_excerpt=true,
+    excerpt_length=260,
+    link_label="Read the full story"
+  %}
+
+  {% module "home_2026_testimonials"
+    path="../modules/home-testimonials",
+    source_mode="hubdb",
+    source_table=409508264,
+    hubdb_query="category__contains=homepage",
+    section_heading="What Our Clients Say",
+    testimonials_heading="Testimonials",
+    image={
+      "src": get_asset_url("../new-hp/what-clients-say.jpg"),
+      "alt": "Client conversation",
+      "loading": "lazy"
+    }
+  %}
+
+  <section class="home2026-section home2026-section--gray home2026-action">
+    <div class="content-wrapper">
+      <h2>The Leading Voices in the Sector</h2>
+      {% module "tigers_in_action_scroller"
+        path="../modules/dynamic-content-scroller",
+        label="Leading Voices content",
+        overrideable=True
+      %}
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--white">
+    <div class="content-wrapper home2026-expertise">
+      <h2>Deep Energy Sector Expertise</h2>
+      <div class="home2026-expertise__body">
+        <div class="home2026-expertise-collage" aria-label="Tigercomm experts at industry events">
+          <img class="home2026-expertise-collage__primary" src="{{ get_asset_url("../new-hp/sector-expertise-01.jpg") }}" alt="Tigercomm expert leading a roundtable discussion" loading="lazy">
+          <div class="home2026-expertise-collage__supporting">
+            <img class="home2026-expertise-collage__panel" src="{{ get_asset_url("../new-hp/sector-expertise-02.jpg") }}" alt="Tigercomm expert speaking on an industry panel" loading="lazy">
+            <div class="home2026-expertise-collage__pair">
+              <div class="home2026-expertise-collage__tile home2026-expertise-collage__tile--workshop">
+                <img src="{{ get_asset_url("../new-hp/sector-expertise-03.jpg") }}" alt="Tigercomm expert presenting at an industry workshop" loading="lazy">
+              </div>
+              <div class="home2026-expertise-collage__tile home2026-expertise-collage__tile--conversation">
+                <img src="{{ get_asset_url("../new-hp/sector-expertise-04.jpg") }}" alt="Tigercomm experts participating in a conference discussion" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Cleantech specialization.</strong> We lead in cleantech public relations, working only with clean energy and climate tech companies.</li>
+          <li><strong>Full-spectrum support.</strong> From marketing communications to policy advocacy, we connect strategy to execution.</li>
+          <li><strong>Campaign expertise.</strong> With more than a century of combined political campaign experience, we know how to influence and engage policymakers.</li>
+          <li><strong>Proven results.</strong> We have delivered success in renewable energy public affairs, reputation management, and crisis communications.</li>
+          <li><strong>Experienced, committed team.</strong> Our track record helps shape narratives that drive market wins.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--gray">
+    <div class="content-wrapper home2026-team">
+      <div class="home2026-team__main">
+        <h2>Meet the Team</h2>
+        <img src="{{ get_asset_url("../new-hp/our-team.jpg") }}" alt="Tigercomm team members">
+        <p>Behind everything we do is a team of hardworking people who care about delivering impactful, lasting work. We collaborate, challenge each other, and always leave room for some fun.</p>
+      </div>
+      <div class="home2026-team__leaders">
+        <h3>Our Senior Leadership</h3>
+        <a class="home2026-leader" href="/about/staff/mike-casey">
+          <img src="{{ get_asset_url("../images/team/mike-casey.jpg") }}" alt="Mike Casey">
+          <p><strong>Mike Casey</strong><span>President</span></p>
+        </a>
+        <a class="home2026-leader" href="/about/staff/melissa-meehan-baldwin">
+          <img src="{{ get_asset_url("../images/team/melissa.jpg") }}" alt="Melissa Baldwin">
+          <p><strong>Melissa Baldwin</strong><span>Senior Vice President</span></p>
+        </a>
+        <a class="home2026-leader" href="/about/staff/ayelet-hines">
+          <img src="{{ get_asset_url("../images/team/ayelet.jpg") }}" alt="Ayelet Hines">
+          <p><strong>Ayelet Hines</strong><span>Vice President, Community Engagement</span></p>
+        </a>
+        <a class="button" href="/team">Meet the rest</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="home2026-section home2026-section--white">
+    <div class="content-wrapper">
+      <h2>Frequently Asked Questions</h2>
+      {% module "home_2026_faq"
+        path="../modules/faq",
+        source_mode="hubdb",
+        source_table=409505822,
+        hubdb_query="category__contains=homepage",
+        faq_items=[
+          {
+            "question": "Is PR for cleantech different from other industries?",
+            "answer": "<p>Yes. As a cleantech PR agency, we know that effective energy public relations requires fluency in markets and technologies in a new sector. We’re deeply experienced translating complexity into attention that moves customers, investors and policy makers.</p>"
+          },
+          {
+            "question": "How can PR help my cleantech company?",
+            "answer": "<p>A smart clean energy PR strategy builds credibility fast and makes it visible to customers of investors. We help companies ranging from startups and to publicly traded globals earn attention, attract investors, and stand out in a crowded market. In today’s world, AI platforms are the first resource for whoever a company needs to reach, it is more important than ever for it to have credible, third party coverage that validate the company with LLMs.</p>"
+          },
+          {
+            "question": "Do you deliver community engagement trainings in person?",
+            "answer": "<p>Yes. We lead live, in-person trainings several times a year at events like RE+ as well as private company trainings to help clean energy teams sharpen their messaging, outreach strategy, and local engagement skills. Our team members have trained nearly 2,500 people.</p>"
+          },
+          {
+            "question": "Do you have a network of local consultants across the country?",
+            "answer": "<p>Yes. We’ve built a trusted national bench of community engagement consultants who understand the local dynamics that shape renewable energy project support — from permitting boards to grassroots influencers.</p>"
+          },
+          {
+            "question": "Do you handle ribbon cutting or groundbreaking ceremonies?",
+            "answer": "<p>Yes. We plan and promote events of different sizes. They elevate brands, generate media coverage, and strengthen local support — especially for renewable energy project milestones.</p>"
+          },
+          {
+            "question": "Do you handle award submissions and event abstracts?",
+            "answer": "<p>Yes. We craft strategic award entries and cleantech event abstracts that raise visibility, position a company’s team as thought leaders, and support its broader energy PR goals.</p>"
+          },
+          {
+            "question": "Do you work with both B2B and B2C cleantech companies?",
+            "answer": "<p>We do. Whoever a company wants to reach, our energy PR strategies are tailored to resonate with the audiences that drive a business forward.</p>"
+          },
+          {
+            "question": "How long will it take to see results from our PR campaign?",
+            "answer": "<p>Energy PR delivers early traction within months in media stories, online buzz, investor interest, and audience growth – usually in ways that show in AI rankings. We measure results continually to show how a client company is gaining ground.</p>"
+          },
+          {
+            "question": "Do you work with startups on smaller budgets?",
+            "answer": "<p>Yes. We help early-stage companies get the most from their investment with focused cleantech PR strategies. They deliver real visibility,  without wasting time or resources.</p>"
+          },
+          {
+            "question": "What regions do you work in?",
+            "answer": "<p>We support clients from across the world succeed in their target markets and advance policy goals at every level of government. From local and state efforts to federal campaigns—across the U.S., Canada,  and now the Middle East.</p>"
+          },
+          {
+            "question": "Do you handle crisis communications for companies and projects in trouble?",
+            "answer": "<p>Yes. As a seasoned renewable energy PR agency, we manage high-stakes moments — from local opposition to media scrutiny — protecting the reputation of a project or company – and the social license to operate.</p>"
+          },
+          {
+            "question": "How can community engagement help get my renewable energy project or data center approved?",
+            "answer": "<p>Early community engagement builds trust with local residents and reduces permitting risk. By listening to what communities want for their future and their concerns about potential projects, developers can more effectively communicate project benefits. They can also activate supporters who can help projects secure the social license that permitting officials rely on to say “yes.”</p>"
+          },
+          {
+            "question": "What are the best ways to reduce opposition to wind, solar, storage or data center projects?",
+            "answer": "<p>Start early, lead with locally trusted messengers, and stay visible. Our playbook service combines grassroots outreach, influence mapping, and message discipline to counter NIMBY pushback and build community support for renewable energy projects.</p>"
+          },
+          {
+            "question": "Do you offer community engagement strategies for permitting and zoning hearings?",
+            "answer": "<p>Yes. We design campaigns that engage neighbors, equip allies, and prepare developers for hearings. Our team blends campaign experience and communications expertise to help them show up prepared, persuasive, and supported.</p>"
+          },
+          {
+            "question": "Can you help manage misinformation or negative sentiment in rural communities?",
+            "answer": "<p>Absolutely. We monitor local forums, and respond with emotionally connected, values-based messaging. And we can help companies amplify important facts, while mobilizing credible local voices to keep the narrative grounded in the realities of a community. Our public relations approach is built for today’s digital “town square,” where a community considers proposed projects.</p>"
+          },
+          {
+            "question": "What causes clean energy firms to outgrow in-house PR management?",
+            "answer": "<p>Companies usually outgrow in-house PR management when they face communications challenges that demand more experience or more bandwidth than what their current team can provide. Unexpected PR crises like litigation, regulatory attacks, and scandals can quickly swamp most small communications teams. But major obstacles aren’t the only reason for outsourcing PR; growth through acquisitions or expansion into new markets can also lead companies to turn to outside communications support. In these instances, the communications staff is typically occupied with existing projects while leadership focuses on the deal itself, leaving little to no capacity for planning the expansion of the communications program needed to support the growth.</p><p>That’s where companies most frequently turn to firms like us for experience, resources, and readily available bandwidth that internal teams can’t quickly create on their own. In our experience, communications teams in the clean economy space are almost never excessively resourced. Most operate more or less in a state of “well-managed overwhelm,” making it nearly impossible to take on new responsibilities without external support. That is when an experienced PR firm can make all the difference.</p>"
+          }
+        ]
+      %}
+    </div>
+  </section>
+</div>
+{% endblock body %}

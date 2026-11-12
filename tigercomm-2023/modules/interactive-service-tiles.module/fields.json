@@ -1,0 +1,85 @@
+[
+  {
+    "label": "Services",
+    "name": "services",
+    "type": "group",
+    "occurrence": {
+      "default": 4,
+      "min": 1,
+      "max": 8,
+      "sorting_label_field": "services.service_title"
+    },
+    "children": [
+      {
+        "label": "Title",
+        "name": "service_title",
+        "type": "text",
+        "required": true,
+        "default": "Service title"
+      },
+      {
+        "label": "Hover title",
+        "name": "hover_title",
+        "type": "text",
+        "help_text": "Optional. Use the service page hero title when expanded; the shorter service title remains visible at rest."
+      },
+      {
+        "label": "Description",
+        "name": "description",
+        "type": "richtext",
+        "required": true,
+        "default": "<p>Add a short service description.</p>"
+      },
+      {
+        "label": "Link",
+        "name": "link",
+        "type": "url"
+      },
+      {
+        "label": "Image",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "label": "Image focal point",
+        "name": "image_position",
+        "type": "choice",
+        "display": "select",
+        "help_text": "Choose which part of the image should remain visible as the tile changes width.",
+        "choices": [
+          ["center center", "Center"],
+          ["center top", "Top"],
+          ["center bottom", "Bottom"],
+          ["left center", "Left"],
+          ["right center", "Right"],
+          ["left top", "Top left"],
+          ["right top", "Top right"],
+          ["left bottom", "Bottom left"],
+          ["right bottom", "Bottom right"]
+        ],
+        "default": "center center"
+      },
+      {
+        "label": "Theme",
+        "name": "theme",
+        "type": "choice",
+        "display": "select",
+        "choices": [
+          ["primary", "Primary"],
+          ["quinary", "Quinary"],
+          ["financial", "Financial PR accent"],
+          ["alt", "Alt"],
+          ["quaternary", "Quaternary"]
+        ],
+        "default": "primary"
+      }
+    ],
+    "default": [
+      {
+        "service_title": "Marketing Communications",
+        "description": "<p>A lot of clean economy companies offer B2B industrial goods and services to a limited pool of customers that don't buy with a mouse click. But too many still use the legacy marketing approach that forces sales teams to do the early-stage customer education.</p>",
+        "theme": "primary"
+      }
+    ]
+  }
+]

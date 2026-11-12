@@ -1,0 +1,97 @@
+{% set background_images = [] %}
+{% for background_item in module.background.images %}
+  {% if background_item.image.src %}
+    {% do background_images.append(background_item.image.src) %}
+  {% endif %}
+{% endfor %}
+
+{% set overlay_color = module.styles.overlay_color.color or "#001a3a" %}
+{% set overlay_opacity = module.styles.overlay_color.opacity|default(78)|int / 100 %}
+{% set overlay_middle_opacity = overlay_opacity * 0.74 %}
+{% set overlay_end_opacity = overlay_opacity * 0.2 %}
+{% set text_color = module.styles.text_color.color or "#ffffff" %}
+{% set text_opacity = module.styles.text_color.opacity|default(100)|int / 100 %}
+{% set background_color = module.styles.background_color.color or "#285079" %}
+{% set background_opacity = module.styles.background_color.opacity|default(100)|int / 100 %}
+{% set title_id = "hero-banner-title-" ~ name %}
+
+{% require_css %}
+  <style>
+    {% scope_css %}
+      .hero-banner {
+        color: rgba({{ text_color|convert_rgb }}, {{ text_opacity }});
+        background-color: rgba({{ background_color|convert_rgb }}, {{ background_opacity }});
+        {% if background_images|length %}
+          background-image: url("{{ background_images[0]|escape_url }}");
+        {% endif %}
+      }
+
+      .hero-banner__overlay {
+        {% if module.styles.overlay_style == "uniform" %}
+          background: rgba({{ overlay_color|convert_rgb }}, {{ overlay_opacity }});
+        {% elif module.styles.overlay_style == "none" %}
+          display: none;
+        {% else %}
+          background:
+            linear-gradient(90deg, rgba({{ overlay_color|convert_rgb }}, {{ overlay_opacity }}) 0%, rgba({{ overlay_color|convert_rgb }}, {{ overlay_middle_opacity }}) 42%, rgba({{ overlay_color|convert_rgb }}, {{ overlay_end_opacity }}) 100%),
+            linear-gradient(0deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16));
+        {% endif %}
+      }
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+<section
+  class="hero-banner hero-banner--height-{{ module.styles.height or 'standard' }} hero-banner--vertical-{{ module.styles.vertical_alignment or 'center' }} hero-banner--text-{{ module.styles.text_alignment or 'left' }} hero-banner--width-{{ module.styles.content_width or 'medium' }}"
+  style="background-position: {{ module.background.position or 'center center' }};"
+  data-hero-banner
+  data-randomize-background="{{ module.background.randomize }}"
+  aria-labelledby="{{ title_id }}"
+>
+  {% for image_url in background_images %}
+    <span data-hero-banner-image="{{ image_url|escape_attr }}" hidden></span>
+  {% endfor %}
+
+  <div class="hero-banner__overlay" aria-hidden="true"></div>
+  <div class="hero-banner__inner content-wrapper">
+    <div class="hero-banner__content">
+      {% if module.content.eyebrow %}
+        <p class="hero-banner__eyebrow"{% if module.content.enable_animation %} data-aos="fade-right" data-aos-delay="250"{% endif %}>{{ module.content.eyebrow }}</p>
+      {% endif %}
+
+      <h1 class="hero-banner__title" id="{{ title_id }}">
+        <span{% if module.content.enable_animation %} data-aos="fade-right" data-aos-delay="500"{% endif %}>{{ module.content.title }}</span>
+        {% if module.content.subtitle %}
+          <span class="hero-banner__subtitle"{% if module.content.enable_animation %} data-aos="fade-left" data-aos-delay="750"{% endif %}>{{ module.content.subtitle }}</span>
+        {% endif %}
+      </h1>
+
+      {% if module.content.description %}
+        <div class="hero-banner__body"{% if module.content.enable_animation %} data-aos="fade" data-aos-delay="1000"{% endif %}>{{ module.content.description }}</div>
+      {% endif %}
+
+      {% if module.content.buttons|length %}
+        <div class="hero-banner__actions"{% if module.content.enable_animation %} data-aos="fade" data-aos-delay="1250"{% endif %}>
+          {% for button in module.content.buttons %}
+            {% set href = button.link.url.href %}
+            {% if button.link.url.type == "EMAIL_ADDRESS" %}
+              {% set href = "mailto:" ~ href %}
+            {% endif %}
+            {% set rel = [] %}
+            {% if button.link.no_follow %}{% do rel.append("nofollow") %}{% endif %}
+            {% if button.link.open_in_new_tab %}{% do rel.append("noopener") %}{% endif %}
+
+            {% if button.button_text and href %}
+              <a
+                class="hero-banner__button hero-banner__button--{{ button.style or 'primary' }} button"
+                href="{{ href|escape_url }}"
+                {% if button.link.open_in_new_tab %}target="_blank"{% endif %}
+                {% if rel %}rel="{{ rel|join(' ') }}"{% endif %}
+              >{{ button.button_text }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

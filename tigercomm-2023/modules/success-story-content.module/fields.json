@@ -1,0 +1,276 @@
+[
+  {
+    "label": "Listing summary",
+    "name": "listing_summary",
+    "type": "text",
+    "allow_new_line": true,
+    "help_text": "Short description used on the Success Stories listing page. If left blank, the hero summary is used.",
+    "default": "Summarize the client challenge, Tigercomm's work and the outcome in one or two sentences."
+  },
+  {
+    "label": "Service page link",
+    "name": "category_link",
+    "type": "link",
+    "supported_types": ["EXTERNAL", "CONTENT"],
+    "help_text": "The hero label links to this service page.",
+    "default": {
+      "url": {
+        "content_id": null,
+        "type": "EXTERNAL",
+        "href": "/services/marketing-communications"
+      },
+      "open_in_new_tab": false,
+      "no_follow": false
+    }
+  },
+  {
+    "label": "Primary image",
+    "name": "primary_image",
+    "type": "image",
+    "responsive": true,
+    "resizable": true,
+    "show_loading": true,
+    "help_text": "Used in the story sidebar and on the Success Stories listing card.",
+    "default": {
+      "loading": "lazy"
+    }
+  },
+  {
+    "label": "Primary image caption",
+    "name": "primary_image_caption",
+    "type": "text",
+    "allow_new_line": true,
+    "default": ""
+  },
+  {
+    "label": "Project details",
+    "name": "project_details",
+    "type": "group",
+    "occurrence": {
+      "default": 4,
+      "min": 0,
+      "max": 8,
+      "sorting_label_field": "project_details.detail_label"
+    },
+    "children": [
+      {
+        "label": "Label",
+        "name": "detail_label",
+        "type": "text",
+        "required": true,
+        "default": "Client"
+      },
+      {
+        "label": "Value",
+        "name": "value",
+        "type": "richtext",
+        "default": "<p>Add the project detail.</p>"
+      }
+    ],
+    "default": [
+      {
+        "detail_label": "Client",
+        "value": "<p>Client name</p>"
+      },
+      {
+        "detail_label": "Project",
+        "value": "<p>Project or campaign name</p>"
+      },
+      {
+        "detail_label": "Timeframe",
+        "value": "<p>Engagement timeframe</p>"
+      },
+      {
+        "detail_label": "Services",
+        "value": "<p>Services provided</p>"
+      }
+    ]
+  },
+  {
+    "label": "Outcome metrics",
+    "name": "metrics",
+    "type": "group",
+    "occurrence": {
+      "default": 4,
+      "min": 0,
+      "max": 8,
+      "sorting_label_field": "metrics.metric_label"
+    },
+    "children": [
+      {
+        "label": "Value",
+        "name": "value",
+        "type": "text",
+        "required": true,
+        "help_text": "Accepts numbers or short text, such as 21+, #1–#2 or Full Sweep.",
+        "default": "21+"
+      },
+      {
+        "label": "Label",
+        "name": "metric_label",
+        "type": "text",
+        "required": true,
+        "default": "Original stories"
+      }
+    ],
+    "default": [
+      {
+        "value": "21+",
+        "metric_label": "Original Stories"
+      },
+      {
+        "value": "6",
+        "metric_label": "National Outlets"
+      },
+      {
+        "value": "4",
+        "metric_label": "Industry Validators"
+      },
+      {
+        "value": "#1–#2",
+        "metric_label": "Search Visibility"
+      }
+    ]
+  },
+  {
+    "label": "Challenge",
+    "name": "challenge",
+    "type": "richtext",
+    "default": "<p>Describe the business, communications or policy challenge.</p>"
+  },
+  {
+    "label": "Strategy",
+    "name": "strategy",
+    "type": "richtext",
+    "default": "<p>Explain the strategy Tigercomm developed to address the challenge.</p>"
+  },
+  {
+    "label": "Execution",
+    "name": "execution",
+    "type": "richtext",
+    "default": "<ul><li>Describe the most important actions Tigercomm took.</li></ul>"
+  },
+  {
+    "label": "Results",
+    "name": "results",
+    "type": "richtext",
+    "default": "<p>Describe the measurable results and their business value.</p>"
+  },
+  {
+    "label": "About the client",
+    "name": "about_client",
+    "type": "richtext",
+    "help_text": "Optional sidebar description of the client.",
+    "default": ""
+  },
+  {
+    "label": "Additional images",
+    "name": "additional_images",
+    "type": "group",
+    "occurrence": {
+      "default": 0,
+      "min": 0,
+      "max": 4,
+      "sorting_label_field": "additional_images.caption"
+    },
+    "children": [
+      {
+        "label": "Image",
+        "name": "image",
+        "type": "image",
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "default": {
+          "loading": "lazy"
+        }
+      },
+      {
+        "label": "Caption",
+        "name": "caption",
+        "type": "text",
+        "allow_new_line": true,
+        "default": ""
+      }
+    ],
+    "default": []
+  },
+  {
+    "label": "Featured coverage",
+    "name": "featured_coverage",
+    "type": "group",
+    "help_text": "Add outlet names in the order they should appear. Links are optional.",
+    "occurrence": {
+      "default": 0,
+      "min": 0,
+      "max": 30,
+      "sorting_label_field": "featured_coverage.outlet"
+    },
+    "children": [
+      {
+        "label": "Outlet",
+        "name": "outlet",
+        "type": "text",
+        "required": true,
+        "default": "Publication name"
+      },
+      {
+        "label": "Coverage link",
+        "name": "link",
+        "type": "link",
+        "supported_types": ["EXTERNAL", "CONTENT"],
+        "default": {
+          "url": {
+            "content_id": null,
+            "type": "EXTERNAL",
+            "href": ""
+          },
+          "open_in_new_tab": true,
+          "no_follow": false
+        }
+      }
+    ],
+    "default": []
+  },
+  {
+    "label": "Show testimonial",
+    "name": "show_testimonial",
+    "type": "boolean",
+    "display": "toggle",
+    "default": false
+  },
+  {
+    "label": "Testimonial quote",
+    "name": "testimonial_quote",
+    "type": "text",
+    "allow_new_line": true,
+    "visibility": {
+      "controlling_field": "show_testimonial",
+      "controlling_value_regex": "true",
+      "operator": "EQUAL"
+    },
+    "default": ""
+  },
+  {
+    "label": "Testimonial author",
+    "name": "testimonial_author",
+    "type": "text",
+    "visibility": {
+      "controlling_field": "show_testimonial",
+      "controlling_value_regex": "true",
+      "operator": "EQUAL"
+    },
+    "default": ""
+  },
+  {
+    "label": "Author title and company",
+    "name": "testimonial_author_title",
+    "type": "text",
+    "visibility": {
+      "controlling_field": "show_testimonial",
+      "controlling_value_regex": "true",
+      "operator": "EQUAL"
+    },
+    "default": ""
+  }
+]

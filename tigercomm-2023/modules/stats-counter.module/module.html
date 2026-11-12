@@ -1,0 +1,17 @@
+{% set stats = module.stats %}
+{% set duration = module.animation_duration|int %}
+
+{% if stats|length %}
+  <div class="stats-counter" aria-label="Key statistics" data-count-up-stats data-count-up-duration="{{ duration }}">
+    {% for stat in stats %}
+      {% set value = stat.value %}
+      {% set suffix = stat.suffix or "" %}
+      <div class="stats-counter__item">
+        <strong>
+          <span class="stats-counter__value" data-count-up-value="{{ value }}" data-count-up-suffix="{{ suffix|escape }}">{{ value }}{{ suffix }}</span>
+        </strong>
+        <span class="stats-counter__label">{{ stat.stat_label }}</span>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

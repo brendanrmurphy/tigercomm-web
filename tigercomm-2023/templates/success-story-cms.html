@@ -1,0 +1,203 @@
+<!--
+  templateType: blog_post
+  isAvailableForNewContent: true
+  label: Success Story - CMS Managed
+  screenshotPath: ../images/template-previews/home.png
+-->
+{% module "success_story_sectors" path="/tigercomm-2023/modules/sectors", export_to_template_context=True %}
+{% module "success_story_years" path="/tigercomm-2023/modules/years", export_to_template_context=True %}
+{% module "success_story_hero"
+  path="/tigercomm-2023/modules/hero",
+  label="Success Story Hero",
+  export_to_template_context=True,
+  title="Success story headline",
+  sub_title="Add a concise, results-focused subheading.",
+  hero_label="Marketing Communications",
+  content="<p>Summarize how Tigercomm addressed the client's challenge and delivered measurable value.</p>"
+%}
+{% module "success_story_content"
+  path="/tigercomm-2023/modules/success-story-content",
+  label="Success Story Content",
+  export_to_template_context=True
+%}
+{% module "success_story_cta"
+  path="/tigercomm-2023/modules/cta",
+  label="Success Story CTA",
+  export_to_template_context=True,
+  enabled=True,
+  title="Interested in Learning More?",
+  description="<p>Whatever the engagement, we design our work to meet goals, overcome barriers and produce results.</p>",
+  button_label="Get in Touch"
+%}
+
+{% set template_css = "../../css/templates/success-story.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+{% set story = content.widgets.success_story_content.body %}
+{% set story_hero = content.widgets.success_story_hero.body %}
+{% set story_cta = content.widgets.success_story_cta.body %}
+{% set category_url = story.category_link.url.href %}
+
+<div class="container-fluid body-container body-container--success-story-v2 body-container--success-story-cms">
+  {% set hero_title = story_hero.title or content.name %}
+  {% set hero_sub_title = story_hero.sub_title %}
+  {% set hero_title_class = "success-story-v2__hero-title" %}
+  {% if story_hero.hero_label and category_url %}
+    {% set hero_label = "Success Story | <a href='" + category_url + "'>" + story_hero.hero_label + "</a>" %}
+  {% elif story_hero.hero_label %}
+    {% set hero_label = "Success Story | " + story_hero.hero_label %}
+  {% else %}
+    {% set hero_label = "Success Story" %}
+  {% endif %}
+  {% set hero_img = "" %}
+  {% set hero_content = story_hero.content %}
+  {% include "../sections/hero.html" %}
+
+  <div class="content-wrapper">
+    <div class="cta__border">
+      <span data-aos="fade-down-right" data-aos-delay="150"></span>
+      <span data-aos="fade-down-right" data-aos-delay="250"></span>
+      <span data-aos="fade-down-right" data-aos-delay="350"></span>
+    </div>
+  </div>
+
+  {% if story.project_details or story.metrics %}
+  <div class="success-story-v2__glance row--alt">
+    <div class="content-wrapper content-wrapper--vertical-spacing--sm">
+      <h2 class="h4 label">At A Glance</h2>
+      {% if story.project_details %}
+      <dl class="success-story-v2__details">
+        {% for detail in story.project_details %}
+        <div class="success-story-v2__detail">
+          <dt>{{ detail.detail_label }}</dt>
+          <dd>{{ detail.value }}</dd>
+        </div>
+        {% endfor %}
+      </dl>
+      {% endif %}
+
+      {% if story.metrics %}
+      <div class="success-story-v2__metrics">
+        {% for metric in story.metrics %}
+        <div class="success-story-v2__metric">
+          <div class="success-story-v2__metric-value">{{ metric.value }}</div>
+          <div class="success-story-v2__metric-label">{{ metric.metric_label }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="success-story-v2__content content-wrapper content-wrapper--vertical-spacing">
+    <div class="row-fluid">
+      <div class="span7">
+        {% if story.challenge %}
+        <section class="success-story-v2__section">
+          <h2>Challenge</h2>
+          {{ story.challenge }}
+        </section>
+        {% endif %}
+        {% if story.strategy %}
+        <section class="success-story-v2__section">
+          <h2>Strategy</h2>
+          {{ story.strategy }}
+        </section>
+        {% endif %}
+        {% if story.execution %}
+        <section class="success-story-v2__section">
+          <h2>Execution</h2>
+          {{ story.execution }}
+        </section>
+        {% endif %}
+        {% if story.results %}
+        <section class="success-story-v2__section">
+          <h2>Results</h2>
+          {{ story.results }}
+        </section>
+        {% endif %}
+      </div>
+      <aside class="success-story-v2__media span5">
+        {% if story.primary_image.src %}
+        <img
+          src="{{ story.primary_image.src|escape_url }}"
+          alt="{{ story.primary_image.alt|escape_attr }}"
+          {% if story.primary_image.width %}width="{{ story.primary_image.width }}"{% endif %}
+          {% if story.primary_image.height %}height="{{ story.primary_image.height }}"{% endif %}
+          loading="lazy"
+        />
+        {% endif %}
+        {% if story.primary_image_caption %}
+        <p class="success-story-img-caption">{{ story.primary_image_caption }}</p>
+        {% endif %}
+        {% for media_item in story.additional_images %}
+          {% if media_item.image.src %}
+          <img
+            src="{{ media_item.image.src|escape_url }}"
+            alt="{{ media_item.image.alt|escape_attr }}"
+            {% if media_item.image.width %}width="{{ media_item.image.width }}"{% endif %}
+            {% if media_item.image.height %}height="{{ media_item.image.height }}"{% endif %}
+            {% if media_item.image.loading and media_item.image.loading != "disabled" %}loading="{{ media_item.image.loading }}"{% endif %}
+          />
+          {% endif %}
+          {% if media_item.caption %}
+          <p class="success-story-img-caption">{{ media_item.caption }}</p>
+          {% endif %}
+        {% endfor %}
+        {% if story.about_client %}
+        <section class="success-story-v2__about-client">
+          <h2 class="h4 label">About the Client</h2>
+          {{ story.about_client }}
+        </section>
+        {% endif %}
+      </aside>
+    </div>
+  </div>
+
+  {% if story.featured_coverage|length %}
+  <section class="success-story-v2__coverage content-wrapper">
+    <h2>As Seen In</h2>
+    <ul>
+      {% for coverage_item in story.featured_coverage %}
+        {% set coverage_href = coverage_item.link.url.href %}
+        {% set coverage_rel = [] %}
+        {% if coverage_item.link.no_follow %}
+          {% do coverage_rel.append("nofollow") %}
+        {% endif %}
+        {% if coverage_item.link.open_in_new_tab %}
+          {% do coverage_rel.append("noopener") %}
+        {% endif %}
+        <li>
+          {% if coverage_href %}
+          <a href="{{ coverage_href|escape_url }}"{% if coverage_item.link.open_in_new_tab %} target="_blank"{% endif %}{% if coverage_rel %} rel="{{ coverage_rel|join(' ') }}"{% endif %}>{{ coverage_item.outlet }}</a>
+          {% else %}
+          {{ coverage_item.outlet }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if story.show_testimonial and story.testimonial_quote %}
+    {% set testimonial_label = "Testimonial" %}
+    {% set testimonial = story.testimonial_quote %}
+    {% set testimonial_author = story.testimonial_author %}
+    {% set testimonial_author_title = story.testimonial_author_title %}
+    {% include "../sections/testimonials.html" %}
+  {% endif %}
+
+  {% if story_cta.enabled == true %}
+    {% set cta_enabled = true %}
+  {% else %}
+    {% set cta_enabled = false %}
+  {% endif %}
+  {% set cta_title = story_cta.title %}
+  {% set cta_description = story_cta.description %}
+  {% set cta_button_label = story_cta.button_label %}
+  {% set cta_contact_type = story_cta.contact_type %}
+  {% include "../sections/cta.html" %}
+</div>
+{% endblock body %}

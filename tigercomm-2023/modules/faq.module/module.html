@@ -1,24 +1,54 @@
-{% set faq_items = module.faq_items %}
+{% set source_mode = module.source_mode or "manual" %}
+{% set faq_items = [] %}
+
+{% if source_mode == "hubdb" and module.source_table %}
+  {% set query = (module.hubdb_query or "")|trim %}
+  {% set hubdb_rows = query ? hubdb_table_rows(module.source_table, query) : hubdb_table_rows(module.source_table) %}
+  {# Preserve the forgiving category-query behavior used by other HubDB-backed modules. #}
+  {% if query and hubdb_rows|length == 0 and "category=" in query and "category__" not in query %}
+    {% set contains_query = query|replace("category=", "category__contains=") %}
+    {% set hubdb_rows = hubdb_table_rows(module.source_table, contains_query) %}
+  {% endif %}
+  {% for row in hubdb_rows %}
+    {% set row_is_enabled = true %}
+    {% if row.disabled is defined and row.disabled %}
+      {% set row_is_enabled = false %}
+    {% endif %}
+    {% if row_is_enabled and (row.question or row.answer) %}
+      {% do faq_items.append(row) %}
+    {% endif %}
+  {% endfor %}
+{% else %}
+  {% for item in module.faq_items %}
+    {% if item.question or item.answer %}
+      {% do faq_items.append(item) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 <section class="faq" aria-label="Frequently asked questions">
   {% if faq_items|length %}
     <div class="faq__list">
       {% for item in faq_items %}
-        {% if item.question or item.answer %}
-          <details class="faq__item">
-            <summary class="faq__question">
-              <span class="faq__question-text">{{ item.question }}</span>
-              <span class="faq__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="faq__answer">
-              {{ item.answer }}
-            </div>
-          </details>
-        {% endif %}
+        <details class="faq__item">
+          <summary class="faq__question">
+            <span class="faq__question-text">{{ item.question }}</span>
+            <span class="faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq__answer">
+            {{ item.answer }}
+          </div>
+        </details>
       {% endfor %}
     </div>
   {% else %}
-    <p class="faq__empty">Add FAQ items to populate this module.</p>
+    <p class="faq__empty">
+      {% if source_mode == "hubdb" %}
+        Select the FAQs HubDB table and confirm that the category query matches at least one published row.
+      {% else %}
+        Add FAQ items to populate this module.
+      {% endif %}
+    </p>
   {% endif %}
 </section>
 
